@@ -2,6 +2,8 @@
 
 Repositorio de materiales de estudio para la materia **Física I (62.01)** de la Facultad de Ingeniería, UBA.
 
+> **⚠️ Aviso:** La organización, el renombrado de archivos y el plan de estudio fueron generados con asistencia de inteligencia artificial. Pueden existir errores en la clasificación temática, el orden sugerido o los nombres de los archivos. Verificar siempre con el programa oficial de la materia y el criterio propio.
+
 ---
 
 ## Contenido
