@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2c3e50">
+<title>Cheatsheet con justificaciones · FSP Moreno</title>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root { --primary:#1a5490; --primary-dark:#2c3e50; --bg:#fafafa; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:0; color:#222; line-height:1.6; background:var(--bg); -webkit-text-size-adjust:100%; }
+
+  header.top { position:sticky; top:0; z-index:100; background:var(--primary-dark); color:#fff; padding:0.7em 0.9em 0.55em; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  header.top h1 { font-size:1.0em; margin:0 0 0.5em; font-weight:600; }
+  nav.temas { display:flex; gap:0.4em; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:0.15em; }
+  nav.temas a { flex:0 0 auto; background:#ffffff22; color:#fff; text-decoration:none; padding:0.34em 0.7em; border-radius:999px; font-size:0.8em; white-space:nowrap; border:1px solid #ffffff44; }
+
+  main { max-width:820px; margin:0 auto; padding:0.8em 0.9em 3em; }
+  .intro { background:#eef3fa; border-radius:8px; padding:0.9em 1em; margin:0.9em 0 0.5em; font-size:0.95em; }
+  .intro h2 { margin:0 0 0.4em; font-size:1.1em; color:var(--primary-dark); }
+
+  .tema-titulo { color:#fff; background:var(--primary); border-radius:8px; padding:0.5em 0.7em; font-size:1.12em; margin:1.6em 0 0.7em; scroll-margin-top:96px; }
+
+  .card { background:#fff; border:1px solid #e2e6ee; border-radius:9px; padding:0.8em 0.9em; margin:0.9em 0; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  .card h3 { font-size:1.0em; color:var(--primary-dark); margin:0 0 0.5em; }
+
+  .formula { background:#f3f5f9; border-left:4px solid var(--primary); border-radius:6px; padding:0.5em 0.9em; margin:0.6em 0; }
+  .origen { background:#f3e5f5; border-left:4px solid #9c27b0; border-radius:6px; padding:0.55em 0.9em; margin:0.4em 0 0.8em; font-size:0.93em; }
+  .origen b { color:#7b1fa2; }
+  .nota { background:#fff4e6; border-left:4px solid #ff9800; border-radius:6px; padding:0.55em 0.9em; margin:0.4em 0; font-size:0.93em; }
+  .clave { background:#eef9ee; border-left:4px solid #4caf50; border-radius:6px; padding:0.55em 0.9em; margin:0.4em 0; font-size:0.93em; }
+
+  svg { display:block; max-width:100%; height:auto; margin:0.8em auto; background:#fff; border:1px solid #e2e6ee; border-radius:6px; }
+  mjx-container { overflow-x:auto; overflow-y:hidden; max-width:100%; }
+  mjx-container[display="true"] { margin:0.5em 0 !important; }
+
+  table { border-collapse:collapse; width:100%; font-size:0.88em; margin:0.6em 0; display:block; overflow-x:auto; }
+  th,td { border:1px solid #ccc; padding:0.4em 0.6em; text-align:left; }
+  th { background:#e8eef5; }
+
+  .backtop { position:fixed; right:14px; bottom:14px; background:var(--primary); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 2px 8px rgba(0,0,0,.3); font-size:1.3em; }
+  footer { text-align:center; color:#888; font-size:0.85em; padding:1.5em 1em 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>📐 Cheatsheet con justificaciones — FSP (Moreno)</h1>
+  <nav class="temas">
+    <a href="#t1">1 · Cinemática</a>
+    <a href="#t2">2 · Dinámica</a>
+    <a href="#t3">3 · Trabajo y energía</a>
+    <a href="#t4">4 · Sistemas de partículas</a>
+    <a href="#t5">5 · Cuerpo rígido</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<div class="intro">
+<h2>Cómo usar este cheatsheet</h2>
+<p>Cada fórmula viene con un recuadro <b style="color:#7b1fa2">violeta “De dónde sale”</b> que muestra la <strong>derivación o justificación</strong>, porque en el parcial casi siempre piden fundamentar (no alcanza con el número). Los recuadros <b style="color:#e69100">naranjas</b> son advertencias y los <b style="color:#388e3c">verdes</b>, lo clave para acordarte.</p>
+<p style="margin-bottom:0">Decimales con coma. Se usa $g=10\,\text{m/s}^2$. Producto vectorial con $\wedge$.</p>
+</div>
+
+
+<!-- ============================ TEMA 1: CINEMÁTICA ============================ -->
+<h2 class="tema-titulo" id="t1">1 · Cinemática</h2>
+
+<div class="card">
+<h3>Velocidad y aceleración: las definiciones madre</h3>
+<div class="formula">
+$$\vec{v}(t)=\frac{d\vec{r}}{dt} \qquad \vec{a}(t)=\frac{d\vec{v}}{dt}=\frac{d^2\vec{r}}{dt^2}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> la velocidad media es $\vec{v}_m=\dfrac{\Delta \vec{r}}{\Delta t}$ (cuánto cambió la posición sobre cuánto tardó). Si achicamos el intervalo hasta $\Delta t \to 0$, obtenemos la velocidad <em>instantánea</em>, que es justamente la <b>derivada</b> de la posición. La aceleración es lo mismo aplicado a la velocidad: cuánto cambia $\vec{v}$ por unidad de tiempo. Por eso <b>derivar baja un nivel</b> (posición → velocidad → aceleración) e <b>integrar sube</b> (aceleración → velocidad → posición).
+</div>
+<div class="clave">El camino inverso: $\ \vec{v}(t)=\vec{v}_0+\displaystyle\int_0^t \vec{a}\,dt\quad$ y $\quad\vec{r}(t)=\vec{r}_0+\displaystyle\int_0^t \vec{v}\,dt$. Las constantes de integración son las condiciones iniciales $\vec{r}_0,\vec{v}_0$.</div>
+</div>
+
+<div class="card">
+<h3>MRU y MRUV (caso $a=$ cte)</h3>
+<div class="formula">
+$$v=v_0+a\,t \qquad x=x_0+v_0\,t+\tfrac{1}{2}a\,t^2 \qquad v^2=v_0^2+2a\,\Delta x$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> con $a=$ cte, integro $a$ respecto de $t$ y queda $v=v_0+at$. Integrando $v$ otra vez aparece el $\tfrac12 a t^2$. La tercera (independiente del tiempo) sale de despejar $t$ de la primera y reemplazar en la segunda; sirve cuando <b>no te dan ni te piden el tiempo</b>.
+</div>
+</div>
+
+<div class="card">
+<h3>Coordenadas intrínsecas (movimiento curvilíneo)</h3>
+<div class="formula">
+$$\vec{v}=v\,\hat{t} \qquad \vec{a}=\underbrace{\frac{dv}{dt}}_{a_t}\hat{t}+\underbrace{\frac{v^2}{\rho}}_{a_n}\hat{n}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> la velocidad siempre es <b>tangente</b> a la trayectoria, así que $\vec{v}=v\,\hat{t}$. Para la aceleración derivo ese producto: $\vec{a}=\dfrac{dv}{dt}\hat{t}+v\dfrac{d\hat{t}}{dt}$. El primer término es el cambio de <b>módulo</b> de la velocidad. El segundo: al recorrer la curva el versor $\hat{t}$ gira, y se demuestra que $\dfrac{d\hat{t}}{dt}=\dfrac{v}{\rho}\hat{n}$ (apunta al centro de curvatura), dando $a_n=\dfrac{v^2}{\rho}$, el cambio de <b>dirección</b>.
+</div>
+<div class="clave">$a_t$ = frena o acelera (cambia rapidez). $a_n$ = dobla (cambia dirección), nunca es negativa y apunta al centro. $\rho$ = radio de curvatura. Módulo total: $a=\sqrt{a_t^2+a_n^2}$.</div>
+<div class="nota">Firma de Moreno: te dan $v(t)$ y $\rho$, o te dan un $\vec{a}$ y preguntan si es <em>compatible</em> con el movimiento. Truco: en el punto más rápido/lento $a_t=0$; si va a rapidez constante, toda la aceleración es normal.</div>
+</div>
+
+<div class="card">
+<h3>Movimiento circular</h3>
+<div class="formula">
+$$\omega=\frac{d\theta}{dt}\quad \alpha=\frac{d\omega}{dt}\qquad v=\omega R\quad a_t=\alpha R\quad a_n=\omega^2 R=\frac{v^2}{R}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es el caso particular de las intrínsecas con $\rho=R$ constante. La longitud de arco es $s=R\theta$; derivando respecto del tiempo (con $R$ fijo) sale $v=R\omega$, y derivando de nuevo $a_t=R\alpha$. Lo angular ($\theta,\omega,\alpha$) es el "espejo" de lo lineal ($x,v,a$) con las mismas fórmulas de MRUV: $\omega=\omega_0+\alpha t$, etc.
+</div>
+</div>
+
+<div class="card">
+<h3>Movimiento armónico simple (MAS)</h3>
+<div class="formula">
+$$x(t)=A\,\operatorname{sen}(\omega_0 t+\varphi)\qquad \omega_0=\sqrt{\frac{k}{m}}\qquad T=\frac{2\pi}{\omega_0}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> arranca de la 2.ª ley con la fuerza del resorte (Hooke $F=-kx$): $\ m\,\ddot{x}=-k\,x \ \Rightarrow\ \ddot{x}=-\dfrac{k}{m}\,x$. Buscás una función cuya segunda derivada sea ella misma cambiada de signo: el seno cumple $\ddot{x}=-\omega_0^2 x$. Comparando, $\omega_0^2=\dfrac{k}{m}$. La <b>amplitud $A$ y la fase $\varphi$</b> las fijan las condiciones iniciales ($x_0,v_0$).
+</div>
+<div class="clave">$v=\dot{x}=A\omega_0\cos(\omega_0 t+\varphi)$, $\ a=\ddot{x}=-\omega_0^2\,x$. Suma de dos MAS de <b>igual frecuencia</b> = otro MAS de la misma frecuencia (se suman como fasores/vectores).</div>
+</div>
+
+
+<!-- ============================ TEMA 2: DINÁMICA ============================ -->
+<h2 class="tema-titulo" id="t2">2 · Dinámica</h2>
+
+<div class="card">
+<h3>Leyes de Newton</h3>
+<div class="formula">
+$$\sum \vec{F}=m\,\vec{a}=\frac{d\vec{p}}{dt}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es un <b>principio</b> (no se deriva), pero su forma general es $\sum\vec{F}=\dfrac{d\vec{p}}{dt}$. Si la masa es constante, $\dfrac{d(m\vec{v})}{dt}=m\dfrac{d\vec{v}}{dt}=m\vec{a}$. La 1.ª ley es el caso $\sum\vec{F}=0\Rightarrow \vec{a}=0$ (inercia). La 3.ª ley (acción–reacción) es la que después hace que las fuerzas internas de un sistema se cancelen.
+</div>
+<div class="clave">Método: (1) elijo cuerpo, (2) DCL con <b>todas</b> las fuerzas externas, (3) elijo ejes (conviene uno en la dirección de $\vec{a}$), (4) proyecto $\sum F_x=ma_x$, $\sum F_y=ma_y$.</div>
+</div>
+
+<div class="card">
+<h3>Rozamiento</h3>
+<div class="formula">
+$$f_s \le \mu_e\,N \qquad f_d=\mu_d\,N \qquad (\mu_e>\mu_d)$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es un modelo empírico (experimental). Mientras el cuerpo <b>no desliza</b>, el rozamiento estático vale <em>lo justo</em> para equilibrar lo que lo empuja, hasta un máximo $\mu_e N$. Si se supera ese máximo, empieza a deslizar y pasa a valer $f_d=\mu_d N$ (constante, en contra del movimiento). $N$ sale de la ecuación perpendicular a la superficie, ¡no siempre es $mg$!
+</div>
+<div class="nota">Criterio "¿desliza?": comparás la fuerza que tiende a mover contra $\mu_e N$. En el plano inclinado sin otra fuerza: desliza si $\tan\alpha>\mu_e$. Caso cuña acelerada: $N$ depende de la aceleración del sistema.</div>
+</div>
+
+<div class="card">
+<h3>Dinámica en curvas / peralte</h3>
+<div class="formula">
+$$\sum F_n=m\,a_n=m\frac{v^2}{R}\qquad \text{(peralte ideal) } \tan\theta=\frac{v^2}{gR}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> no hay una "fuerza centrípeta" nueva: es la <b>resultante</b> de las fuerzas reales (normal, peso, rozamiento) proyectada hacia el centro, igualada a $m\,a_n=m\dfrac{v^2}{R}$ por la 2.ª ley. En el peralte sin rozamiento, la componente horizontal de la normal aporta toda la centrípeta: $N\operatorname{sen}\theta=m\dfrac{v^2}{R}$ y $N\cos\theta=mg$; dividiendo se cancela $N$ y queda $\tan\theta=\dfrac{v^2}{gR}$.
+</div>
+<div class="nota">Firma de Moreno: $v_\text{max}$ en curva con rozamiento (la fricción ayuda hacia el centro), variantes con lluvia (baja $\mu$) o coeficiente de seguridad.</div>
+</div>
+
+
+<!-- ============================ TEMA 3: TRABAJO Y ENERGÍA ============================ -->
+<h2 class="tema-titulo" id="t3">3 · Trabajo y energía</h2>
+
+<div class="card">
+<h3>Trabajo y potencia</h3>
+<div class="formula">
+$$W=\int_A^B \vec{F}\cdot d\vec{r}\qquad P=\frac{dW}{dt}=\vec{F}\cdot\vec{v}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> para una fuerza constante y un desplazamiento recto, el trabajo es $W=\vec{F}\cdot\vec{d}=F\,d\cos\theta$ (solo cuenta la componente de la fuerza <em>en la dirección del movimiento</em>). Si la fuerza <b>varía</b> a lo largo del camino, partís la trayectoria en pedacitos $d\vec{r}$ donde $\vec{F}$ es casi constante, sumás $dW=\vec{F}\cdot d\vec{r}$ y esa suma infinita es la <b>integral de línea</b>. La potencia es el trabajo por unidad de tiempo: $\dfrac{dW}{dt}=\vec{F}\cdot\dfrac{d\vec{r}}{dt}=\vec{F}\cdot\vec{v}$.
+</div>
+<div class="nota">Ojo: el trabajo es la <b>integral</b> de la fuerza a lo largo del camino, no su derivada. La fuerza sí se recupera derivando la energía potencial: $\vec{F}=-\nabla E_p$.</div>
+</div>
+
+<div class="card">
+<h3>Teorema del trabajo y la energía (trabajo–energía cinética)</h3>
+<div class="formula">
+$$W_\text{neto}=\Delta E_c=\tfrac{1}{2}mv_B^2-\tfrac{1}{2}mv_A^2$$
+</div>
+<div class="origen">
+<b>De dónde sale (esta derivación la piden):</b> partís del trabajo de la fuerza neta y usás la 2.ª ley $\vec{F}=m\dfrac{d\vec{v}}{dt}$:
+$$W=\int \vec{F}\cdot d\vec{r}=\int m\frac{d\vec{v}}{dt}\cdot d\vec{r}=\int m\,d\vec{v}\cdot\frac{d\vec{r}}{dt}=\int m\,\vec{v}\cdot d\vec{v}=\tfrac{1}{2}mv_B^2-\tfrac{1}{2}mv_A^2.$$
+El paso clave es $d\vec{r}=\vec{v}\,dt$, que convierte la integral en el espacio en una integral en la velocidad.
+</div>
+</div>
+
+<div class="card">
+<h3>Energía potencial y fuerzas conservativas</h3>
+<div class="formula">
+$$W_\text{cons}=-\Delta E_p \qquad \vec{F}=-\nabla E_p \qquad E_{p,\text{grav}}=mgh\quad E_{p,\text{res}}=\tfrac12 k x^2$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> una fuerza es <b>conservativa</b> si su trabajo no depende del camino, solo de los puntos inicial y final. Entonces se puede <em>definir</em> una función $E_p$ tal que $W_\text{cons}=-\Delta E_p$ (el signo menos: si la fuerza hace trabajo positivo, la energía potencial baja). Invirtiendo, la fuerza es menos el gradiente de $E_p$. Ej.: de $E_p=mgh$ sale $F=-\dfrac{dE_p}{dh}=-mg$ (peso); de $E_p=\tfrac12kx^2$ sale $F=-kx$ (resorte).
+</div>
+</div>
+
+<div class="card">
+<h3>¿Cómo verifico si una fuerza es conservativa?</h3>
+<div class="formula">
+$$\frac{\partial F_y}{\partial x}=\frac{\partial F_x}{\partial y}\ \ (\text{rotor}=0)\quad\Longleftrightarrow\quad \oint \vec{F}\cdot d\vec{r}=0 \quad\Longleftrightarrow\quad W\ \text{indep. del camino}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> son tres formas equivalentes de decir lo mismo. Si el trabajo no depende del camino, ir y volver por caminos distintos da trabajo nulo ⇒ $\oint=0$. Y por el teorema de Green/rotor, $\oint=0$ para todo lazo equivale a que el rotor sea cero. En 2D eso es la igualdad de las derivadas cruzadas. <b>Si falla, la fuerza NO es conservativa</b> y no le podés asociar $E_p$.
+</div>
+<div class="clave">Receta de parcial: calculás $\dfrac{\partial F_x}{\partial y}$ y $\dfrac{\partial F_y}{\partial x}$. Si son iguales → conservativa (buscás $E_p$); si no → calculás $W$ por integral de línea en cada tramo.</div>
+</div>
+
+<div class="card">
+<h3>Conservación de la energía mecánica</h3>
+<div class="formula">
+$$E_m=E_c+E_p \qquad W_{\text{no cons}}=\Delta E_m$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> separás el trabajo neto en conservativo + no conservativo. Por el teorema trabajo–energía $W_\text{cons}+W_{\text{no cons}}=\Delta E_c$, y como $W_\text{cons}=-\Delta E_p$, reordenando: $W_{\text{no cons}}=\Delta E_c+\Delta E_p=\Delta E_m$. <b>Si no hay fuerzas no conservativas</b> (rozamiento, etc.), $W_{\text{no cons}}=0$ y la energía mecánica <b>se conserva</b>.
+</div>
+<div class="nota">Los 3 teoremas que pide Moreno: $W_\text{total}=\Delta E_c$ · $W_\text{cons}=-\Delta E_p$ · $W_{\text{no cons}}=\Delta E_m$.</div>
+</div>
+
+
+<!-- ============================ TEMA 4: SISTEMAS DE PARTÍCULAS ============================ -->
+<h2 class="tema-titulo" id="t4">4 · Sistemas de partículas</h2>
+
+<div class="card">
+<h3>Centro de masa</h3>
+<div class="formula">
+$$\vec{r}_\text{cm}=\frac{\sum m_i\,\vec{r}_i}{M}\qquad \vec{v}_\text{cm}=\frac{\sum m_i\,\vec{v}_i}{M}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es el promedio de las posiciones <em>pesado por la masa</em> (las masas grandes "tiran" más del CM hacia ellas). $\vec{v}_\text{cm}$ y $\vec{a}_\text{cm}$ salen de derivar respecto del tiempo, porque $M$ es constante.
+</div>
+</div>
+
+<div class="card">
+<h3>Momento lineal y 2.ª ley del sistema</h3>
+<div class="formula">
+$$\vec{P}=\sum m_i\vec{v}_i=M\,\vec{v}_\text{cm}\qquad \sum \vec{F}_\text{ext}=\frac{d\vec{P}}{dt}=M\,\vec{a}_\text{cm}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> sumás la 2.ª ley de todas las partículas. Las fuerzas <b>internas</b> vienen en pares acción–reacción (3.ª ley) y se cancelan de a dos, así que solo sobreviven las <b>externas</b>. Resultado: el CM se mueve como si toda la masa y la fuerza externa estuvieran ahí concentradas.
+</div>
+<div class="clave"><b>Conservación de P:</b> si $\sum\vec{F}_\text{ext}=0$ (o en una dirección donde no hay fuerza externa) ⇒ $\vec{P}=$ cte. Por eso en choques sin fuerzas externas relevantes, $\vec{P}$ se conserva.</div>
+</div>
+
+<div class="card">
+<h3>Impulso</h3>
+<div class="formula">
+$$\vec{J}=\int_{t_1}^{t_2}\vec{F}\,dt=\Delta \vec{P}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> directo de $\vec{F}=\dfrac{d\vec{P}}{dt}$. Multiplicás por $dt$ e integrás en el tiempo: $\int \vec{F}\,dt=\int d\vec{P}=\Delta\vec{P}$. Sirve cuando la fuerza depende del tiempo (ej. $F(t)=e^{t}$) o en golpes muy breves.
+</div>
+</div>
+
+<div class="card">
+<h3>Choques</h3>
+<table>
+<tr><th>Tipo</th><th>Se conserva</th><th>NO se conserva</th></tr>
+<tr><td>Plástico (quedan pegados)</td><td>$\vec{P}$</td><td>$E_c$ (hay pérdida)</td></tr>
+<tr><td>Elástico</td><td>$\vec{P}$ y $E_c$</td><td>—</td></tr>
+</table>
+<div class="origen">
+<b>De dónde sale:</b> en todo choque (fuerzas externas despreciables frente a las del impacto) se conserva $\vec{P}$. La diferencia está en la energía: en el plástico parte de $E_c$ se transforma en deformación/calor, por eso $E_c$ <b>no</b> se conserva; en el elástico no hay pérdida. <b>Nunca asumas que $E_c$ se conserva sin justificarlo.</b>
+</div>
+</div>
+
+<div class="card">
+<h3>Teorema de König</h3>
+<div class="formula">
+$$E_c=\tfrac{1}{2}M\,v_\text{cm}^2+E_c'$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> escribís la velocidad de cada partícula como $\vec{v}_i=\vec{v}_\text{cm}+\vec{v}_i\,'$ (velocidad del CM + velocidad relativa al CM) y la metés en $E_c=\sum\tfrac12 m_i v_i^2$. El término cruzado se anula (porque $\sum m_i\vec{v}_i\,'=0$ por definición de CM) y queda: energía del CM moviéndose como un todo + energía interna relativa al CM.
+</div>
+</div>
+
+<div class="card">
+<h3>Momento angular del sistema</h3>
+<div class="formula">
+$$\vec{L}_O=\sum \vec{r}_i\wedge \vec{p}_i\qquad \frac{d\vec{L}_O}{dt}=\sum\vec{\tau}_\text{ext}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es el análogo rotacional de $\vec{P}$. Derivando $\vec{L}=\vec{r}\wedge\vec{p}$ aparece el torque $\vec{\tau}=\vec{r}\wedge\vec{F}$, y al sumar sobre el sistema los torques internos se cancelan (igual que las fuerzas internas). <b>Si $\sum\vec{\tau}_\text{ext}=0$ ⇒ $\vec{L}$ se conserva.</b>
+</div>
+<div class="nota">Caso típico (barras con perno): durante el golpe $\vec{P}$ <b>no</b> se conserva porque el perno hace fuerza externa, pero $\vec{L}$ <b>respecto del perno sí</b> (el perno no hace torque respecto de sí mismo).</div>
+</div>
+
+
+<!-- ============================ TEMA 5: CUERPO RÍGIDO ============================ -->
+<h2 class="tema-titulo" id="t5">5 · Cuerpo rígido</h2>
+
+<div class="card">
+<h3>Momento de inercia y teorema de Steiner</h3>
+<div class="formula">
+$$I=\sum m_i r_i^2=\int r^2\,dm \qquad I=I_\text{cm}+M d^2$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> el momento de inercia mide cuánto "cuesta" cambiar la rotación; aparece naturalmente al calcular $E_c$ o $L$ de un cuerpo que gira (cada pedacito aporta $m_i r_i^2$). <b>Steiner</b>: si conocés $I$ respecto del CM, para un eje paralelo a distancia $d$ se suma $Md^2$. Sale de meter $\vec{r}_i=\vec{r}_\text{cm}+\vec{r}_i\,'$ en la definición; el término cruzado se anula y queda $I_\text{cm}+Md^2$. Por eso el eje del CM siempre da el <b>mínimo</b> momento de inercia.
+</div>
+<table>
+<tr><th>Cuerpo (eje)</th><th>$I$</th></tr>
+<tr><td>Barra por el centro</td><td>$\tfrac{1}{12}ML^2$</td></tr>
+<tr><td>Barra por un extremo</td><td>$\tfrac{1}{3}ML^2$ (Steiner con $d=L/2$)</td></tr>
+<tr><td>Disco / cilindro macizo (eje)</td><td>$\tfrac{1}{2}MR^2$</td></tr>
+<tr><td>Aro / cilindro hueco (eje)</td><td>$MR^2$</td></tr>
+<tr><td>Esfera maciza (diámetro)</td><td>$\tfrac{2}{5}MR^2$</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Torque y 2.ª ley de la rotación</h3>
+<div class="formula">
+$$\vec{\tau}=\vec{r}\wedge\vec{F}\qquad |\tau|=F\cdot b\ (\text{brazo})\qquad \sum\tau=I\,\alpha$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> el torque mide la capacidad de una fuerza de hacer girar; su módulo es $|\tau|=rF\operatorname{sen}\theta=F\cdot b$, donde el <b>brazo</b> $b$ es la distancia perpendicular del eje a la recta de acción de la fuerza. La ley $\sum\tau=I\alpha$ es el análogo de $F=ma$: sale de tomar $\vec{\tau}=\vec{r}\wedge\vec{F}$ partícula a partícula y sumar; con el cuerpo rígido todas comparten el mismo $\alpha$ y aparece $I=\sum m_i r_i^2$.
+</div>
+<div class="clave">Diccionario lineal ↔ rotación: $\ F\!\leftrightarrow\!\tau,\ m\!\leftrightarrow\!I,\ a\!\leftrightarrow\!\alpha,\ v\!\leftrightarrow\!\omega,\ p\!\leftrightarrow\!L$.</div>
+</div>
+
+<div class="card">
+<h3>Momento angular de un cuerpo rígido (eje fijo)</h3>
+<div class="formula">
+$$L=I\,\omega \qquad \frac{dL}{dt}=\sum\tau_\text{ext}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> sumando $L=\sum m_i r_i v_i=\sum m_i r_i(\omega r_i)=\left(\sum m_i r_i^2\right)\omega=I\omega$. Si el torque externo es cero, $L=I\omega$ se conserva: por eso cuando una patinadora encoge los brazos baja $I$ y sube $\omega$ (el producto se mantiene).
+</div>
+</div>
+
+<div class="card">
+<h3>Energía cinética de rotación y rodadura</h3>
+<div class="formula">
+$$E_c^\text{rot}=\tfrac{1}{2}I\omega^2 \qquad E_c^\text{rodadura}=\tfrac{1}{2}M v_\text{cm}^2+\tfrac{1}{2}I_\text{cm}\,\omega^2$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> $E_c=\sum\tfrac12 m_i v_i^2$ con $v_i=\omega r_i$ da $\tfrac12 I\omega^2$. Para un cuerpo que <b>rueda</b>, aplicás König: energía de traslación del CM + energía de rotación alrededor del CM. Es la misma estructura "todo el cuerpo se mueve + además gira".
+</div>
+<div class="clave"><b>Rodar sin deslizar</b> impone el vínculo $v_\text{cm}=\omega R$ y $a_\text{cm}=\alpha R$. Es la ecuación extra que conecta lo lineal con lo angular y te permite cerrar el sistema.</div>
+</div>
+
+<div class="card">
+<h3>Polea con masa (caso típico de parcial)</h3>
+<div class="origen">
+<b>Idea clave a justificar:</b> si la polea <b>tiene masa</b>, las tensiones a cada lado son <b>distintas</b> ($T_1\neq T_2$), porque la diferencia de tensiones es la que produce el torque neto que la acelera: $(T_1-T_2)R=I\alpha$. Si la polea fuera ideal (sin masa), $I=0$ y $T_1=T_2$. Se resuelve con: Newton en cada bloque ($\sum F=ma$), $\sum\tau=I\alpha$ en la polea, y el vínculo $a=\alpha R$.
+</div>
+</div>
+
+<footer>Cheatsheet FSP · cátedra Moreno · g = 10 m/s² · decimales con coma</footer>
+
+</main>
+
+<a href="#top" class="backtop" aria-label="Volver arriba">↑</a>
+
+</body>
+</html>
