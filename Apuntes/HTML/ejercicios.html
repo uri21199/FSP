@@ -1,0 +1,3004 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejercicios resueltos — FSP / Física I — FIUBA</title>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --sidebar-width: 280px;
+    --primary: #1a5490;
+    --primary-dark: #2c3e50;
+    --bg: #fafafa;
+    --bg-sidebar: #f3f5f9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    color: #222;
+    line-height: 1.6;
+    background: var(--bg);
+  }
+
+  /* Sidebar */
+  nav.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-sidebar);
+    border-right: 1px solid #d8dde6;
+    padding: 1.5em 1em;
+    overflow-y: auto;
+  }
+  nav.sidebar h2 {
+    font-size: 1.1em;
+    margin: 0 0 1em 0;
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.3em;
+  }
+  nav.sidebar h3 {
+    font-size: 0.95em;
+    color: var(--primary);
+    margin: 1.2em 0 0.4em 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  nav.sidebar ul {
+    list-style: none;
+    padding-left: 0.8em;
+    margin: 0;
+  }
+  nav.sidebar li {
+    margin: 0.3em 0;
+  }
+  nav.sidebar a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.92em;
+    display: block;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+  }
+  nav.sidebar a:hover {
+    background: #e1e7f0;
+    color: var(--primary);
+  }
+  nav.sidebar .group-title {
+    font-weight: 600;
+    color: #555;
+    margin-top: 0.8em;
+    font-size: 0.9em;
+  }
+
+  /* Main content */
+  main {
+    margin-left: var(--sidebar-width);
+    max-width: 960px;
+    padding: 2em 2.5em;
+  }
+  h1 {
+    border-bottom: 3px solid var(--primary-dark);
+    padding-bottom: 0.3em;
+    color: var(--primary-dark);
+    margin-top: 0;
+  }
+  h2.parcial {
+    color: var(--primary-dark);
+    background: linear-gradient(to right, #e8eef5, transparent);
+    padding: 0.4em 0.6em;
+    border-left: 5px solid var(--primary);
+    margin-top: 2.5em;
+  }
+  h3.ejercicio-titulo {
+    color: var(--primary);
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.2em;
+    margin-top: 2em;
+  }
+  h4 { color: var(--primary); margin-top: 1.3em; }
+  .meta {
+    color: #777;
+    font-size: 0.9em;
+    margin-top: -0.5em;
+    margin-bottom: 1em;
+    font-style: italic;
+  }
+
+  /* Coloured boxes */
+  .enunciado {
+    background: #f0f6ff;
+    border-left: 4px solid #4a8bc2;
+    padding: 1em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .respuesta {
+    background: #eef9ee;
+    border-left: 4px solid #4caf50;
+    padding: 0.8em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+    font-size: 1.05em;
+  }
+  .alerta {
+    background: #fff4e6;
+    border-left: 4px solid #ff9800;
+    padding: 0.8em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .truco {
+    background: #f3e5f5;
+    border-left: 4px solid #9c27b0;
+    padding: 0.8em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .nota {
+    background: #f5f5f5;
+    border-left: 4px solid #888;
+    padding: 0.6em 1em;
+    margin: 1em 0;
+    border-radius: 4px;
+    font-size: 0.95em;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.5em 0.8em;
+    text-align: left;
+  }
+  th { background: #e8eef5; }
+
+  svg { display: block; margin: 1em auto; background: white; border: 1px solid #ddd; border-radius: 4px; }
+
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.95em; }
+
+  .back-to-top {
+    display: inline-block;
+    margin-top: 1.5em;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.85em;
+  }
+  .back-to-top:hover { color: var(--primary); }
+
+  hr.separador {
+    border: none;
+    border-top: 2px dashed #ccc;
+    margin: 3em 0;
+  }
+
+  /* Resolución colapsable */
+  details.resolucion {
+    margin: 1em 0;
+    border: 1px solid #d0d7e0;
+    border-radius: 4px;
+    padding: 0.6em 1em;
+    background: #fbfcff;
+  }
+  details.resolucion[open] { background: #fff; }
+  details.resolucion summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 0.2em 0;
+    user-select: none;
+  }
+  details.resolucion summary:hover { color: var(--primary-dark); }
+  details.resolucion > *:not(summary) { margin-top: 0.7em; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav.sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 2px solid var(--primary);
+    }
+    main { margin-left: 0; padding: 1em; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <h2>Ejercicios FSP</h2>
+
+  <h3>Índice</h3>
+  <ul>
+    <li><a href="#top">⬆ Inicio</a></li>
+    <li><a href="#como-usar">Cómo usar este doc</a></li>
+  </ul>
+
+  <h3>Cheatsheets</h3>
+  <div class="group-title">Parciales tipo Moreno</div>
+  <ul>
+    <li><a href="#cheat-flow">Flujo general (5 min)</a></li>
+    <li><a href="#cheat-cinematica">1. Cinemática curvilínea</a></li>
+    <li><a href="#cheat-peralte">2. Dinámica en curvas / peralte</a></li>
+    <li><a href="#cheat-trabajo">3. Trabajo y conservatividad</a></li>
+    <li><a href="#cheat-impulso">4. Impulso, choques, péndulos</a></li>
+    <li><a href="#cheat-cr-polea">5. CR con polea / cuerda</a></li>
+    <li><a href="#cheat-checklist">Checklist final pre-entrega</a></li>
+  </ul>
+
+  <h3>Práctica graduada</h3>
+  <div class="group-title">Cinemática curvilínea</div>
+  <ul>
+    <li><a href="#grad-cc-intro">Fórmulas y convenciones</a></li>
+    <li><a href="#grad-cc-ej1">Ej 1 — Rotonda con V constante</a></li>
+    <li><a href="#grad-cc-ej2">Ej 2 — V(t) lineal</a></li>
+    <li><a href="#grad-cc-ej3">Ej 3 — Ángulo y radio</a></li>
+    <li><a href="#grad-cc-ej4">Ej 4 — V(t) cuadrática</a></li>
+    <li><a href="#grad-cc-ej5">Ej 5 — Dado |ā| y θ</a></li>
+    <li><a href="#grad-cc-ej6">Ej 6 — Vectores compatibles</a></li>
+    <li><a href="#grad-cc-ej7">Ej 7 — Detención momentánea</a></li>
+    <li><a href="#grad-cc-ej8">Ej 8 — Datos cruzados</a></li>
+    <li><a href="#grad-cc-ej9">Ej 9 — Ángulo 60°</a></li>
+    <li><a href="#grad-cc-ej10">Ej 10 — Círculo MRUV</a></li>
+    <li><a href="#grad-cc-ej11"><strong>Ej 11 — Tipo parcial</strong></a></li>
+    <li><a href="#grad-cc-errores">Errores típicos</a></li>
+  </ul>
+
+  <div class="group-title">Dinámica en curvas / peralte</div>
+  <ul>
+    <li><a href="#grad-pe-intro">Fórmulas y convenciones</a></li>
+    <li><a href="#grad-pe-ej1">Ej 1 — Curva plana sin roce</a></li>
+    <li><a href="#grad-pe-ej2">Ej 2 — Curva plana con roce</a></li>
+    <li><a href="#grad-pe-ej3">Ej 3 — Comparar a_c con g</a></li>
+    <li><a href="#grad-pe-ej4">Ej 4 — Peralte ideal V₀</a></li>
+    <li><a href="#grad-pe-ej5">Ej 5 — Ángulo óptimo</a></li>
+    <li><a href="#grad-pe-ej6">Ej 6 — Curva plana, V máxima</a></li>
+    <li><a href="#grad-pe-ej7">Ej 7 — V₀ con datos invertidos</a></li>
+    <li><a href="#grad-pe-ej8">Ej 8 — Peralte + roce, V_max</a></li>
+    <li><a href="#grad-pe-ej9">Ej 9 — Peralte + roce, V_min</a></li>
+    <li><a href="#grad-pe-ej10">Ej 10 — V intermedia, f_r real</a></li>
+    <li><a href="#grad-pe-ej11"><strong>Ej 11 — Tipo parcial</strong></a></li>
+    <li><a href="#grad-pe-errores">Errores típicos</a></li>
+  </ul>
+
+  <h3>Parciales</h3>
+  <div class="group-title">Moreno 2C 2025</div>
+  <ul>
+    <li><a href="#moreno-2C2025-ej1">Ej 1 — Cinemática curvilínea</a></li>
+    <li><a href="#moreno-2C2025-ej2">Ej 2 — Curva peraltada</a></li>
+    <li><a href="#moreno-2C2025-ej3">Ej 3 — Trabajo en trayectoria cerrada</a></li>
+    <li><a href="#moreno-2C2025-ej4">Ej 4 — Bolita + péndulo balístico</a></li>
+    <li><a href="#moreno-2C2025-ej5">Ej 5 — Esfera-polea con cuerpo colgante</a></li>
+    <!-- Agregar acá futuros ejercicios del mismo parcial -->
+  </ul>
+
+  <!-- Plantilla: copiar y pegar para nuevo parcial
+  <div class="group-title">Nombre del parcial</div>
+  <ul>
+    <li><a href="#id-ejercicio">Ej X — Tema</a></li>
+  </ul>
+  -->
+</nav>
+
+<main>
+
+<h1 id="top">Ejercicios resueltos — FSP / Física I — FIUBA</h1>
+
+<p class="meta">Cátedra Moreno · Práctica para parcial 2026-05-30</p>
+
+<section id="como-usar">
+<h2 class="parcial">Cómo usar este doc</h2>
+<p>Este archivo es el hub central donde se van cargando ejercicios resueltos. Cada ejercicio tiene su propia sección con id único, así que se accede directo desde el sidebar izquierdo.</p>
+<p><strong>Convenciones</strong>:</p>
+<ul>
+  <li>Recuadro azul = enunciado del problema.</li>
+  <li>Recuadro verde = respuesta final / fórmula clave.</li>
+  <li>Recuadro naranja = alerta / error típico.</li>
+  <li>Recuadro violeta = truco / observación útil.</li>
+  <li>Recuadro gris = nota lateral.</li>
+</ul>
+<p>Las ecuaciones se renderizan con MathJax (LaTeX). Los diagramas son SVG inline.</p>
+</section>
+<hr class="separador">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CHEATSHEET — PARCIALES TIPO MORENO                                -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h2 class="parcial" id="cheatsheet-moreno">Cheatsheet — Parciales tipo Moreno</h2>
+
+<p class="meta">Basado en los 5 ejercicios del parcial Moreno 2C2025. Pensado para releer en los últimos 30 min antes del examen.</p>
+
+<section id="cheat-flow">
+<h3 class="ejercicio-titulo">Flujo general para atacar un parcial (5 min de lectura)</h3>
+
+<p>Antes de empezar a resolver, hacer una pasada rápida de los 5 ejercicios y clasificarlos. Los parciales de Moreno suelen mezclar:</p>
+
+<table>
+<tr><th>Pista en el enunciado</th><th>Tipo de problema</th><th>Ir a</th></tr>
+<tr><td>Trayectoria curva, $V(t)$, $\rho$, ángulo entre $\vec{v}$ y $\vec{a}$</td><td>Cinemática curvilínea</td><td><a href="#cheat-cinematica">§1</a></td></tr>
+<tr><td>Curva peraltada, $V_{\max}$, fricción, coche que dobla</td><td>Dinámica en curva</td><td><a href="#cheat-peralte">§2</a></td></tr>
+<tr><td>$W = \int \vec{F}\cdot d\vec{r}$, fuerza conservativa, $\oint$</td><td>Trabajo / energía</td><td><a href="#cheat-trabajo">§3</a></td></tr>
+<tr><td>Choque, péndulo balístico, "queda incrustado", impulso</td><td>Impulso y conservación</td><td><a href="#cheat-impulso">§4</a></td></tr>
+<tr><td>Polea con masa, esfera/disco que rota, cuerda inextensible</td><td>CR + vínculo</td><td><a href="#cheat-cr-polea">§5</a></td></tr>
+</table>
+
+<div class="truco">
+<strong>Estrategia de tiempo</strong>: empezá por el que más rápido podés cerrar (suele ser cinemática o trabajo). Dejá para el final el de cuerpo rígido — es donde más fácil te trabás en signos.
+</div>
+</section>
+
+<!-- ─────────────────────────── §1 ─────────────────────────── -->
+<section id="cheat-cinematica">
+<h3 class="ejercicio-titulo">§1 — Cinemática curvilínea</h3>
+<p class="meta">Ej tipo: una partícula recorre una trayectoria y te dan $V(t)$, $\rho$ y ángulos.</p>
+
+<h4>Lo que SIEMPRE usás</h4>
+$$\vec{a} = a_t\,\hat{v} + a_n\,\hat{n} \qquad a_t = \frac{dV}{dt} \qquad a_n = \frac{V^2}{\rho}$$
+$$|\vec{a}| = \sqrt{a_t^2 + a_n^2} \qquad \tan\theta = \frac{a_n}{a_t}$$
+<p>donde $\theta$ es el ángulo entre $\vec{v}$ y $\vec{a}$, y $\hat{n}$ apunta <strong>hacia el centro de curvatura</strong>.</p>
+
+<h4>Procedimiento</h4>
+<ol>
+  <li>Identificá $V(t)$ → derivá para $a_t$.</li>
+  <li>Identificá $\rho$ → calculá $a_n$.</li>
+  <li>Si te dan el ángulo entre $\vec{v}$ y $\vec{a}$, usá $\tan\theta = a_n/a_t$.</li>
+  <li>Para decidir qué vector aceleración es compatible con una trayectoria: ver si $a_n$ apunta hacia el centro de curvatura de la curva en ese punto.</li>
+</ol>
+
+<div class="alerta">
+<strong>Trampas típicas</strong>:
+<ul>
+  <li>$a_t$ puede ser negativa (la partícula frena) — el signo importa.</li>
+  <li>$a_n$ <strong>siempre</strong> apunta hacia el centro de curvatura, nunca hacia afuera.</li>
+  <li>Si $V$ cambia de signo, $\hat{v}$ se da vuelta — ojo con la dirección.</li>
+  <li>$\rho$ es el <strong>radio de curvatura local</strong>, no necesariamente el radio de una circunferencia "global".</li>
+</ul>
+</div>
+
+<div class="truco">
+<strong>Truco mental</strong>: si $\vec{v}$ y $\vec{a}$ forman 90° → no hay aceleración tangencial (rapidez constante). Si forman <90° → acelera. Si forman >90° → frena.
+</div>
+</section>
+
+<!-- ─────────────────────────── §2 ─────────────────────────── -->
+<section id="cheat-peralte">
+<h3 class="ejercicio-titulo">§2 — Dinámica en curvas (peralte / fricción)</h3>
+<p class="meta">Ej tipo: coche que toma una curva de radio $R$ peraltada un ángulo $\alpha$, con o sin roce.</p>
+
+<h4>Sistema de coordenadas que conviene</h4>
+<p><strong>NO</strong> usés ejes paralelos al piso peraltado. Usá:</p>
+<ul>
+  <li>$x$ horizontal apuntando al centro de la curva (donde apunta $\vec{a}_c$).</li>
+  <li>$y$ vertical hacia arriba.</li>
+</ul>
+<p>La aceleración del coche es <strong>puramente horizontal</strong>: $\vec{a} = (V^2/R)\,\hat{x}$. No hay aceleración vertical (el coche no sube ni baja).</p>
+
+<h4>Ecuaciones</h4>
+$$\sum F_x = m\,\frac{V^2}{R} \qquad \sum F_y = 0$$
+
+<p>Descomponer $\vec{N}$ y $\vec{f_r}$ en $x, y$:</p>
+<table>
+<tr><th>Fuerza</th><th>Componente $x$ (hacia centro)</th><th>Componente $y$ (arriba)</th></tr>
+<tr><td>Peso $m\vec{g}$</td><td>0</td><td>$-mg$</td></tr>
+<tr><td>Normal $\vec{N}$</td><td>$N\,\text{sen}\,\alpha$</td><td>$N\,\cos\alpha$</td></tr>
+<tr><td>Roce $\vec{f_r}$ (depende de tendencia a deslizar)</td><td>$\pm f_r\,\cos\alpha$</td><td>$\mp f_r\,\text{sen}\,\alpha$</td></tr>
+</table>
+
+<h4>Procedimiento</h4>
+<ol>
+  <li>Hacer DCL del coche en el peralte.</li>
+  <li>Plantear $\sum F_x = mV^2/R$ y $\sum F_y = 0$.</li>
+  <li>Para $V_{\max}$: el coche tiende a salirse → roce hacia adentro (suma al centro).</li>
+  <li>Para $V_{\min}$: el coche tiende a deslizar hacia el centro → roce hacia afuera.</li>
+  <li>$V$ "ideal" sin roce: $V_0 = \sqrt{gR\tan\alpha}$.</li>
+</ol>
+
+<div class="alerta">
+<strong>Trampas típicas</strong>:
+<ul>
+  <li>Confundir el sentido del roce. Regla: el roce <strong>se opone a la tendencia a deslizar</strong>.</li>
+  <li>Si $V > V_0$ ideal → tiende a salirse (roce hacia centro).</li>
+  <li>Si $V < V_0$ ideal → tiende a caer al centro (roce hacia afuera).</li>
+  <li>El roce <strong>estático</strong> se ajusta solo: $f_r \leq \mu_e N$. Sólo en el límite vale la igualdad.</li>
+</ul>
+</div>
+
+<div class="truco">
+<strong>Por qué $\sum F_x = mV^2/R$ y no $= 0$</strong>: porque hay aceleración centrípeta. La cantidad $mV^2/R$ <strong>NO es una fuerza</strong>; es $m \cdot a_c$ del lado derecho de Newton.
+</div>
+</section>
+
+<!-- ─────────────────────────── §3 ─────────────────────────── -->
+<section id="cheat-trabajo">
+<h3 class="ejercicio-titulo">§3 — Trabajo, fuerzas conservativas, $\oint$</h3>
+<p class="meta">Ej tipo: $\vec{F}(x,y)$ aplicada sobre una curva en el plano. Calcular $W$ en varios tramos, decidir si es conservativa.</p>
+
+<h4>Fórmulas clave</h4>
+$$W = \int_C \vec{F}\cdot d\vec{r} = \int_C (F_x\,dx + F_y\,dy)$$
+
+<p><strong>Conservatividad en 2D</strong>: $\vec{F}(x,y) = (F_x, F_y)$ es conservativa $\iff$</p>
+$$\frac{\partial F_y}{\partial x} = \frac{\partial F_x}{\partial y} \quad\text{(rotor nulo)}$$
+
+<p><strong>Si es conservativa</strong> → $W$ entre dos puntos no depende del camino, y $\oint \vec{F}\cdot d\vec{r} = 0$.</p>
+
+<h4>Procedimiento por tramo</h4>
+<ol>
+  <li><strong>Parametrizar</strong> el tramo. Opciones:
+    <ul>
+      <li>Si es $y = f(x)$: $dy = f'(x)\,dx$, integrar en $x$.</li>
+      <li>Si es $x = g(y)$: $dx = g'(y)\,dy$, integrar en $y$.</li>
+      <li>Recta diagonal $(0,0)\to(a,b)$: parametrizá $\vec{r}(t) = (at, bt)$, $t\in[0,1]$.</li>
+    </ul>
+  </li>
+  <li>Substituir $x, y$ en $\vec{F}$ para que quede todo en una variable.</li>
+  <li>Calcular $\vec{F}\cdot d\vec{r} = F_x\,dx + F_y\,dy$.</li>
+  <li>Integrar respetando el <strong>sentido de recorrido</strong> (límites en el orden correcto).</li>
+</ol>
+
+<div class="alerta">
+<strong>Trampas típicas</strong>:
+<ul>
+  <li>Olvidar que $d\vec{r}$ es vector: si el tramo es horizontal ($dy=0$), el término $F_y\,dy$ no aporta — pero $F_x\,dx$ sí.</li>
+  <li>Equivocar el sentido del tramo invierte el signo de $W$.</li>
+  <li>Si la curva pasa por un mismo punto dos veces (lazo cerrado), $W_{\text{total}} = W_A + W_B + W_C$ con cada tramo en su sentido.</li>
+  <li>Confundir "$W$ en cerrado $= 0$" (criterio de conservatividad) con "$W$ entre A y B vale lo mismo por dos caminos" — son equivalentes pero distintos enunciados.</li>
+</ul>
+</div>
+
+<div class="truco">
+<strong>Test rápido de conservatividad</strong>: si $\vec{F} = (P(x), Q(y))$ (cada componente depende sólo de su variable) → es conservativa.<br>
+Si $\vec{F}$ tiene un término cruzado como $xy$ → calculá las derivadas parciales.
+</div>
+</section>
+
+<!-- ─────────────────────────── §4 ─────────────────────────── -->
+<section id="cheat-impulso">
+<h3 class="ejercicio-titulo">§4 — Impulso, choques y péndulos balísticos</h3>
+<p class="meta">Ej tipo: una bolita choca contra un péndulo (queda incrustada o rebota), después oscila.</p>
+
+<h4>Separar SIEMPRE en dos fases</h4>
+
+<div class="alerta" style="margin-top:0.3em">
+<strong>Regla de oro</strong>: el choque y la oscilación son <strong>fases distintas</strong>. No mezcles las ecuaciones de una con la otra.
+</div>
+
+<table>
+<tr><th></th><th>Fase 1: Choque (instantáneo)</th><th>Fase 2: Post-choque (oscilación o caída)</th></tr>
+<tr><td>Tiempo</td><td>$\Delta t \to 0$</td><td>finito</td></tr>
+<tr><td>Gravedad</td><td>Despreciable (impulso de $g$ es $\to 0$)</td><td>Sí, actúa</td></tr>
+<tr><td>Lo que se conserva</td><td>$\vec{p}$ del sistema (plástico, elástico)</td><td>$E_{\text{mec}}$ si no hay roce</td></tr>
+<tr><td>Lo que NO se conserva</td><td>$E$ en choque plástico</td><td>—</td></tr>
+</table>
+
+<h4>Choque plástico (queda pegado)</h4>
+$$m_1 v_1 + m_2 v_2 = (m_1 + m_2)\,v_f$$
+<p>Energía perdida en el choque (calor, deformación):</p>
+$$\Delta E = \tfrac{1}{2}m_1 v_1^2 + \tfrac{1}{2}m_2 v_2^2 - \tfrac{1}{2}(m_1+m_2)\,v_f^2$$
+
+<h4>Péndulo balístico — procedimiento</h4>
+<ol>
+  <li><strong>Fase 1</strong>: aplicar conservación de $\vec{p}$ → obtener $v_f$ inmediatamente después del choque.</li>
+  <li><strong>Fase 2</strong>: con la masa combinada y velocidad $v_f$, aplicar conservación de energía:
+    $$\tfrac{1}{2}(m_1+m_2)\,v_f^2 = (m_1+m_2)\,g\,h$$
+    para obtener altura máxima $h$ (o ángulo: $h = L(1 - \cos\theta)$).</li>
+</ol>
+
+<div class="alerta">
+<strong>Trampas típicas</strong>:
+<ul>
+  <li>Usar $v_1$ (antes del choque) para calcular la energía del péndulo — <strong>MAL</strong>. Hay que usar $v_f$ (después del choque).</li>
+  <li>Aplicar conservación de energía en el choque plástico — <strong>MAL</strong>. La energía se pierde.</li>
+  <li>Olvidar el ángulo $\theta$: relación $h = L(1 - \cos\theta)$ — pensar el dibujo.</li>
+  <li>Confundir conservación de $\vec{p}$ (vector, en el choque) con $L^A$ (torque, cuando hay rotación). Si el péndulo es un cuerpo rígido que rota alrededor de un pivote, usar $L^A$.</li>
+</ul>
+</div>
+
+<div class="truco">
+<strong>Cuándo usar $L$ en vez de $p$</strong>: si el "péndulo" es una barra/cuerpo rígido que pivotea (no una masa puntual en una cuerda), la conservación es de momento angular alrededor del pivote, no del lineal.
+</div>
+</section>
+
+<!-- ─────────────────────────── §5 ─────────────────────────── -->
+<section id="cheat-cr-polea">
+<h3 class="ejercicio-titulo">§5 — Cuerpo rígido + polea / cuerda inextensible</h3>
+<p class="meta">Ej tipo: una polea (o esfera/disco) con masa, una cuerda no desliza, un cuerpo colgante.</p>
+
+<h4>Lo que SIEMPRE usás</h4>
+$$\boxed{\sum \vec{F} = m\,\vec{a}_{CM}} \qquad \boxed{\sum \tau_{\text{eje}} = I\,\alpha}$$
+
+<p><strong>Vínculo soga-polea</strong> (cuerda inextensible, no desliza):</p>
+$$a_{\text{cuerpo}} = \alpha \cdot R$$
+<p>(donde $R$ es el radio donde la cuerda toca la polea).</p>
+
+<h4>Momentos de inercia que tenés que tener memorizados</h4>
+<table>
+<tr><th>Cuerpo</th><th>$I$ (eje por CM)</th></tr>
+<tr><td>Disco macizo / cilindro</td><td>$\tfrac{1}{2}mR^2$</td></tr>
+<tr><td>Esfera maciza</td><td>$\tfrac{2}{5}mR^2$</td></tr>
+<tr><td>Aro / cilindro hueco delgado</td><td>$mR^2$</td></tr>
+<tr><td>Barra (eje perp. por centro, largo $L$)</td><td>$\tfrac{1}{12}mL^2$</td></tr>
+<tr><td>Barra (eje perp. por extremo)</td><td>$\tfrac{1}{3}mL^2$</td></tr>
+</table>
+<p><strong>Steiner</strong>: $I_A = I_{CM} + m\,d^2$ con $d$ = distancia del eje al CM.</p>
+
+<h4>Procedimiento</h4>
+<ol>
+  <li><strong>DCL</strong> de cada cuerpo por separado. Si hay polea con masa, las tensiones a cada lado son <strong>distintas</strong>: $T_1 \neq T_2$.</li>
+  <li>Newton lineal para cada cuerpo colgante: $T - mg = ma$ (con signo de $a$ según el sentido elegido).</li>
+  <li>Newton de rotación para la polea: $\sum \tau_{\text{eje}} = I\,\alpha$.
+    <ul><li>Las tensiones que tiran de la polea hacen torque: $\tau = T \cdot R$ con signo según el sentido.</li></ul>
+  </li>
+  <li>Vínculo: $a = \alpha R$ (cuidar el signo: si $\alpha > 0$ en $+\hat{k}$, ¿el cuerpo sube o baja?).</li>
+  <li>Resolver el sistema (típicamente 3 ecuaciones, 3 incógnitas: $T_1$, $T_2$, $a$ o $\alpha$).</li>
+</ol>
+
+<h4>Energía cinética total de un CR</h4>
+$$K = \tfrac{1}{2}m\,v_{CM}^2 + \tfrac{1}{2}I_{CM}\,\omega^2$$
+<p>Si rota alrededor de eje fijo (no traslada): $K = \tfrac{1}{2}I_{\text{eje}}\,\omega^2$.</p>
+
+<div class="alerta">
+<strong>Trampas típicas</strong>:
+<ul>
+  <li><strong>Polea con masa</strong> → las dos tensiones son distintas. Sólo si es ideal (sin masa) son iguales.</li>
+  <li>El "torque del peso de la polea" sobre su propio eje es 0 (el CM está en el eje).</li>
+  <li>Signo del vínculo: si elegís $\hat{k}$ saliente y la polea gira en $+\hat{k}$, mirá el dibujo para ver de qué lado sube el cuerpo.</li>
+  <li>$I$ es del cuerpo que rota, no del que cuelga.</li>
+  <li>En RSR (rodadura sin resbalar): $v_{CM} = \omega R$. NO es lo mismo que el caso de la polea fija con cuerda — pensá bien la geometría.</li>
+  <li>Si la cuerda <strong>desliza</strong> sobre la polea → el vínculo $a = \alpha R$ <strong>no vale</strong>, y hay roce cinético entre cuerda y polea.</li>
+</ul>
+</div>
+
+<div class="truco">
+<strong>Atajo conceptual</strong>: una polea con masa "se come" parte de la fuerza neta para acelerarse angularmente. Cuanto más grande $I$, más se reduce la aceleración del cuerpo colgante.<br>
+En el límite $I \to 0$ recuperás la polea ideal con $T_1 = T_2$.
+</div>
+</section>
+
+<!-- ─────────────────────────── Checklist final ─────────────────────────── -->
+<section id="cheat-checklist">
+<h3 class="ejercicio-titulo">Checklist final pre-entrega</h3>
+
+<div class="nota">
+Antes de entregar, repasá por cada ejercicio:
+<ol>
+  <li><strong>Unidades</strong>: los resultados tienen unidades correctas. Energía en J, fuerza en N, torque en N·m, momento angular en kg·m²/s.</li>
+  <li><strong>Signos</strong>: aclaraste convención (qué eje es $\hat{x}$, $\hat{k}$). Los signos del resultado son consistentes con esa convención.</li>
+  <li><strong>Orden de magnitud</strong>: el resultado es razonable (un coche no va a 1000 m/s; un péndulo no sube 50 m).</li>
+  <li><strong>Casos límite</strong>: si $\mu \to 0$, ¿recuperás el caso sin roce? Si $I \to 0$, ¿polea ideal?</li>
+  <li><strong>Dibujo final</strong>: DCL con vectores y referencias. Los profes valoran que se entienda qué dibujaste.</li>
+  <li><strong>Justificaste</strong>: para preguntas tipo "¿es conservativa?" o "¿qué vector es compatible?", no alcanza con el sí/no — escribí la razón.</li>
+</ol>
+</div>
+
+<div class="truco">
+<strong>Si te trabás</strong>: pasá al siguiente ejercicio. Volver con la cabeza fresca te ahorra 20 minutos de frustración. Y siempre escribí lo que sabés (DCL, ecuaciones generales) aunque no llegues al número final — eso suma parcialmente.
+</div>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<hr class="separador">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PRÁCTICA GRADUADA — CINEMÁTICA CURVILÍNEA                         -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h2 class="parcial" id="practica-cinematica-curvilinea">Práctica graduada — Cinemática curvilínea</h2>
+
+<p class="meta">10 ejercicios escalando dificultad + 1 tipo parcial. Las resoluciones están colapsadas: intentá primero, después abrí.</p>
+
+<!-- ─────────────────────────── Intro / fórmulas ─────────────────────────── -->
+<section id="grad-cc-intro">
+<h3 class="ejercicio-titulo">Fórmulas y convenciones</h3>
+
+<p>Para una partícula en movimiento curvilíneo:</p>
+$$\vec{a} = a_t\,\hat{t} + a_n\,\hat{n}$$
+$$a_t = \frac{dV}{dt} \qquad a_n = \frac{V^2}{\rho} \qquad |\vec{a}| = \sqrt{a_t^2 + a_n^2} \qquad \tan(\theta) = \frac{a_n}{a_t}$$
+
+<ul>
+  <li>$\hat{t}$ : versor tangente a la trayectoria, en el sentido del movimiento.</li>
+  <li>$\hat{n}$ : versor normal, <strong>hacia el centro de curvatura</strong>.</li>
+  <li>$\rho$ : radio de curvatura <strong>local</strong> (no necesariamente un radio "global").</li>
+  <li>$a_t > 0 \Rightarrow$ acelera; $a_t < 0 \Rightarrow$ frena.</li>
+  <li>$a_n \geq 0$ <strong>siempre</strong> y <strong>siempre</strong> apunta al centro.</li>
+  <li>$\theta$ es el ángulo entre $\vec{v}$ y $\vec{a}$.</li>
+</ul>
+</section>
+
+<!-- ═══════════════════════════ NIVEL 1 ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:#555;border-left:3px solid #999;padding-left:0.6em">NIVEL 1 — Básico (Ej 1–3): fórmulas directas, datos limpios</h4>
+
+<!-- ─────────────────────────── Ej 1 ─────────────────────────── -->
+<section id="grad-cc-ej1">
+<h3 class="ejercicio-titulo">Ejercicio 1 — Rotonda con V constante</h3>
+<p class="meta">Nivel: básico · Tema: $a_n$ en MRU circular</p>
+
+<div class="enunciado">
+Un auto recorre una rotonda de radio $R = 50\,\text{m}$ con rapidez constante $V = 15\,\text{m/s}$.
+<ol type="a">
+  <li>¿Cuánto vale $a_t$?</li>
+  <li>¿Cuánto vale $a_n$? ¿Hacia dónde apunta?</li>
+  <li>¿Cuánto vale $|\vec{a}|$? ¿Qué ángulo forma $\vec{a}$ con $\vec{v}$?</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<ol type="a">
+  <li>$a_t = \dfrac{dV}{dt} = 0$ ($V$ constante).</li>
+  <li>$a_n = \dfrac{V^2}{R} = \dfrac{225}{50} = 4{,}5\,\text{m/s}^2$. Apunta hacia el centro de la rotonda.</li>
+  <li>$|\vec{a}| = a_n = 4{,}5\,\text{m/s}^2$. $\vec{a} \perp \vec{v}$ ($\theta = 90°$).</li>
+</ol>
+<div class="respuesta">
+$$\boxed{a_t = 0,\quad a_n = 4{,}5\,\text{m/s}^2,\quad \theta = 90°}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 2 ─────────────────────────── -->
+<section id="grad-cc-ej2">
+<h3 class="ejercicio-titulo">Ejercicio 2 — V(t) lineal en curva de radio fijo</h3>
+<p class="meta">Nivel: básico · Tema: derivada de $V(t)$, $a_n$ instantánea</p>
+
+<div class="enunciado">
+Una partícula recorre una curva de radio $\rho = 20\,\text{m}$. Su rapidez es $V(t) = 3t$ (m/s, $t$ en s). Calcular $a_t$, $a_n$ y $|\vec{a}|$ en $t = 4\,\text{s}$.
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+$$a_t = \frac{dV}{dt} = 3\,\text{m/s}^2 \text{ (constante)}$$
+<p>En $t = 4\,\text{s}$: $V = 12\,\text{m/s}$, entonces</p>
+$$a_n = \frac{V^2}{\rho} = \frac{144}{20} = 7{,}2\,\text{m/s}^2$$
+$$|\vec{a}| = \sqrt{3^2 + 7{,}2^2} = \sqrt{60{,}84} \approx 7{,}8\,\text{m/s}^2$$
+<div class="respuesta">
+$$\boxed{a_t = 3\,\text{m/s}^2,\quad a_n = 7{,}2\,\text{m/s}^2,\quad |\vec{a}| \approx 7{,}8\,\text{m/s}^2}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 3 ─────────────────────────── -->
+<section id="grad-cc-ej3">
+<h3 class="ejercicio-titulo">Ejercicio 3 — Despejar $\rho$ del ángulo</h3>
+<p class="meta">Nivel: básico · Tema: $\tan\theta = a_n/a_t$, despejar $\rho$</p>
+
+<div class="enunciado">
+En cierto instante una partícula tiene $V = 10\,\text{m/s}$, la aceleración forma $60°$ con $\vec{v}$, y $a_t = 2\,\text{m/s}^2$.
+<ol type="a">
+  <li>¿Cuánto vale $a_n$?</li>
+  <li>¿Cuánto vale el radio de curvatura $\rho$ en ese instante?</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p><strong>(a)</strong> $\tan(60°) = \dfrac{a_n}{a_t} \Rightarrow a_n = 2\,\tan(60°) = 2\sqrt{3} \approx 3{,}46\,\text{m/s}^2$.</p>
+<p><strong>(b)</strong> $a_n = \dfrac{V^2}{\rho} \Rightarrow \rho = \dfrac{V^2}{a_n} = \dfrac{100}{2\sqrt{3}} \approx 28{,}9\,\text{m}$.</p>
+<div class="respuesta">
+$$\boxed{a_n \approx 3{,}46\,\text{m/s}^2, \quad \rho \approx 28{,}9\,\text{m}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ═══════════════════════════ NIVEL 2 ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:#555;border-left:3px solid #999;padding-left:0.6em">NIVEL 2 — Intermedio (Ej 4–7): combinaciones, figuras, instantes especiales</h4>
+
+<!-- ─────────────────────────── Ej 4 ─────────────────────────── -->
+<section id="grad-cc-ej4">
+<h3 class="ejercicio-titulo">Ejercicio 4 — V(t) cuadrática, encontrar instante de $\theta = 45°$</h3>
+<p class="meta">Nivel: intermedio · Tema: ecuación implícita en $t$</p>
+
+<div class="enunciado">
+Una partícula tiene $V(t) = 2t^2 + 1$ (m/s), en una trayectoria de $\rho = 50\,\text{m}$ constante.
+<ol type="a">
+  <li>Calcular $a_t$ y $a_n$ en $t = 2\,\text{s}$.</li>
+  <li>¿En qué instante el ángulo entre $\vec{v}$ y $\vec{a}$ vale $45°$?</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p><strong>(a)</strong> En $t = 2\,\text{s}$:</p>
+$$V(2) = 9\,\text{m/s}, \quad a_t = 4t \Rightarrow a_t(2) = 8\,\text{m/s}^2, \quad a_n = \frac{81}{50} = 1{,}62\,\text{m/s}^2$$
+
+<p><strong>(b)</strong> $\theta = 45° \Rightarrow a_n = a_t$:</p>
+$$\frac{(2t^2 + 1)^2}{50} = 4t \;\;\Rightarrow\;\; (2t^2 + 1)^2 = 200\,t$$
+
+<p>Hay que resolver numéricamente. Por iteración:</p>
+$$t \approx 3{,}6\,\text{s}$$
+
+<p>Comprobación: $V(3{,}6) \approx 26{,}92\,\text{m/s}$, $a_n \approx 14{,}5\,\text{m/s}^2$, $a_t = 14{,}4\,\text{m/s}^2$. ✓</p>
+
+<div class="respuesta">
+$$\boxed{a_t(2) = 8\,\text{m/s}^2,\quad a_n(2) = 1{,}62\,\text{m/s}^2,\quad t_{45°} \approx 3{,}6\,\text{s}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 5 ─────────────────────────── -->
+<section id="grad-cc-ej5">
+<h3 class="ejercicio-titulo">Ejercicio 5 — Dado $|\vec{a}|$ y $\theta$, hallar $\rho$ y $a_t$</h3>
+<p class="meta">Nivel: intermedio · Tema: descomposición de $\vec{a}$ por trigonometría directa</p>
+
+<div class="enunciado">
+En cierto punto de una trayectoria curva: $|\vec{v}| = 5\,\text{m/s}$, $|\vec{a}| = 8\,\text{m/s}^2$, y el ángulo entre $\vec{v}$ y $\vec{a}$ es $30°$. Calcular $\rho$ y $a_t$.
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+$$a_t = |\vec{a}|\cos(30°) = 8 \cdot \frac{\sqrt{3}}{2} \approx 6{,}93\,\text{m/s}^2$$
+$$a_n = |\vec{a}|\,\text{sen}(30°) = 8 \cdot 0{,}5 = 4\,\text{m/s}^2$$
+$$\rho = \frac{V^2}{a_n} = \frac{25}{4} = 6{,}25\,\text{m}$$
+<div class="respuesta">
+$$\boxed{a_t \approx 6{,}93\,\text{m/s}^2,\quad \rho = 6{,}25\,\text{m}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 6 ─────────────────────────── -->
+<section id="grad-cc-ej6">
+<h3 class="ejercicio-titulo">Ejercicio 6 — ¿Cuál vector es compatible?</h3>
+<p class="meta">Nivel: intermedio · Tema: justificación de compatibilidad (típico Moreno)</p>
+
+<div class="enunciado">
+Una partícula recorre la trayectoria de izquierda a derecha. En el punto P (curva hacia arriba, <strong>centro de curvatura arriba</strong>, partícula <strong>acelera</strong>), se dibujan 4 vectores candidatos:
+<ul>
+  <li>$\vec{a}_1$: perpendicular a $\vec{v}$, hacia arriba.</li>
+  <li>$\vec{a}_2$: perpendicular a $\vec{v}$, hacia abajo.</li>
+  <li>$\vec{a}_3$: paralelo a $\vec{v}$, hacia adelante.</li>
+  <li>$\vec{a}_4$: forma $135°$ con $\vec{v}$ (hacia atrás-arriba).</li>
+</ul>
+¿Cuál o cuáles son compatibles? Justificar.
+</div>
+
+<svg width="450" height="200" viewBox="0 0 450 200">
+  <!-- Trayectoria curva hacia arriba -->
+  <path d="M 30 150 Q 225 30 420 150" fill="none" stroke="#333" stroke-width="2"/>
+  <!-- Punto P -->
+  <circle cx="225" cy="65" r="4" fill="black"/>
+  <text x="232" y="60" font-size="14">P</text>
+  <!-- v en P -->
+  <line x1="225" y1="65" x2="290" y2="65" stroke="#1a5490" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="295" y="69" font-size="13" fill="#1a5490">v⃗</text>
+  <!-- a1: arriba -->
+  <line x1="100" y1="100" x2="100" y2="60" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="106" y="58" font-size="12" fill="#4caf50">a₁ ↑</text>
+  <!-- a2: abajo -->
+  <line x1="155" y1="100" x2="155" y2="140" stroke="#f44336" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="161" y="138" font-size="12" fill="#f44336">a₂ ↓</text>
+  <!-- a3: adelante -->
+  <line x1="285" y1="100" x2="335" y2="100" stroke="#ff9800" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <text x="340" y="104" font-size="12" fill="#ff9800">a₃ →</text>
+  <!-- a4: 135° (atrás-arriba) -->
+  <line x1="370" y1="120" x2="338" y2="88" stroke="#9c27b0" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <text x="335" y="83" font-size="12" fill="#9c27b0">a₄</text>
+  <!-- Centro de curvatura -->
+  <text x="200" y="180" font-size="11" fill="#888" font-style="italic">centro de curvatura ↑ (arriba)</text>
+  <defs>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#1a5490"/></marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#4caf50"/></marker>
+    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#f44336"/></marker>
+    <marker id="arrow-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#ff9800"/></marker>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#9c27b0"/></marker>
+  </defs>
+</svg>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>Restricciones del problema:</p>
+<ul>
+  <li>$a_n$ debe apuntar al centro de curvatura → <strong>hacia arriba</strong>.</li>
+  <li>Como acelera, $a_t$ debe estar en el sentido de $\vec{v}$ → <strong>hacia adelante</strong>.</li>
+</ul>
+<p>El vector real tiene componente arriba <em>y</em> hacia adelante (ángulo entre $0°$ y $90°$ con $\vec{v}$).</p>
+
+<table>
+<tr><th>Candidato</th><th>Análisis</th><th>Veredicto</th></tr>
+<tr><td>$\vec{a}_1$ (arriba)</td><td>Sólo $a_n$, sin $a_t$. Implicaría $V$ constante.</td><td>NO (acelera)</td></tr>
+<tr><td>$\vec{a}_2$ (abajo)</td><td>$a_n$ apunta lejos del centro.</td><td>NO</td></tr>
+<tr><td>$\vec{a}_3$ (adelante)</td><td>Sólo $a_t$, sin $a_n$. Implicaría $\rho \to \infty$ (recta).</td><td>NO</td></tr>
+<tr><td>$\vec{a}_4$ ($135°$)</td><td>$a_t < 0$ (frena), $a_n$ arriba.</td><td>NO (frena)</td></tr>
+</table>
+
+<div class="respuesta">
+<strong>Ninguno de los 4 es compatible</strong>. El correcto sería un vector con componente <strong>arriba + adelante</strong>, formando un ángulo $\theta \in (0°, 90°)$ con $\vec{v}$.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 7 ─────────────────────────── -->
+<section id="grad-cc-ej7">
+<h3 class="ejercicio-titulo">Ejercicio 7 — Detención momentánea</h3>
+<p class="meta">Nivel: intermedio · Tema: $a_n = 0$ cuando $V = 0$</p>
+
+<div class="enunciado">
+Una partícula tiene $V(t) = 6 - t^2$ (m/s) sobre una curva de $\rho = 30\,\text{m}$.
+<ol type="a">
+  <li>¿En qué instante se detiene la partícula?</li>
+  <li>En ese instante, ¿cuánto valen $a_n$ y la aceleración total?</li>
+  <li>¿Es razonable que $a_n = 0$ en ese instante? Explicar.</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p><strong>(a)</strong> $V(t) = 0 \Rightarrow t^2 = 6 \Rightarrow t = \sqrt{6} \approx 2{,}45\,\text{s}$.</p>
+
+<p><strong>(b)</strong> En $t = \sqrt{6}$:</p>
+$$a_n = \frac{V^2}{\rho} = \frac{0}{30} = 0\,\text{m/s}^2$$
+$$a_t = \frac{dV}{dt} = -2t = -2\sqrt{6} \approx -4{,}9\,\text{m/s}^2 \text{ (frena)}$$
+$$|\vec{a}| = |a_t| \approx 4{,}9\,\text{m/s}^2$$
+
+<p><strong>(c)</strong> Sí, es razonable: en la detención momentánea no hay tendencia centrípeta porque la partícula no se mueve. Toda la aceleración es tangencial (la partícula está por cambiar de sentido).</p>
+
+<div class="truco">
+<strong>Truco mental</strong>: $a_n = V^2/\rho$. Si $V = 0 \Rightarrow a_n = 0$, sin importar $\rho$.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ═══════════════════════════ NIVEL 3 ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:#555;border-left:3px solid #999;padding-left:0.6em">NIVEL 3 — Avanzado (Ej 8–10): parámetros libres, sistemas combinados</h4>
+
+<!-- ─────────────────────────── Ej 8 ─────────────────────────── -->
+<section id="grad-cc-ej8">
+<h3 class="ejercicio-titulo">Ejercicio 8 — Datos cruzados (analizar consistencia)</h3>
+<p class="meta">Nivel: avanzado · Tema: detectar inconsistencias del enunciado</p>
+
+<div class="enunciado">
+$V(t) = A\,t + B$. En $t = 0$, $\vec{v}$ y $\vec{a}$ son perpendiculares. En $t = 2\,\text{s}$, el ángulo entre $\vec{v}$ y $\vec{a}$ es $45°$. $\rho = 10\,\text{m}$ constante. Determinar $A$ y $B$.
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>$a_t = A$ (constante).</p>
+
+<p>En $t = 0$: $\vec{v} \perp \vec{a} \Rightarrow a_t(0) = 0 \Rightarrow A = 0$.</p>
+
+<div class="alerta">
+Pero si $A = 0$ entonces $V$ es constante y $a_t = 0$ <strong>siempre</strong>. El ángulo no podría cambiar a $45°$ en $t = 2$. <strong>Contradicción</strong>.
+</div>
+
+<p>El sistema con $V(t) = A t + B$ <strong>no admite solución</strong>. Esto pasa porque la familia lineal tiene $a_t$ constante, así que el ángulo entre $\vec{v}$ y $\vec{a}$ varía sólo por cambios en $V$ (que entra en $a_n = V^2/\rho$), pero no puede pasar de $90°$ a $45°$ sin que $a_t$ cambie.</p>
+
+<p><strong>Reformulación</strong> (probablemente lo que querían): si $V(t) = A\,t^2 + B$, entonces $a_t = 2At$, que sí varía con $t$:</p>
+<ul>
+  <li>En $t = 0$: $a_t(0) = 0$ ✓ (consistente con $\vec{v} \perp \vec{a}$).</li>
+  <li>En $t = 2$: $\tan(45°) = 1 \Rightarrow a_n(2) = a_t(2) = 4A$.</li>
+  <li>$V(2) = 4A + B \Rightarrow a_n(2) = (4A + B)^2 / 10 = 4A$.</li>
+  <li>$\Rightarrow (4A + B)^2 = 40 A$.</li>
+</ul>
+<p>Una ecuación, dos incógnitas: <strong>el enunciado necesita un dato más</strong> (por ejemplo $B$).</p>
+
+<div class="truco">
+<strong>Enseñanza</strong>: en parcial, si los datos no cierran, decilo. Mostrar la inconsistencia y justificar suma puntos.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 9 ─────────────────────────── -->
+<section id="grad-cc-ej9">
+<h3 class="ejercicio-titulo">Ejercicio 9 — Encontrar instante de $\theta = 60°$</h3>
+<p class="meta">Nivel: avanzado · Tema: ecuación cuadrática + diagrama vectorial</p>
+
+<div class="enunciado">
+$V(t) = 4t$ (m/s), $\rho = 16\,\text{m}$.
+<ol type="a">
+  <li>¿En qué instante $\theta = 60°$?</li>
+  <li>En ese instante, ¿cuánto vale $|\vec{a}|$?</li>
+  <li>Dibujar $a_t$ y $a_n$ con módulo y sentido.</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>$a_t = 4\,\text{m/s}^2$ (constante), $a_n(t) = \dfrac{(4t)^2}{16} = t^2$.</p>
+
+<p><strong>(a)</strong></p>
+$$\tan(60°) = \frac{a_n}{a_t} \Rightarrow \sqrt{3} = \frac{t^2}{4} \Rightarrow t^2 = 4\sqrt{3} \Rightarrow t \approx 2{,}63\,\text{s}$$
+
+<p><strong>(b)</strong> En $t \approx 2{,}63\,\text{s}$:</p>
+$$a_t = 4\,\text{m/s}^2, \quad a_n = 4\sqrt{3} \approx 6{,}93\,\text{m/s}^2$$
+$$|\vec{a}| = \sqrt{16 + 48} = \sqrt{64} = 8\,\text{m/s}^2$$
+
+<p><strong>(c)</strong> Diagrama:</p>
+
+<svg width="450" height="200" viewBox="0 0 450 200">
+  <!-- Punto P -->
+  <circle cx="180" cy="120" r="3" fill="black"/>
+  <text x="166" y="135" font-size="13">P</text>
+  <!-- v -->
+  <line x1="180" y1="120" x2="280" y2="120" stroke="#1a5490" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+  <text x="285" y="124" font-size="13" fill="#1a5490">v⃗ ≈ 10,5 m/s</text>
+  <!-- a_t -->
+  <line x1="180" y1="135" x2="220" y2="135" stroke="#ff9800" stroke-width="2.5" marker-end="url(#arr-orange)"/>
+  <text x="225" y="139" font-size="12" fill="#ff9800">a_t = 4 m/s²</text>
+  <!-- a_n -->
+  <line x1="180" y1="120" x2="180" y2="50" stroke="#4caf50" stroke-width="2.5" marker-end="url(#arr-green)"/>
+  <text x="125" y="80" font-size="12" fill="#4caf50">a_n ≈ 6,93 m/s²</text>
+  <!-- a total -->
+  <line x1="180" y1="120" x2="220" y2="50" stroke="#9c27b0" stroke-width="2.5" stroke-dasharray="4,2" marker-end="url(#arr-purple2)"/>
+  <text x="225" y="50" font-size="12" fill="#9c27b0">|a⃗| = 8 m/s² (60°)</text>
+  <!-- arco 60° -->
+  <path d="M 220 120 A 40 40 0 0 0 210 95" fill="none" stroke="#666" stroke-width="1"/>
+  <text x="210" y="115" font-size="11" fill="#666">60°</text>
+  <defs>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#1a5490"/></marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#ff9800"/></marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#4caf50"/></marker>
+    <marker id="arr-purple2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#9c27b0"/></marker>
+  </defs>
+</svg>
+
+<div class="respuesta">
+$$\boxed{t \approx 2{,}63\,\text{s},\quad |\vec{a}| = 8\,\text{m/s}^2}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 10 ─────────────────────────── -->
+<section id="grad-cc-ej10">
+<h3 class="ejercicio-titulo">Ejercicio 10 — Círculo con MRUV</h3>
+<p class="meta">Nivel: avanzado · Tema: 4 sub-items combinados</p>
+
+<div class="enunciado">
+Una partícula recorre un círculo de $R = 5\,\text{m}$. Su rapidez aumenta uniformemente de $0$ a $10\,\text{m/s}$ en $4\,\text{s}$.
+<ol type="a">
+  <li>Calcular $a_t$ (constante).</li>
+  <li>Calcular $|\vec{a}|$ en $t = 1\,\text{s}$ y $t = 3\,\text{s}$.</li>
+  <li>¿En qué instante $a_n = a_t$?</li>
+  <li>¿En qué instante $\theta = 80°$?</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>$V(t) = \dfrac{10}{4}t = 2{,}5\,t$, entonces $a_t = 2{,}5\,\text{m/s}^2$ constante, y $a_n(t) = \dfrac{(2{,}5 t)^2}{5} = 1{,}25\,t^2$.</p>
+
+<p><strong>(a)</strong> $a_t = 2{,}5\,\text{m/s}^2$.</p>
+
+<p><strong>(b)</strong></p>
+<ul>
+  <li>$t = 1\,\text{s}$: $a_n = 1{,}25$, $|\vec{a}| = \sqrt{6{,}25 + 1{,}5625} \approx 2{,}80\,\text{m/s}^2$.</li>
+  <li>$t = 3\,\text{s}$: $a_n = 11{,}25$, $|\vec{a}| = \sqrt{6{,}25 + 126{,}56} \approx 11{,}52\,\text{m/s}^2$.</li>
+</ul>
+
+<p><strong>(c)</strong> $a_n = a_t \Rightarrow 1{,}25\,t^2 = 2{,}5 \Rightarrow t = \sqrt{2} \approx 1{,}41\,\text{s}$.</p>
+
+<p><strong>(d)</strong> $\tan(80°) \approx 5{,}671$:</p>
+$$a_n = 2{,}5 \cdot 5{,}671 \approx 14{,}18\,\text{m/s}^2 \Rightarrow 1{,}25\,t^2 = 14{,}18 \Rightarrow t \approx 3{,}37\,\text{s}$$
+<p>Está dentro del rango ($t \leq 4$). ✓</p>
+
+<div class="respuesta">
+$$\boxed{a_t = 2{,}5\,\text{m/s}^2,\quad t_{\!_{a_n=a_t}} \approx 1{,}41\,\text{s},\quad t_{80°} \approx 3{,}37\,\text{s}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ═══════════════════════════ EJERCICIO 11 — TIPO PARCIAL ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:var(--primary-dark);border-left:5px solid var(--primary);padding-left:0.6em;font-size:1.05em">EJERCICIO 11 — Tipo parcial Moreno</h4>
+
+<section id="grad-cc-ej11">
+<h3 class="ejercicio-titulo">Ejercicio 11 — Movimiento curvilíneo con parámetro libre</h3>
+<p class="meta">Nivel: parcial · Tema: integración de todo (parámetro, ángulo, vectores compatibles)</p>
+
+<div class="enunciado">
+Una partícula realiza un movimiento curvilíneo con rapidez
+$$V(t) = C\,t^2 - 4\,t \qquad \text{(m/s, } t \text{ en s)}$$
+donde $C > 0$ es un parámetro a determinar.
+<p>Datos:</p>
+<ul>
+  <li>En $t = 1\,\text{s}$, $\rho = 80\,\text{m}$.</li>
+  <li>En $t = 1\,\text{s}$, $\vec{a}$ forma $30°$ con $\vec{v}$, y $\vec{v}$ apunta hacia la derecha.</li>
+</ul>
+<ol type="a">
+  <li>Determinar $C$.</li>
+  <li>Calcular $a_t$, $a_n$ y $|\vec{a}|$ en $t = 1\,\text{s}$.</li>
+  <li>¿La partícula acelera o frena en $t = 1\,\text{s}$? Justificar por el signo de $a_t$.</li>
+  <li>En $t = 2\,\text{s}$, ¿cuál de estos vectores es compatible con el movimiento?
+    <ul>
+      <li>$\vec{a}_I$: perpendicular a $\vec{v}$, hacia el centro de curvatura.</li>
+      <li>$\vec{a}_{II}$: paralelo a $\vec{v}$.</li>
+      <li>$\vec{a}_{III}$: forma $45°$ con $\vec{v}$, hacia el centro.</li>
+      <li>$\vec{a}_{IV}$: opuesto a $\vec{v}$.</li>
+    </ul>
+    Justificar con valores numéricos.
+  </li>
+</ol>
+</div>
+
+<details class="resolucion" open>
+<summary>Ver resolución completa</summary>
+
+<h4>(a) Determinación de $C$</h4>
+
+<p>En $t = 1\,\text{s}$:</p>
+$$V(1) = C - 4, \qquad a_t(1) = 2C - 4, \qquad a_n(1) = \frac{(C-4)^2}{80}$$
+
+<p>Condición del ángulo (asumiendo $a_t > 0$):</p>
+$$\tan(30°) = \frac{a_n}{a_t} = \frac{1}{\sqrt{3}}$$
+$$\frac{(C-4)^2}{80} = \frac{2C - 4}{\sqrt{3}}$$
+$$\sqrt{3}\,(C-4)^2 = 160\,(C - 2)$$
+
+<p>Expandiendo y reordenando:</p>
+$$\sqrt{3}\,C^2 - (8\sqrt{3} + 160)\,C + (16\sqrt{3} + 320) = 0$$
+
+<p>Con $\sqrt{3} \approx 1{,}732$ y dividiendo por $\sqrt{3}$:</p>
+$$C^2 - 100{,}38\,C + 200{,}76 = 0$$
+
+<p>Resolviendo:</p>
+$$C = \frac{100{,}38 \pm \sqrt{100{,}38^2 - 4\cdot 200{,}76}}{2} = \frac{100{,}38 \pm 96{,}29}{2}$$
+$$C_1 \approx 98{,}34, \qquad C_2 \approx 2{,}045$$
+
+<div class="truco">
+<strong>Cómo descartar una raíz</strong>: con $C_1 \approx 98$, en $t = 1\,\text{s}$ daría $V \approx 94\,\text{m/s}$, físicamente inverosímil. Tomamos $C \approx 2{,}045\,\text{m/s}^3$.
+</div>
+
+<div class="respuesta">
+$$\boxed{C \approx 2{,}045\,\text{m/s}^3}$$
+</div>
+
+<h4>(b) Valores en $t = 1\,\text{s}$</h4>
+
+<p>Con $C \approx 2{,}045$:</p>
+$$V(1) = 2{,}045 - 4 = -1{,}955\,\text{m/s}$$
+
+<div class="alerta">
+<strong>Atención al signo de $V$</strong>: salió negativa. Esto significa que la <strong>parametrización</strong> da $V$ negativa en $t = 1$, así que la <strong>rapidez</strong> (módulo) es $|V| = 1{,}955\,\text{m/s}$. La velocidad apunta en sentido $-\hat{t}$ respecto al sentido convencional. Si el enunciado dice "$\vec{v}$ a la derecha", interpretamos que $-\hat{t}$ es la derecha en ese instante.
+</div>
+
+<p>Componentes en $t = 1\,\text{s}$:</p>
+$$a_t(1) = 2(2{,}045) - 4 = 0{,}09\,\text{m/s}^2$$
+$$a_n(1) = \frac{(1{,}955)^2}{80} \approx 0{,}0478\,\text{m/s}^2$$
+$$|\vec{a}|(1) = \sqrt{0{,}09^2 + 0{,}0478^2} \approx 0{,}102\,\text{m/s}^2$$
+
+<div class="respuesta">
+$$\boxed{a_t(1) \approx 0{,}09\,\text{m/s}^2,\quad a_n(1) \approx 0{,}048\,\text{m/s}^2,\quad |\vec{a}|(1) \approx 0{,}10\,\text{m/s}^2}$$
+</div>
+
+<h4>(c) Signo de $a_t$ en $t = 1\,\text{s}$</h4>
+
+<p>$a_t(1) \approx +0{,}09\,\text{m/s}^2 > 0$, así que <strong>la partícula está acelerando</strong> en el sentido positivo de $\hat{t}$.</p>
+
+<p>Pero $V(1) < 0$ en la parametrización, así que en ese instante la partícula está <strong>desacelerando su movimiento</strong> en el sentido $-\hat{t}$ (que es el de avance real). En otras palabras: como $V$ y $a_t$ tienen signos opuestos, la rapidez está disminuyendo.</p>
+
+<div class="alerta">
+<strong>Conclusión real</strong>: en $t = 1\,\text{s}$ la partícula <strong>frena</strong> (rapidez disminuye). El signo positivo de $a_t$ refleja la convención del versor $\hat{t}$ elegido, no el "acelera/frena" físico, que se mide por el signo de $V \cdot a_t$.
+</div>
+
+<h4>(d) Vectores compatibles en $t = 2\,\text{s}$</h4>
+
+<p>Con $C \approx 2{,}045$ en $t = 2\,\text{s}$:</p>
+$$V(2) = 2{,}045 \cdot 4 - 8 = 0{,}18\,\text{m/s}$$
+$$a_t(2) = 2 \cdot 2{,}045 \cdot 2 - 4 = 4{,}18\,\text{m/s}^2$$
+
+<p>Asumiendo $\rho$ constante (= 80 m, sin otro dato):</p>
+$$a_n(2) = \frac{(0{,}18)^2}{80} \approx 4 \times 10^{-4}\,\text{m/s}^2$$
+
+<p>La aceleración está dominada por $a_t$:</p>
+$$|\vec{a}|(2) \approx 4{,}18\,\text{m/s}^2 \text{ (casi puramente tangencial)}$$
+
+<table>
+<tr><th>Candidato</th><th>Análisis</th><th>Veredicto</th></tr>
+<tr><td>$\vec{a}_I$ (⊥ a $\vec{v}$)</td><td>$a_t \neq 0$, así que $\vec{a}$ no es perpendicular.</td><td>Incompatible</td></tr>
+<tr><td>$\vec{a}_{II}$ (∥ a $\vec{v}$)</td><td>$a_n$ casi nulo: $\vec{a}$ es <em>casi</em> paralelo a $\vec{v}$.</td><td>Aproximadamente compatible</td></tr>
+<tr><td>$\vec{a}_{III}$ ($45°$)</td><td>Requeriría $a_n/a_t = 1$, pero $a_n/a_t \approx 10^{-4}$.</td><td>Incompatible</td></tr>
+<tr><td>$\vec{a}_{IV}$ (opuesto)</td><td>$a_t > 0$, no apunta en sentido opuesto a $\vec{v}$.</td><td>Incompatible</td></tr>
+</table>
+
+<div class="respuesta">
+El vector más próximo al real es $\vec{a}_{II}$ (paralelo a $\vec{v}$), porque $|\vec{a}| \approx 4{,}18\,\text{m/s}^2$ con componente normal despreciable. Estrictamente <strong>ninguno de los 4 es exactamente compatible</strong> — es típico de Moreno que la respuesta correcta sea "ninguno" y haya que justificar.
+</div>
+
+<div class="truco">
+<strong>Estrategia en parcial</strong>: cuando aparezca un set de 4 vectores candidatos, calculá $a_t$ y $a_n$ numéricos en el instante pedido, decidí ángulo y sentido del vector real, y compará uno a uno. Aunque ninguno sea estrictamente compatible, mostrar el análisis numérico vale puntos.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Errores típicos ─────────────────────────── -->
+<section id="grad-cc-errores">
+<h3 class="ejercicio-titulo">Errores típicos a evitar</h3>
+
+<div class="alerta">
+<ol>
+  <li><strong>Confundir $V$ con $|\vec{v}|$</strong>. En ejercicios de rapidez positiva la diferencia es trivial; cuando $V(t)$ puede ser negativa (paramétrica), hay que distinguir.</li>
+  <li><strong>Olvidar que $a_n$ siempre apunta al centro</strong>. El signo de $a_t$ puede ser $\pm$ (acelera/frena), pero $a_n$ nunca cambia de sentido respecto a $\hat{n}$.</li>
+  <li><strong>Usar mal el ángulo</strong>. $\tan(\theta) = a_n/a_t$, con $\theta$ entre $\vec{v}$ y $\vec{a}$. Confundir con el complemento (entre $\vec{a}$ y $\hat{n}$) invierte resultados.</li>
+  <li><strong>Aplicar $\rho$ "global" en vez de local</strong>. En trayectorias generales, $\rho$ cambia punto a punto. Sólo en circunferencias $\rho = R$ constante.</li>
+  <li><strong>Tratar la velocidad como escalar cuando importa el vector</strong>. Para vectores compatibles, importa la dirección de $\vec{v}$, no sólo el módulo.</li>
+  <li><strong>No verificar casos límite</strong>. Si $V = 0 \Rightarrow a_n = 0$ (independiente de $\rho$). Si $\rho \to \infty \Rightarrow a_n \to 0$ (trayectoria casi recta).</li>
+  <li><strong>Olvidar las unidades</strong>. Convertir cm a m, km/h a m/s antes de calcular.</li>
+</ol>
+</div>
+
+<h4>Resumen visual</h4>
+
+<svg width="450" height="220" viewBox="0 0 450 220">
+  <!-- v -->
+  <line x1="80" y1="160" x2="280" y2="160" stroke="#1a5490" stroke-width="2.5" marker-end="url(#arr2-blue)"/>
+  <text x="285" y="164" font-size="13" fill="#1a5490">v⃗ (tangente)</text>
+  <!-- a_n -->
+  <line x1="180" y1="160" x2="180" y2="60" stroke="#4caf50" stroke-width="2.5" marker-end="url(#arr2-green)"/>
+  <text x="115" y="100" font-size="12" fill="#4caf50">a_n (al centro)</text>
+  <!-- a_t -->
+  <line x1="180" y1="175" x2="240" y2="175" stroke="#ff9800" stroke-width="2.5" marker-end="url(#arr2-orange)"/>
+  <text x="245" y="179" font-size="12" fill="#ff9800">a_t</text>
+  <!-- a total -->
+  <line x1="180" y1="160" x2="240" y2="60" stroke="#9c27b0" stroke-width="3" stroke-dasharray="5,2" marker-end="url(#arr2-purple)"/>
+  <text x="245" y="60" font-size="13" fill="#9c27b0">a⃗ (total)</text>
+  <!-- arco θ -->
+  <path d="M 230 160 A 50 50 0 0 0 215 130" fill="none" stroke="#666" stroke-width="1.2"/>
+  <text x="218" y="153" font-size="11" fill="#666">θ</text>
+  <!-- Punto P -->
+  <circle cx="180" cy="160" r="3" fill="black"/>
+  <text x="167" y="175" font-size="13">P</text>
+  <!-- Trayectoria -->
+  <path d="M 30 200 Q 180 100 350 200" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="320" y="215" font-size="10" fill="#888" font-style="italic">trayectoria</text>
+  <defs>
+    <marker id="arr2-blue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#1a5490"/></marker>
+    <marker id="arr2-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#ff9800"/></marker>
+    <marker id="arr2-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#4caf50"/></marker>
+    <marker id="arr2-purple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#9c27b0"/></marker>
+  </defs>
+</svg>
+
+<ul>
+  <li>$a_t = |\vec{a}|\cos\theta$</li>
+  <li>$a_n = |\vec{a}|\,\text{sen}\,\theta$</li>
+  <li>$\tan\theta = a_n / a_t$</li>
+</ul>
+
+<table>
+<tr><th>$\theta$</th><th>Significado físico</th></tr>
+<tr><td>$0°$</td><td>$\vec{a} \parallel \vec{v}$: sólo tangencial (recta o instante de paso por recta).</td></tr>
+<tr><td>$90°$</td><td>$\vec{a} \perp \vec{v}$: sólo normal ($V$ momentáneamente constante).</td></tr>
+<tr><td>$(0°, 90°)$</td><td>Componentes mixtas, caso típico.</td></tr>
+<tr><td>$(90°, 180°)$</td><td>$a_t < 0$: la partícula <strong>frena</strong>.</td></tr>
+</table>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<hr class="separador">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PRÁCTICA GRADUADA — DINÁMICA EN CURVAS / PERALTE                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h2 class="parcial" id="practica-peralte">Práctica graduada — Dinámica en curvas / peralte</h2>
+
+<p class="meta">10 ejercicios escalando dificultad + 1 tipo parcial. Resoluciones colapsadas.</p>
+
+<!-- ─────────────────────────── Intro / fórmulas ─────────────────────────── -->
+<section id="grad-pe-intro">
+<h3 class="ejercicio-titulo">Fórmulas y convenciones</h3>
+
+<p>Para un cuerpo de masa $m$ que toma una curva de radio $R$ con rapidez $V$:</p>
+
+<h4>Sistema de coordenadas correcto</h4>
+<p>Aunque el plano esté inclinado, usá ejes <strong>horizontal y vertical</strong>:</p>
+<ul>
+  <li>$\hat{x}$: horizontal, apuntando al centro de la curva.</li>
+  <li>$\hat{y}$: vertical, hacia arriba.</li>
+</ul>
+<p>Esto porque la aceleración del coche es <strong>puramente horizontal</strong>:</p>
+$$\vec{a} = \frac{V^2}{R}\,\hat{x}, \qquad a_y = 0$$
+
+<h4>Ecuaciones de Newton</h4>
+$$\sum F_x = m\,\frac{V^2}{R} \qquad \sum F_y = 0$$
+
+<h4>Descomposición de fuerzas (peralte de ángulo $\alpha$)</h4>
+<table>
+<tr><th>Fuerza</th><th>$F_x$ (al centro)</th><th>$F_y$ (arriba)</th></tr>
+<tr><td>Peso $m\vec{g}$</td><td>$0$</td><td>$-mg$</td></tr>
+<tr><td>Normal $\vec{N}$</td><td>$N\,\text{sen}\,\alpha$</td><td>$N\cos\alpha$</td></tr>
+<tr><td>Roce a "lo largo del plano" hacia abajo (tendencia a salir)</td><td>$+f_r\cos\alpha$</td><td>$-f_r\,\text{sen}\,\alpha$</td></tr>
+<tr><td>Roce hacia arriba del plano (tendencia a caer al centro)</td><td>$-f_r\cos\alpha$</td><td>$+f_r\,\text{sen}\,\alpha$</td></tr>
+</table>
+
+<h4>Fórmulas clave (memorizar)</h4>
+
+<p><strong>Peralte ideal sin roce</strong>:</p>
+$$\tan\alpha = \frac{V_0^2}{gR} \quad\Longleftrightarrow\quad V_0 = \sqrt{gR\,\tan\alpha}$$
+
+<p><strong>Curva plana ($\alpha = 0$) con roce estático $\mu$</strong>:</p>
+$$V_{\max} = \sqrt{\mu\,g\,R}$$
+
+<p><strong>Peralte $\alpha$ con roce $\mu$, $V$ máxima</strong> (tendencia a deslizar hacia afuera):</p>
+$$V_{\max}^2 = gR\,\frac{\tan\alpha + \mu}{1 - \mu\tan\alpha}$$
+
+<p><strong>Peralte $\alpha$ con roce $\mu$, $V$ mínima</strong> (tendencia a deslizar hacia el centro):</p>
+$$V_{\min}^2 = gR\,\frac{\tan\alpha - \mu}{1 + \mu\tan\alpha}$$
+
+<div class="alerta">
+Si la expresión de $V_{\min}^2$ da $\leq 0$, significa que el roce alcanza para sostener al coche aunque esté quieto. <strong>No hay $V_{\min}$</strong>; cualquier $V < V_0$ es estable.
+</div>
+
+<div class="truco">
+<strong>Regla del sentido del roce</strong>: el roce se opone a la <em>tendencia a deslizar</em>.
+<ul>
+  <li>Si $V > V_0$ → tiende a salirse (subir por el peralte) → roce hacia el centro (hacia abajo del plano).</li>
+  <li>Si $V < V_0$ → tiende a caer al centro (bajar por el peralte) → roce hacia afuera (hacia arriba del plano).</li>
+  <li>Si $V = V_0$ → $f_r = 0$ (no hay tendencia a deslizar).</li>
+</ul>
+</div>
+</section>
+
+<!-- ═══════════════════════════ NIVEL 1 ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:#555;border-left:3px solid #999;padding-left:0.6em">NIVEL 1 — Básico (Ej 1–3): conceptos base</h4>
+
+<!-- ─────────────────────────── Ej 1 ─────────────────────────── -->
+<section id="grad-pe-ej1">
+<h3 class="ejercicio-titulo">Ejercicio 1 — Curva plana sin roce</h3>
+<p class="meta">Nivel: básico · Tema: por qué no se puede tomar una curva sin fuerza horizontal</p>
+
+<div class="enunciado">
+Un auto de $m = 1000\,\text{kg}$ quiere tomar una curva plana (sin peralte) de radio $R = 30\,\text{m}$ a $V = 36\,\text{km/h}$. La superficie es de hielo (sin roce).
+<ol type="a">
+  <li>¿Cuánto vale la fuerza centrípeta que necesita?</li>
+  <li>¿Qué fuerzas horizontales actúan sobre el auto?</li>
+  <li>¿Puede tomar la curva? Justificar.</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>Pasar unidades: $V = 36\,\text{km/h} = 10\,\text{m/s}$.</p>
+
+<p><strong>(a)</strong> Fuerza centrípeta necesaria:</p>
+$$F_c = m\,\frac{V^2}{R} = 1000 \cdot \frac{100}{30} \approx 3333\,\text{N}$$
+
+<p><strong>(b)</strong> En curva plana sin roce, las únicas fuerzas son:</p>
+<ul>
+  <li>Peso $\vec{P} = -mg\,\hat{y}$ (vertical hacia abajo).</li>
+  <li>Normal $\vec{N} = N\,\hat{y}$ (vertical hacia arriba).</li>
+</ul>
+<p>Ninguna tiene componente horizontal.</p>
+
+<p><strong>(c)</strong> Como no hay ninguna fuerza horizontal, $\sum F_x = 0 \neq mV^2/R$. <strong>No puede</strong> tomar la curva: sigue derecho (1ª ley de Newton).</p>
+
+<div class="respuesta">
+$$\boxed{F_c \approx 3333\,\text{N}; \text{ sin roce ni peralte no hay quién provea esa fuerza}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 2 ─────────────────────────── -->
+<section id="grad-pe-ej2">
+<h3 class="ejercicio-titulo">Ejercicio 2 — Curva plana con roce</h3>
+<p class="meta">Nivel: básico · Tema: $V_{\max} = \sqrt{\mu g R}$</p>
+
+<div class="enunciado">
+Una curva plana de radio $R = 50\,\text{m}$ tiene coeficiente de roce estático $\mu = 0{,}4$ entre el asfalto y los neumáticos. ¿Cuál es la rapidez máxima a la que un auto puede tomar la curva sin derrapar? Tomar $g = 10\,\text{m/s}^2$.
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>En curva plana, la fricción es la única fuerza centrípeta:</p>
+$$\mu N = m\,\frac{V^2}{R}, \qquad N = mg \Rightarrow \mu mg = m\,\frac{V^2}{R}$$
+
+<p>La masa se simplifica:</p>
+$$V_{\max} = \sqrt{\mu\,g\,R} = \sqrt{0{,}4 \cdot 10 \cdot 50} = \sqrt{200} \approx 14{,}14\,\text{m/s}$$
+<p>En km/h: $V_{\max} \approx 50{,}9\,\text{km/h}$.</p>
+
+<div class="respuesta">
+$$\boxed{V_{\max} \approx 14{,}14\,\text{m/s} \approx 50{,}9\,\text{km/h}}$$
+</div>
+
+<div class="truco">
+$V_{\max}$ no depende de la masa del auto. Un auto y un camión derrapan a la misma velocidad.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 3 ─────────────────────────── -->
+<section id="grad-pe-ej3">
+<h3 class="ejercicio-titulo">Ejercicio 3 — Aceleración centrípeta vs $g$</h3>
+<p class="meta">Nivel: básico · Tema: comparar $a_c$ con $g$ para tener intuición de magnitudes</p>
+
+<div class="enunciado">
+Un auto toma una curva de $R = 80\,\text{m}$ a $V = 20\,\text{m/s}$.
+<ol type="a">
+  <li>¿Cuánto vale $a_c$?</li>
+  <li>¿Cuántos "$g$" representa esa aceleración?</li>
+  <li>¿Cuánto $\mu$ mínimo necesita el asfalto para que no derrape (curva plana, $g = 10\,\text{m/s}^2$)?</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p><strong>(a)</strong> $a_c = \dfrac{V^2}{R} = \dfrac{400}{80} = 5\,\text{m/s}^2$.</p>
+
+<p><strong>(b)</strong> $\dfrac{a_c}{g} = \dfrac{5}{10} = 0{,}5$. Es <strong>media $g$</strong>.</p>
+
+<p><strong>(c)</strong> Para no derrapar:</p>
+$$\mu\,g \geq \frac{V^2}{R} \Rightarrow \mu \geq \frac{a_c}{g} = 0{,}5$$
+
+<div class="respuesta">
+$$\boxed{a_c = 5\,\text{m/s}^2 = 0{,}5\,g,\quad \mu_{\min} = 0{,}5}$$
+</div>
+
+<div class="truco">
+Truco rápido: $\mu_{\min} = a_c/g$. Si la curva exige más de $0{,}8\,g$, ningún asfalto seco aguanta (típicamente $\mu \lesssim 0{,}8$).
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ═══════════════════════════ NIVEL 2 ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:#555;border-left:3px solid #999;padding-left:0.6em">NIVEL 2 — Intermedio (Ej 4–7): peralte sin roce, fricción aislada</h4>
+
+<!-- ─────────────────────────── Ej 4 ─────────────────────────── -->
+<section id="grad-pe-ej4">
+<h3 class="ejercicio-titulo">Ejercicio 4 — Peralte ideal $V_0$</h3>
+<p class="meta">Nivel: intermedio · Tema: $\tan\alpha = V_0^2/(gR)$</p>
+
+<div class="enunciado">
+Una curva peraltada $\alpha = 20°$ de radio $R = 100\,\text{m}$ está diseñada para tomarse sin fricción a una velocidad $V_0$. Calcular $V_0$. Tomar $g = 10\,\text{m/s}^2$.
+</div>
+
+<svg width="450" height="240" viewBox="0 0 450 240">
+  <!-- Peralte inclinado -->
+  <polygon points="80,200 380,200 380,170" fill="#e0e0e0" stroke="#555" stroke-width="1.5"/>
+  <!-- Línea horizontal de referencia -->
+  <line x1="80" y1="200" x2="380" y2="200" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Coche (caja inclinada) -->
+  <g transform="translate(230, 180) rotate(-5.71)">
+    <rect x="-25" y="-12" width="50" height="14" fill="#1a5490" rx="3"/>
+    <circle cx="-15" cy="3" r="4" fill="#222"/>
+    <circle cx="15" cy="3" r="4" fill="#222"/>
+  </g>
+  <!-- Normal -->
+  <line x1="230" y1="173" x2="223" y2="105" stroke="#4caf50" stroke-width="2" marker-end="url(#arr3-green)"/>
+  <text x="200" y="100" font-size="13" fill="#4caf50">N⃗</text>
+  <!-- Peso -->
+  <line x1="230" y1="173" x2="230" y2="225" stroke="#9c27b0" stroke-width="2" marker-end="url(#arr3-purple)"/>
+  <text x="235" y="222" font-size="13" fill="#9c27b0">mg</text>
+  <!-- Ángulo α -->
+  <path d="M 340 200 A 40 40 0 0 0 337 196" fill="none" stroke="#666" stroke-width="1"/>
+  <text x="328" y="194" font-size="12" fill="#666">α = 20°</text>
+  <!-- Centro de curvatura -->
+  <text x="30" y="195" font-size="12" fill="#888" font-style="italic">← centro</text>
+  <defs>
+    <marker id="arr3-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#4caf50"/></marker>
+    <marker id="arr3-purple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#9c27b0"/></marker>
+  </defs>
+</svg>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>Sin roce, sólo actúan $\vec{N}$ y $m\vec{g}$.</p>
+$$\sum F_x: \; N\,\text{sen}\,\alpha = m\,\frac{V_0^2}{R}$$
+$$\sum F_y: \; N\cos\alpha - mg = 0 \Rightarrow N = \frac{mg}{\cos\alpha}$$
+
+<p>Sustituyendo:</p>
+$$\frac{mg}{\cos\alpha}\,\text{sen}\,\alpha = m\,\frac{V_0^2}{R}$$
+$$\tan\alpha = \frac{V_0^2}{gR} \Rightarrow V_0 = \sqrt{gR\tan\alpha}$$
+
+<p>Numéricamente:</p>
+$$V_0 = \sqrt{10 \cdot 100 \cdot \tan(20°)} = \sqrt{1000 \cdot 0{,}364} \approx 19{,}07\,\text{m/s}$$
+
+<div class="respuesta">
+$$\boxed{V_0 \approx 19{,}07\,\text{m/s} \approx 68{,}7\,\text{km/h}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 5 ─────────────────────────── -->
+<section id="grad-pe-ej5">
+<h3 class="ejercicio-titulo">Ejercicio 5 — Ángulo óptimo de peralte</h3>
+<p class="meta">Nivel: intermedio · Tema: despejar $\alpha$ dada $V$ y $R$</p>
+
+<div class="enunciado">
+Una autopista quiere diseñar una curva de radio $R = 200\,\text{m}$ para que los autos puedan tomarla sin fricción a $V = 90\,\text{km/h}$. ¿Qué ángulo de peralte $\alpha$ debe darle? $g = 10\,\text{m/s}^2$.
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>$V = 90\,\text{km/h} = 25\,\text{m/s}$.</p>
+$$\tan\alpha = \frac{V^2}{gR} = \frac{625}{10 \cdot 200} = 0{,}3125$$
+$$\alpha = \arctan(0{,}3125) \approx 17{,}4°$$
+
+<div class="respuesta">
+$$\boxed{\alpha \approx 17{,}4°}$$
+</div>
+
+<div class="truco">
+En autopistas reales, los peraltes rara vez superan los $7°$–$10°$. Si tu curva pide $\alpha = 30°$, está mal diseñada: hay que aumentar $R$ o reducir $V_{\text{diseño}}$.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 6 ─────────────────────────── -->
+<section id="grad-pe-ej6">
+<h3 class="ejercicio-titulo">Ejercicio 6 — Curva plana, $V_{\max}$ y análisis</h3>
+<p class="meta">Nivel: intermedio · Tema: $V_{\max}$ con roce y comparación de escenarios</p>
+
+<div class="enunciado">
+Una curva plana de $R = 60\,\text{m}$ tiene $\mu = 0{,}3$.
+<ol type="a">
+  <li>$V_{\max}$ sin derrapar (asfalto seco).</li>
+  <li>Si llueve y $\mu$ baja a $0{,}15$, ¿en qué porcentaje se reduce $V_{\max}$?</li>
+  <li>Si la curva fuera de $R = 240\,\text{m}$ (4× más grande), ¿cómo cambia $V_{\max}$?</li>
+</ol>
+$g = 10\,\text{m/s}^2$.
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p><strong>(a)</strong> $V_{\max} = \sqrt{\mu g R} = \sqrt{0{,}3 \cdot 10 \cdot 60} = \sqrt{180} \approx 13{,}42\,\text{m/s}$.</p>
+
+<p><strong>(b)</strong> Con $\mu = 0{,}15$: $V'_{\max} = \sqrt{0{,}15 \cdot 10 \cdot 60} = \sqrt{90} \approx 9{,}49\,\text{m/s}$.</p>
+$$\frac{V'_{\max}}{V_{\max}} = \sqrt{\frac{0{,}15}{0{,}3}} = \sqrt{0{,}5} \approx 0{,}707$$
+<p>Reducción: $\approx 29{,}3\%$.</p>
+
+<p><strong>(c)</strong> Con $R = 240\,\text{m}$ (×4): $V_{\max} = \sqrt{0{,}3 \cdot 10 \cdot 240} = \sqrt{720} \approx 26{,}83\,\text{m/s}$.</p>
+<p>Es el doble (×2), porque $V_{\max} \propto \sqrt{R}$.</p>
+
+<div class="respuesta">
+$$\boxed{V_{\max} \approx 13{,}42\,\text{m/s};\quad \text{lluvia: } -29{,}3\%;\quad \text{R×4} \Rightarrow V_{\max}\!\times 2}$$
+</div>
+
+<div class="truco">
+Dependencias: $V_{\max} \propto \sqrt{\mu g R}$. Cuadruplicar $R$ duplica $V_{\max}$.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 7 ─────────────────────────── -->
+<section id="grad-pe-ej7">
+<h3 class="ejercicio-titulo">Ejercicio 7 — Datos invertidos del peralte ideal</h3>
+<p class="meta">Nivel: intermedio · Tema: despejar $R$ o $V_0$ con $\alpha$ dado</p>
+
+<div class="enunciado">
+Una curva peraltada con $\alpha = 30°$ está diseñada para ser tomada sin fricción a $V_0 = 22\,\text{m/s}$.
+<ol type="a">
+  <li>¿Cuál es el radio de la curva? $g = 10\,\text{m/s}^2$.</li>
+  <li>Si la normal medida sobre el coche es $N = 5{,}77\,\text{kN}$, ¿cuál es la masa del coche?</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p><strong>(a)</strong>
+$$\tan(30°) = \frac{V_0^2}{gR} \Rightarrow R = \frac{V_0^2}{g\tan(30°)} = \frac{484}{10 \cdot 0{,}5774} \approx 83{,}8\,\text{m}$$
+</p>
+
+<p><strong>(b)</strong> Para el peralte sin roce, $N = mg/\cos\alpha$:
+$$m = \frac{N\cos\alpha}{g} = \frac{5770 \cdot \cos(30°)}{10} = \frac{5770 \cdot 0{,}866}{10} \approx 500\,\text{kg}$$
+</p>
+
+<div class="respuesta">
+$$\boxed{R \approx 83{,}8\,\text{m},\quad m \approx 500\,\text{kg}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ═══════════════════════════ NIVEL 3 ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:#555;border-left:3px solid #999;padding-left:0.6em">NIVEL 3 — Avanzado (Ej 8–10): peralte + roce combinados</h4>
+
+<!-- ─────────────────────────── Ej 8 ─────────────────────────── -->
+<section id="grad-pe-ej8">
+<h3 class="ejercicio-titulo">Ejercicio 8 — Peralte + roce, $V_{\max}$</h3>
+<p class="meta">Nivel: avanzado · Tema: fórmula maestra de $V_{\max}$</p>
+
+<div class="enunciado">
+Una curva peraltada $\alpha = 15°$, $R = 80\,\text{m}$, con $\mu = 0{,}3$. ¿Cuál es la rapidez máxima a la que se puede tomar sin derrapar hacia afuera? $g = 10\,\text{m/s}^2$.
+</div>
+
+<svg width="450" height="240" viewBox="0 0 450 240">
+  <!-- Peralte inclinado -->
+  <polygon points="80,200 380,200 380,160" fill="#e0e0e0" stroke="#555" stroke-width="1.5"/>
+  <line x1="80" y1="200" x2="380" y2="200" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Coche -->
+  <g transform="translate(230, 180) rotate(-7.6)">
+    <rect x="-25" y="-12" width="50" height="14" fill="#1a5490" rx="3"/>
+    <circle cx="-15" cy="3" r="4" fill="#222"/>
+    <circle cx="15" cy="3" r="4" fill="#222"/>
+  </g>
+  <!-- Normal (perpendicular al plano) -->
+  <line x1="230" y1="170" x2="220" y2="100" stroke="#4caf50" stroke-width="2" marker-end="url(#arr4-green)"/>
+  <text x="195" y="95" font-size="13" fill="#4caf50">N⃗</text>
+  <!-- Peso -->
+  <line x1="230" y1="170" x2="230" y2="225" stroke="#9c27b0" stroke-width="2" marker-end="url(#arr4-purple)"/>
+  <text x="236" y="222" font-size="13" fill="#9c27b0">mg</text>
+  <!-- Fricción a lo largo del plano (hacia el centro, hacia abajo del plano) -->
+  <line x1="244" y1="172" x2="200" y2="178" stroke="#ff9800" stroke-width="2.5" marker-end="url(#arr4-orange)"/>
+  <text x="155" y="174" font-size="13" fill="#ff9800">f_r</text>
+  <!-- Etiqueta de "salida" -->
+  <text x="370" y="155" font-size="10" fill="#888" font-style="italic">↗ "afuera"</text>
+  <text x="30" y="195" font-size="11" fill="#888" font-style="italic">← centro</text>
+  <defs>
+    <marker id="arr4-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#4caf50"/></marker>
+    <marker id="arr4-purple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#9c27b0"/></marker>
+    <marker id="arr4-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#ff9800"/></marker>
+  </defs>
+</svg>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>En $V_{\max}$ el coche tiende a salirse del plano (hacia arriba del peralte), así que el roce apunta <strong>hacia el centro</strong> (a lo largo del plano hacia abajo).</p>
+
+<p>Descomposición:</p>
+<ul>
+  <li>$N_x = N\,\text{sen}\,\alpha$ (al centro)</li>
+  <li>$N_y = N\cos\alpha$ (arriba)</li>
+  <li>$f_{r,x} = +\mu N\cos\alpha$ (al centro)</li>
+  <li>$f_{r,y} = -\mu N\,\text{sen}\,\alpha$ (abajo)</li>
+</ul>
+
+<p>Ecuaciones:</p>
+$$\sum F_x: \; N\,\text{sen}\,\alpha + \mu N\cos\alpha = m\,\frac{V_{\max}^2}{R}$$
+$$\sum F_y: \; N\cos\alpha - \mu N\,\text{sen}\,\alpha - mg = 0$$
+
+<p>Dividiendo (1) por (2):</p>
+$$\frac{V_{\max}^2}{gR} = \frac{\text{sen}\,\alpha + \mu\cos\alpha}{\cos\alpha - \mu\,\text{sen}\,\alpha} = \frac{\tan\alpha + \mu}{1 - \mu\tan\alpha}$$
+
+<p>Con $\alpha = 15°$ ($\tan(15°) \approx 0{,}268$), $\mu = 0{,}3$:</p>
+$$V_{\max}^2 = 10 \cdot 80 \cdot \frac{0{,}268 + 0{,}3}{1 - 0{,}3 \cdot 0{,}268} = 800 \cdot \frac{0{,}568}{0{,}920} \approx 493{,}9$$
+$$V_{\max} \approx 22{,}22\,\text{m/s} \approx 80\,\text{km/h}$$
+
+<div class="respuesta">
+$$\boxed{V_{\max} \approx 22{,}22\,\text{m/s} \approx 80\,\text{km/h}}$$
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 9 ─────────────────────────── -->
+<section id="grad-pe-ej9">
+<h3 class="ejercicio-titulo">Ejercicio 9 — Peralte + roce, $V_{\min}$</h3>
+<p class="meta">Nivel: avanzado · Tema: fricción en sentido contrario (tendencia a caer al centro)</p>
+
+<div class="enunciado">
+Misma curva del Ej 8: $\alpha = 15°$, $R = 80\,\text{m}$, $\mu = 0{,}3$, $g = 10\,\text{m/s}^2$.
+<ol type="a">
+  <li>¿Cuál es la rapidez <strong>mínima</strong> a la que se puede tomar sin deslizar hacia el centro?</li>
+  <li>Comparar con $V_0$ del peralte ideal y con $V_{\max}$.</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p>En $V_{\min}$ el coche tiende a caer al centro (bajar por el peralte), así que el roce apunta <strong>hacia afuera</strong> (a lo largo del plano hacia arriba).</p>
+
+<p>Ecuaciones (signos del roce invertidos respecto al Ej 8):</p>
+$$\sum F_x: \; N\,\text{sen}\,\alpha - \mu N\cos\alpha = m\,\frac{V_{\min}^2}{R}$$
+$$\sum F_y: \; N\cos\alpha + \mu N\,\text{sen}\,\alpha - mg = 0$$
+
+<p>Dividiendo:</p>
+$$\frac{V_{\min}^2}{gR} = \frac{\tan\alpha - \mu}{1 + \mu\tan\alpha}$$
+
+<p>Con $\alpha = 15°$, $\mu = 0{,}3$:</p>
+$$V_{\min}^2 = 800 \cdot \frac{0{,}268 - 0{,}3}{1 + 0{,}3 \cdot 0{,}268} = 800 \cdot \frac{-0{,}032}{1{,}080} \approx -23{,}7$$
+
+<div class="alerta">
+$V_{\min}^2 < 0$: <strong>no hay $V_{\min}$</strong>. El roce alcanza para mantener al coche incluso quieto. Cualquier rapidez entre $0$ y $V_{\max}$ es segura.
+</div>
+
+<p><strong>Comparación</strong>:</p>
+<ul>
+  <li>$V_0 = \sqrt{gR\tan\alpha} = \sqrt{800 \cdot 0{,}268} \approx 14{,}65\,\text{m/s}$ (sin fricción).</li>
+  <li>$V_{\max} \approx 22{,}22\,\text{m/s}$ (Ej 8).</li>
+  <li>$V_{\min}$: no existe — $0 \leq V \leq V_{\max}$.</li>
+</ul>
+
+<div class="respuesta">
+$$\boxed{V_{\min} \text{ no existe (el roce sostiene al coche aún quieto)}}$$
+</div>
+
+<div class="truco">
+Criterio: $V_{\min}$ existe sólo si $\mu < \tan\alpha$. Si $\mu \geq \tan\alpha$, la curva es "segura a baja velocidad".
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Ej 10 ─────────────────────────── -->
+<section id="grad-pe-ej10">
+<h3 class="ejercicio-titulo">Ejercicio 10 — Rapidez intermedia, fricción real $f_r < \mu N$</h3>
+<p class="meta">Nivel: avanzado · Tema: $f_r$ ajustable; no usar $\mu N$ salvo en el límite</p>
+
+<div class="enunciado">
+Curva: $\alpha = 20°$, $R = 100\,\text{m}$, $\mu = 0{,}25$, $g = 10\,\text{m/s}^2$.
+<p>Un coche de $m = 1200\,\text{kg}$ toma la curva a $V = 18\,\text{m/s}$ (esa $V$ está entre $V_{\min}$ y $V_{\max}$, así que el coche no está en el límite). Calcular:</p>
+<ol type="a">
+  <li>$V_0$ del peralte ideal y verificar que $V \neq V_0$.</li>
+  <li>El módulo y sentido de la fricción $\vec{f_r}$ real (no la máxima).</li>
+  <li>El valor de la normal $N$.</li>
+</ol>
+</div>
+
+<details class="resolucion">
+<summary>Ver resolución</summary>
+<p><strong>(a)</strong> $V_0 = \sqrt{gR\tan\alpha} = \sqrt{10 \cdot 100 \cdot \tan(20°)} = \sqrt{1000 \cdot 0{,}364} \approx 19{,}07\,\text{m/s}$.</p>
+<p>Como $V = 18\,\text{m/s} < V_0$, el coche tiende a deslizar <strong>hacia el centro</strong> (bajar por el peralte), entonces $\vec{f_r}$ apunta hacia afuera (arriba del plano).</p>
+
+<p><strong>(b) y (c)</strong> Planteo con $f_r$ desconocido (no en el límite):</p>
+$$\sum F_x: \; N\,\text{sen}\,\alpha - f_r\cos\alpha = m\,\frac{V^2}{R}$$
+$$\sum F_y: \; N\cos\alpha + f_r\,\text{sen}\,\alpha - mg = 0$$
+
+<p>Datos numéricos: $\text{sen}(20°) \approx 0{,}342$, $\cos(20°) \approx 0{,}940$, $V^2/R = 324/100 = 3{,}24$, $mV^2/R = 1200 \cdot 3{,}24 = 3888\,\text{N}$, $mg = 12000\,\text{N}$.</p>
+
+<p>Sistema:</p>
+$$0{,}342\,N - 0{,}940\,f_r = 3888 \quad\text{(1)}$$
+$$0{,}940\,N + 0{,}342\,f_r = 12000 \quad\text{(2)}$$
+
+<p>De (1): $N = (3888 + 0{,}940\,f_r)/0{,}342$. Sustituyendo en (2):</p>
+$$0{,}940 \cdot \frac{3888 + 0{,}940\,f_r}{0{,}342} + 0{,}342\,f_r = 12000$$
+$$\frac{0{,}940}{0{,}342}\,(3888 + 0{,}940\,f_r) + 0{,}342\,f_r = 12000$$
+$$2{,}749\,(3888 + 0{,}940\,f_r) + 0{,}342\,f_r = 12000$$
+$$10688 + 2{,}584\,f_r + 0{,}342\,f_r = 12000$$
+$$2{,}926\,f_r = 1312 \Rightarrow f_r \approx 448{,}4\,\text{N}$$
+
+<p>Sustituyendo en (1):</p>
+$$N = \frac{3888 + 0{,}940 \cdot 448{,}4}{0{,}342} = \frac{3888 + 421{,}5}{0{,}342} \approx 12601\,\text{N}$$
+
+<p>Chequeo: $\mu N = 0{,}25 \cdot 12601 \approx 3150\,\text{N}$. Como $f_r \approx 448\,\text{N} < \mu N$, el supuesto de no derrapar se cumple. ✓</p>
+
+<div class="respuesta">
+$$\boxed{f_r \approx 448\,\text{N} \text{ hacia afuera del plano},\quad N \approx 12601\,\text{N}}$$
+</div>
+
+<div class="alerta">
+<strong>Error típico</strong>: usar $f_r = \mu N$ cuando la pregunta no es "$V$ extrema". Sólo en $V_{\min}$ y $V_{\max}$ vale la igualdad. Para $V$ intermedia, $f_r$ es una <strong>incógnita</strong> del sistema.
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ═══════════════════════════ EJERCICIO 11 — TIPO PARCIAL ═══════════════════════════ -->
+<h4 style="margin-top:2em;color:var(--primary-dark);border-left:5px solid var(--primary);padding-left:0.6em;font-size:1.05em">EJERCICIO 11 — Tipo parcial Moreno</h4>
+
+<section id="grad-pe-ej11">
+<h3 class="ejercicio-titulo">Ejercicio 11 — Camioneta en curva peraltada</h3>
+<p class="meta">Nivel: parcial · Tema: integración completa (V₀, V_max, V_min, N)</p>
+
+<div class="enunciado">
+Una camioneta de $m = 1500\,\text{kg}$ toma una curva peraltada de ángulo $\alpha$ y radio $R = 120\,\text{m}$. El coeficiente de roce estático entre la calzada y los neumáticos es $\mu = 0{,}35$. La curva está diseñada para ser tomada sin fricción a una rapidez de $V_0 = 72\,\text{km/h}$.
+<ol type="a">
+  <li>Determinar el ángulo de peralte $\alpha$. Tomar $g = 10\,\text{m/s}^2$.</li>
+  <li>Calcular $V_{\max}$ (sin derrapar hacia afuera).</li>
+  <li>Calcular $V_{\min}$ (sin deslizar hacia el centro). Si no existe, justificar.</li>
+  <li>Si la camioneta toma la curva a $V = 25\,\text{m/s}$, calcular el módulo de la normal $N$ sobre la camioneta y el módulo de la fricción $f_r$ real. Indicar sentido del roce.</li>
+</ol>
+</div>
+
+<details class="resolucion" open>
+<summary>Ver resolución completa</summary>
+
+<h4>(a) Ángulo de peralte</h4>
+<p>$V_0 = 72\,\text{km/h} = 20\,\text{m/s}$.</p>
+$$\tan\alpha = \frac{V_0^2}{gR} = \frac{400}{10 \cdot 120} = \frac{1}{3} \approx 0{,}333$$
+$$\alpha = \arctan(0{,}333) \approx 18{,}43°$$
+
+<div class="respuesta">
+$$\boxed{\alpha \approx 18{,}43°}$$
+</div>
+
+<h4>(b) Rapidez máxima</h4>
+<p>Tendencia a salirse → roce hacia el centro. Fórmula maestra:</p>
+$$V_{\max}^2 = gR\,\frac{\tan\alpha + \mu}{1 - \mu\tan\alpha} = 1200 \cdot \frac{0{,}333 + 0{,}35}{1 - 0{,}35 \cdot 0{,}333}$$
+$$V_{\max}^2 = 1200 \cdot \frac{0{,}683}{0{,}883} \approx 928{,}5 \Rightarrow V_{\max} \approx 30{,}47\,\text{m/s} \approx 109{,}7\,\text{km/h}$$
+
+<div class="respuesta">
+$$\boxed{V_{\max} \approx 30{,}47\,\text{m/s} \approx 109{,}7\,\text{km/h}}$$
+</div>
+
+<h4>(c) Rapidez mínima</h4>
+$$V_{\min}^2 = gR\,\frac{\tan\alpha - \mu}{1 + \mu\tan\alpha} = 1200 \cdot \frac{0{,}333 - 0{,}35}{1 + 0{,}35 \cdot 0{,}333}$$
+$$V_{\min}^2 = 1200 \cdot \frac{-0{,}017}{1{,}117} \approx -18{,}2$$
+
+<p>$V_{\min}^2 < 0$. <strong>No existe $V_{\min}$</strong>: como $\mu > \tan\alpha$ (apenas), el roce alcanza para sostener a la camioneta incluso quieta sobre el peralte.</p>
+
+<div class="respuesta">
+$$\boxed{\text{No hay } V_{\min}\text{. Cualquier } 0 \leq V \leq V_{\max} \text{ es segura.}}$$
+</div>
+
+<h4>(d) Camioneta a $V = 25\,\text{m/s}$</h4>
+
+<p>Como $V_0 = 20\,\text{m/s} < V = 25\,\text{m/s} < V_{\max}$, la camioneta tiende a <strong>salirse hacia afuera</strong>, así que el roce apunta hacia el centro (a lo largo del plano, hacia abajo).</p>
+
+<p>Sistema con $f_r$ incógnita (no en el límite):</p>
+$$\sum F_x: \; N\,\text{sen}\,\alpha + f_r\cos\alpha = m\,\frac{V^2}{R}$$
+$$\sum F_y: \; N\cos\alpha - f_r\,\text{sen}\,\alpha - mg = 0$$
+
+<p>Datos: $\text{sen}(18{,}43°) \approx 0{,}316$, $\cos(18{,}43°) \approx 0{,}949$.</p>
+<p>$mV^2/R = 1500 \cdot 625 / 120 = 7812{,}5\,\text{N}$, $mg = 15000\,\text{N}$.</p>
+
+<p>Sistema:</p>
+$$0{,}316\,N + 0{,}949\,f_r = 7812{,}5 \quad\text{(1)}$$
+$$0{,}949\,N - 0{,}316\,f_r = 15000 \quad\text{(2)}$$
+
+<p>Resolviendo por sustitución. De (2): $N = (15000 + 0{,}316\,f_r)/0{,}949$. En (1):</p>
+$$0{,}316 \cdot \frac{15000 + 0{,}316\,f_r}{0{,}949} + 0{,}949\,f_r = 7812{,}5$$
+$$0{,}333\,(15000 + 0{,}316\,f_r) + 0{,}949\,f_r = 7812{,}5$$
+$$4995 + 0{,}1053\,f_r + 0{,}949\,f_r = 7812{,}5$$
+$$1{,}054\,f_r = 2817{,}5 \Rightarrow f_r \approx 2673\,\text{N}$$
+
+<p>Y sustituyendo:</p>
+$$N = \frac{15000 + 0{,}316 \cdot 2673}{0{,}949} = \frac{15000 + 844{,}7}{0{,}949} \approx 16696\,\text{N}$$
+
+<p><strong>Chequeo</strong>: $\mu N = 0{,}35 \cdot 16696 \approx 5844\,\text{N}$. Como $f_r \approx 2673 < \mu N$, no se llega al límite estático. ✓ Consistente con $V < V_{\max}$.</p>
+
+<div class="respuesta">
+$$\boxed{N \approx 16696\,\text{N},\quad f_r \approx 2673\,\text{N} \text{ hacia el centro (a lo largo del plano, hacia abajo)}}$$
+</div>
+
+<div class="truco">
+<strong>Estrategia en parcial</strong>:
+<ol>
+  <li>Calcular $V_0$ primero — te dice si el coche tiende a salirse ($V > V_0$) o a caer al centro ($V < V_0$).</li>
+  <li>Decidir el sentido del roce <em>antes</em> de plantear ecuaciones.</li>
+  <li>Si $V$ es extrema ($V_{\max}$ o $V_{\min}$), usar $f_r = \mu N$. Si no, tratar $f_r$ como incógnita.</li>
+  <li>Al final, chequear que $f_r \leq \mu N$ para verificar consistencia.</li>
+</ol>
+</div>
+</details>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────── Errores típicos ─────────────────────────── -->
+<section id="grad-pe-errores">
+<h3 class="ejercicio-titulo">Errores típicos a evitar</h3>
+
+<div class="alerta">
+<ol>
+  <li><strong>Usar ejes paralelos al plano inclinado</strong>. ¡No! En este tipo de problema la aceleración es horizontal (centrípeta), no a lo largo del plano. Conviene $x$ horizontal, $y$ vertical.</li>
+  <li><strong>Plantear $f_r = \mu N$ siempre</strong>. Esto sólo vale en $V_{\max}$ o $V_{\min}$. Para $V$ intermedia, $f_r$ es incógnita.</li>
+  <li><strong>Sentido del roce equivocado</strong>. Regla: el roce se opone a la <em>tendencia a deslizar</em>. Si $V > V_0$ → tiende a salirse → roce al centro. Si $V < V_0$ → tiende a caer → roce hacia afuera.</li>
+  <li><strong>Olvidar la componente de $f_r$ en $y$</strong>. La fricción está a lo largo del plano inclinado, así que tiene componente <strong>vertical también</strong> ($\pm f_r\,\text{sen}\,\alpha$), no sólo horizontal.</li>
+  <li><strong>Tratar $N = mg$ siempre</strong>. En peralte, $N \neq mg$. La normal cambia con $\alpha$, $V$ y $\mu$.</li>
+  <li><strong>Ignorar el signo de $V_{\min}^2$</strong>. Si da negativo, hay que decir "no existe", no escribir una raíz imaginaria.</li>
+  <li><strong>Mezclar $\mu_e$ y $\mu_c$</strong>. Para que no derrape se usa $\mu_e$ (estático). Si ya está derrapando, $\mu_c$ (cinético).</li>
+  <li><strong>Olvidar convertir unidades</strong>. km/h → m/s antes de operar.</li>
+</ol>
+</div>
+
+<h4>Resumen visual de los 3 regímenes</h4>
+
+<table>
+<tr><th>Caso</th><th>Tendencia</th><th>Sentido de $\vec{f_r}$</th><th>Fórmula</th></tr>
+<tr><td>$V < V_0$</td><td>caer al centro</td><td>hacia afuera (arriba del plano)</td><td>$V_{\min}^2 = gR\dfrac{\tan\alpha - \mu}{1+\mu\tan\alpha}$</td></tr>
+<tr><td>$V = V_0$</td><td>ninguna</td><td>$f_r = 0$</td><td>$V_0 = \sqrt{gR\tan\alpha}$</td></tr>
+<tr><td>$V > V_0$</td><td>salirse</td><td>hacia el centro (abajo del plano)</td><td>$V_{\max}^2 = gR\dfrac{\tan\alpha+\mu}{1-\mu\tan\alpha}$</td></tr>
+</table>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<hr class="separador">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PARCIAL MORENO 2C2025                                            -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h2 class="parcial" id="parcial-moreno-2C2025">Parcial Moreno · 2C 2025</h2>
+
+<!-- ─────────────────────────────────────────────────────── -->
+<!-- Ej 1 — Cinemática curvilínea (placeholder a completar)  -->
+<!-- ─────────────────────────────────────────────────────── -->
+
+<section id="moreno-2C2025-ej1">
+<h3 class="ejercicio-titulo">Ejercicio 1 — Movimiento curvilíneo de una partícula</h3>
+<p class="meta">Tema: cinemática · componentes tangencial y normal</p>
+
+<div class="enunciado">
+<strong>Enunciado</strong>: Una partícula realiza un movimiento curvilíneo. Se sabe que la rapidez es $V(t) = B\,t^2 - 2t$.
+<ol type="a">
+  <li>Sabiendo que en $t = 1\,\text{s}$, $\rho = 120\,\text{m}$, y a partir de los datos de la figura, calcular el valor del parámetro $B$.</li>
+  <li>Para la posición $t = 2\,\text{s}$, indicar cuál o cuáles de los vectores aceleración indicados son compatibles con la trayectoria indicada. Justificar.</li>
+</ol>
+</div>
+
+<h4>Concepto base</h4>
+<p>En movimiento curvilíneo, la aceleración se descompone en dos componentes perpendiculares:</p>
+$$\vec{a} = a_t\,\hat{v} + a_n\,\hat{n}$$
+<p>donde:</p>
+<ul>
+  <li>$a_t = \dfrac{dV}{dt}$ — aceleración <strong>tangencial</strong> (cambio de rapidez).</li>
+  <li>$a_n = \dfrac{V^2}{\rho}$ — aceleración <strong>normal/centrípeta</strong> (hacia el centro de curvatura).</li>
+</ul>
+
+<h4>Parte (a) — Cálculo de $B$</h4>
+
+<p>En $t = 1\,\text{s}$:</p>
+$$V(1) = B - 2 \qquad a_t(1) = \frac{dV}{dt}\bigg|_{t=1} = 2B - 2 \qquad a_n(1) = \frac{(B-2)^2}{120}$$
+
+<p>De la figura, el ángulo entre $\vec{v}$ y $\vec{a}$ es $35°$:</p>
+$$\tan(35°) = \frac{a_n}{a_t} = \frac{(B-2)^2}{240\,(B-1)}$$
+
+<p>Despejando:</p>
+$$168{,}05\,(B-1) = (B-2)^2$$
+$$B^2 - 172{,}05\,B + 172{,}05 = 0$$
+$$B = \frac{172{,}05 \pm \sqrt{172{,}05^2 - 4\cdot 172{,}05}}{2} \approx 171{,}05 \text{ o } 1{,}005$$
+
+<div class="alerta">
+<strong>Filtro físico</strong>: la rapidez $V(1) = B - 2$ debe ser positiva, así que $B > 2$. La única solución física es:
+</div>
+
+<div class="respuesta">
+$$\boxed{\ B \approx 171\ \text{m/s}^3\ }$$
+</div>
+
+<h4>Parte (b) — Vectores compatibles en $t = 2\,\text{s}$</h4>
+
+<p><strong>Criterio</strong>: un vector $\vec{a}$ es compatible si:</p>
+<ol>
+  <li>Su componente normal apunta hacia el centro de curvatura (lado cóncavo).</li>
+  <li>Su componente tangencial está sobre la línea de $\vec{v}$ (mismo sentido o el opuesto).</li>
+</ol>
+
+<p>En $t = 2\,\text{s}$, sobre la trayectoria descendente (cóncava hacia abajo):</p>
+<ul>
+  <li>$\vec{v}$ apunta abajo-derecha.</li>
+  <li>Centro de curvatura: debajo de la curva.</li>
+  <li>$a_n$ apunta abajo-izquierda (perpendicular a $\vec{v}$, hacia el centro).</li>
+  <li>$a_t(2) = 4B - 2 > 0$ (acelera): $\vec{a}$ tiene componente forward (abajo-derecha).</li>
+</ul>
+
+<p>Resultado: $\vec{a}$ tiene componente $y$ <strong>negativa</strong> (apunta hacia abajo).</p>
+
+<table>
+<thead><tr><th>Vector</th><th>Dirección aprox</th><th>¿Compatible?</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>horizontal derecha</td><td>❌ (sin componente normal hacia el centro)</td></tr>
+<tr><td>2</td><td>arriba-derecha</td><td>❌ (componente $y$ positiva)</td></tr>
+<tr><td>3</td><td>arriba</td><td>❌ (apunta lejos del centro)</td></tr>
+<tr><td>4</td><td>izquierda</td><td>❌ (sin componente forward)</td></tr>
+<tr><td>5</td><td>abajo-izquierda</td><td>✅ (única candidata coherente con $a_n$ hacia el centro)</td></tr>
+</tbody>
+</table>
+
+<div class="respuesta">
+Solo el <strong>vector 5</strong> es compatible (asumiendo lectura de la figura tal como se describió).
+</div>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────────────────────────────────── -->
+<!-- Ej 2 — Curva peraltada con fricción                     -->
+<!-- ─────────────────────────────────────────────────────── -->
+
+<section id="moreno-2C2025-ej2">
+<h3 class="ejercicio-titulo">Ejercicio 2 — Curva peraltada con fricción</h3>
+<p class="meta">Tema: dinámica circular en peralte · pares acción–reacción</p>
+
+<div class="enunciado">
+<strong>Enunciado</strong>: Una curva de autopista de radio $R$ que forma un ángulo $\alpha$ con la horizontal, tiene coeficientes de fricción $\mu_e$ y $\mu_d$ entre los neumáticos y el asfalto. Un automóvil de masa $m$ atraviesa la curva.
+<ol type="a">
+  <li>Realizar el DCL, indicando pares acción–reacción, y calcular la máxima velocidad teórica a la cual el auto puede tomar la curva.</li>
+  <li>Calcular la máxima velocidad teórica a la cual un camión de masa $3m$ puede tomar la curva.</li>
+  <li>Si en lluvia el rozamiento disminuye a la mitad y se desea coeficiente de seguridad 1,5, ¿cuál es la velocidad máxima a colocar en el cartel?</li>
+</ol>
+</div>
+
+<h4>Setup físico</h4>
+<p>La superficie de la ruta está <strong>inclinada lateralmente</strong> un ángulo $\alpha$ (peralte). El auto circula <strong>horizontalmente</strong> alrededor del centro de la curva con radio $R$.</p>
+<p>En velocidad máxima, el auto tiende a salirse <strong>hacia afuera</strong>, así que la fricción $\vec{f}$ apunta <strong>hacia adentro</strong> (hacia abajo del peralte).</p>
+
+<h4>Diagrama de cuerpo libre (DCL)</h4>
+
+<svg viewBox="0 0 600 380" width="600" height="380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="black"/>
+    </marker>
+    <marker id="arrowR2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="red"/>
+    </marker>
+    <marker id="arrowB2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="blue"/>
+    </marker>
+    <marker id="arrowG2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  <line x1="50" y1="300" x2="550" y2="300" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="555" y="305" font-size="12" fill="#666">horizontal</text>
+  <line x1="100" y1="320" x2="500" y2="180" stroke="#444" stroke-width="3"/>
+  <text x="80" y="335" font-size="13" fill="#444">superficie peraltada</text>
+  <path d="M 150 300 A 50 50 0 0 0 165 285" stroke="black" fill="none" stroke-width="1"/>
+  <text x="170" y="298" font-size="14" font-style="italic">α</text>
+  <g transform="translate(300, 240) rotate(-19.5)">
+    <rect x="-30" y="-15" width="60" height="30" fill="#ffe082" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="-12" y="5" font-size="14" fill="#333">auto</text>
+  </g>
+  <line x1="300" y1="245" x2="300" y2="340" stroke="red" stroke-width="2.5" marker-end="url(#arrowR2)"/>
+  <text x="305" y="335" font-size="14" fill="red"><tspan font-style="italic">P</tspan> = mg</text>
+  <line x1="300" y1="240" x2="266" y2="145" stroke="blue" stroke-width="2.5" marker-end="url(#arrowB2)"/>
+  <text x="222" y="135" font-size="14" fill="blue"><tspan font-style="italic">N</tspan></text>
+  <line x1="300" y1="240" x2="225" y2="266" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#arrowG2)"/>
+  <text x="190" y="278" font-size="14" fill="#2e7d32"><tspan font-style="italic">f</tspan> (hacia el centro)</text>
+  <text x="50" y="200" font-size="13" fill="#666">↓ hacia el centro</text>
+  <text x="50" y="215" font-size="13" fill="#666">de la curva</text>
+  <line x1="80" y1="195" x2="80" y2="220" stroke="#666" stroke-width="1.5" marker-end="url(#arrow2)"/>
+  <text x="300" y="30" font-size="16" font-weight="bold" text-anchor="middle">DCL — auto en peralte (vista trasera)</text>
+  <text x="300" y="50" font-size="12" text-anchor="middle" fill="#666">en velocidad máxima: la fricción apunta hacia el centro</text>
+</svg>
+
+<h4>Pares acción–reacción</h4>
+<table>
+<thead><tr><th>Fuerza sobre el auto</th><th>Reacción (sobre el otro cuerpo)</th></tr></thead>
+<tbody>
+<tr><td>Peso (Tierra atrae al auto), $\vec{P} = m\vec{g}$</td><td>Auto atrae a la Tierra (gravitatoria)</td></tr>
+<tr><td>Normal del piso sobre el auto, $\vec{N}$</td><td>Auto empuja al piso con $-\vec{N}$</td></tr>
+<tr><td>Fricción del piso sobre el auto, $\vec{f}$</td><td>Auto fricciona al piso con $-\vec{f}$</td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<strong>Cuidado clásico</strong>: $\vec{P}$ y $\vec{N}$ <strong>NO son par acción–reacción</strong>. Actúan sobre el mismo cuerpo.
+</div>
+
+<h4>Ecuaciones de Newton</h4>
+
+<p>Descomposición en horizontal/vertical:</p>
+$$\vec{N} = (N\sin\alpha,\ N\cos\alpha) \qquad \vec{f} = (f\cos\alpha,\ -f\sin\alpha) \qquad \vec{P} = (0,\ -mg)$$
+
+<p><strong>Vertical</strong> (equilibrio):</p>
+$$N\cos\alpha - f\sin\alpha = mg \quad (1)$$
+
+<p><strong>Horizontal</strong> (centrípeta hacia el centro):</p>
+$$N\sin\alpha + f\cos\alpha = \frac{m\,v^2}{R} \quad (2)$$
+
+<p><strong>Condición límite</strong>: $f = \mu_e N$.</p>
+
+<h4>Parte (a) — Velocidad máxima</h4>
+
+<p>Reemplazo $f = \mu_e \cdot N$ en (1) y (2):</p>
+$$N(\cos\alpha - \mu_e \sin\alpha) = mg \quad (1')$$
+$$N(\sin\alpha + \mu_e \cos\alpha) = \frac{m\,v_{\max}^2}{R} \quad (2')$$
+
+<p>Tenemos <strong>2 ecuaciones</strong> con <strong>2 incógnitas</strong>: $N$ y $v_{\max}$. Mostramos dos métodos equivalentes para resolverlo.</p>
+
+<h4 style="color: #555;">Método 1 — División de ecuaciones (más rápido)</h4>
+
+<p><strong>Idea</strong>: $N$ y $m$ aparecen como factores en ambas ecuaciones. Si dividimos $(2')$ entre $(1')$, se cancelan y queda una sola ecuación con $v_{\max}$.</p>
+
+<p><strong>Paso 1</strong>: armar la división.</p>
+$$\frac{(2')}{(1')} = \frac{N\,(\sin\alpha + \mu_e \cos\alpha)}{N\,(\cos\alpha - \mu_e \sin\alpha)} = \frac{m\,v_{\max}^2 / R}{m\,g}$$
+
+<p><strong>Paso 2</strong>: cancelar lo que se repite.</p>
+<p>Lado izquierdo: $N$ arriba con $N$ abajo:</p>
+$$\frac{\cancel{N}\,(\sin\alpha + \mu_e \cos\alpha)}{\cancel{N}\,(\cos\alpha - \mu_e \sin\alpha)} = \frac{\sin\alpha + \mu_e \cos\alpha}{\cos\alpha - \mu_e \sin\alpha}$$
+
+<p>Lado derecho: $m$ arriba con $m$ abajo:</p>
+$$\frac{\cancel{m}\,v_{\max}^2 / R}{\cancel{m}\,g} = \frac{v_{\max}^2}{g\,R}$$
+
+<p><strong>Paso 3</strong>: igualar lo que queda.</p>
+$$\frac{\sin\alpha + \mu_e \cos\alpha}{\cos\alpha - \mu_e \sin\alpha} = \frac{v_{\max}^2}{g\,R}$$
+
+<p><strong>Paso 4</strong>: despejar $v_{\max}^2$ multiplicando ambos lados por $g\,R$.</p>
+$$v_{\max}^2 = g\,R \cdot \frac{\sin\alpha + \mu_e \cos\alpha}{\cos\alpha - \mu_e \sin\alpha}$$
+
+<p><strong>Paso 5 (cosmético)</strong>: dividir numerador y denominador por $\cos\alpha$ para que aparezcan tangentes.</p>
+
+<p>Numerador:</p>
+$$\frac{\sin\alpha + \mu_e \cos\alpha}{\cos\alpha} = \frac{\sin\alpha}{\cos\alpha} + \mu_e \cdot \frac{\cos\alpha}{\cos\alpha} = \tan\alpha + \mu_e$$
+
+<p>Denominador:</p>
+$$\frac{\cos\alpha - \mu_e \sin\alpha}{\cos\alpha} = \frac{\cos\alpha}{\cos\alpha} - \mu_e \cdot \frac{\sin\alpha}{\cos\alpha} = 1 - \mu_e \tan\alpha$$
+
+<p>Entonces:</p>
+$$v_{\max}^2 = g\,R \cdot \frac{\tan\alpha + \mu_e}{1 - \mu_e \tan\alpha}$$
+
+<p><strong>Paso 6</strong>: tomar raíz cuadrada para obtener $v_{\max}$.</p>
+
+<div class="respuesta">
+$$\boxed{\ v_{\max} = \sqrt{\,g\,R \cdot \dfrac{\tan\alpha + \mu_e}{1 - \mu_e \tan\alpha}\,}\ }$$
+</div>
+
+<h4 style="color: #555;">Método 2 — Sustitución (más mecánico)</h4>
+
+<p>Si te sentís más cómodo despejando paso a paso sin dividir ecuaciones, hacelo así.</p>
+
+<p><strong>Paso 1</strong>: despejar $N$ de $(1')$.</p>
+$$N = \frac{m\,g}{\cos\alpha - \mu_e \sin\alpha}$$
+
+<p><strong>Paso 2</strong>: reemplazar ese $N$ en $(2')$.</p>
+$$\left[\frac{m\,g}{\cos\alpha - \mu_e \sin\alpha}\right] \cdot (\sin\alpha + \mu_e \cos\alpha) = \frac{m\,v_{\max}^2}{R}$$
+
+<p><strong>Paso 3</strong>: cancelar $m$ a ambos lados y despejar $v_{\max}^2$.</p>
+$$\frac{g \cdot (\sin\alpha + \mu_e \cos\alpha)}{\cos\alpha - \mu_e \sin\alpha} = \frac{v_{\max}^2}{R}$$
+$$v_{\max}^2 = R\,g \cdot \frac{\sin\alpha + \mu_e \cos\alpha}{\cos\alpha - \mu_e \sin\alpha}$$
+
+<p><strong>Paso 4</strong>: mismo "embellecimiento" con $\tan\alpha$ y raíz cuadrada que en el Método 1. Llegás al mismo resultado.</p>
+
+<h4 style="color: #555;">Resumen del flujo</h4>
+
+<table>
+<thead><tr><th>Paso</th><th>Qué se hizo</th><th>Por qué</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Reemplazar $f = \mu_e N$ en (1) y (2)</td><td>Eliminar $f$, queda todo en función de $N$ y $v$</td></tr>
+<tr><td>2</td><td>Dividir $(2')/(1')$ o sustituir</td><td>$N$ y $m$ se cancelan → 1 ecuación, 1 incógnita</td></tr>
+<tr><td>3</td><td>Despejar $v^2$</td><td>Álgebra básica</td></tr>
+<tr><td>4</td><td>Dividir num/den por $\cos\alpha$</td><td>Cosmético: aparece $\tan\alpha$</td></tr>
+<tr><td>5</td><td>Tomar raíz</td><td>Pasar de $v^2$ a $v$</td></tr>
+</tbody>
+</table>
+
+<div class="truco">
+<strong>El paso decisivo</strong>: dividir las dos ecuaciones (Método 1) o sustituir $N$ (Método 2). Es lo que te deja con una sola ecuación con una sola incógnita. Si no se te ocurre el truco de dividir, <strong>siempre sustituí</strong>: llegás al mismo resultado.
+</div>
+
+<h4>Parte (b) — Camión de masa $3m$</h4>
+
+<div class="truco">
+<strong>Observación clave</strong>: en la fórmula de $v_{\max}$ <strong>no aparece la masa</strong>. La velocidad máxima del camión es <strong>la misma</strong> que la del auto.
+$$v_{\max,\,\text{camión}} = v_{\max,\,\text{auto}}$$
+</div>
+
+<p><strong>Justificación física</strong>: tanto la fuerza centrípeta necesaria ($m v^2/R$) como la disponible (proporcional a $mg$) escalan con $m$. El "agarre" depende del ángulo y de $\mu_e$, no de la masa.</p>
+
+<h4>Parte (c) — Lluvia + coeficiente de seguridad 1,5</h4>
+
+<ol>
+  <li>$\mu_{\text{lluvia}} = \mu_e/2$</li>
+  <li>$v_{\max,\,\text{lluvia}} = \sqrt{gR\,\dfrac{\tan\alpha + \mu_e/2}{1 - (\mu_e/2)\tan\alpha}}$</li>
+  <li>$v_{\text{cartel}} = v_{\max,\,\text{lluvia}} / 1{,}5$</li>
+</ol>
+
+<div class="respuesta">
+$$\boxed{\ v_{\text{cartel}} = \dfrac{1}{1{,}5}\sqrt{gR\,\dfrac{\tan\alpha + \mu_e/2}{1 - (\mu_e/2)\tan\alpha}}\ }$$
+</div>
+
+<h4>Trampas típicas para parcial</h4>
+<ol>
+  <li><strong>Sentido de $\vec{f}$</strong>: en $v_{\max}$ apunta HACIA EL CENTRO (auto se va para afuera). En $v_{\min}$ se invierte.</li>
+  <li><strong>$\vec{P}$ y $\vec{N}$ NO son par acción–reacción</strong>: actúan sobre el mismo cuerpo.</li>
+  <li><strong>La masa se cancela</strong>: escribirlo explícitamente.</li>
+  <li><strong>Coeficiente de seguridad</strong>: si dudás de la convención, declarala explícitamente.</li>
+</ol>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────────────────────────────────── -->
+<!-- Ej 3 — Trabajo en trayectoria cerrada                   -->
+<!-- ─────────────────────────────────────────────────────── -->
+
+<section id="moreno-2C2025-ej3">
+<h3 class="ejercicio-titulo">Ejercicio 3 — Trabajo de fuerza en trayectoria cerrada</h3>
+<p class="meta">Tema: trabajo · campos conservativos vs no conservativos · teoremas de energía</p>
+
+<div class="enunciado">
+<strong>Enunciado</strong>: Una fuerza $\vec{F} = (3x + 2y + 1)\,\hat{\imath}$ N, de dirección $x$, donde $x$ e $y$ se miden en metros, actúa sobre una partícula que recorre la trayectoria $A \to B \to C \to A$ de la figura, donde el tramo "A" sigue $y = x^2$ y los tramos "B" y "C" son rectos.
+<ol type="a">
+  <li>Calcular el trabajo realizado por la fuerza en cada tramo y en el recorrido cerrado.</li>
+  <li>¿La fuerza $\vec{F}$ es conservativa o no conservativa? ¿Cómo se puede afirmar?</li>
+  <li><strong>Teoría</strong>: escribir las ecuaciones de los tres teoremas que vinculan la variación de la energía y el trabajo de las fuerzas.</li>
+</ol>
+</div>
+
+<div class="alerta">
+<strong>Aclaración importante</strong>: A, B y C son <strong>TRAMOS</strong>, no puntos. La trayectoria nace y termina en el origen $(0,0)$, y consta de tres tramos:
+<table>
+<thead><tr><th>Tramo</th><th>Geometría</th><th>Extremos</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>parábola $y = x^2$</td><td>de $(0, 0)$ a $(3, 9)$</td></tr>
+<tr><td><strong>B</strong></td><td>recta horizontal $y = 9$</td><td>de $(-1, 9)$ a $(3, 9)$</td></tr>
+<tr><td><strong>C</strong></td><td>recta diagonal (de $(0,0)$ a $(-1,9)$)</td><td>de $(0, 0)$ a $(-1, 9)$</td></tr>
+</tbody>
+</table>
+Las esquinas donde se encuentran dos tramos están en $(0, 0)$, $(3, 9)$ y $(-1, 9)$.
+</div>
+
+<h4>Trayectoria</h4>
+
+<svg viewBox="0 0 500 380" width="500" height="380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowEj3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1a5490"/>
+    </marker>
+  </defs>
+
+  <!-- Ejes -->
+  <line x1="60" y1="340" x2="460" y2="340" stroke="#333" stroke-width="1.5" marker-end="url(#arrowEj3)"/>
+  <line x1="200" y1="350" x2="200" y2="40" stroke="#333" stroke-width="1.5" marker-end="url(#arrowEj3)"/>
+  <text x="465" y="345" font-size="14" font-style="italic">x</text>
+  <text x="190" y="40" font-size="14" font-style="italic">y</text>
+
+  <!-- Etiquetas de los ejes -->
+  <text x="140" y="358" font-size="12" fill="#555">-1</text>
+  <line x1="140" y1="335" x2="140" y2="345" stroke="#333" stroke-width="1"/>
+  <text x="378" y="358" font-size="12" fill="#555">3</text>
+  <line x1="380" y1="335" x2="380" y2="345" stroke="#333" stroke-width="1"/>
+  <text x="183" y="294" font-size="12" fill="#555">1</text>
+  <text x="183" y="71" font-size="12" fill="#555">9</text>
+  <line x1="195" y1="295" x2="205" y2="295" stroke="#333" stroke-width="1"/>
+  <line x1="195" y1="68" x2="205" y2="68" stroke="#333" stroke-width="1"/>
+
+  <!-- Origen -->
+  <text x="207" y="357" font-size="11" fill="#555">O</text>
+
+  <!-- Tramo A: Parábola y = x^2 desde (0, 0) hasta (3, 9) -->
+  <polyline points="200,340 218,337 236,329 254,315 272,296 290,272 308,242 326,207 344,166 362,120 380,68"
+            fill="none" stroke="#c62828" stroke-width="3"/>
+
+  <!-- Tramo B: recta horizontal y=9 de (3,9) a (-1,9) -->
+  <line x1="380" y1="68" x2="140" y2="68" stroke="#1565c0" stroke-width="3"/>
+
+  <!-- Tramo C: recta diagonal de (-1,9) a (0,0) -->
+  <line x1="140" y1="68" x2="200" y2="340" stroke="#2e7d32" stroke-width="3"/>
+
+  <!-- Esquinas (puntos donde se conectan dos tramos) -->
+  <circle cx="200" cy="340" r="5" fill="#333"/>
+  <text x="208" y="355" font-size="13" fill="#333">(0, 0)</text>
+
+  <circle cx="380" cy="68" r="5" fill="#333"/>
+  <text x="388" y="65" font-size="13" fill="#333">(3, 9)</text>
+
+  <circle cx="140" cy="68" r="5" fill="#333"/>
+  <text x="78" y="65" font-size="13" fill="#333">(-1, 9)</text>
+
+  <!-- Flechas de dirección sobre cada tramo (sentido A → B → C → A) -->
+  <!-- Tramo A: parábola, hacia arriba-derecha -->
+  <polygon points="316,232 305,228 312,240" fill="#c62828"/>
+  <!-- Tramo B: horizontal, hacia la izquierda (de (3,9) a (-1,9)) -->
+  <polygon points="260,68 270,62 270,74" fill="#1565c0"/>
+  <!-- Tramo C: diagonal, hacia abajo-derecha (de (-1,9) a (0,0)) -->
+  <polygon points="170,204 162,198 174,194" fill="#2e7d32"/>
+
+  <!-- Etiquetas de los tramos -->
+  <text x="335" y="180" font-size="14" font-weight="bold" fill="#c62828">Tramo A</text>
+  <text x="335" y="198" font-size="12" fill="#c62828">y = x²</text>
+  <text x="225" y="55" font-size="14" font-weight="bold" fill="#1565c0">Tramo B</text>
+  <text x="235" y="40" font-size="12" fill="#1565c0">y = 9</text>
+  <text x="80" y="220" font-size="14" font-weight="bold" fill="#2e7d32">Tramo C</text>
+  <text x="80" y="237" font-size="12" fill="#2e7d32">diagonal</text>
+
+  <text x="250" y="25" font-size="14" font-weight="bold" text-anchor="middle">Trayectoria cerrada (0,0) → (3,9) → (-1,9) → (0,0)</text>
+</svg>
+
+<h4>Concepto base: trabajo de una fuerza</h4>
+
+<p>El trabajo de una fuerza $\vec{F}$ sobre una trayectoria $\gamma$ se calcula con la integral de línea:</p>
+
+$$W = \int_{\gamma} \vec{F} \cdot d\vec{r}$$
+
+<p>Con $\vec{F} = (3x + 2y + 1)\,\hat{\imath}$ y $d\vec{r} = dx\,\hat{\imath} + dy\,\hat{\jmath}$, el producto escalar es:</p>
+
+$$\vec{F} \cdot d\vec{r} = (3x + 2y + 1)\,dx + 0 \cdot dy = (3x + 2y + 1)\,dx$$
+
+<div class="truco">
+<strong>Observación clave</strong>: como $F_y = 0$, <strong>solo importa el cambio en $x$</strong>. En tramos donde $x$ es constante ($dx = 0$), el trabajo es cero automáticamente.
+</div>
+
+<h4>Parte (a) — Trabajo en cada tramo</h4>
+
+<p>Sentido de recorrido cerrado: $(0,0) \to (3,9) \to (-1,9) \to (0,0)$.</p>
+<ul>
+  <li>Tramo A: parábola, de $(0, 0)$ a $(3, 9)$ — $x$ crece</li>
+  <li>Tramo B: horizontal a $y=9$, de $(3, 9)$ a $(-1, 9)$ — $x$ decrece</li>
+  <li>Tramo C: diagonal, de $(-1, 9)$ a $(0, 0)$ — $x$ crece</li>
+</ul>
+
+<h4 style="color: #555;">Tramo A — Parábola $y = x^2$, de $(0, 0)$ a $(3, 9)$</h4>
+
+<p>Sobre la curva, $y = x^2$. Sustituyo en $\vec{F}$:</p>
+
+$$\vec{F} \cdot d\vec{r} = (3x + 2x^2 + 1)\,dx$$
+
+<p>La integral va de $x = 0$ a $x = 3$:</p>
+
+$$W_A = \int_{0}^{3} (3x + 2x^2 + 1)\,dx = \left[\frac{3x^2}{2} + \frac{2x^3}{3} + x\right]_{0}^{3}$$
+
+<p>Evalúo:</p>
+
+<p>En $x = 3$: $\dfrac{27}{2} + 18 + 3 = \dfrac{27 + 42}{2} = \dfrac{69}{2}$</p>
+
+<p>En $x = 0$: $0$</p>
+
+$$W_A = \frac{69}{2} - 0 = \frac{69}{2}\,\text{J}$$
+
+<div class="respuesta">
+$$\boxed{\ W_A = \dfrac{69}{2}\,\text{J} = 34{,}5\,\text{J}\ }$$
+</div>
+
+<h4 style="color: #555;">Tramo B — Recta horizontal $y = 9$, de $(3, 9)$ a $(-1, 9)$</h4>
+
+<p>$y = 9$ constante, $dy = 0$. Fuerza:</p>
+
+$$F_x = 3x + 2(9) + 1 = 3x + 19$$
+
+<p>Integral de $x = 3$ a $x = -1$ (sentido decreciente):</p>
+
+$$W_B = \int_{3}^{-1} (3x + 19)\,dx = \left[\frac{3x^2}{2} + 19x\right]_{3}^{-1}$$
+
+<p>En $x = -1$: $\dfrac{3}{2} - 19 = -\dfrac{35}{2}$</p>
+
+<p>En $x = 3$: $\dfrac{27}{2} + 57 = \dfrac{141}{2}$</p>
+
+$$W_B = -\frac{35}{2} - \frac{141}{2} = -\frac{176}{2} = -88\,\text{J}$$
+
+<div class="respuesta">
+$$\boxed{\ W_B = -88\,\text{J}\ }$$
+</div>
+
+<h4 style="color: #555;">Tramo C — Diagonal de $(-1, 9)$ a $(0, 0)$</h4>
+
+<p>Acá hay un paso clave: como es un tramo donde $y$ NO es constante, tengo que <strong>parametrizar la recta</strong> para poner $y$ en función de $x$ (o ambas en función de un parámetro).</p>
+
+<p><strong>Ecuación de la recta</strong>: pasa por $(-1, 9)$ y $(0, 0)$. Pendiente:</p>
+
+$$m = \frac{0 - 9}{0 - (-1)} = \frac{-9}{1} = -9$$
+
+<p>Recta por el origen con esa pendiente: $y = -9x$.</p>
+
+<p>Verifico: en $x = -1$, $y = -9(-1) = 9$ ✓. En $x = 0$, $y = 0$ ✓.</p>
+
+<p>Como $\vec{F}$ solo tiene componente $x$, $\vec{F} \cdot d\vec{r} = F_x\,dx$. Sustituyo $y = -9x$ en $F_x$:</p>
+
+$$F_x = 3x + 2(-9x) + 1 = 3x - 18x + 1 = -15x + 1$$
+
+<p>Integral de $x = -1$ a $x = 0$:</p>
+
+$$W_C = \int_{-1}^{0} (-15x + 1)\,dx = \left[-\frac{15x^2}{2} + x\right]_{-1}^{0}$$
+
+<p>En $x = 0$: $0$</p>
+
+<p>En $x = -1$: $-\dfrac{15(1)}{2} + (-1) = -\dfrac{15}{2} - 1 = -\dfrac{17}{2}$</p>
+
+$$W_C = 0 - \left(-\frac{17}{2}\right) = \frac{17}{2}\,\text{J}$$
+
+<div class="respuesta">
+$$\boxed{\ W_C = \dfrac{17}{2}\,\text{J} = 8{,}5\,\text{J}\ }$$
+</div>
+
+<div class="truco">
+<strong>Lo importante de este tramo</strong>: a diferencia de B y C anteriores, acá NO podés simplificar de entrada porque $y$ varía con $x$. La técnica clave es <strong>parametrizar la recta</strong> y poner una variable en función de la otra. Para una diagonal que pasa por el origen, la ecuación $y = mx$ es la más cómoda.
+</div>
+
+<h4 style="color: #555;">Recorrido cerrado</h4>
+
+$$W_{\text{cerrado}} = W_A + W_B + W_C = \frac{69}{2} + (-88) + \frac{17}{2}$$
+
+<p>Sumando los términos con denominador común:</p>
+
+$$W_{\text{cerrado}} = \frac{69 + 17}{2} - 88 = \frac{86}{2} - 88 = 43 - 88 = -45\,\text{J}$$
+
+<div class="respuesta">
+$$\boxed{\ W_{\text{cerrado}} = -45\,\text{J}\ }$$
+</div>
+
+<h4>Parte (b) — ¿Es conservativa?</h4>
+
+<p>Una fuerza es <strong>conservativa</strong> si y solo si el trabajo en cualquier <strong>recorrido cerrado es nulo</strong>:</p>
+
+$$\oint \vec{F} \cdot d\vec{r} = 0 \quad \Longleftrightarrow \quad \vec{F} \text{ conservativa}$$
+
+<p>Acabamos de calcular $W_{\text{cerrado}} = -45\,\text{J} \neq 0$, así que:</p>
+
+<div class="respuesta">
+$\vec{F}$ <strong>NO es conservativa</strong>.
+</div>
+
+<h4 style="color: #555;">Verificación alternativa (test del rotor en 2D)</h4>
+
+<p>Para una fuerza $\vec{F} = F_x\,\hat{\imath} + F_y\,\hat{\jmath}$, la condición de ser conservativa en 2D es:</p>
+
+$$\frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$$
+
+<p>En este caso:</p>
+
+$$F_x = 3x + 2y + 1 \quad\Rightarrow\quad \frac{\partial F_x}{\partial y} = 2$$
+
+$$F_y = 0 \quad\Rightarrow\quad \frac{\partial F_y}{\partial x} = 0$$
+
+<p>Como $2 \neq 0$, las derivadas cruzadas <strong>no coinciden</strong> → confirma que <strong>no es conservativa</strong>.</p>
+
+<div class="truco">
+Hay dos formas de afirmarlo:<br>
+1) <strong>Cálculo directo</strong>: $\oint \vec{F} \cdot d\vec{r} \neq 0$.<br>
+2) <strong>Test del rotor</strong>: $\partial F_x/\partial y \neq \partial F_y/\partial x$.<br>
+En el parcial, escribí las dos para tener doble respaldo.
+</div>
+
+<h4>Parte (c) — Tres teoremas que vinculan energía y trabajo</h4>
+
+<h4 style="color: #555;">Teorema 1 — Trabajo y energía cinética</h4>
+
+<p>El trabajo de la fuerza neta (todas las fuerzas) sobre una partícula es igual a la variación de su energía cinética:</p>
+
+$$\boxed{\ W_{\text{neto}} = \Delta K = K_f - K_i = \tfrac{1}{2}m\,v_f^2 - \tfrac{1}{2}m\,v_i^2\ }$$
+
+<p>Vale <strong>siempre</strong>, independientemente del tipo de fuerzas que actúen.</p>
+
+<h4 style="color: #555;">Teorema 2 — Trabajo de fuerzas conservativas y energía potencial</h4>
+
+<p>El trabajo de una fuerza conservativa es igual a la disminución (menos la variación) de la energía potencial asociada:</p>
+
+$$\boxed{\ W_{\text{cons}} = -\Delta U = U_i - U_f\ }$$
+
+<p>Vale <strong>solo para fuerzas conservativas</strong> (como peso, fuerza elástica, gravitatoria). Define la energía potencial.</p>
+
+<h4 style="color: #555;">Teorema 3 — Energía mecánica y fuerzas no conservativas</h4>
+
+<p>El trabajo de las fuerzas <strong>no conservativas</strong> es igual a la variación de la energía mecánica total ($E_{\text{mec}} = K + U$):</p>
+
+$$\boxed{\ W_{\text{no\,cons}} = \Delta E_{\text{mec}} = (K_f + U_f) - (K_i + U_i)\ }$$
+
+<p>Caso especial: si NO hay fuerzas no conservativas, $W_{\text{no cons}} = 0$ y la energía mecánica <strong>se conserva</strong>.</p>
+
+<h4 style="color: #555;">Resumen de los tres teoremas</h4>
+
+<table>
+<thead><tr><th>Teorema</th><th>Ecuación</th><th>Cuándo vale</th></tr></thead>
+<tbody>
+<tr><td>W–energía cinética</td><td>$W_{\text{neto}} = \Delta K$</td><td>Siempre</td></tr>
+<tr><td>W cons.–energía potencial</td><td>$W_{\text{cons}} = -\Delta U$</td><td>Solo fuerzas conservativas</td></tr>
+<tr><td>W no cons.–energía mecánica</td><td>$W_{\text{no\,cons}} = \Delta E_{\text{mec}}$</td><td>Siempre (define disipación)</td></tr>
+</tbody>
+</table>
+
+<h4>Trampas típicas para parcial</h4>
+<ol>
+  <li><strong>Sentido del recorrido</strong>: cuidado con los límites de integración. Si el problema dice A→B, integrás de A a B, no al revés.</li>
+  <li><strong>Sobre tramos donde $dx = 0$</strong>: si la fuerza solo tiene componente $x$, el trabajo es nulo sobre tramos verticales. <strong>No te olvides de justificarlo</strong>.</li>
+  <li><strong>Conservatividad</strong>: alcanza con UNA prueba (rotor o circulación), pero da las dos por las dudas.</li>
+  <li><strong>Los tres teoremas son distintos</strong>: el primero es $W = \Delta K$ y vale siempre. El segundo define $U$. El tercero une los dos para fuerzas no conservativas.</li>
+</ol>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────────────────────────────────── -->
+<!-- Ej 4 — Bolita + péndulo balístico                       -->
+<!-- ─────────────────────────────────────────────────────── -->
+
+<section id="moreno-2C2025-ej4">
+<h3 class="ejercicio-titulo">Ejercicio 4 — Impulso + choque + péndulo balístico</h3>
+<p class="meta">Tema: impulso · choque plástico · conservación de P y L_A · energía mecánica</p>
+
+<div class="enunciado">
+<strong>Enunciado</strong>: Sobre una bolita de masa $m$, actúa una fuerza $\vec{F}(t)$ durante 2 segundos. Luego la fuerza desaparece, y la bolita continúa su recorrido libremente hasta que impacta contra un bloque de masa $M$, elevándose el conjunto una altura $h$.
+<ol type="a">
+  <li>Calcular el impulso que produce la fuerza $\vec{F}(t)$ sobre la bolita, y calcular la velocidad de la bolita antes del choque con la masa $M$.</li>
+  <li>Analizar la conservación del vector cantidad de movimiento $\vec{P}$ y del momento angular respecto al punto A ($\vec{L}^A$) del sistema compuesto por la bolita y la masa $M$ durante el choque y luego cuando ya se mueven juntas. Justificar.</li>
+  <li>Calcular la altura $h$ a la que llega el conjunto.</li>
+</ol>
+<strong>Datos</strong>: $\vec{F}(t) = (2t + e^t)\,\hat{\imath}$ N; $m = 2$ kg; $M = 20$ kg; $L = 2{,}5$ m; $g = 9{,}81$ m/s².
+</div>
+
+<h4>Setup físico</h4>
+
+<p>El sistema consiste en:</p>
+<ul>
+  <li>Una <strong>bolita</strong> de masa $m$ que parte del reposo en el piso (a la izquierda).</li>
+  <li>Un <strong>bloque</strong> de masa $M$ que cuelga de un punto fijo A por medio de <strong>un único hilo</strong> de longitud $L$. El bloque está en reposo en el punto más bajo (péndulo simple).</li>
+  <li>$L = 2{,}5$ m es la longitud del hilo (distancia de A al bloque).</li>
+</ul>
+
+<p><strong>Secuencia de eventos</strong>:</p>
+<ol>
+  <li>$\vec{F}(t)$ actúa sobre la bolita durante 2 s, acelerándola.</li>
+  <li>La fuerza desaparece. La bolita se mueve <strong>libremente</strong> hasta chocar contra el bloque.</li>
+  <li>Choque <strong>plástico</strong> (la bolita se queda pegada al bloque — "elevándose el conjunto").</li>
+  <li>El conjunto $(m + M)$ oscila como péndulo, llegando a una altura máxima $h$.</li>
+</ol>
+
+<h4>Diagrama del sistema</h4>
+
+<svg viewBox="0 0 600 380" width="600" height="380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowEj4" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="red"/>
+    </marker>
+    <marker id="arrowEj4b" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Viga horizontal (techo) -->
+  <line x1="50" y1="50" x2="550" y2="50" stroke="#333" stroke-width="3"/>
+  <!-- Hatching arriba de la viga (símbolo de fijo) -->
+  <g stroke="#333" stroke-width="1">
+    <line x1="60" y1="50" x2="50" y2="40"/>
+    <line x1="90" y1="50" x2="80" y2="40"/>
+    <line x1="120" y1="50" x2="110" y2="40"/>
+    <line x1="150" y1="50" x2="140" y2="40"/>
+    <line x1="180" y1="50" x2="170" y2="40"/>
+    <line x1="210" y1="50" x2="200" y2="40"/>
+    <line x1="240" y1="50" x2="230" y2="40"/>
+    <line x1="270" y1="50" x2="260" y2="40"/>
+    <line x1="300" y1="50" x2="290" y2="40"/>
+    <line x1="330" y1="50" x2="320" y2="40"/>
+    <line x1="360" y1="50" x2="350" y2="40"/>
+    <line x1="390" y1="50" x2="380" y2="40"/>
+    <line x1="420" y1="50" x2="410" y2="40"/>
+    <line x1="450" y1="50" x2="440" y2="40"/>
+    <line x1="480" y1="50" x2="470" y2="40"/>
+    <line x1="510" y1="50" x2="500" y2="40"/>
+    <line x1="540" y1="50" x2="530" y2="40"/>
+  </g>
+
+  <!-- Punto A -->
+  <circle cx="400" cy="50" r="4" fill="black"/>
+  <text x="408" y="46" font-size="14" font-weight="bold">A</text>
+
+  <!-- Hilo único desde A hasta el centro superior del bloque -->
+  <line x1="400" y1="50" x2="400" y2="250" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Bloque M -->
+  <rect x="365" y="250" width="70" height="55" fill="#ffe082" stroke="#333" stroke-width="2"/>
+  <text x="392" y="284" font-size="14" font-weight="bold">M</text>
+
+  <!-- Bolita m -->
+  <circle cx="135" cy="277" r="14" fill="#90caf9" stroke="#333" stroke-width="2"/>
+  <text x="130" y="282" font-size="12" font-weight="bold">m</text>
+
+  <!-- Flecha F(t) sobre la bolita -->
+  <line x1="60" y1="277" x2="118" y2="277" stroke="red" stroke-width="2.5" marker-end="url(#arrowEj4)"/>
+  <text x="65" y="268" font-size="14" fill="red"><tspan font-style="italic">F(t)</tspan></text>
+
+  <!-- Línea horizontal (piso, opcional) -->
+  <line x1="50" y1="310" x2="550" y2="310" stroke="#888" stroke-width="1" stroke-dasharray="5,3"/>
+
+  <!-- Etiqueta de la longitud L (en el hilo) -->
+  <text x="408" y="160" font-size="13" fill="#1a5490" font-style="italic" font-weight="bold">L = 2,5 m</text>
+
+  <!-- Posición elevada del conjunto (después del choque, dashed) -->
+  <line x1="400" y1="50" x2="500" y2="225" stroke="#666" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <rect x="468" y="220" width="65" height="45" fill="none" stroke="#666" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="478" y="248" font-size="12" fill="#666">m+M</text>
+
+  <!-- Altura h -->
+  <line x1="540" y1="277" x2="540" y2="242" stroke="#1565c0" stroke-width="2"/>
+  <line x1="535" y1="277" x2="545" y2="277" stroke="#1565c0" stroke-width="1.5"/>
+  <line x1="535" y1="242" x2="545" y2="242" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="548" y="263" font-size="14" font-weight="bold" fill="#1565c0">h</text>
+
+  <!-- Línea horizontal punteada al mismo nivel del CM original (referencia) -->
+  <line x1="435" y1="277" x2="540" y2="277" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Título -->
+  <text x="300" y="30" font-size="14" font-weight="bold" text-anchor="middle">Bolita golpea bloque colgante; conjunto se eleva h</text>
+</svg>
+
+<h4>Concepto base</h4>
+
+<p>Hay <strong>tres fases</strong> del problema y cada una usa un principio distinto:</p>
+
+<table>
+<thead><tr><th>Fase</th><th>¿Qué pasa?</th><th>Principio</th></tr></thead>
+<tbody>
+<tr><td>1. F(t) acelera la bolita</td><td>$0 \le t \le 2$ s</td><td>Impulso = $\Delta \vec{p}$</td></tr>
+<tr><td>2. Choque bolita–bloque</td><td>$\Delta t \to 0$</td><td>Conservación de $\vec{P}$ y $\vec{L}^A$</td></tr>
+<tr><td>3. Conjunto oscila</td><td>swing del péndulo</td><td>Conservación de $E_{\text{mec}}$</td></tr>
+</tbody>
+</table>
+
+<div class="truco">
+<strong>Clave</strong>: cada fase usa un principio físico distinto. NO podés aplicar conservación de energía al choque plástico (se pierde energía), ni conservación de cantidad de movimiento al swing del péndulo (gravedad actúa sobre tiempo finito).
+</div>
+
+<h4>Parte (a) — Impulso y velocidad de la bolita</h4>
+
+<h4 style="color: #555;">Impulso</h4>
+
+<p>Por definición:</p>
+
+$$\vec{J} = \int_0^{2} \vec{F}(t)\,dt$$
+
+<p>Como $\vec{F}(t)$ solo tiene componente $x$:</p>
+
+$$J_x = \int_0^{2} (2t + e^t)\,dt = \left[t^2 + e^t\right]_0^{2}$$
+
+$$J_x = (2^2 + e^2) - (0 + e^0) = (4 + e^2) - 1 = 3 + e^2$$
+
+<p>Numéricamente, con $e^2 \approx 7{,}389$:</p>
+
+<div class="respuesta">
+$$\boxed{\ \vec{J} = (3 + e^2)\,\hat{\imath} \approx 10{,}39\,\hat{\imath}\,\text{N·s}\ }$$
+</div>
+
+<h4 style="color: #555;">Velocidad de la bolita justo antes del choque</h4>
+
+<p>Por el teorema del impulso:</p>
+
+$$\vec{J} = \Delta \vec{p}_{\text{bolita}} = m\,\vec{v}_f - m\,\vec{v}_i$$
+
+<p>La bolita parte del reposo ($\vec{v}_i = 0$), así que:</p>
+
+$$\vec{J} = m\,\vec{v}_f \quad\Longrightarrow\quad \vec{v}_f = \frac{\vec{J}}{m} = \frac{3 + e^2}{2}\,\hat{\imath}$$
+
+<div class="respuesta">
+$$\boxed{\ \vec{v}_{\text{bolita, antes choque}} = \dfrac{3 + e^2}{2}\,\hat{\imath} \approx 5{,}19\,\hat{\imath}\,\text{m/s}\ }$$
+</div>
+
+<p><strong>Nota</strong>: como entre $t = 2$ s (fin de la fuerza) y el momento del choque no actúan otras fuerzas horizontales sobre la bolita (recorrido "libremente"), la velocidad <strong>se mantiene constante</strong> durante ese tramo. Por eso $\vec{v}_{\text{antes choque}} = \vec{v}_f$ del impulso.</p>
+
+<h4>Parte (b) — Conservación durante el choque y durante el swing</h4>
+
+<h4 style="color: #555;">Durante el choque (Δt → 0)</h4>
+
+<p>El choque es <strong>instantáneo</strong> (Δt → 0). Las fuerzas externas al sistema bolita+bloque son:</p>
+<ul>
+  <li>Gravedad $\vec{P}_{\text{tot}} = -(m + M)\,g\,\hat{\jmath}$ (vertical)</li>
+  <li>Tensión del hilo $\vec{T}$ (a lo largo del hilo, pasando por A)</li>
+</ul>
+
+<p>Como Δt → 0, el impulso de cualquier fuerza finita tiende a cero:</p>
+
+$$\Delta\vec{p} = \int_0^{\Delta t} \vec{F}_{\text{ext}}\,dt \to 0 \quad \text{cuando } \Delta t \to 0$$
+
+<div class="respuesta">
+Por lo tanto, durante el choque:<br>
+✅ <strong>$\vec{P}$ se conserva</strong> (las fuerzas externas son finitas y Δt → 0).<br>
+✅ <strong>$\vec{L}^A$ se conserva</strong> (además, la tensión pasa por A, así que su torque es 0 incluso para Δt finito).
+</div>
+
+<h4 style="color: #555;">Después del choque (mientras el conjunto oscila)</h4>
+
+<p>Ya no es instantáneo: la gravedad actúa durante todo el swing y sus impulsos NO son despreciables.</p>
+
+<table>
+<thead><tr><th>Magnitud</th><th>¿Se conserva durante el swing?</th><th>Justificación</th></tr></thead>
+<tbody>
+<tr><td>$\vec{P}$</td><td>❌ NO</td><td>Gravedad genera impulso vertical neto. Además, en la dirección horizontal la tensión tiene componente $x$ cuando el péndulo está inclinado.</td></tr>
+<tr><td>$\vec{L}^A$</td><td>❌ NO</td><td>La tensión sigue pasando por A (torque = 0), pero la gravedad actúa en el CM del conjunto y produce torque $\tau^A = -(m+M)\,g\,L\sin\theta \neq 0$ (excepto en $\theta = 0$).</td></tr>
+<tr><td>$E_{\text{mec}}$</td><td>✅ SÍ</td><td>Tensión perpendicular al desplazamiento → no hace trabajo. Gravedad es conservativa.</td></tr>
+</tbody>
+</table>
+
+<div class="truco">
+<strong>Conclusión</strong>: durante el choque se conservan $\vec{P}$ y $\vec{L}^A$. Después del choque <strong>solo se conserva la energía mecánica</strong>.
+</div>
+
+<h4>Parte (c) — Altura h del conjunto</h4>
+
+<h4 style="color: #555;">Paso 1: velocidad del conjunto justo después del choque (usando conservación de P)</h4>
+
+<p>Choque plástico: la bolita y el bloque quedan pegados. Conservación de $\vec{P}$:</p>
+
+$$m\,\vec{v}_{\text{bolita}} = (m + M)\,\vec{v}_{\text{conjunto}}$$
+
+<p>En módulo (todo es horizontal):</p>
+
+$$v_{\text{conjunto}} = \frac{m \cdot v_{\text{bolita}}}{m + M} = \frac{2 \cdot \frac{3 + e^2}{2}}{2 + 20} = \frac{3 + e^2}{22}$$
+
+<p>Numéricamente:</p>
+
+$$v_{\text{conjunto}} \approx \frac{10{,}39}{22} \approx 0{,}472\,\text{m/s}$$
+
+<h4 style="color: #555;">Paso 2: altura $h$ (usando conservación de $E_{\text{mec}}$)</h4>
+
+<p>Tomo como nivel de referencia $y = 0$ la posición original del conjunto (punto más bajo del swing).</p>
+
+<p>Estado inicial (justo después del choque, en el punto más bajo):</p>
+$$E_1 = \tfrac{1}{2}(m+M)\,v_{\text{conjunto}}^2 + 0$$
+
+<p>Estado final (altura máxima $h$, momentáneamente en reposo):</p>
+$$E_2 = 0 + (m+M)\,g\,h$$
+
+<p>Igualando $E_1 = E_2$:</p>
+
+$$\tfrac{1}{2}(m+M)\,v_{\text{conjunto}}^2 = (m+M)\,g\,h$$
+
+<p>Cancelando $(m+M)$:</p>
+
+$$h = \frac{v_{\text{conjunto}}^2}{2g}$$
+
+<p>Reemplazando:</p>
+
+$$h = \frac{\left(\frac{3 + e^2}{22}\right)^2}{2g} = \frac{(3 + e^2)^2}{484 \cdot 2g} = \frac{(3 + e^2)^2}{968\,g}$$
+
+<p>Numéricamente:</p>
+
+$$h \approx \frac{(10{,}39)^2}{968 \cdot 9{,}81} \approx \frac{107{,}9}{9495} \approx 0{,}01137\,\text{m}$$
+
+<div class="respuesta">
+$$\boxed{\ h \approx 0{,}0114\,\text{m} \approx 1{,}14\,\text{cm}\ }$$
+</div>
+
+<div class="nota">
+<strong>Observación 1</strong>: la altura es muy pequeña (~1 cm) porque la masa del bloque es 10 veces mayor que la de la bolita. La mayor parte de la energía cinética de la bolita se "pierde" en el choque inelástico.<br><br>
+<strong>Observación 2</strong>: la longitud $L$ <strong>no aparece</strong> en la fórmula final de $h$. La razón: en la conservación de energía, $(m+M)$ se cancela y $L$ no entra (la altura depende solo de $v$ y $g$). Sin embargo, $L$ sí afectaría el <em>ángulo</em> de swing: $1 - \cos\theta = h/L$, así que $\theta \approx \arccos(1 - 0{,}01137/2{,}5) \approx 5{,}5°$.
+</div>
+
+<h4>Verificación: conservación de $\vec{L}^A$ da lo mismo</h4>
+
+<p>Si en lugar de conservar $\vec{P}$ usamos $\vec{L}^A$ durante el choque, obtenemos la misma ecuación:</p>
+
+$$L_A^{\text{antes}} = L \cdot m \cdot v_{\text{bolita}}$$
+$$L_A^{\text{después}} = L \cdot (m + M) \cdot v_{\text{conjunto}}$$
+
+<p>Igualando:</p>
+$$L \cdot m \cdot v_{\text{bolita}} = L \cdot (m + M) \cdot v_{\text{conjunto}}$$
+
+<p>$L$ se cancela y queda exactamente la misma ecuación que conservación de $\vec{P}$. ✓</p>
+
+<h4>Trampas típicas para parcial</h4>
+<ol>
+  <li><strong>NO conservar energía en el choque</strong>: es plástico (inelástico). Solo se conservan $\vec{P}$ y $\vec{L}^A$, no la energía cinética.</li>
+  <li><strong>NO conservar P durante el swing</strong>: una vez que el conjunto está en movimiento bajo gravedad, $\vec{P}$ cambia. Para encontrar $h$, usá energía.</li>
+  <li><strong>Tensión NO hace trabajo</strong>: es perpendicular a la velocidad en cada instante (porque la trayectoria es circular). Por eso $E_{\text{mec}}$ se conserva.</li>
+  <li><strong>Velocidad libre entre fuerza y choque</strong>: entre $t = 2$ s y el choque, la bolita no recibe más impulso, así que mantiene la velocidad obtenida al final de F(t).</li>
+  <li><strong>$L$ no aparece en h</strong>: pero podría aparecer si te piden el ángulo de swing o el tiempo de oscilación.</li>
+</ol>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<!-- ─────────────────────────────────────────────────────── -->
+<!-- Ej 5 — Esfera-polea con cuerpo colgante                 -->
+<!-- ─────────────────────────────────────────────────────── -->
+
+<section id="moreno-2C2025-ej5">
+<h3 class="ejercicio-titulo">Ejercicio 5 — Esfera como polea con cuerpo colgante</h3>
+<p class="meta">Tema: cuerpo rígido · rotación con torque externo · poleas con masa · sistema con vínculo</p>
+
+<div class="enunciado">
+<strong>Enunciado</strong>: El cuerpo de masa $m_1$ cuelga de una soga que pasa por una esfera. En un extremo (libre) actúa una fuerza $\vec{F}$. (No hay torque aplicado, salvo para el punto d).
+<ol type="a">
+  <li>Realizar el DCL de todos los cuerpos, indicando claramente todos los pares acción–reacción.</li>
+  <li>Calcular la aceleración angular $\vec{\alpha}$ y la del CM de la esfera, el vector aceleración del cuerpo $m_1$ y las tensiones en los sectores de la soga.</li>
+  <li>Calcular la energía cinética de la esfera luego de que transcurrieron 5 segundos.</li>
+  <li>Si se desea que el sistema esté en equilibrio aplicando un torque $\tau$, calcular el valor de dicho torque.</li>
+</ol>
+<strong>Datos</strong>: $m_1 = 5$ kg; $M_{\text{esf}} = 3$ kg; $R_{\text{esf}} = 0{,}5$ m; $F = 10$ N; $g = 9{,}81$ m/s²; $I^{\text{CM}}_{\text{esf}} = \tfrac{2}{5}MR^2$.
+</div>
+
+<h4>Setup físico (interpretación de la figura)</h4>
+
+<p>La esfera funciona como una <strong>polea con masa</strong>:</p>
+<ul>
+  <li>La <strong>pared/bracket rayado</strong> a la izquierda es el <strong>soporte fijo</strong> que sostiene el eje de la esfera (perpendicular a la hoja, pasando por el CM). Los dos segmentos que van del soporte a la esfera son las <strong>barras del bracket</strong> que mantienen el eje fijo. La esfera <strong>no se traslada</strong>, solo rota.</li>
+  <li>La <strong>fuerza $\vec{F}$</strong> se aplica horizontalmente (hacia la izquierda) en el punto superior tangencial de la esfera (12 hs). Físicamente equivale a que la soga sale de la esfera por arriba y se tira hacia la izquierda con fuerza $F$.</li>
+  <li>La soga continúa envolviendo la esfera 90° hasta el punto derecho (3 hs), de ahí baja vertical y sostiene a $m_1$.</li>
+  <li>La soga se considera <strong>inextensible y de masa despreciable</strong>. No hay deslizamiento entre la soga y la esfera.</li>
+</ul>
+
+<h4>Diagrama del sistema</h4>
+
+<svg viewBox="0 0 600 400" width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowEj5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="red"/>
+    </marker>
+    <marker id="arrowEj5b" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="blue"/>
+    </marker>
+    <marker id="arrowEj5g" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+
+  <!-- Pared/bloque fijo (hatching) -->
+  <rect x="60" y="180" width="170" height="50" fill="#e0e0e0" stroke="#333" stroke-width="2"/>
+  <!-- Hatching dentro de la pared -->
+  <g stroke="#666" stroke-width="1">
+    <line x1="70" y1="180" x2="60" y2="190"/>
+    <line x1="90" y1="180" x2="60" y2="210"/>
+    <line x1="110" y1="180" x2="60" y2="230"/>
+    <line x1="130" y1="180" x2="80" y2="230"/>
+    <line x1="150" y1="180" x2="100" y2="230"/>
+    <line x1="170" y1="180" x2="120" y2="230"/>
+    <line x1="190" y1="180" x2="140" y2="230"/>
+    <line x1="210" y1="180" x2="160" y2="230"/>
+    <line x1="230" y1="180" x2="180" y2="230"/>
+    <line x1="230" y1="200" x2="200" y2="230"/>
+    <line x1="230" y1="220" x2="220" y2="230"/>
+  </g>
+  <text x="115" y="262" font-size="12" fill="#555" font-style="italic">soporte fijo</text>
+
+  <!-- Bracket: dos barras desde la pared al eje de la esfera -->
+  <line x1="230" y1="190" x2="380" y2="200" stroke="#333" stroke-width="2"/>
+  <line x1="230" y1="220" x2="380" y2="200" stroke="#333" stroke-width="2"/>
+
+  <!-- Esfera -->
+  <circle cx="380" cy="200" r="55" fill="#fff3e0" stroke="#333" stroke-width="2.5"/>
+  <text x="360" y="225" font-size="14" font-weight="bold">esfera</text>
+
+  <!-- Eje fijo en el CM (donde llega el bracket) -->
+  <circle cx="380" cy="200" r="4" fill="#333"/>
+  <text x="350" y="195" font-size="11" fill="#333">eje fijo</text>
+
+  <!-- Soga corta horizontal saliendo del top de la esfera y flecha F -->
+  <line x1="380" y1="145" x2="320" y2="145" stroke="#444" stroke-width="2.5"/>
+  <line x1="320" y1="145" x2="260" y2="145" stroke="red" stroke-width="3" marker-end="url(#arrowEj5)"/>
+  <text x="265" y="138" font-size="14" fill="red" font-weight="bold"><tspan font-style="italic">F</tspan> = 10 N</text>
+
+  <!-- Arco de la soga sobre la esfera (de 12hs a 3hs) -->
+  <path d="M 380 145 A 55 55 0 0 1 435 200" fill="none" stroke="#444" stroke-width="2.5"/>
+
+  <!-- Soga vertical baja a m1 -->
+  <line x1="435" y1="200" x2="435" y2="325" stroke="#444" stroke-width="2.5"/>
+
+  <!-- Bloque m1 -->
+  <rect x="415" y="325" width="40" height="40" fill="#ffe082" stroke="#333" stroke-width="2"/>
+  <text x="425" y="350" font-size="13" font-weight="bold">m₁</text>
+
+  <!-- Etiquetas de tensiones T1, T2 -->
+  <text x="305" y="125" font-size="13" fill="#1565c0">soga horiz., tensión <tspan font-style="italic">T₁ = F</tspan></text>
+  <text x="445" y="265" font-size="13" fill="#1565c0">soga vert.,</text>
+  <text x="445" y="283" font-size="13" fill="#1565c0">tensión <tspan font-style="italic">T₂</tspan></text>
+
+  <!-- Flecha curva indicando τ aplicado (parte d) -->
+  <path d="M 490 165 A 25 25 0 0 1 470 145" fill="none" stroke="#7b1fa2" stroke-width="2" marker-end="url(#arrowEj5)"/>
+  <text x="490" y="135" font-size="14" fill="#7b1fa2" font-weight="bold">τ (parte d)</text>
+
+  <!-- Flecha indicando movimiento de m1 hacia abajo -->
+  <line x1="475" y1="340" x2="475" y2="380" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowEj5g)"/>
+  <text x="483" y="370" font-size="13" fill="#2e7d32" font-weight="bold">a (↓)</text>
+
+  <!-- Título -->
+  <text x="300" y="30" font-size="14" font-weight="bold" text-anchor="middle">Esfera-polea con eje fijo, soga horizontal (F) → vertical (m₁)</text>
+  <text x="300" y="50" font-size="12" text-anchor="middle" fill="#666">Como m₁·g (49 N) ≫ F (10 N), m₁ cae y la esfera rota en sentido horario</text>
+</svg>
+
+<h4>Análisis preliminar</h4>
+
+<p>Antes de plantear nada, comparemos las fuerzas:</p>
+<ul>
+  <li>Peso de $m_1$: $m_1 \cdot g = 5 \cdot 9{,}81 = 49{,}05$ N (tira para abajo)</li>
+  <li>Fuerza aplicada: $F = 10$ N (tira la soga para la izquierda)</li>
+</ul>
+<p>Como $m_1 \cdot g \gg F$, $m_1$ <strong>cae</strong> y la esfera <strong>rota en sentido horario</strong> (de modo que la soga se "transfiera" del lado izquierdo al derecho, alargando la sección vertical). Esto define los sentidos esperados de $\vec{\alpha}$ y $\vec{a}_{m_1}$.</p>
+
+<h4>Parte (a) — DCL y pares acción-reacción</h4>
+
+<table>
+<thead><tr><th>Cuerpo</th><th>Fuerzas que actúan</th><th>Par acción-reacción</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>$m_1$</strong></td>
+  <td>
+    • Peso $\vec{P}_1 = -m_1 g\,\hat{\jmath}$ (abajo)<br>
+    • Tensión $\vec{T}_2$ (arriba)
+  </td>
+  <td>
+    • Peso: $m_1$ atrae a la Tierra<br>
+    • $\vec{T}_2$: $m_1$ tira de la soga hacia abajo con $-\vec{T}_2$
+  </td>
+</tr>
+<tr>
+  <td><strong>Esfera</strong></td>
+  <td>
+    • Peso $\vec{P}_{\text{esf}} = -M g\,\hat{\jmath}$ (abajo)<br>
+    • Tensión $\vec{T}_1$ en contacto 12hs (a la izquierda)<br>
+    • Tensión $\vec{T}_2$ en contacto 3hs (hacia abajo)<br>
+    • Reacción del eje $\vec{R}_{\text{eje}}$ en el CM
+  </td>
+  <td>
+    • Peso: esfera atrae a la Tierra<br>
+    • $\vec{T}_1, \vec{T}_2$: esfera tira de la soga con $-\vec{T}_1$ y $-\vec{T}_2$<br>
+    • Reacción del eje: esfera empuja al eje con $-\vec{R}_{\text{eje}}$
+  </td>
+</tr>
+<tr>
+  <td><strong>Soga</strong> (masa despreciable)</td>
+  <td>
+    • $\vec{F}$ en el extremo libre (a la izquierda)<br>
+    • Tensión en cada sección<br>
+    • (No tiene peso)
+  </td>
+  <td>
+    • $\vec{F}$: la soga empuja al agente externo con $-\vec{F}$
+  </td>
+</tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<strong>Importante</strong>: como la soga es de masa despreciable y la sección horizontal está en una línea recta, la tensión es uniforme en esa sección. Eso implica:
+$$T_1 = F = 10\,\text{N}$$
+La tensión $T_2$ (sección vertical) es <strong>distinta</strong> porque la esfera tiene momento de inercia (transfiere torque).
+</div>
+
+<h4>Parte (b) — Aceleración angular, aceleraciones del CM y tensiones</h4>
+
+<h4 style="color: #555;">Planteo</h4>
+
+<p>Defino sentido positivo: CCW (antihorario) en $+\hat{k}$ para rotaciones, "arriba" en $+\hat{\jmath}$ para traslaciones. Como ya vimos, esperamos $\alpha < 0$ (CW) y $a_{m_1} < 0$ (cae).</p>
+
+<p><strong>Ecuación para $m_1$</strong> (Newton, eje $y$):</p>
+$$T_2 - m_1 g = m_1 \cdot a_{m_1} \quad (1)$$
+
+<p><strong>Ecuación rotacional para la esfera</strong> (torques respecto al CM):</p>
+<ul>
+  <li>$T_1$ aplicada en 12 hs (posición $(0, R)$), apuntando a la izquierda: aporta torque $+R \cdot T_1$ (CCW).</li>
+  <li>$T_2$ aplicada en 3 hs (posición $(R, 0)$), apuntando hacia abajo: aporta torque $-R \cdot T_2$ (CW).</li>
+</ul>
+$$R \cdot T_1 - R \cdot T_2 = I^{\text{CM}} \cdot \alpha \quad (2)$$
+
+<p>Con $I^{\text{CM}} = \tfrac{2}{5} M R^2$:</p>
+$$R \cdot (T_1 - T_2) = \tfrac{2}{5} M R^2 \cdot \alpha \quad\Rightarrow\quad T_1 - T_2 = \tfrac{2}{5} M R \cdot \alpha \quad (2')$$
+
+<p><strong>Vínculo soga-esfera</strong> (la soga no resbala): cuando la esfera rota con $\alpha$, la superficie en 3 hs tiene velocidad/aceleración vertical. La soga acompaña, y $m_1$ se mueve con esa misma magnitud:</p>
+$$a_{m_1} = R \cdot \alpha \quad (3)$$
+
+<p><strong>Aceleración del CM de la esfera</strong>: como el eje está fijo,</p>
+<div class="respuesta">
+$$\boxed{\ \vec{a}_{\text{CM, esfera}} = \vec{0}\ }$$
+</div>
+
+<h4 style="color: #555;">Resolución del sistema</h4>
+
+<p>De (1) y (3): $T_2 = m_1 g + m_1 \cdot R \alpha$.</p>
+<p>Sustituyo en (2'):</p>
+$$T_1 - m_1 g - m_1 R \alpha = \tfrac{2}{5} M R \alpha$$
+$$T_1 - m_1 g = \alpha \cdot R \left(m_1 + \tfrac{2}{5} M\right)$$
+
+<p>Con $T_1 = F$:</p>
+$$\alpha = \frac{F - m_1 g}{R\,(m_1 + \tfrac{2}{5} M)}$$
+
+<p>Reemplazo valores:</p>
+$$\alpha = \frac{10 - 49{,}05}{0{,}5 \cdot (5 + \tfrac{2}{5}\cdot 3)} = \frac{-39{,}05}{0{,}5 \cdot 6{,}2} = \frac{-39{,}05}{3{,}1} \approx -12{,}6\,\text{rad/s}^2$$
+
+<div class="respuesta">
+$$\boxed{\ \vec{\alpha} \approx -12{,}6\,\hat{k}\,\text{rad/s}^2\ }$$
+(signo negativo = horario, sentido $-\hat{k}$, entra a la hoja)
+</div>
+
+<p><strong>Aceleración de $m_1$</strong>:</p>
+$$a_{m_1} = R \cdot \alpha = 0{,}5 \cdot (-12{,}6) = -6{,}30\,\text{m/s}^2$$
+
+<div class="respuesta">
+$$\boxed{\ \vec{a}_{m_1} \approx -6{,}30\,\hat{\jmath}\,\text{m/s}^2\ }$$
+(cae con $6{,}30$ m/s²)
+</div>
+
+<p><strong>Tensiones</strong>:</p>
+$$T_1 = F = 10\,\text{N}$$
+$$T_2 = m_1 g + m_1 R \alpha = 49{,}05 + 5 \cdot 0{,}5 \cdot (-12{,}6) = 49{,}05 - 31{,}5 = 17{,}55\,\text{N}$$
+
+<div class="respuesta">
+$$\boxed{\ T_1 = 10\,\text{N}\ ;\quad T_2 \approx 17{,}55\,\text{N}\ }$$
+</div>
+
+<p><strong>Verificación rápida</strong>: $T_2 - T_1 = 17{,}55 - 10 = 7{,}55$ N. Y $\tfrac{2}{5} M R |\alpha| = 0{,}4 \cdot 3 \cdot 0{,}5 \cdot 12{,}6 = 7{,}56$ N. ✓ (coincide salvo redondeo).</p>
+
+<h4>Parte (c) — Energía cinética de la esfera a $t = 5$ s</h4>
+
+<p>El sistema parte del reposo (no se especifica otra cosa). La esfera gira con aceleración angular constante. A los $t = 5$ s:</p>
+$$\omega(5) = \alpha \cdot t = -12{,}6 \cdot 5 = -63\,\text{rad/s}$$
+
+<p>Energía cinética de la esfera (solo rotacional, porque su CM está fijo):</p>
+$$K_{\text{esf}} = \tfrac{1}{2} I^{\text{CM}} \cdot \omega^2 = \tfrac{1}{2} \cdot \tfrac{2}{5} M R^2 \cdot \omega^2$$
+
+$$K_{\text{esf}} = \tfrac{1}{5} \cdot 3 \cdot 0{,}25 \cdot 63^2 = \tfrac{1}{5} \cdot 0{,}75 \cdot 3969 = 0{,}15 \cdot 3969$$
+
+<div class="respuesta">
+$$\boxed{\ K_{\text{esf}} \approx 595{,}35\,\text{J}\ }$$
+</div>
+
+<h4>Parte (d) — Torque para equilibrio</h4>
+
+<p>Si se quiere que el sistema esté en equilibrio, todo debe estar en reposo. Para $m_1$ en equilibrio:</p>
+$$T_2 = m_1 g = 49{,}05\,\text{N}$$
+
+<p>Para la esfera, suma de torques sobre el CM = 0. Ahora hay un torque externo $\tau$ aplicado además de las tensiones:</p>
+$$R \cdot T_1 - R \cdot T_2 + \tau = 0$$
+$$\tau = R \cdot (T_2 - T_1) = R \cdot (m_1 g - F)$$
+
+<p>Reemplazo:</p>
+$$\tau = 0{,}5 \cdot (49{,}05 - 10) = 0{,}5 \cdot 39{,}05$$
+
+<div class="respuesta">
+$$\boxed{\ \tau \approx 19{,}53\,\text{N·m}\ (\text{en sentido }+\hat{k}\text{, antihorario})\ }$$
+</div>
+
+<p>El torque debe ser <strong>antihorario</strong> ($+\hat{k}$) para contrarrestar la tendencia natural del sistema a girar horario (por culpa de $m_1$).</p>
+
+<h4>Resumen de resultados</h4>
+
+<table>
+<thead><tr><th>Magnitud</th><th>Valor</th></tr></thead>
+<tbody>
+<tr><td>$\vec{\alpha}$ (esfera)</td><td>$\approx -12{,}6\,\hat{k}$ rad/s²</td></tr>
+<tr><td>$\vec{a}_{\text{CM, esfera}}$</td><td>$\vec{0}$ (eje fijo)</td></tr>
+<tr><td>$\vec{a}_{m_1}$</td><td>$\approx -6{,}30\,\hat{\jmath}$ m/s²</td></tr>
+<tr><td>$T_1$ (soga horizontal)</td><td>$10$ N</td></tr>
+<tr><td>$T_2$ (soga vertical)</td><td>$\approx 17{,}55$ N</td></tr>
+<tr><td>$K_{\text{esf}}$ a $t = 5$ s</td><td>$\approx 595{,}35$ J</td></tr>
+<tr><td>$\tau$ para equilibrio</td><td>$\approx 19{,}53\,\hat{k}$ N·m</td></tr>
+</tbody>
+</table>
+
+<h4>Trampas típicas para parcial</h4>
+<ol>
+  <li><strong>$T_1 \neq T_2$</strong>: si la polea tiene masa, las tensiones a ambos lados son <strong>distintas</strong>. Solo cuando la polea es ideal (sin masa) las tensiones son iguales. Acá hay $M = 3$ kg, así que $T_1 \neq T_2$.</li>
+  <li><strong>$T_1 = F$</strong> en el tramo horizontal: la soga es de masa despreciable y va en línea recta, así que la tensión es uniforme. NO confundir con $T_2$.</li>
+  <li><strong>El CM de la esfera NO se traslada</strong>: la esfera está sobre un eje fijo. $\vec{a}_{\text{CM, esfera}} = 0$. Las reacciones del eje balancean las tensiones y el peso.</li>
+  <li><strong>Vínculo soga-esfera</strong>: $a_{m_1} = R \cdot \alpha$ (con los signos correspondientes). Es la condición de "no deslizamiento", análoga a RSR pero entre soga y polea.</li>
+  <li><strong>Signo de $\alpha$</strong>: hacé el análisis físico antes de plantear. Si $m_1 g > F$, $\alpha$ es CW (negativo en $+\hat{k}$). Si fuera al revés, sería CCW. No te quedes con el signo de la fórmula sin pensar.</li>
+</ol>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+<hr class="separador">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PLANTILLA PARA NUEVOS EJERCICIOS                                 -->
+<!-- Copiar y pegar el bloque <section> y adaptar id + contenido      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<!--
+<section id="ID-UNICO-DEL-EJERCICIO">
+<h3 class="ejercicio-titulo">Ejercicio N — Título</h3>
+<p class="meta">Tema: …</p>
+
+<div class="enunciado">
+<strong>Enunciado</strong>: …
+</div>
+
+<h4>Setup / Planteo</h4>
+<p>…</p>
+
+<h4>Resolución</h4>
+$$\text{ecuaciones aquí}$$
+
+<div class="respuesta">
+$$\boxed{\text{resultado final}}$$
+</div>
+
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+-->
+
+</main>
+
+</body>
+</html>

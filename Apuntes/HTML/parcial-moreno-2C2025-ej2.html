@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ej 2 — Parcial Moreno 2C2025 — Curva peraltada</title>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 920px;
+    margin: 2em auto;
+    padding: 0 1.5em;
+    color: #222;
+    line-height: 1.6;
+    background: #fafafa;
+  }
+  h1 { border-bottom: 3px solid #2c3e50; padding-bottom: 0.3em; color: #2c3e50; }
+  h2 { color: #1a5490; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; margin-top: 2em; }
+  h3 { color: #1a5490; margin-top: 1.5em; }
+  .enunciado {
+    background: #f0f6ff;
+    border-left: 4px solid #4a8bc2;
+    padding: 1em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .respuesta {
+    background: #eef9ee;
+    border-left: 4px solid #4caf50;
+    padding: 0.8em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+    font-size: 1.05em;
+  }
+  .alerta {
+    background: #fff4e6;
+    border-left: 4px solid #ff9800;
+    padding: 0.8em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  .truco {
+    background: #f3e5f5;
+    border-left: 4px solid #9c27b0;
+    padding: 0.8em 1.2em;
+    margin: 1em 0;
+    border-radius: 4px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.5em 0.8em;
+    text-align: left;
+  }
+  th { background: #e8eef5; }
+  svg { display: block; margin: 1em auto; background: white; border: 1px solid #ddd; border-radius: 4px; }
+  .ascii {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: #f5f5f5;
+    padding: 1em;
+    border-radius: 4px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.95em; }
+</style>
+</head>
+<body>
+
+<h1>Ejercicio 2 — Parcial Moreno 2C2025 — Curva peraltada con fricción</h1>
+
+<div class="enunciado">
+<strong>Enunciado</strong>: Una curva de autopista de radio $R$ que forma un ángulo $\alpha$ con la horizontal, tiene coeficiente de fricción $\mu_e$ y $\mu_d$ entre los neumáticos y el asfalto. Un automóvil de masa $m$ atraviesa la curva.
+<ol type="a">
+  <li>Realizar el DCL, indicando pares acción–reacción, y calcular la máxima velocidad teórica a la cual el auto puede tomar la curva.</li>
+  <li>Calcular la máxima velocidad teórica a la cual un camión que tiene 3 veces la masa del auto puede tomar la curva.</li>
+  <li>Si se sabe que los días de lluvia el rozamiento disminuye a la mitad, y adicionalmente se desea tener un coeficiente de seguridad de 1,5. ¿Cuál es la velocidad máxima a colocar en el cartel de la ruta?</li>
+</ol>
+</div>
+
+<h2>Setup físico</h2>
+
+<p>Una curva peraltada: la superficie de la ruta está <strong>inclinada lateralmente</strong> un ángulo $\alpha$. El auto circula <strong>horizontalmente</strong> en círculo de radio $R$ alrededor del centro de la curva.</p>
+
+<p>En velocidad máxima, el auto tiende a salirse <strong>hacia afuera</strong> de la curva, así que la fricción $\vec{f}$ apunta <strong>hacia adentro</strong> (hacia abajo del peralte).</p>
+
+<h3>Diagrama de cuerpo libre (DCL)</h3>
+
+<svg viewBox="0 0 600 380" width="600" height="380" xmlns="http://www.w3.org/2000/svg">
+  <!-- Grid background subtle -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="black"/>
+    </marker>
+    <marker id="arrowR" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="red"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="blue"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+
+  <!-- Horizontal reference line (ground) -->
+  <line x1="50" y1="300" x2="550" y2="300" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="555" y="305" font-size="12" fill="#666">horizontal</text>
+
+  <!-- Banked surface (line tilted by alpha) -->
+  <line x1="100" y1="320" x2="500" y2="180" stroke="#444" stroke-width="3"/>
+  <text x="80" y="335" font-size="13" fill="#444">superficie peraltada</text>
+
+  <!-- Angle alpha marker -->
+  <path d="M 150 300 A 50 50 0 0 0 165 285" stroke="black" fill="none" stroke-width="1"/>
+  <text x="170" y="298" font-size="14" font-style="italic">α</text>
+
+  <!-- Car (rectangle on the slope) -->
+  <g transform="translate(300, 240) rotate(-19.5)">
+    <rect x="-30" y="-15" width="60" height="30" fill="#ffe082" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="-12" y="5" font-size="14" fill="#333">auto</text>
+  </g>
+
+  <!-- Forces on car (center at approx 300, 240) -->
+  <!-- Weight (red, down) -->
+  <line x1="300" y1="245" x2="300" y2="340" stroke="red" stroke-width="2.5" marker-end="url(#arrowR)"/>
+  <text x="305" y="335" font-size="14" fill="red"><tspan font-style="italic">P</tspan> = mg</text>
+
+  <!-- Normal (blue, perpendicular to surface) -->
+  <!-- Surface direction: from (100,320) to (500,180) so slope ~= -0.35, angle ~ -19.5 deg -->
+  <!-- Normal perpendicular: rotate +90 = points up-left of surface direction -->
+  <line x1="300" y1="240" x2="266" y2="145" stroke="blue" stroke-width="2.5" marker-end="url(#arrowB)"/>
+  <text x="222" y="135" font-size="14" fill="blue"><tspan font-style="italic">N</tspan></text>
+
+  <!-- Friction (green, along surface, downhill toward center) -->
+  <!-- Surface direction down-left: from car toward bottom-left -->
+  <line x1="300" y1="240" x2="225" y2="266" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#arrowG)"/>
+  <text x="190" y="278" font-size="14" fill="#2e7d32"><tspan font-style="italic">f</tspan> (hacia el centro)</text>
+
+  <!-- Center of curve indicator -->
+  <text x="50" y="200" font-size="13" fill="#666">↓ hacia el centro</text>
+  <text x="50" y="215" font-size="13" fill="#666">de la curva</text>
+  <line x1="80" y1="195" x2="80" y2="220" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Title -->
+  <text x="300" y="30" font-size="16" font-weight="bold" text-anchor="middle">DCL — auto en peralte (vista trasera)</text>
+  <text x="300" y="50" font-size="12" text-anchor="middle" fill="#666">en velocidad máxima: la fricción apunta hacia el centro</text>
+</svg>
+
+<h2>Parte (a) — DCL + velocidad máxima</h2>
+
+<h3>Pares acción–reacción</h3>
+
+<table>
+<thead>
+<tr><th>Fuerza sobre el auto</th><th>Reacción (sobre el otro cuerpo)</th></tr>
+</thead>
+<tbody>
+<tr><td>Peso (Tierra atrae al auto), $\vec{P} = m\vec{g}$</td><td>Auto atrae a la Tierra (interacción gravitatoria)</td></tr>
+<tr><td>Normal del piso sobre el auto, $\vec{N}$</td><td>Auto empuja al piso con $-\vec{N}$</td></tr>
+<tr><td>Fricción del piso sobre el auto, $\vec{f}$</td><td>Auto fricciona al piso con $-\vec{f}$</td></tr>
+</tbody>
+</table>
+
+<div class="alerta">
+<strong>Cuidado clásico</strong>: el peso y la normal <strong>NO son par acción–reacción</strong>. Actúan sobre el mismo cuerpo (el auto) y el par del peso es la atracción del auto sobre la Tierra.
+</div>
+
+<h3>Descomposición de fuerzas (sistema xy horizontal/vertical)</h3>
+
+<p>Eje $x$: horizontal hacia el centro de la curva.<br>
+Eje $y$: vertical hacia arriba.</p>
+
+<p>Componentes:</p>
+
+$$\vec{N} = (N\sin\alpha,\ N\cos\alpha)$$
+$$\vec{f} = (f\cos\alpha,\ -f\sin\alpha)$$
+$$\vec{P} = (0,\ -mg)$$
+
+<h3>Ecuaciones de Newton</h3>
+
+<p><strong>Eje vertical</strong> (no acelera verticalmente, equilibrio en $y$):</p>
+$$N\cos\alpha - f\sin\alpha - mg = 0$$
+$$\boxed{\ N\cos\alpha - f\sin\alpha = mg\ }\quad (1)$$
+
+<p><strong>Eje horizontal</strong> (aceleración centrípeta hacia el centro):</p>
+$$N\sin\alpha + f\cos\alpha = \frac{m\,v^2}{R}$$
+$$\boxed{\ N\sin\alpha + f\cos\alpha = \frac{m\,v^2}{R}\ }\quad (2)$$
+
+<p><strong>Condición de máxima velocidad</strong> (a punto de deslizar):</p>
+$$f = \mu_e \cdot N$$
+
+<h3>Resolución del sistema</h3>
+
+<p>Reemplazo $f = \mu_e N$ en (1) y (2):</p>
+
+$$N(\cos\alpha - \mu_e \sin\alpha) = mg \quad (1')$$
+$$N(\sin\alpha + \mu_e \cos\alpha) = \frac{m\,v_{\max}^2}{R} \quad (2')$$
+
+<p>Divido (2') entre (1') para que $N$ y $m$ se cancelen:</p>
+
+$$\frac{\sin\alpha + \mu_e \cos\alpha}{\cos\alpha - \mu_e \sin\alpha} = \frac{v_{\max}^2}{gR}$$
+
+<p>Dividiendo numerador y denominador por $\cos\alpha$:</p>
+
+<div class="respuesta">
+$$\boxed{\ v_{\max} = \sqrt{\, gR \cdot \dfrac{\tan\alpha + \mu_e}{1 - \mu_e \tan\alpha}\ }\ }$$
+</div>
+
+<h2>Parte (b) — Camión con masa $3m$</h2>
+
+<div class="truco">
+<strong>Observación clave</strong>: en la fórmula de $v_{\max}$ <strong>no aparece la masa</strong>. Se canceló al dividir (1') entre (2').
+</div>
+
+<p>La velocidad máxima del camión es <strong>la misma que la del auto</strong>:</p>
+
+<div class="respuesta">
+$$v_{\max,\,\text{camión}} = v_{\max,\,\text{auto}} = \sqrt{\, gR \cdot \dfrac{\tan\alpha + \mu_e}{1 - \mu_e \tan\alpha}\ }$$
+</div>
+
+<p><strong>Justificación física</strong>: tanto la fuerza centrípeta necesaria ($m v^2/R$) como la fuerza disponible (proporcional al peso $mg$) escalan con $m$, así que se cancelan. La capacidad de "agarre" en la curva depende del ángulo y del coeficiente de fricción, no de la masa.</p>
+
+<h2>Parte (c) — Lluvia + coeficiente de seguridad</h2>
+
+<h3>Paso 1: $\mu$ con lluvia</h3>
+
+$$\mu_{\text{lluvia}} = \frac{\mu_e}{2}$$
+
+<h3>Paso 2: $v_{\max}$ con lluvia</h3>
+
+<p>Sustituyo $\mu_e$ por $\mu_e/2$ en la fórmula:</p>
+
+$$v_{\max,\,\text{lluvia}} = \sqrt{\, gR \cdot \dfrac{\tan\alpha + \mu_e/2}{1 - (\mu_e/2)\,\tan\alpha}\ }$$
+
+<h3>Paso 3: aplicar coeficiente de seguridad</h3>
+
+<p>El coeficiente de seguridad 1,5 implica que la velocidad de cartel debe ser 1,5 veces menor que la $v_{\max}$ real (margen de seguridad para condiciones reales):</p>
+
+<div class="respuesta">
+$$\boxed{\ v_{\text{cartel}} = \dfrac{1}{1{,}5} \cdot \sqrt{\, gR \cdot \dfrac{\tan\alpha + \mu_e/2}{1 - (\mu_e/2)\,\tan\alpha}\ }\ }$$
+</div>
+
+<h2>Resumen ultracomprimido</h2>
+
+<table>
+<thead><tr><th>Parte</th><th>Respuesta</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td>$v_{\max} = \sqrt{gR\,(\tan\alpha + \mu_e)/(1 - \mu_e\tan\alpha)}$</td></tr>
+<tr><td>(b)</td><td>Misma $v_{\max}$ (la masa se cancela)</td></tr>
+<tr><td>(c)</td><td>$v_{\text{cartel}} = v_{\max,\text{lluvia}} / 1{,}5$ con $\mu_e/2$ en lugar de $\mu_e$</td></tr>
+</tbody>
+</table>
+
+<h2>Trampas típicas para parcial</h2>
+
+<ol>
+  <li><strong>Sentido de la fricción</strong>: en $v_{\max}$, el auto tiende a IRSE HACIA AFUERA, así que $\vec{f}$ apunta HACIA EL CENTRO (hacia abajo del peralte). Para $v_{\min}$ (cuando la curva está muy peraltada y el auto cae hacia el centro), $\vec{f}$ se invierte (hacia afuera).</li>
+  <li><strong>Pares acción–reacción</strong>: Peso y Normal <strong>NO son par acción–reacción</strong>. La reacción del peso es la atracción gravitatoria del auto sobre la Tierra.</li>
+  <li><strong>La masa se cancela</strong>: punto sutil que conviene escribir explícitamente para que se vea que entendiste.</li>
+  <li><strong>Coeficiente de seguridad</strong>: en general "factor 1,5" = dividir por 1,5 la velocidad. Algunas cátedras lo definen distinto ($v^2 = v_{\max}^2 / 1{,}5$). Si dudás, escribilo simbólicamente y aclará tu convención.</li>
+</ol>
+
+</body>
+</html>

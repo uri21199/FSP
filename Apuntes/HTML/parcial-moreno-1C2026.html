@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Resolución Parcial Moreno · 1C2026 · Turno 18 — FSP</title>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --sidebar-width: 280px;
+    --primary: #1a5490;
+    --primary-dark: #2c3e50;
+    --bg: #fafafa;
+    --bg-sidebar: #f3f5f9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0; color: #222; line-height: 1.6; background: var(--bg);
+  }
+  nav.sidebar {
+    position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh;
+    background: var(--bg-sidebar); border-right: 1px solid #d8dde6; padding: 1.5em 1em; overflow-y: auto;
+  }
+  nav.sidebar h2 { font-size: 1.1em; margin: 0 0 1em 0; color: var(--primary-dark); border-bottom: 2px solid var(--primary); padding-bottom: 0.3em; }
+  nav.sidebar h3 { font-size: 0.95em; color: var(--primary); margin: 1.2em 0 0.4em 0; text-transform: uppercase; letter-spacing: 0.05em; }
+  nav.sidebar ul { list-style: none; padding-left: 0.8em; margin: 0; }
+  nav.sidebar li { margin: 0.3em 0; }
+  nav.sidebar a { color: #333; text-decoration: none; font-size: 0.92em; display: block; padding: 0.2em 0.4em; border-radius: 3px; }
+  nav.sidebar a:hover { background: #e1e7f0; color: var(--primary); }
+  nav.sidebar .group-title { font-weight: 600; color: #555; margin-top: 0.8em; font-size: 0.9em; }
+  main { margin-left: var(--sidebar-width); max-width: 960px; padding: 2em 2.5em; }
+  h1 { border-bottom: 3px solid var(--primary-dark); padding-bottom: 0.3em; color: var(--primary-dark); margin-top: 0; }
+  h2.parcial { color: var(--primary-dark); background: linear-gradient(to right, #e8eef5, transparent); padding: 0.4em 0.6em; border-left: 5px solid var(--primary); margin-top: 2.5em; }
+  h3.ejercicio-titulo { color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 0.2em; margin-top: 2em; }
+  h4 { color: var(--primary); margin-top: 1.3em; }
+  .meta { color: #777; font-size: 0.9em; margin-top: -0.5em; margin-bottom: 1em; font-style: italic; }
+  .enunciado { background: #f0f6ff; border-left: 4px solid #4a8bc2; padding: 1em 1.2em; margin: 1em 0; border-radius: 4px; }
+  .respuesta { background: #eef9ee; border-left: 4px solid #4caf50; padding: 0.8em 1.2em; margin: 1em 0; border-radius: 4px; font-size: 1.05em; }
+  .alerta { background: #fff4e6; border-left: 4px solid #ff9800; padding: 0.8em 1.2em; margin: 1em 0; border-radius: 4px; }
+  .truco { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 0.8em 1.2em; margin: 1em 0; border-radius: 4px; }
+  .nota { background: #f5f5f5; border-left: 4px solid #888; padding: 0.6em 1em; margin: 1em 0; border-radius: 4px; font-size: 0.95em; }
+  .dato { background: #fffde7; border-left: 4px solid #fbc02d; padding: 0.6em 1em; margin: 1em 0; border-radius: 4px; font-size: 0.95em; }
+  table { border-collapse: collapse; margin: 1em 0; width: 100%; }
+  th, td { border: 1px solid #ccc; padding: 0.5em 0.8em; text-align: left; }
+  th { background: #e8eef5; }
+  svg { display: block; margin: 1em auto; background: white; border: 1px solid #ddd; border-radius: 4px; }
+  code { background: #f5f5f5; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.95em; }
+  .back-to-top { display: inline-block; margin-top: 1.5em; color: #888; text-decoration: none; font-size: 0.85em; }
+  .back-to-top:hover { color: var(--primary); }
+  hr.separador { border: none; border-top: 2px dashed #ccc; margin: 3em 0; }
+  @media (max-width: 900px) {
+    nav.sidebar { position: static; width: 100%; height: auto; border-right: none; border-bottom: 2px solid var(--primary); }
+    main { margin-left: 0; padding: 1em; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <h2>Parcial Moreno · 1C2026</h2>
+  <h3>Índice</h3>
+  <ul>
+    <li><a href="#top">⬆ Inicio</a></li>
+    <li><a href="#aclaraciones">Aclaraciones / supuestos</a></li>
+  </ul>
+  <h3>Los 5 ejercicios</h3>
+  <ul>
+    <li><a href="#ej1">Ej 1 — Resorte / MAS</a></li>
+    <li><a href="#ej2">Ej 2 — Bloque sobre cuña acelerada</a></li>
+    <li><a href="#ej3">Ej 3 — Trabajo de F(x,y) / conservatividad</a></li>
+    <li><a href="#ej4">Ej 4 — Impulso + choque de barras (L^A)</a></li>
+    <li><a href="#ej5">Ej 5 — Cilindro-polea + bloque con roce</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<h1 id="top">Resolución — Parcial Moreno · 1C2026 · Turno 18</h1>
+<p class="meta">Los 5 ejercicios del parcial, resueltos paso a paso. Foco en entender el método, no en aprobarte de memoria.</p>
+
+<section id="aclaraciones">
+<h2 class="parcial">Resumen de resultados (todo confirmado ✓)</h2>
+<p>Los 5 ejercicios están resueltos y <strong>verificados contra las figuras del parcial</strong>. Acá va el resumen de cada uno; el desarrollo completo está más abajo. El único dato no provisto por el enunciado es la $v_0$ del Ej 5 (tomada como $0$ para los 5 s).</p>
+<ul>
+  <li><strong>Ej 1</strong>: ✓ <strong>confirmado</strong> (ecuación de dos términos, $10\,\text{sen}(\omega_0 t) + B\,\text{sen}(\omega_0 t+\varphi)$). Resuelto: $B=9{,}9\,\text{m}$, $\varphi=\pi$, amplitud resultante $0{,}1\,\text{m}$.</li>
+  <li><strong>Ej 2</strong>: ✓ <strong>confirmado</strong>. Cara vertical a la derecha (plano sube a la derecha), $F$ tira hacia la derecha → el bloque tiende a <em>bajar</em> → $F_{\max}\approx 29\,\text{N}$.</li>
+  <li><strong>Ej 3</strong>: ✓ <strong>confirmado</strong>. Lados: A = parábola $(0,0)\to(3,9)$, B = recta $y=9$, C = recta inclinada $(-1,9)\to(0,0)$. $W_A=34{,}5$, $W_B=-88$, $W_C=8{,}5$ → $W_{\oint}=-45\,\text{J}$ → NO conservativa.</li>
+  <li><strong>Ej 4</strong>: ✓ <strong>confirmado</strong>. Barras paralelas, choque de costado, quedan alineadas pivotando en el extremo $A$. $J=e^2-1\approx 6{,}39$, $v\approx 3{,}19$, $\Omega\approx 2{,}40\,\text{rad/s}$, $\Delta E_c\approx -6{,}4\,\text{J}$.</li>
+  <li><strong>Ej 5</strong>: ✓ <strong>confirmado</strong>. $\tau$ ayuda a $F$ → $a\approx 1{,}61$, $\alpha\approx 4{,}02$, $T_1=25$, $T_2\approx 26{,}1\,\text{N}$, $E_c(5\text{s})\approx 452\,\text{J}$ (con $v_0=0$), $\mu_{e,\min}=0{,}325$.</li>
+</ul>
+<div class="nota">Uso $g = 10\,\text{m/s}^2$ en todos (el parcial no aclara $g$; si tu cátedra usó $9{,}81$, los números cambian un poquito). Decimales con coma.</div>
+</section>
+<hr class="separador">
+
+<!-- ════════════════════════ EJERCICIO 1 ════════════════════════ -->
+<section id="ej1">
+<h3 class="ejercicio-titulo">Ejercicio 1 — Resorte / Movimiento Armónico Simple</h3>
+<p class="meta">Tema: MAS · frecuencia angular, condiciones iniciales, período</p>
+
+<div class="enunciado">
+Un resorte de longitud $L_0 = 0{,}2\,\text{m}$ y constante $k = 8\,\text{N/m}$ tiene una partícula de masa $m = 2\,\text{kg}$ en su extremo y realiza un movimiento oscilatorio armónico según
+$$x(t) = 10\,\text{sen}(\omega_0 t) + B\,\text{sen}(\omega_0 t + \varphi)$$
+<ol type="a">
+  <li>Obtener los vectores velocidad y aceleración. Calcular la frecuencia angular $\omega_0$.</li>
+  <li>Si en $t = 0$ la partícula está en el origen ($x = 0$) y su velocidad es $0{,}2\,\text{m/s}$, calcular $B$ y $\varphi$.</li>
+  <li>Calcular el período, el máximo desplazamiento de $m$, y cada cuánto tiempo se encuentra en esa condición.</li>
+</ol>
+</div>
+
+<svg width="420" height="150" viewBox="0 0 420 150">
+  <line x1="20" y1="120" x2="400" y2="120" stroke="#888" stroke-width="1.5"/>
+  <line x1="40" y1="40" x2="40" y2="130" stroke="#555" stroke-width="4"/>
+  <path d="M40,80 L70,65 L90,95 L110,65 L130,95 L150,65 L170,95 L190,80" fill="none" stroke="#1a5490" stroke-width="2"/>
+  <rect x="190" y="62" width="36" height="36" fill="#1a5490" rx="3"/>
+  <text x="200" y="86" font-size="13" fill="#fff">m</text>
+  <line x1="208" y1="120" x2="208" y2="135" stroke="#888" stroke-dasharray="3,2"/>
+  <text x="200" y="148" font-size="11" fill="#888">x=0</text>
+  <line x1="240" y1="105" x2="300" y2="105" stroke="#c62828" stroke-width="2" marker-end="url(#arrE1)"/>
+  <text x="260" y="100" font-size="12" fill="#c62828">v₀</text>
+  <defs><marker id="arrE1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#c62828"/></marker></defs>
+</svg>
+
+<h4>(a) Velocidad, aceleración y $\omega_0$</h4>
+<p>Derivando término a término (los dos senos tienen la <strong>misma</strong> frecuencia $\omega_0$):</p>
+$$v(t) = \dot{x} = 10\,\omega_0\cos(\omega_0 t) + B\,\omega_0\cos(\omega_0 t + \varphi)$$
+$$a(t) = \ddot{x} = -10\,\omega_0^2\,\text{sen}(\omega_0 t) - B\,\omega_0^2\,\text{sen}(\omega_0 t + \varphi) = -\omega_0^2\,x(t)$$
+<p>La última igualdad ($a = -\omega_0^2 x$) <strong>es la firma del MAS</strong> y vale para cualquier combinación de senos de igual frecuencia. La frecuencia angular sale de la dinámica del resorte ($\sum F = -kx = ma$):</p>
+$$\omega_0 = \sqrt{\frac{k}{m}} = \sqrt{\frac{8}{2}} = \sqrt{4} = 2\,\text{rad/s}$$
+<div class="respuesta">$$\boxed{v(t)=20\cos(2t) + 2B\cos(2t+\varphi),\quad a(t)=-4\,x(t),\quad \omega_0 = 2\,\text{rad/s}}$$</div>
+
+<h4>(b) Parámetros $B$ y $\varphi$ con las condiciones iniciales</h4>
+<p><strong>Condición de posición</strong> en $t=0$ ($\text{sen}\,0 = 0$):</p>
+$$x(0) = 10\cdot 0 + B\,\text{sen}(\varphi) = B\,\text{sen}(\varphi) = 0 \;\Rightarrow\; \text{sen}\,\varphi = 0 \;\Rightarrow\; \varphi = 0 \text{ o } \varphi = \pi$$
+<p><strong>Condición de velocidad</strong> en $t=0$ ($\cos 0 = 1$):</p>
+$$v(0) = 10\,\omega_0 + B\,\omega_0\cos(\varphi) = \omega_0\,(10 + B\cos\varphi) = 0{,}2$$
+$$10 + B\cos\varphi = \frac{0{,}2}{2} = 0{,}1 \;\Rightarrow\; B\cos\varphi = -9{,}9$$
+<p>Como $\cos\varphi$ debe ser negativo, tomamos $\varphi = \pi$ (así $\cos\varphi = -1$ y $B$ queda positivo, como conviene a una amplitud):</p>
+$$B\cdot(-1) = -9{,}9 \;\Rightarrow\; B = 9{,}9\,\text{m}$$
+<div class="respuesta">$$\boxed{B = 9{,}9\,\text{m}, \qquad \varphi = \pi\;\text{rad}}$$</div>
+<div class="truco">
+<strong>Lo que pasa físicamente</strong>: con $\varphi = \pi$, el segundo seno está en <em>contrafase</em> con el primero: $\text{sen}(\omega_0 t + \pi) = -\text{sen}(\omega_0 t)$. Entonces
+$$x(t) = 10\,\text{sen}(2t) - 9{,}9\,\text{sen}(2t) = 0{,}1\,\text{sen}(2t).$$
+Los dos términos casi se cancelan y queda <strong>un único MAS de amplitud $0{,}1\,\text{m}$</strong>. (La solución equivalente $\varphi=0,\;B=-9{,}9\,\text{m}$ da exactamente lo mismo; es solo otra forma de escribir la contrafase.)
+</div>
+
+<h4>(c) Período, máximo desplazamiento y cada cuánto</h4>
+<p>El movimiento resultante es $x(t) = 0{,}1\,\text{sen}(2t)$, un MAS de amplitud $C = 0{,}1\,\text{m}$ y frecuencia $\omega_0 = 2\,\text{rad/s}$.</p>
+$$T = \frac{2\pi}{\omega_0} = \frac{2\pi}{2} = \pi \approx 3{,}14\,\text{s}$$
+<p>El <strong>máximo desplazamiento</strong> es la amplitud resultante: $x_{\max} = C = 0{,}1\,\text{m}$ (la masa se aleja como mucho $10\,\text{cm}$ del origen). <strong>Ojo</strong>: no es $B=9{,}9$; es la amplitud de la <em>suma</em> de los dos senos.</p>
+<p>La masa alcanza un <strong>extremo</strong> (donde $|x| = 0{,}1\,\text{m}$) cada medio período: $T/2 = \pi/2 \approx 1{,}57\,\text{s}$. Vuelve al <strong>mismo</strong> extremo (ej. $+0{,}1\,\text{m}$) una vez por período completo, cada $T = \pi \approx 3{,}14\,\text{s}$.</p>
+<div class="respuesta">$$\boxed{T = \pi \approx 3{,}14\,\text{s},\quad x_{\max} = 0{,}1\,\text{m},\quad \text{extremo cada } T/2 \approx 1{,}57\,\text{s}}$$</div>
+
+<div class="alerta">
+<strong>El error más fácil de cometer acá</strong>: confundir el parámetro $B=9{,}9\,\text{m}$ con la amplitud del movimiento. $B$ es solo el coeficiente de uno de los dos senos; como están casi en contrafase, la amplitud <em>real</em> de la oscilación es $0{,}1\,\text{m}$. Siempre conviene primero <strong>simplificar la suma</strong> de senos de igual frecuencia a un único $C\,\text{sen}(\omega_0 t + \psi)$ y recién ahí leer amplitud, período y máximos.
+</div>
+<div class="truco">
+<strong>Atajo MAS</strong>: $\omega_0 = \sqrt{k/m}$ siempre (resorte). Una vez simplificado a $x(t)=C\,\text{sen}(2t)$, como en $t=0$ la masa pasa por el origen, ahí su velocidad <em>es</em> la máxima: $v_{\max} = C\,\omega_0 \Rightarrow 0{,}2 = C\cdot 2 \Rightarrow C = 0{,}1\,\text{m}$. Llegás a la amplitud sin siquiera despejar $B$.
+</div>
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+<hr class="separador">
+
+<!-- ════════════════════════ EJERCICIO 2 ════════════════════════ -->
+<section id="ej2">
+<h3 class="ejercicio-titulo">Ejercicio 2 — Bloque sobre cuña acelerada por una fuerza</h3>
+<p class="meta">Tema: dinámica con vínculos · sistema acelerado · rozamiento estático</p>
+
+<div class="enunciado">
+Un cuerpo de masa $m$ está apoyado en un plano inclinado (cuña) de masa $m_{\text{plano}}$ y ángulo $\alpha$. Se aplica una fuerza $F$ a la cuña de modo que <strong>ambos cuerpos se aceleran juntos</strong>. Hay rozamiento entre el cuerpo y la cuña, pero <strong>no</strong> entre la cuña y el piso.
+<ol type="a">
+  <li>Elegir un sistema de referencia y hacer el DCL de ambos cuerpos, indicando los pares acción–reacción.</li>
+  <li>Determinar la <strong>máxima fuerza</strong> $F$ que se puede aplicar sin que $m$ deslice respecto de la cuña.</li>
+  <li>¿Qué ocurre si $F = 0$ y la cuña se fija al piso?</li>
+</ol>
+<div class="dato">Datos: $m_{\text{plano}} = 10\,\text{kg}$, $m = 2\,\text{kg}$, $\alpha = 30°$, $\mu_e = 0{,}95$, $\mu_d = 0{,}10$, $g = 10\,\text{m/s}^2$.</div>
+</div>
+
+<svg width="480" height="250" viewBox="0 0 480 250">
+  <!-- cuña: cara vertical a la DERECHA, el plano sube hacia la derecha; ángulo recto abajo-derecha, α abajo-izquierda -->
+  <polygon points="90,200 380,200 380,60" fill="#e8e8e8" stroke="#555" stroke-width="1.5"/>
+  <text x="112" y="194" font-size="12" fill="#666">α</text>
+  <path d="M118,200 A 28 28 0 0 0 121 188" fill="none" stroke="#666"/>
+  <!-- bloque sobre la hipotenusa (sube hacia la derecha) -->
+  <g transform="translate(232,118) rotate(-25.8)">
+    <rect x="-18" y="-26" width="36" height="26" fill="#1a5490" rx="3"/>
+    <text x="-6" y="-8" font-size="12" fill="#fff">m</text>
+  </g>
+  <!-- piso sin rozamiento -->
+  <line x1="50" y1="200" x2="455" y2="200" stroke="#888" stroke-width="1"/>
+  <text x="110" y="218" font-size="11" fill="#888">piso liso (sin roce)</text>
+  <!-- Fuerza F tira de la cuña hacia la DERECHA (cara vertical derecha) -->
+  <line x1="382" y1="130" x2="452" y2="130" stroke="#c62828" stroke-width="3" marker-end="url(#arrE2)"/>
+  <text x="430" y="122" font-size="14" fill="#c62828">F</text>
+  <text x="388" y="148" font-size="10" fill="#888">(F tira →)</text>
+  <!-- tendencia del bloque -->
+  <text x="140" y="92" font-size="10" fill="#2e7d32">el bloque tiende a bajar ↙</text>
+  <defs><marker id="arrE2" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#c62828"/></marker></defs>
+</svg>
+
+<h4>(a) Sistema de referencia y DCL</h4>
+<p>Ejes fijos a tierra: $x$ horizontal (sentido de $F$), $y$ vertical hacia arriba. Como el piso no tiene roce, la <strong>única fuerza horizontal externa</strong> sobre el conjunto es $F$, así que el sistema (cuña + bloque) acelera <strong>horizontalmente</strong>:</p>
+$$a = \frac{F}{m_{\text{plano}} + m}\quad(\text{horizontal, mientras no haya deslizamiento})$$
+<p><strong>DCL del bloque $m$</strong> (4 fuerzas):</p>
+<ul>
+  <li>Peso $m\vec{g}$ (abajo).</li>
+  <li>Normal $\vec{N}$, perpendicular a la cara inclinada (par acción–reacción: el bloque empuja a la cuña con $-\vec{N}$).</li>
+  <li>Rozamiento $\vec{f}$ a lo largo de la cara (par acción–reacción: el bloque roza la cuña con $-\vec{f}$).</li>
+</ul>
+<p><strong>DCL de la cuña</strong>: su peso, la normal del piso (vertical), las reacciones $-\vec{N}$ y $-\vec{f}$ del bloque, y la fuerza aplicada $F$.</p>
+
+<svg width="640" height="330" viewBox="0 0 640 330">
+  <!-- ===== PANEL A: DCL del bloque ===== -->
+  <text x="60" y="28" font-size="14" font-weight="bold" fill="#2c3e50">DCL del bloque m</text>
+  <line x1="20" y1="40" x2="20" y2="320" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- superficie del plano (referencia, sube a la derecha 30°) -->
+  <line x1="95" y1="190" x2="240" y2="106" stroke="#bbb" stroke-width="2" stroke-dasharray="5,4"/>
+  <text x="200" y="190" font-size="11" fill="#999">plano (30°)</text>
+  <!-- bloque inclinado -->
+  <g transform="translate(165,150) rotate(-30)">
+    <rect x="-22" y="-18" width="44" height="20" fill="#1a5490" rx="3"/>
+    <text x="-6" y="-3" font-size="12" fill="#fff">m</text>
+  </g>
+  <!-- punto de aplicacion (centro) -->
+  <circle cx="165" cy="150" r="2.5" fill="#000"/>
+  <!-- Peso m·g (abajo) -->
+  <line x1="165" y1="150" x2="165" y2="240" stroke="#9c27b0" stroke-width="2.5" marker-end="url(#aP)"/>
+  <text x="170" y="232" font-size="13" fill="#9c27b0">m·g</text>
+  <!-- Normal N (perpendicular al plano, hacia arriba-izquierda) -->
+  <line x1="165" y1="150" x2="128" y2="86" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#aN)"/>
+  <text x="108" y="80" font-size="13" fill="#2e7d32">N</text>
+  <!-- Friccion f (hacia arriba del plano = arriba-derecha) -->
+  <line x1="165" y1="150" x2="223" y2="116" stroke="#e65100" stroke-width="2.5" marker-end="url(#aFr)"/>
+  <text x="227" y="112" font-size="13" fill="#e65100">f</text>
+  <text x="60" y="300" font-size="10" fill="#777">f apunta hacia arriba del plano</text>
+  <text x="60" y="314" font-size="10" fill="#777">(el bloque tiende a bajar)</text>
+
+  <!-- ===== PANEL B: DCL de la cuña ===== -->
+  <text x="400" y="28" font-size="14" font-weight="bold" fill="#2c3e50">DCL de la cuña (plano)</text>
+  <!-- triangulo: cara vertical a la derecha, sube a la derecha -->
+  <polygon points="380,250 580,250 580,130" fill="#eee" stroke="#555" stroke-width="1.5"/>
+  <text x="398" y="244" font-size="11" fill="#666">α</text>
+  <!-- piso -->
+  <line x1="360" y1="250" x2="600" y2="250" stroke="#888" stroke-width="1"/>
+  <!-- contacto en el plano (punto) -->
+  <circle cx="470" cy="172" r="2.5" fill="#000"/>
+  <!-- centroide -->
+  <circle cx="513" cy="210" r="2.5" fill="#000"/>
+  <!-- Peso M·g -->
+  <line x1="513" y1="210" x2="513" y2="288" stroke="#9c27b0" stroke-width="2.5" marker-end="url(#aP)"/>
+  <text x="518" y="282" font-size="13" fill="#9c27b0">M·g</text>
+  <!-- Normal del piso -->
+  <line x1="475" y1="250" x2="475" y2="180" stroke="#1565c0" stroke-width="2.5" marker-end="url(#aNp)"/>
+  <text x="440" y="180" font-size="12" fill="#1565c0">N_piso</text>
+  <!-- Reaccion -N (del bloque sobre la cuña): hacia adentro del plano = abajo-derecha -->
+  <line x1="470" y1="172" x2="503" y2="229" stroke="#2e7d32" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#aN)"/>
+  <text x="506" y="226" font-size="13" fill="#2e7d32">−N</text>
+  <!-- Reaccion -f (del bloque sobre la cuña): hacia abajo del plano = abajo-izquierda -->
+  <line x1="470" y1="172" x2="424" y2="198" stroke="#e65100" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#aFr)"/>
+  <text x="398" y="196" font-size="13" fill="#e65100">−f</text>
+  <!-- Fuerza aplicada F (cara vertical derecha, hacia la derecha) -->
+  <line x1="580" y1="180" x2="632" y2="180" stroke="#c62828" stroke-width="3" marker-end="url(#aF)"/>
+  <text x="612" y="173" font-size="14" fill="#c62828">F</text>
+
+  <defs>
+    <marker id="aP" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#9c27b0"/></marker>
+    <marker id="aN" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#2e7d32"/></marker>
+    <marker id="aFr" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#e65100"/></marker>
+    <marker id="aF" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#c62828"/></marker>
+    <marker id="aNp" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#1565c0"/></marker>
+  </defs>
+</svg>
+
+<div class="nota">
+<strong>Pares acción–reacción</strong> (mismo color en los dos DCL):
+<ul style="margin:0.3em 0">
+  <li>$\vec{N}$ (el plano empuja al bloque, ↖) ↔ $-\vec{N}$ (el bloque empuja al plano, ↘). Verde.</li>
+  <li>$\vec{f}$ (el plano frena al bloque hacia arriba, ↗) ↔ $-\vec{f}$ (el bloque arrastra al plano hacia abajo, ↙). Naranja.</li>
+</ul>
+El peso, la normal del piso ($N_{\text{piso}}$) y la fuerza $F$ <strong>no</strong> tienen su reacción en estos DCL (sus reacciones están en la Tierra, el piso y quien tira de $F$, que no forman parte de los cuerpos dibujados).
+</div>
+
+<h4>(b) Máxima fuerza sin que el bloque deslice</h4>
+<p>Mientras no desliza, el bloque acelera con el conjunto: $\vec{a} = (a, 0)$ hacia la derecha. El plano sube hacia la derecha y la cuña acelera hacia la derecha, así que el bloque (por inercia) <strong>queda atrás</strong> respecto de la cuña → <strong>tiende a deslizar hacia abajo</strong> de la rampa → el rozamiento estático se opone apuntando <strong>hacia arriba</strong> de la cara. Planteando Newton para el bloque en $x$ e $y$:</p>
+$$N = m\,(g\cos\alpha - a\,\text{sen}\,\alpha), \qquad f = m\,(g\,\text{sen}\,\alpha + a\cos\alpha)$$
+<p>El bloque está al borde de deslizar (hacia abajo) cuando $f = \mu_e N$:</p>
+$$m(g\,\text{sen}\,\alpha + a\cos\alpha) = \mu_e\,m(g\cos\alpha - a\,\text{sen}\,\alpha)$$
+<p>Despejando la aceleración máxima:</p>
+$$a_{\max} = g\,\frac{\mu_e\cos\alpha - \text{sen}\,\alpha}{\cos\alpha + \mu_e\,\text{sen}\,\alpha}$$
+<p>Reemplazo ($\text{sen}30°=0{,}5$, $\cos30°=0{,}866$, $\mu_e=0{,}95$):</p>
+$$a_{\max} = 10\cdot\frac{0{,}95\cdot 0{,}866 - 0{,}5}{0{,}866 + 0{,}95\cdot 0{,}5} = 10\cdot\frac{0{,}3227}{1{,}341} = 2{,}41\,\text{m/s}^2$$
+$$F_{\max} = (m_{\text{plano}} + m)\,a_{\max} = 12 \cdot 2{,}41 \approx 29\,\text{N}$$
+<div class="respuesta">$$\boxed{a_{\max} \approx 2{,}41\,\text{m/s}^2,\qquad F_{\max} \approx 29\,\text{N}}$$</div>
+
+<div class="alerta">
+<strong>✓ Geometría confirmada</strong>: la cara <strong>vertical</strong> de la cuña está a la <strong>derecha</strong> (el plano sube hacia la derecha) y $F$ <strong>tira</strong> de la cuña hacia la derecha. Al acelerar hacia la derecha, el bloque tiende a deslizar <strong>hacia abajo</strong> → ese es el caso que da $F_{\max}\approx 29\,\text{N}$.<br><br>
+<strong>Para entender el contraste</strong>: si la cuña acelerara hacia el otro lado (bloque tendiendo a <em>subir/trepar</em>), el límite sería mucho mayor, $a' = g\frac{\text{sen}\,\alpha + \mu_e\cos\alpha}{\cos\alpha - \mu_e\,\text{sen}\,\alpha} = 33{,}8\,\text{m/s}^2 \Rightarrow F' \approx 406\,\text{N}$. La diferencia (29 vs 406 N) muestra lo decisivo que es el sentido de la fuerza y la orientación del plano.
+</div>
+<div class="truco">
+<strong>Cómo decidir el sentido del rozamiento sin equivocarte</strong>: pensá en la inercia. Cuando la cuña acelera, el bloque "se queda atrás" respecto de ella. Fijate hacia qué parte del plano lo lleva ese quedarse atrás: acá la cuña va a la derecha (lado alto), el bloque queda hacia el lado <em>bajo</em> → tiende a <strong>bajar</strong> → el rozamiento apunta <strong>hacia arriba</strong> del plano. El rozamiento siempre se opone a la <em>tendencia</em> a deslizar, no al movimiento de la cuña.
+</div>
+
+<h4>(c) Si $F = 0$ y la cuña se fija al piso</h4>
+<p>Sin fuerza y cuña fija, es el clásico "bloque en rampa": ¿desliza? Comparo la tendencia a bajar ($mg\,\text{sen}\,\alpha$) con el máximo de roce estático ($\mu_e\,mg\cos\alpha$):</p>
+$$mg\,\text{sen}\,\alpha = 2\cdot10\cdot0{,}5 = 10\,\text{N} \qquad \mu_e\,mg\cos\alpha = 0{,}95\cdot2\cdot10\cdot0{,}866 = 16{,}5\,\text{N}$$
+<p>Como $10\,\text{N} < 16{,}5\,\text{N}$ (equivalente a $\tan\alpha = 0{,}58 < \mu_e = 0{,}95$), el rozamiento estático alcanza para sostenerlo.</p>
+<div class="respuesta">$$\boxed{\text{El bloque NO desliza: queda en reposo. } f = mg\,\text{sen}\,\alpha = 10\,\text{N (hacia arriba de la rampa).}}$$</div>
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+<hr class="separador">
+
+<!-- ════════════════════════ EJERCICIO 3 ════════════════════════ -->
+<section id="ej3">
+<h3 class="ejercicio-titulo">Ejercicio 3 — Trabajo de $F(x,y)$ y conservatividad</h3>
+<p class="meta">Tema: trabajo por definición ($\int \vec F\cdot d\vec r$) · test de fuerza conservativa</p>
+
+<div class="enunciado">
+Una fuerza $\vec{F} = (3x + 2y + 1)\,\hat{\imath}$ (dirección $x$; $x,y$ en m, $F$ en N) actúa sobre un recorrido cerrado $A\to B\to C\to A$, donde el tramo $A$ es la parábola $y = x^2$ y $B$, $C$ son tramos rectos.
+<ol type="a">
+  <li>Calcular (por definición) el trabajo de $\vec{F}$ en cada tramo y en el recorrido cerrado.</li>
+  <li>¿$\vec{F}$ es conservativa? ¿Se puede afirmar? Justificar.</li>
+  <li>Teoría: escribir las ecuaciones de los 3 teoremas que vinculan la variación de energía con el trabajo.</li>
+</ol>
+</div>
+
+<svg width="360" height="300" viewBox="0 0 360 300">
+  <!-- ejes (origen en pixel 120,250; x:50px/u, y:24px/u) -->
+  <line x1="40" y1="250" x2="340" y2="250" stroke="#555" stroke-width="1.5" marker-end="url(#axE3)"/>
+  <line x1="120" y1="285" x2="120" y2="20" stroke="#555" stroke-width="1.5" marker-end="url(#axE3)"/>
+  <text x="345" y="255" font-size="13">x</text>
+  <text x="106" y="22" font-size="13">y</text>
+  <text x="124" y="266" font-size="11" fill="#888">0</text>
+  <text x="60" y="266" font-size="11" fill="#888">−1</text>
+  <text x="264" y="266" font-size="11" fill="#888">3</text>
+  <line x1="70" y1="246" x2="70" y2="254" stroke="#555"/>
+  <line x1="270" y1="246" x2="270" y2="254" stroke="#555"/>
+  <!-- Lado A: parabola y=x^2 de (0,0) a (3,9) -->
+  <path d="M120,250 L170,226 L220,154 L245,100 L270,34" fill="none" stroke="#1a5490" stroke-width="2.5"/>
+  <text x="205" y="205" font-size="12" fill="#1a5490">A: y=x²</text>
+  <!-- Lado B: recta horizontal y=9 de (3,9) a (-1,9) -->
+  <line x1="270" y1="34" x2="70" y2="34" stroke="#c62828" stroke-width="2.5"/>
+  <text x="150" y="26" font-size="12" fill="#c62828">B (recta, y=9)</text>
+  <!-- Lado C: recta inclinada de (-1,9) a (0,0) -->
+  <line x1="70" y1="34" x2="120" y2="250" stroke="#2e7d32" stroke-width="2.5"/>
+  <text x="26" y="150" font-size="12" fill="#2e7d32">C (recta)</text>
+  <!-- vertices -->
+  <circle cx="120" cy="250" r="3.5" fill="#000"/><text x="126" y="244" font-size="10">(0,0)</text>
+  <circle cx="270" cy="34" r="3.5" fill="#000"/><text x="276" y="32" font-size="10">(3,9)</text>
+  <circle cx="70" cy="34" r="3.5" fill="#000"/><text x="20" y="30" font-size="10">(−1,9)</text>
+  <defs><marker id="axE3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#555"/></marker></defs>
+</svg>
+
+<h4>Idea clave antes de calcular</h4>
+<p>$\vec{F}$ tiene <strong>solo componente $x$</strong>: $\vec{F} = F_x\,\hat{\imath}$ con $F_x = 3x+2y+1$. Entonces el trabajo es</p>
+$$W = \int \vec{F}\cdot d\vec{r} = \int (F_x\,\hat{\imath})\cdot(dx\,\hat{\imath} + dy\,\hat{\jmath}) = \int F_x\,dx$$
+<p>Es decir: <strong>solo cuentan los tramos donde hay desplazamiento en $x$</strong>. En un tramo vertical ($dx = 0$) el trabajo es $0$, sin importar la fuerza.</p>
+
+<h4>(a) Trabajo por lado</h4>
+<div class="nota">✓ <strong>Coordenadas confirmadas de la figura</strong>. Los tres lados son: <strong>A</strong> = parábola $y=x^2$ de $(0,0)$ a $(3,9)$; <strong>B</strong> = recta horizontal $y=9$ de $(3,9)$ a $(-1,9)$; <strong>C</strong> = recta inclinada de $(-1,9)$ a $(0,0)$. El recorrido cerrado va A → B → C.</div>
+<p><strong>Lado A — parábola $y=x^2$, $x: 0 \to 3$:</strong> reemplazo $y = x^2$ dentro de $F_x = 3x+2y+1$:</p>
+$$W_A = \int_{0}^{3}(3x + 2x^2 + 1)\,dx = \left[\tfrac{3x^2}{2} + \tfrac{2x^3}{3} + x\right]_{0}^{3} = 13{,}5 + 18 + 3 = 34{,}5\,\text{J}$$
+<p><strong>Lado B — recta horizontal $y=9$, $x: 3 \to -1$:</strong> ahora $y$ es constante $=9$, así que $F_x = 3x + 2\cdot 9 + 1 = 3x + 19$:</p>
+$$W_B = \int_{3}^{-1}(3x + 19)\,dx = \left[\tfrac{3x^2}{2} + 19x\right]_{3}^{-1} = -17{,}5 - 70{,}5 = -88\,\text{J}$$
+<p><strong>Lado C — recta inclinada de $(-1,9)$ a $(0,0)$:</strong> esta recta <strong>no es vertical</strong>, así que sí hay desplazamiento en $x$ y hay que parametrizarla. Su ecuación (pasa por $(0,0)$ y $(-1,9)$, pendiente $\tfrac{0-9}{0-(-1)}=-9$) es $y = -9x$. Reemplazo en $F_x$:</p>
+$$F_x = 3x + 2(-9x) + 1 = -15x + 1$$
+$$W_C = \int_{-1}^{0}(-15x + 1)\,dx = \left[-\tfrac{15x^2}{2} + x\right]_{-1}^{0} = 0 - \big(-7{,}5 - 1\big) = 8{,}5\,\text{J}$$
+<p><strong>Recorrido cerrado:</strong></p>
+$$W_{\text{cerrado}} = W_A + W_B + W_C = 34{,}5 - 88 + 8{,}5 = -45\,\text{J}$$
+<div class="respuesta">$$\boxed{W_A = 34{,}5\,\text{J},\;\; W_B = -88\,\text{J},\;\; W_C = 8{,}5\,\text{J},\;\; W_{\oint} = -45\,\text{J}}$$</div>
+<div class="alerta"><strong>Ojo con el tramo C</strong>: es una recta <em>inclinada</em> (no vertical), así que <strong>sí aporta trabajo</strong>. El error fácil es confundirla con una recta vertical (que daría 0). Como $\vec F$ es horizontal, lo que importa es que haya desplazamiento en $x$: en C, $x$ va de $-1$ a $0$, entonces hay que integrar reemplazando $y(x)$ de la recta.</div>
+<div class="truco">Para cualquier tramo: como $\vec F = F_x\,\hat\imath$, escribí $y$ en función de $x$ a lo largo de ese tramo, metelo en $F_x$, e integrá en $dx$ entre los $x$ de los extremos. Solo un tramo <em>estrictamente vertical</em> ($x=$ cte) daría trabajo nulo. Si el recorrido se hiciera al revés, el trabajo cerrado cambiaría de signo ($+45\,\text{J}$).</div>
+
+<h4>(b) ¿Es conservativa?</h4>
+<p><strong>Sí se puede afirmar, y la respuesta es NO.</strong> Dos argumentos, ambos válidos:</p>
+<p><strong>1) Por el recorrido cerrado</strong>: una fuerza conservativa cumple $\oint \vec{F}\cdot d\vec{r} = 0$. Acá dio $-45\,\text{J} \neq 0$ → <strong>no conservativa</strong>.</p>
+<p><strong>2) Por el test del rotor</strong> (más rápido y no depende del camino): para $\vec{F}=(F_x,F_y)$ conservativa debe ser $\dfrac{\partial F_x}{\partial y} = \dfrac{\partial F_y}{\partial x}$. Acá:</p>
+$$\frac{\partial F_x}{\partial y} = \frac{\partial}{\partial y}(3x+2y+1) = 2, \qquad \frac{\partial F_y}{\partial x} = \frac{\partial}{\partial x}(0) = 0$$
+<p>Como $2 \neq 0$, $\vec{F}$ <strong>no es conservativa</strong>. (El término $2y$ dentro de $F_x$ es el culpable.)</p>
+<div class="respuesta">$$\boxed{\vec{F}\text{ NO es conservativa: } \tfrac{\partial F_x}{\partial y}=2 \neq 0 = \tfrac{\partial F_y}{\partial x}}$$</div>
+<div class="truco">El test del rotor te ahorra todo el cálculo de la parte (a) para responder (b): si la componente $x$ depende de $y$ (o la $y$ de $x$) de forma cruzada, casi seguro no es conservativa. Igual el parcial te pide calcular los trabajos, así que hacé ambas.</div>
+
+<h4>(c) Los 3 teoremas (teoría)</h4>
+<table>
+<tr><th>Teorema</th><th>Ecuación</th><th>Qué dice</th></tr>
+<tr><td>Trabajo–energía cinética</td><td>$W_{\text{total}}^{\text{(todas las fuerzas)}} = \Delta E_c$</td><td>El trabajo de <em>todas</em> las fuerzas cambia la energía cinética.</td></tr>
+<tr><td>Trabajo–energía potencial</td><td>$W_{\text{conservativas}} = -\Delta E_p$</td><td>Solo para fuerzas conservativas; define $E_p$.</td></tr>
+<tr><td>Energía mecánica</td><td>$W_{\text{no conservativas}} = \Delta E_m = \Delta(E_c + E_p)$</td><td>Solo las fuerzas no conservativas (roce, $\vec F$ de este tipo) cambian $E_m$.</td></tr>
+</table>
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+<hr class="separador">
+
+<!-- ════════════════════════ EJERCICIO 4 ════════════════════════ -->
+<section id="ej4">
+<h3 class="ejercicio-titulo">Ejercicio 4 — Impulso + choque plástico de dos barras (momento angular)</h3>
+<p class="meta">Tema: impulso de $F(t)$ · conservación de $\vec P$ y $\vec L^A$ · choque plástico · cuerpo rígido</p>
+
+<div class="enunciado">
+Sobre una mesa lisa (plano $x$–$y$, vista superior) hay una barra 1 ($M$, largo $L$) inicialmente en reposo, sobre la que actúa $\vec{F}(t)$ durante 2 s. Luego la barra 1 choca <strong>plásticamente</strong> contra otra igual (barra 2) vinculada a un perno fijo $A$ que permite el giro.
+<ol type="a">
+  <li>Calcular el impulso de $\vec F$ sobre la barra 1.</li>
+  <li>Calcular $\Delta \vec P$ y la velocidad de la barra 1 antes del choque.</li>
+  <li>Analizar la conservación de $\vec P$ del sistema (2 barras) durante el choque y después. Justificar.</li>
+  <li>Analizar la conservación de $\vec L^A$ del sistema durante el choque y después. Justificar.</li>
+  <li>Calcular la velocidad angular $\Omega$ del sistema.</li>
+  <li>Calcular la variación de energía cinética durante el choque.</li>
+</ol>
+<div class="dato">Datos: $\vec F = e^{t}\,\hat{\imath}\;\text{N}$, $M = 2\,\text{kg}$, $L = 1\,\text{m}$, $I^{CM}_{\text{barra}} = \tfrac{ML^2}{12}$.</div>
+</div>
+
+<svg width="440" height="250" viewBox="0 0 440 250">
+  <text x="20" y="20" font-size="12" fill="#666">Vista superior (mesa lisa, x→ · y↑)</text>
+  <!-- ejes: y arriba, x derecha (como la figura) -->
+  <line x1="55" y1="215" x2="55" y2="45" stroke="#999" stroke-width="1" marker-end="url(#axE4)"/>
+  <text x="47" y="42" font-size="11" fill="#999">y</text>
+  <line x1="55" y1="215" x2="415" y2="215" stroke="#999" stroke-width="1" marker-end="url(#axE4)"/>
+  <text x="418" y="219" font-size="11" fill="#999">x</text>
+  <!-- barra 1 (vertical, a lo largo de y), se mueve en +x -->
+  <rect x="172" y="70" width="16" height="105" fill="#1a5490"/>
+  <text x="176" y="62" font-size="13" fill="#1a5490">1</text>
+  <!-- F sobre barra 1 (hacia la derecha = +x) -->
+  <line x1="128" y1="122" x2="168" y2="122" stroke="#c62828" stroke-width="3" marker-end="url(#arrE4F)"/>
+  <text x="132" y="114" font-size="13" fill="#c62828">F</text>
+  <!-- velocidad v (a la derecha) -->
+  <line x1="192" y1="95" x2="246" y2="95" stroke="#e65100" stroke-width="2.5" marker-end="url(#arrE4v)"/>
+  <text x="214" y="89" font-size="13" fill="#e65100">v</text>
+  <!-- barra 2 (vertical) pivotada en A (extremo inferior) -->
+  <rect x="312" y="70" width="16" height="105" fill="#9c27b0" opacity="0.85"/>
+  <text x="316" y="62" font-size="13" fill="#9c27b0">2</text>
+  <!-- barra 2 rotada (punteada): gira con el tope hacia la derecha -->
+  <g transform="translate(320,175) rotate(22)"><rect x="-8" y="-105" width="16" height="105" fill="none" stroke="#9c27b0" stroke-width="1.3" stroke-dasharray="5,3"/></g>
+  <circle cx="320" cy="175" r="5" fill="#000"/>
+  <text x="326" y="192" font-size="12">A (perno)</text>
+  <!-- brazo L/2: distancia perpendicular de A a la linea de v -->
+  <line x1="362" y1="175" x2="362" y2="122" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="358" y1="175" x2="366" y2="175" stroke="#888" stroke-width="1"/>
+  <line x1="358" y1="122" x2="366" y2="122" stroke="#888" stroke-width="1"/>
+  <text x="368" y="152" font-size="10" fill="#888">L/2</text>
+  <!-- Omega en A -->
+  <path d="M300,158 A 32 32 0 0 1 320,140" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrE4w)"/>
+  <text x="294" y="150" font-size="12" fill="#555">Ω</text>
+  <text x="20" y="240" font-size="10" fill="#777">La barra 1 (vertical) avanza en +x, choca de costado y se pega a la barra 2; el conjunto (2M) gira en torno a A.</text>
+  <defs>
+    <marker id="axE4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#999"/></marker>
+    <marker id="arrE4F" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#c62828"/></marker>
+    <marker id="arrE4v" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#e65100"/></marker>
+    <marker id="arrE4w" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" fill="#555"/></marker>
+  </defs>
+</svg>
+
+<h4>(a) Impulso de la fuerza</h4>
+<p>Por definición, $\vec{J} = \int \vec{F}\,dt$. La fuerza actúa de $t=0$ a $t=2\,\text{s}$:</p>
+$$\vec{J} = \int_0^2 e^{t}\,dt\;\hat{\imath} = \left[e^{t}\right]_0^2\,\hat{\imath} = (e^2 - 1)\,\hat{\imath} \approx 6{,}39\,\hat{\imath}\;\text{N·s}$$
+<div class="respuesta">$$\boxed{\vec{J} = (e^2 - 1)\,\hat{\imath} \approx 6{,}39\;\text{N·s (= kg·m/s)}}$$</div>
+
+<h4>(b) $\Delta\vec P$ y velocidad antes del choque</h4>
+<p>El teorema del impulso dice $\vec{J} = \Delta\vec{P}$. Como la barra 1 partía del reposo:</p>
+$$\Delta\vec P = \vec P_{\text{final}} - 0 = \vec J = 6{,}39\,\hat{\imath}\;\text{kg·m/s}$$
+$$v = \frac{|\vec P|}{M} = \frac{e^2-1}{2} = \frac{6{,}39}{2} \approx 3{,}19\,\text{m/s}$$
+<p>(Después de los 2 s la fuerza desaparece y la barra viaja a $v$ constante hasta chocar.)</p>
+<div class="respuesta">$$\boxed{\Delta P \approx 6{,}39\;\text{kg·m/s}, \qquad v \approx 3{,}19\,\text{m/s}}$$</div>
+
+<h4>(c) ¿Se conserva $\vec P$ del sistema?</h4>
+<p><strong>NO.</strong> Durante el choque, el perno $A$ ejerce una fuerza <strong>externa impulsiva</strong> sobre la barra 2 (la sostiene). Esa fuerza externa cambia la cantidad de movimiento del sistema → $\vec P$ <strong>no se conserva</strong> (ni durante ni después: el perno sigue empujando mientras el conjunto gira).</p>
+<div class="respuesta">$$\boxed{\vec P \text{ NO se conserva (el perno } A \text{ aporta fuerza externa).}}$$</div>
+
+<h4>(d) ¿Se conserva $\vec L^A$ (momento angular respecto de A)?</h4>
+<p><strong>SÍ, durante el choque.</strong> La fuerza del perno actúa <em>en</em> el punto $A$, así que su <strong>torque respecto de $A$ es nulo</strong> ($\vec{r}_{A\to A}\wedge\vec{F} = 0$). En la mesa horizontal, peso y normal son verticales (perpendiculares al plano, no dan torque en $z$). Por lo tanto $\vec\tau^A_{\text{ext}} = 0 \Rightarrow \vec L^A$ se conserva en el choque.</p>
+<p><strong>Y después también</strong>: mientras el conjunto gira en torno a $A$, las únicas fuerzas horizontales son la reacción del perno (en $A$, sin torque) y nada más (mesa sin roce). Como sigue siendo $\vec\tau^A_{\text{ext}}=0$, $\vec L^A$ se mantiene constante y el conjunto gira con $\Omega$ <strong>constante</strong>.</p>
+<div class="respuesta">$$\boxed{\vec L^A \text{ se conserva durante el choque Y después (}\vec\tau^A_{\text{ext}}=0\text{).}}$$</div>
+<div class="truco">Esta es <em>la</em> idea del ejercicio: cuando hay un perno/eje, el momento lineal se pierde pero el momento angular <strong>respecto del eje</strong> se conserva, porque la reacción del eje no hace torque ahí. Por eso se calcula $\Omega$ con $\vec L^A$, no con $\vec P$.</div>
+
+<h4>(e) Velocidad angular $\Omega$ del sistema</h4>
+<div class="nota">✓ <strong>Geometría confirmada con la figura</strong>: las dos barras están <strong>paralelas</strong>; la barra 1 baja y choca de costado contra la barra 2, quedando pegadas <strong>alineadas</strong>, con $A$ en un extremo del conjunto. Entonces la barra 2 está pivotada en su extremo ($I_2^A = \tfrac{ML^2}{3}$ por Steiner) y la barra 1 queda pegada a lo largo de ella ($I_1^A = \tfrac{ML^2}{3}$).</div>
+<p><strong>Antes</strong> (solo barra 1 trasladándose, su CM a $L/2$ del eje $A$, velocidad $\perp$ a ese brazo):</p>
+$$L^A_{\text{antes}} = M\,v\,\frac{L}{2}$$
+<p><strong>Después</strong> (conjunto rígido girando con $\Omega$ alrededor de $A$). Momento de inercia total con Steiner ($I^{CM}=\tfrac{ML^2}{12}$, CM a $L/2$ de $A$):</p>
+$$I^A_{\text{total}} = I_1^A + I_2^A = 2\left(\frac{ML^2}{12} + M\Big(\frac{L}{2}\Big)^2\right) = 2\cdot\frac{ML^2}{3} = \frac{2ML^2}{3}$$
+<p>Conservando $L^A$:</p>
+$$M v \frac{L}{2} = \frac{2ML^2}{3}\,\Omega \;\Rightarrow\; \Omega = \frac{3v}{4L} = \frac{3\cdot 3{,}19}{4\cdot 1} \approx 2{,}40\,\text{rad/s}$$
+<div class="respuesta">$$\boxed{\Omega = \dfrac{3v}{4L} \approx 2{,}40\,\text{rad/s}}$$</div>
+
+<h4>(f) Variación de energía cinética en el choque</h4>
+$$E_{c,\text{antes}} = \tfrac12 M v^2 = \tfrac12\cdot 2\cdot(3{,}19)^2 \approx 10{,}2\,\text{J}$$
+$$E_{c,\text{después}} = \tfrac12 I^A_{\text{total}}\,\Omega^2 = \tfrac12\cdot\frac{2ML^2}{3}\cdot(2{,}40)^2 \approx 3{,}8\,\text{J}$$
+$$\Delta E_c = 3{,}8 - 10{,}2 \approx -6{,}4\,\text{J}$$
+<div class="respuesta">$$\boxed{\Delta E_c \approx -6{,}4\,\text{J} \;(\text{se pierde energía: choque plástico})}$$</div>
+<div class="alerta">En todo choque <strong>plástico</strong> $\Delta E_c < 0$: parte de la energía se disipa en la deformación al quedar pegadas. Lo que <em>no</em> se pierde acá es $L^A$ (eso lo usaste en (e)).</div>
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+<hr class="separador">
+
+<!-- ════════════════════════ EJERCICIO 5 ════════════════════════ -->
+<section id="ej5">
+<h3 class="ejercicio-titulo">Ejercicio 5 — Cilindro-polea con bloque sobre superficie con roce</h3>
+<p class="meta">Tema: cuerpo rígido (polea con masa) · tensiones distintas · torque aplicado · energía · equilibrio</p>
+
+<div class="enunciado">
+Una fuerza $F$ actúa sobre una soga ideal que hace girar un cilindro fijo en su eje (masa $M_{\text{cil}}$, radio $R$) y arrastra un cuerpo $m$ sobre una superficie con rozamiento. Además se aplica un torque $\tau$ al cilindro. En el instante inicial el cuerpo ya está en movimiento.
+<ol type="1">
+  <li>DCL de todos los cuerpos (cilindro, $m$, perno), con pares acción–reacción.</li>
+  <li>Calcular la aceleración angular del cilindro, la aceleración de $m$ y las tensiones en la soga.</li>
+  <li>Calcular la energía cinética del sistema luego de 5 s.</li>
+  <li>¿Cuál es el mínimo $\mu_e$ para que el sistema esté en equilibrio?</li>
+</ol>
+<div class="dato">Datos: $m = 10\,\text{kg}$, $M_{\text{cil}} = 8\,\text{kg}$, $R = 0{,}4\,\text{m}$, $\tau = 3\,\text{N·m}$, $F = 25\,\text{N}$, $I^{CM}_{\text{cil}} = \tfrac{MR^2}{2}$, $\mu_e = 0{,}12$, $\mu_d = 0{,}10$, $g=10\,\text{m/s}^2$.</div>
+</div>
+
+<svg width="470" height="235" viewBox="0 0 470 235">
+  <!-- techo -->
+  <line x1="345" y1="34" x2="458" y2="34" stroke="#555" stroke-width="3"/>
+  <line x1="353" y1="34" x2="346" y2="26" stroke="#888"/><line x1="373" y1="34" x2="366" y2="26" stroke="#888"/><line x1="393" y1="34" x2="386" y2="26" stroke="#888"/><line x1="413" y1="34" x2="406" y2="26" stroke="#888"/><line x1="433" y1="34" x2="426" y2="26" stroke="#888"/><line x1="453" y1="34" x2="446" y2="26" stroke="#888"/>
+  <!-- soporte fijo: del techo al CENTRO (eje) del cilindro -->
+  <line x1="414" y1="34" x2="392" y2="110" stroke="#555" stroke-width="2"/>
+  <text x="420" y="66" font-size="10" fill="#777">soporte (eje fijo)</text>
+  <!-- cilindro -->
+  <circle cx="392" cy="110" r="30" fill="none" stroke="#1a5490" stroke-width="2.5"/>
+  <circle cx="392" cy="110" r="4" fill="#1a5490"/>
+  <text x="360" y="180" font-size="11" fill="#1a5490">M_cil, R</text>
+  <!-- soga enrollada alrededor del cilindro (lado derecho) -->
+  <path d="M392,78 A 32 32 0 0 1 392,142" fill="none" stroke="#8d6e63" stroke-width="2.5"/>
+  <!-- tramo T2 hacia m (tangente arriba, horizontal a la izquierda) -->
+  <line x1="392" y1="78" x2="132" y2="78" stroke="#8d6e63" stroke-width="2.5"/>
+  <text x="220" y="72" font-size="11" fill="#5d4037">T₂</text>
+  <!-- bloque m -->
+  <rect x="78" y="74" width="54" height="36" fill="#1a5490" rx="3"/>
+  <text x="96" y="97" font-size="13" fill="#fff">m</text>
+  <!-- superficie con roce -->
+  <line x1="40" y1="110" x2="250" y2="110" stroke="#555" stroke-width="1.5"/>
+  <line x1="48" y1="110" x2="42" y2="118" stroke="#999"/><line x1="78" y1="110" x2="72" y2="118" stroke="#999"/><line x1="108" y1="110" x2="102" y2="118" stroke="#999"/><line x1="138" y1="110" x2="132" y2="118" stroke="#999"/><line x1="168" y1="110" x2="162" y2="118" stroke="#999"/><line x1="198" y1="110" x2="192" y2="118" stroke="#999"/>
+  <text x="116" y="132" font-size="10" fill="#888">superficie con roce</text>
+  <!-- tramo T1=F (tangente abajo), F tira hacia la IZQUIERDA -->
+  <line x1="392" y1="142" x2="342" y2="142" stroke="#8d6e63" stroke-width="2.5"/>
+  <line x1="342" y1="142" x2="298" y2="142" stroke="#c62828" stroke-width="3" marker-end="url(#arrE5f)"/>
+  <text x="302" y="135" font-size="13" fill="#c62828">F</text>
+  <text x="348" y="158" font-size="10" fill="#5d4037">T₁=F</text>
+  <!-- sentido de giro horario (el tope va a la derecha) + torque -->
+  <path d="M366,95 Q392,70 418,95" fill="none" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrE5t)"/>
+  <text x="384" y="58" font-size="12" fill="#2e7d32">τ ↻ (horario)</text>
+  <defs>
+    <marker id="arrE5t" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#2e7d32"/></marker>
+    <marker id="arrE5f" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L0,9 L9,4.5 z" fill="#c62828"/></marker>
+  </defs>
+</svg>
+<div class="nota" style="font-size:0.9em">El cilindro cuelga del techo por su <strong>eje (centro)</strong>. La soga se <strong>enrolla</strong> en él: el tramo de arriba va a $m$ (tensión $T_2$) y el de abajo es el que $F$ <strong>tira hacia la izquierda</strong> (tensión $T_1 = F$). Como $F$ tira del tramo de abajo hacia la izquierda, el cilindro gira en sentido <strong>horario</strong> (↻): el punto de arriba se mueve a la derecha y enrolla la soga, arrastrando a $m$ hacia el cilindro. El torque $\tau$ va en el mismo sentido horario → <strong>ayuda</strong>.</div>
+
+<h4>(1) DCL</h4>
+<ul>
+  <li><strong>Bloque $m$</strong>: peso $mg$, normal $N$ del piso, tensión $T_2$ (lo tira hacia el cilindro), rozamiento $f$ (se opone al movimiento, dinámico porque ya se mueve).</li>
+  <li><strong>Cilindro</strong>: en su borde la tensión $T_1$ (lado $F$) y la tensión $T_2$ (lado bloque), el torque aplicado $\tau$, su peso y la reacción del perno $\vec{R}_O$ en el eje.</li>
+  <li><strong>Perno</strong>: recibe del cilindro $-\vec{R}_O$ (par acción–reacción) y lo transmite al soporte.</li>
+</ul>
+<p>Como $F$ se aplica directo al extremo libre de la soga, en ese tramo $T_1 = F = 25\,\text{N}$. Pero el cilindro <strong>tiene masa y torque</strong>, así que $T_1 \neq T_2$.</p>
+
+<h4>(2) Aceleraciones y tensiones</h4>
+<p>Rozamiento dinámico sobre el bloque (piso horizontal, $N = mg$):</p>
+$$f = \mu_d\,m\,g = 0{,}10\cdot 10\cdot 10 = 10\,\text{N}$$
+<p><strong>Bloque</strong> (positivo en el sentido del movimiento):</p>
+$$T_2 - f = m\,a \qquad (1)$$
+<p><strong>Cilindro</strong> (eje fijo; tomo positivo el sentido de giro que arrastra al bloque). La figura confirma que el torque $\tau$ va en <strong>ese mismo sentido</strong> (ayuda a $F$):</p>
+$$\underbrace{F\,R}_{T_1=F} + \tau - T_2\,R = I^{CM}\alpha = \tfrac12 M_{\text{cil}}R^2\,\alpha \qquad (2)$$
+<p><strong>Vínculo</strong> soga–cilindro (no desliza): $a = \alpha R \Rightarrow \alpha = a/R \quad(3)$.</p>
+<p>De (1): $T_2 = m a + f$. Lo meto en (2) junto con (3):</p>
+$$F R + \tau - (m a + f)R = \tfrac12 M_{\text{cil}}R^2\cdot\frac{a}{R} = \tfrac12 M_{\text{cil}}R\,a$$
+$$a = \frac{F R + \tau - f R}{R\left(m + \tfrac12 M_{\text{cil}}\right)} = \frac{25\cdot 0{,}4 + 3 - 10\cdot 0{,}4}{0{,}4\,(10 + 4)} = \frac{9}{5{,}6} \approx 1{,}61\,\text{m/s}^2$$
+$$\alpha = \frac{a}{R} = \frac{1{,}61}{0{,}4} \approx 4{,}02\,\text{rad/s}^2$$
+$$T_2 = m a + f = 10\cdot 1{,}61 + 10 \approx 26{,}1\,\text{N}, \qquad T_1 = F = 25\,\text{N}$$
+<div class="respuesta">$$\boxed{a \approx 1{,}61\,\text{m/s}^2,\;\; \alpha \approx 4{,}02\,\text{rad/s}^2,\;\; T_1 = 25\,\text{N},\;\; T_2 \approx 26{,}1\,\text{N}}$$</div>
+<div class="nota">✓ <strong>Sentido de $\tau$ confirmado con la figura</strong>: $\tau$ ayuda a $F$ (mismo sentido de giro). Para que veas el contraste: si fuera al revés, $a = \frac{FR - \tau - fR}{R(m+M/2)} = \frac{10-3-4}{5{,}6} \approx 0{,}54\,\text{m/s}^2$ (mucho más lento). Por eso importa el signo de $\tau$ en la ecuación (2).</div>
+
+<h4>(3) Energía cinética luego de 5 s</h4>
+<div class="alerta"><strong>Sobre la velocidad inicial</strong>: el enunciado dice "ya está en movimiento" pero <strong>no da $v_0$</strong>. Ese dato sirve sobre todo para justificar usar rozamiento <em>dinámico</em> ($\mu_d$). Para los 5 s tomo $v_0 = 0$ (arranco el conteo desde el reposo). Si en tu examen había un $v_0$, la velocidad a los 5 s sería $v = v_0 + a\cdot 5$ y recalculás la energía con ese $v$.</div>
+<p>Con $a$ constante: $v(5) = a\,t = 1{,}61\cdot 5 = 8{,}04\,\text{m/s}$ (bloque), y $\omega(5) = v/R = 8{,}04/0{,}4 = 20{,}1\,\text{rad/s}$ (cilindro).</p>
+$$E_c = \underbrace{\tfrac12 m v^2}_{\text{bloque}} + \underbrace{\tfrac12 I^{CM}\omega^2}_{\text{cilindro}} = \tfrac12\cdot 10\cdot 8{,}04^2 + \tfrac12\cdot(0{,}64)\cdot 20{,}1^2$$
+$$E_c \approx 323 + 129 \approx 452\,\text{J} \qquad\left(I^{CM} = \tfrac12 M_{\text{cil}}R^2 = \tfrac12\cdot 8\cdot 0{,}16 = 0{,}64\,\text{kg·m}^2\right)$$
+<div class="respuesta">$$\boxed{E_c(5\,\text{s}) \approx 452\,\text{J}}$$</div>
+
+<h4>(4) Mínimo $\mu_e$ para el equilibrio</h4>
+<p>Para que el sistema esté en equilibrio: $a = 0$ y $\alpha = 0$. La fuerza $F$ y el torque $\tau$ siguen aplicados, así que el rozamiento (ahora <strong>estático</strong>) debe sostener al bloque.</p>
+<p><strong>Cilindro en equilibrio</strong> (suma de torques $=0$): la tensión del lado bloque debe equilibrar a $F$ y $\tau$:</p>
+$$F R + \tau - T_2 R = 0 \;\Rightarrow\; T_2 = F + \frac{\tau}{R} = 25 + \frac{3}{0{,}4} = 32{,}5\,\text{N}$$
+<p><strong>Bloque en equilibrio</strong>: el rozamiento estático debe igualar a $T_2$, y no puede superar $\mu_e\,m g$:</p>
+$$f = T_2 = 32{,}5\,\text{N} \leq \mu_e\,m g \;\Rightarrow\; \mu_e \geq \frac{32{,}5}{10\cdot 10} = 0{,}325$$
+<div class="respuesta">$$\boxed{\mu_{e,\min} = 0{,}325}$$</div>
+<div class="truco">Como el $\mu_e$ real es $0{,}12 < 0{,}325$, el sistema <strong>no</strong> puede estar en equilibrio: por eso en las partes (2) y (3) acelera. Todo cierra.</div>
+<a href="#top" class="back-to-top">↑ Volver arriba</a>
+</section>
+
+</main>
+
+</body>
+</html>
