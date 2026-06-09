@@ -62,7 +62,37 @@
   th { background:#e8eef5; }
   code { background:#eef0f3; padding:0.05em 0.3em; border-radius:3px; }
 
-  .backtop { position:fixed; right:14px; bottom:14px; background:var(--primary); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 2px 8px rgba(0,0,0,.3); font-size:1.3em; }
+  /* --- Botones flotantes --- */
+  .fab { position:fixed; z-index:200; border:none; cursor:pointer; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,.3); display:flex; align-items:center; justify-content:center; }
+  .backtop { right:14px; bottom:128px; background:var(--primary); width:44px; height:44px; border-radius:50%; text-decoration:none; font-size:1.25em; }
+  .fab-formulas { right:14px; bottom:14px; background:#9c27b0; height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+  .fab-index { left:14px; bottom:14px; background:var(--primary-dark); height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+
+  /* --- Backdrop común --- */
+  .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:300; opacity:0; visibility:hidden; transition:opacity .25s; }
+  .backdrop.show { opacity:1; visibility:visible; }
+
+  /* --- Drawer lateral (índice) --- */
+  .drawer { position:fixed; top:0; left:0; height:100%; width:82%; max-width:340px; background:#fff; z-index:310; transform:translateX(-100%); transition:transform .28s ease; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:2px 0 14px rgba(0,0,0,.25); }
+  .drawer.show { transform:translateX(0); }
+  .drawer .dhead { position:sticky; top:0; background:var(--primary-dark); color:#fff; padding:0.85em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .drawer .dhead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .drawer ul { list-style:none; margin:0; padding:0; }
+  .drawer .nav-tema > a { display:block; background:#eef3fa; color:var(--primary-dark); font-weight:600; text-decoration:none; padding:0.6em 1em; border-bottom:1px solid #e2e6ee; }
+  .drawer .nav-tema.active > a { background:var(--primary); color:#fff; }
+  .drawer .nav-ejs { padding:0.2em 0 0.5em; }
+  .drawer .nav-ejs a { display:block; color:#333; text-decoration:none; padding:0.4em 1em 0.4em 1.6em; font-size:0.9em; border-bottom:1px solid #f0f2f5; }
+  .drawer .nav-ejs a:active { background:#eef3fa; }
+
+  /* --- Panel de fórmulas (bottom sheet) --- */
+  .sheet { position:fixed; left:0; right:0; bottom:0; max-height:72vh; background:#fff; z-index:310; transform:translateY(100%); transition:transform .28s ease; border-radius:14px 14px 0 0; box-shadow:0 -2px 14px rgba(0,0,0,.25); display:flex; flex-direction:column; }
+  .sheet.show { transform:translateY(0); }
+  .sheet .shead { background:#9c27b0; color:#fff; padding:0.8em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0; }
+  .sheet .shead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .sheet .sbody { overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0.6em 0.9em 1em; }
+  .sheet .sbody .formulas { margin:0; }
+  @media (min-width:760px){ .sheet { left:auto; right:18px; bottom:18px; width:420px; max-height:78vh; border-radius:12px; } .sheet .shead { border-radius:12px 12px 0 0; } }
+
   footer { text-align:center; color:#888; font-size:0.85em; padding:1.5em 1em 0; }
 </style>
 </head>
@@ -1393,7 +1423,102 @@ Práctica para el parcial de Física de Sistemas de Partículas · Cátedra More
 </footer>
 </main>
 
-<a href="#top" class="backtop" aria-label="Volver arriba">↑</a>
+<!-- Botones flotantes -->
+<a href="#top" class="fab backtop" aria-label="Volver arriba">↑</a>
+<button class="fab fab-formulas" id="btnFormulas" aria-label="Ver fórmulas del tema actual">📐 Fórmulas</button>
+<button class="fab fab-index" id="btnIndex" aria-label="Abrir índice">☰ Índice</button>
+
+<!-- Drawer índice -->
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Índice de temas y ejercicios">
+  <div class="dhead"><span>📑 Índice</span><button id="closeDrawer" aria-label="Cerrar">×</button></div>
+  <ul id="navTree"></ul>
+</aside>
+
+<!-- Panel de fórmulas -->
+<section class="sheet" id="sheet" aria-label="Fórmulas del tema actual">
+  <div class="shead"><span id="sheetTitle">Fórmulas</span><button id="closeSheet" aria-label="Cerrar">×</button></div>
+  <div class="sbody" id="sheetBody"></div>
+</section>
+
+<script>
+(function(){
+  var temas = Array.prototype.slice.call(document.querySelectorAll('section.tema'));
+  var currentTema = temas[0];
+
+  // ---- Construir el índice (drawer) automáticamente ----
+  var navTree = document.getElementById('navTree');
+  temas.forEach(function(sec){
+    var titulo = sec.querySelector('.tema-titulo').textContent.trim();
+    var li = document.createElement('li');
+    li.className = 'nav-tema';
+    li.dataset.target = sec.id;
+    var a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = titulo;
+    li.appendChild(a);
+    var ul = document.createElement('ul');
+    ul.className = 'nav-ejs';
+    sec.querySelectorAll('article.ej').forEach(function(ej){
+      var h = ej.querySelector('h3').cloneNode(true);
+      var nivel = h.querySelector('.nivel'); if(nivel) nivel.remove();
+      var ea = document.createElement('a');
+      ea.href = '#' + ej.id;
+      ea.textContent = h.textContent.trim();
+      ul.appendChild(ea);
+    });
+    li.appendChild(ul);
+    navTree.appendChild(li);
+  });
+
+  // ---- Apertura/cierre de overlays ----
+  var backdrop = document.getElementById('backdrop');
+  var drawer = document.getElementById('drawer');
+  var sheet = document.getElementById('sheet');
+  function openDrawer(){ drawer.classList.add('show'); backdrop.classList.add('show'); }
+  function openSheet(){ refreshSheet(); sheet.classList.add('show'); backdrop.classList.add('show'); }
+  function closeAll(){ drawer.classList.remove('show'); sheet.classList.remove('show'); backdrop.classList.remove('show'); }
+  document.getElementById('btnIndex').addEventListener('click', openDrawer);
+  document.getElementById('btnFormulas').addEventListener('click', openSheet);
+  document.getElementById('closeDrawer').addEventListener('click', closeAll);
+  document.getElementById('closeSheet').addEventListener('click', closeAll);
+  backdrop.addEventListener('click', closeAll);
+  navTree.addEventListener('click', function(e){ if(e.target.tagName === 'A') closeAll(); });
+
+  // ---- Detectar el tema activo según el scroll ----
+  function updateCurrent(){
+    var line = 140; // alto aprox del header fijo
+    var found = temas[0];
+    for(var i=0;i<temas.length;i++){
+      if(temas[i].getBoundingClientRect().top <= line) found = temas[i];
+    }
+    if(found !== currentTema){
+      currentTema = found;
+      // resaltar en el drawer
+      navTree.querySelectorAll('.nav-tema').forEach(function(li){
+        li.classList.toggle('active', li.dataset.target === currentTema.id);
+      });
+      // si el panel está abierto, actualizar contenido
+      if(sheet.classList.contains('show')) refreshSheet();
+    }
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){ window.requestAnimationFrame(function(){ updateCurrent(); ticking=false; }); ticking=true; }
+  }, {passive:true});
+  updateCurrent();
+
+  // ---- Cargar las fórmulas del tema actual en el panel ----
+  function refreshSheet(){
+    var titulo = currentTema.querySelector('.tema-titulo').textContent.trim();
+    document.getElementById('sheetTitle').textContent = '📐 ' + titulo;
+    var formulas = currentTema.querySelector('.formulas');
+    var body = document.getElementById('sheetBody');
+    body.innerHTML = '';
+    if(formulas) body.appendChild(formulas.cloneNode(true)); // clona el MathJax ya renderizado
+  }
+})();
+</script>
 
 </body>
 </html>
