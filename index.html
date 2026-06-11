@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#2c3e50">
-<title>Guía graduada · FSP Moreno</title>
+<title>Guía integradora · FSP Moreno</title>
 <script>
   MathJax = {
     tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true },
@@ -19,7 +19,7 @@
   body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:0; color:#222; line-height:1.6; background:var(--bg); -webkit-text-size-adjust:100%; }
 
   header.top { position:sticky; top:0; z-index:100; background:var(--primary-dark); color:#fff; padding:0.7em 0.9em 0.55em; box-shadow:0 2px 6px rgba(0,0,0,.2); }
-  header.top h1 { font-size:1.0em; margin:0 0 0.5em; font-weight:600; }
+  header.top h1 { font-size:1.02em; margin:0 0 0.5em; font-weight:600; }
   nav.temas { display:flex; gap:0.4em; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:0.15em; }
   nav.temas a { flex:0 0 auto; background:#ffffff22; color:#fff; text-decoration:none; padding:0.34em 0.7em; border-radius:999px; font-size:0.8em; white-space:nowrap; border:1px solid #ffffff44; }
   nav.temas a.chip-cheat { background:#9c27b0; border-color:#ce5fe0; font-weight:600; }
@@ -31,11 +31,8 @@
   .intro { background:#eef3fa; border-radius:8px; padding:0.9em 1em; margin:0.9em 0 0.5em; font-size:0.95em; }
   .intro h2 { margin:0 0 0.4em; font-size:1.1em; color:var(--primary-dark); }
 
-  .tema { margin-top:1.6em; }
-  .tema-titulo { color:#fff; background:var(--primary); border-radius:8px; padding:0.5em 0.7em; font-size:1.12em; margin:1.4em 0 0.7em; scroll-margin-top:96px; }
-
-  .ej { background:#fff; border:1px solid #e2e6ee; border-radius:9px; padding:0.8em 0.9em; margin:0.9em 0; box-shadow:0 1px 3px rgba(0,0,0,.05); scroll-margin-top:96px; }
-  .ej h3 { font-size:1.0em; color:var(--primary-dark); margin:0 0 0.5em; display:flex; flex-wrap:wrap; align-items:center; gap:0.45em; line-height:1.35; }
+  .ej { background:#fff; border:1px solid #e2e6ee; border-radius:9px; padding:0.8em 0.9em; margin:1.1em 0; box-shadow:0 1px 3px rgba(0,0,0,.05); scroll-margin-top:96px; }
+  .ej h3 { font-size:1.02em; color:var(--primary-dark); margin:0 0 0.5em; display:flex; flex-wrap:wrap; align-items:center; gap:0.45em; line-height:1.35; }
   .nivel { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#e3edf7; color:var(--primary); white-space:nowrap; }
   .tchip { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#dcefe0; color:#2e7d32; white-space:nowrap; }
   .tchip.parcial { background:#ffe2cc; color:#e65100; }
@@ -79,11 +76,10 @@
   .drawer .dhead { position:sticky; top:0; background:var(--primary-dark); color:#fff; padding:0.85em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
   .drawer .dhead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
   .drawer ul { list-style:none; margin:0; padding:0; }
-  .drawer .nav-tema > a { display:block; background:#eef3fa; color:var(--primary-dark); font-weight:600; text-decoration:none; padding:0.6em 1em; border-bottom:1px solid #e2e6ee; }
-  .drawer .nav-tema.active > a { background:var(--primary); color:#fff; }
-  .drawer .nav-ejs { padding:0.2em 0 0.5em; }
-  .drawer .nav-ejs a { display:block; color:#333; text-decoration:none; padding:0.42em 1em 0.42em 1.6em; font-size:0.88em; border-bottom:1px solid #f0f2f5; }
-  .drawer .nav-ejs a:active { background:#eef3fa; }
+  .drawer .nav-ej { display:flex; gap:0.5em; align-items:baseline; color:#333; text-decoration:none; padding:0.55em 1em; border-bottom:1px solid #f0f2f5; }
+  .drawer .nav-ej.active { background:#eef3fa; }
+  .drawer .nav-ej .ntema { font-size:0.7em; font-weight:700; color:#2e7d32; flex:0 0 auto; }
+  .drawer .nav-ej .ntit { font-size:0.9em; }
 
   .sheet { position:fixed; left:0; right:0; bottom:0; max-height:72vh; background:#fff; z-index:310; transform:translateY(100%); transition:transform .28s ease; border-radius:14px 14px 0 0; box-shadow:0 -2px 14px rgba(0,0,0,.25); display:flex; flex-direction:column; }
   .sheet.show { transform:translateY(0); }
@@ -99,14 +95,14 @@
 <body>
 
 <header class="top">
-  <h1>📚 Guía graduada por tema — FSP (cátedra Moreno)</h1>
+  <h1>📗 Guía integradora — FSP (cátedra Moreno)</h1>
   <nav class="temas">
     <a href="cheatsheet.html" class="chip-cheat">📐 Cheatsheet</a>
-    <a href="#tema-cinematica">1 · Cinemática</a>
-    <a href="#tema-dinamica">2 · Dinámica</a>
-    <a href="#tema-energia">3 · Energía</a>
-    <a href="#tema-particulas">4 · Partículas</a>
-    <a href="#tema-rigido">5 · Rígido</a>
+    <a href="#ej1">Cinemática</a>
+    <a href="#ej3">Dinámica</a>
+    <a href="#ej5">Energía</a>
+    <a href="#ej7">Partículas</a>
+    <a href="#ej9">Rígido</a>
   </nav>
 </header>
 
@@ -114,1146 +110,278 @@
 
 <div class="intro">
 <h2>Cómo usar esta guía</h2>
-<p><strong>5 temas del programa, 10 ejercicios cada uno</strong> (50 en total), que escalan de menos a más. El <strong>Ejercicio 10 de cada tema es "tipo parcial"</strong> (parecido a lo que toma Moreno). Tocá <em>“Ver resolución”</em> para desplegar el paso a paso.</p>
-<p style="margin-bottom:0">Botón <strong>📐 Fórmulas</strong> (abajo der.) = fórmulas del tema en el que estás scrolleando; <strong>☰ Índice</strong> (abajo izq.) = saltar a cualquier ejercicio. Niveles 1–3 básico · 4–6 intermedio · 7–9 avanzado · 10 tipo parcial. Decimales con coma, $g=10\,\text{m/s}^2$.</p>
+<p><strong>10 ejercicios que recorren todo el programa</strong>, de menos a más: cinemática → dinámica → trabajo y energía → sistemas de partículas → cuerpo rígido. El <strong>Ejercicio 10 es integrador tipo parcial</strong> (cuerpo rígido + choque + energía, lo más frecuente en Moreno).</p>
+<p style="margin-bottom:0">Tocá <em>“Ver resolución”</em> para desplegar el paso a paso. Botón <strong>📐 Fórmulas</strong> (abajo der.) = fórmulas del tema en el que estás; <strong>☰ Índice</strong> (abajo izq.) = saltar a cualquier ejercicio. Decimales con coma, $g=10\,\text{m/s}^2$.</p>
 <p style="margin-bottom:0">¿Querés repasar las fórmulas y <em>de dónde salen</em>? <a href="cheatsheet.html" class="btn-cheat">📐 Abrir Cheatsheet con justificaciones →</a></p>
 </div>
 
-<section class="tema" id="tema-cinematica" data-tema="cinematica">
-<h2 class="tema-titulo">1 · Cinemática</h2>
 
-<article class="ej" id="cin-ej1" data-tema="cinematica">
-<h3>Ejercicio 1 — Frenada de un auto <span class="tchip">Cinemática</span> <span class="nivel">Nivel 1</span></h3>
+<!-- ===================== EJ1 ===================== -->
+<article class="ej" id="ej1" data-tema="cinematica">
+<h3>Ejercicio 1 — MRUV: velocidad y posición <span class="tchip">Cinemática</span> <span class="nivel">Nivel 1</span></h3>
 <div class="enunciado">
-Un auto viaja a $v_0 = 20\ \text{m/s}$ y frena con aceleración constante $a = -4\ \text{m/s}^2$.
+Un auto parte del reposo con aceleración constante $a=2\ \text{m/s}^2$.
 <ol type="a">
-<li>¿Qué distancia recorre hasta detenerse?</li>
-<li>¿Cuánto tarda en frenar?</li>
+<li>¿Qué velocidad y qué posición tiene a los $t=5\ \text{s}$?</li>
+<li>¿Qué velocidad tiene cuando recorrió $100\ \text{m}$?</li>
 </ol>
 </div>
 <details class="sol"><summary>Ver resolución</summary>
-<p>Como pide distancia sin tiempo, conviene la fórmula independiente del tiempo $v^2 = v_0^2 + 2\,a\,\Delta x$. Al detenerse $v = 0$:</p>
-$$ 0 = v_0^2 + 2\,a\,\Delta x \;\Rightarrow\; \Delta x = \frac{-v_0^2}{2a} = \frac{-(20)^2}{2(-4)} = \frac{-400}{-8} = 50\ \text{m} $$
-<p>El tiempo sale de $v = v_0 + a\,t$ con $v=0$:</p>
-$$ t = \frac{-v_0}{a} = \frac{-20}{-4} = 5\ \text{s} $$
-<div class="truco">Chequeo: $\Delta x = \tfrac{v_0+v}{2}\,t = \tfrac{20+0}{2}\cdot 5 = 50\ \text{m}$. Cierra.</div>
-<div class="respuesta">$$\boxed{\Delta x = 50\ \text{m}, \quad t = 5\ \text{s}}$$</div>
+<p><strong>a)</strong> Con $a$ constante, integro la aceleración para la velocidad y otra vez para la posición ($v_0=0,\ x_0=0$):</p>
+$$v=v_0+a\,t=0+2\cdot 5=10\ \text{m/s}.$$
+$$x=x_0+v_0 t+\tfrac{1}{2}a\,t^2=\tfrac{1}{2}\cdot 2\cdot 5^2=25\ \text{m}.$$
+<p><strong>b)</strong> Acá no me dan ni me piden el tiempo, así que uso la fórmula independiente del tiempo:</p>
+$$v^2=v_0^2+2a\,\Delta x=0+2\cdot 2\cdot 100=400\ \Rightarrow\ v=20\ \text{m/s}.$$
+<div class="truco">La tercera fórmula sale de despejar $t$ de $v=v_0+at$ y meterlo en la de posición. Úsala siempre que no aparezca el tiempo.</div>
+<div class="respuesta">$$\boxed{v(5)=10\ \tfrac{\text{m}}{\text{s}},\quad x(5)=25\ \text{m},\quad v(100\,\text{m})=20\ \tfrac{\text{m}}{\text{s}}}$$</div>
 </details>
 </article>
 
-<article class="ej" id="cin-ej2" data-tema="cinematica">
-<h3>Ejercicio 2 — Tiro vertical <span class="tchip">Cinemática</span> <span class="nivel">Nivel 2</span></h3>
+<!-- ===================== EJ2 ===================== -->
+<article class="ej" id="ej2" data-tema="cinematica">
+<h3>Ejercicio 2 — Aceleración tangencial y normal <span class="tchip">Cinemática</span> <span class="nivel">Nivel 2</span></h3>
 <div class="enunciado">
-Se lanza una pelota verticalmente hacia arriba desde el suelo con $v_0 = 30\ \text{m/s}$. Tomá $g = 10\ \text{m/s}^2$ y despreciá el rozamiento.
+Una partícula recorre una curva de radio de curvatura $\rho=50\ \text{m}$ aumentando su rapidez. En cierto instante tiene $v=10\ \text{m/s}$ y aceleración tangencial $a_t=3\ \text{m/s}^2$.
 <ol type="a">
-<li>¿Qué altura máxima alcanza?</li>
-<li>¿Cuánto tiempo está en el aire hasta volver al suelo?</li>
+<li>Calculá la componente normal $a_n$ y el módulo de la aceleración.</li>
+<li>¿Qué ángulo forma $\vec{a}$ con la dirección del movimiento?</li>
+<li>¿Cuánto valdría $\vec{a}$ si la rapidez fuera constante?</li>
 </ol>
 </div>
 <details class="sol"><summary>Ver resolución</summary>
-<p>Tomo eje $y$ positivo hacia arriba, origen en el suelo, $a = -g$. En la altura máxima la velocidad se anula ($v=0$):</p>
-$$ 0 = v_0^2 - 2g\,h_{\max} \;\Rightarrow\; h_{\max} = \frac{v_0^2}{2g} = \frac{(30)^2}{2\cdot 10} = \frac{900}{20} = 45\ \text{m} $$
-<p>El tiempo de subida es $t_{sub} = v_0/g = 30/10 = 3\ \text{s}$. Por simetría, el tiempo total de vuelo es el doble:</p>
-$$ t_{vuelo} = 2\,t_{sub} = 6\ \text{s} $$
-<div class="alerta">No confundas el tiempo de subida con el de vuelo. La pelota vuelve al suelo con la misma rapidez $30\ \text{m/s}$ pero hacia abajo.</div>
-<div class="respuesta">$$\boxed{h_{\max} = 45\ \text{m}, \quad t_{vuelo} = 6\ \text{s}}$$</div>
+<p><strong>a)</strong> La componente normal (la que "dobla" la trayectoria) depende de la rapidez y del radio:</p>
+$$a_n=\frac{v^2}{\rho}=\frac{10^2}{50}=2\ \text{m/s}^2.$$
+<p>$a_t$ y $a_n$ son perpendiculares, así que el módulo es la hipotenusa:</p>
+$$a=\sqrt{a_t^2+a_n^2}=\sqrt{3^2+2^2}=\sqrt{13}\approx 3{,}61\ \text{m/s}^2.$$
+<p><strong>b)</strong> El ángulo respecto de la tangente (dirección del movimiento):</p>
+$$\tan\theta=\frac{a_n}{a_t}=\frac{2}{3}\ \Rightarrow\ \theta\approx 33{,}7^\circ.$$
+<p><strong>c)</strong> Si la rapidez es constante, $a_t=\dfrac{dv}{dt}=0$, y toda la aceleración es normal: $a=a_n=2\ \text{m/s}^2$ apuntando al centro. <em>Hay aceleración aunque la rapidez no cambie</em>, porque cambia la dirección.</p>
+<div class="alerta">Error clásico: pensar que si la rapidez es constante no hay aceleración. La aceleración normal nunca es cero en una curva.</div>
+<div class="respuesta">$$\boxed{a_n=2\ \tfrac{\text{m}}{\text{s}^2},\quad a\approx 3{,}61\ \tfrac{\text{m}}{\text{s}^2},\quad \theta\approx 33{,}7^\circ}$$</div>
 </details>
 </article>
 
-<article class="ej" id="cin-ej3" data-tema="cinematica">
-<h3>Ejercicio 3 — De la posición a la aceleración <span class="tchip">Cinemática</span> <span class="nivel">Nivel 3</span></h3>
-<div class="enunciado">
-La posición de una partícula sobre una recta es $x(t) = 2t^3 - 9t^2 + 12t$ (en metros, con $t$ en segundos).
-<ol type="a">
-<li>Hallá $v(t)$ y $a(t)$.</li>
-<li>¿En qué instantes la partícula está instantáneamente en reposo?</li>
-<li>¿Cuánto vale la aceleración en $t = 2\ \text{s}$?</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Derivo respecto del tiempo: $v = \dfrac{dx}{dt}$ y $a = \dfrac{dv}{dt}$.</p>
-$$ v(t) = 6t^2 - 18t + 12\ \text{(m/s)}, \qquad a(t) = 12t - 18\ \text{(m/s}^2) $$
-<p>Reposo instantáneo: $v(t) = 0 \Rightarrow 6t^2 - 18t + 12 = 0 \Rightarrow t^2 - 3t + 2 = 0$, cuyas raíces son:</p>
-$$ t = \frac{3 \pm \sqrt{9-8}}{2} = \frac{3 \pm 1}{2} \;\Rightarrow\; t_1 = 1\ \text{s}, \quad t_2 = 2\ \text{s} $$
-<p>Aceleración en $t=2\ \text{s}$:</p>
-$$ a(2) = 12\cdot 2 - 18 = 6\ \text{m/s}^2 $$
-<div class="respuesta">$$\boxed{v = 6t^2 - 18t + 12,\quad a = 12t - 18,\quad t_1=1\ \text{s},\ t_2=2\ \text{s},\quad a(2)=6\ \text{m/s}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="cin-ej4" data-tema="cinematica">
-<h3>Ejercicio 4 — Tiro oblicuo <span class="tchip">Cinemática</span> <span class="nivel">Nivel 4</span></h3>
-<div class="enunciado">
-Se patea una pelota desde el suelo con rapidez $v_0 = 25\ \text{m/s}$ formando $37^\circ$ con la horizontal. Usá $\text{sen}\,37^\circ = 0{,}6$, $\cos 37^\circ = 0{,}8$ y $g = 10\ \text{m/s}^2$.
-<ol type="a">
-<li>Tiempo de vuelo.</li>
-<li>Altura máxima.</li>
-<li>Alcance horizontal.</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<svg viewBox="0 0 320 140" width="320" height="140" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="120" x2="300" y2="120" stroke="#333" stroke-width="2"/>
-<path d="M20,120 Q120,10 220,120" fill="none" stroke="#1a5490" stroke-width="2"/>
-<line x1="20" y1="120" x2="60" y2="90" stroke="#1a5490" stroke-width="2" marker-end="url(#arr)"/>
-<text x="62" y="88" font-size="12" fill="#1a5490">$v_0$</text>
-<text x="42" y="116" font-size="11" fill="#333">37°</text>
-<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#1a5490"/></marker></defs>
-</svg>
-<p>Descompongo: $v_{0x} = v_0\cos 37^\circ = 25\cdot 0{,}8 = 20\ \text{m/s}$ y $v_{0y} = v_0\,\text{sen}\,37^\circ = 25\cdot 0{,}6 = 15\ \text{m/s}$.</p>
-<p>Tiempo de vuelo (vuelve a $y=0$): $t_v = \dfrac{2\,v_{0y}}{g} = \dfrac{2\cdot 15}{10} = 3\ \text{s}$.</p>
-<p>Altura máxima:</p>
-$$ h_{\max} = \frac{v_{0y}^2}{2g} = \frac{(15)^2}{20} = \frac{225}{20} = 11{,}25\ \text{m} $$
-<p>Alcance horizontal (la velocidad horizontal es constante):</p>
-$$ x_{\max} = v_{0x}\,t_v = 20\cdot 3 = 60\ \text{m} $$
-<div class="truco">Atajo del alcance: $x_{\max} = \dfrac{v_0^2\,\text{sen}(2\theta)}{g}$. Con $\text{sen}\,74^\circ = 2\cdot 0{,}6\cdot 0{,}8 = 0{,}96$: $x_{\max} = \dfrac{625\cdot 0{,}96}{10} = 60\ \text{m}$.</div>
-<div class="respuesta">$$\boxed{t_v = 3\ \text{s},\quad h_{\max} = 11{,}25\ \text{m},\quad x_{\max} = 60\ \text{m}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="cin-ej5" data-tema="cinematica">
-<h3>Ejercicio 5 — Movimiento circular uniforme <span class="tchip">Cinemática</span> <span class="nivel">Nivel 5</span></h3>
-<div class="enunciado">
-Una piedra gira en una circunferencia horizontal de radio $R = 0{,}5\ \text{m}$ dando $2$ vueltas por segundo a rapidez constante.
-<ol type="a">
-<li>Velocidad angular $\omega$ y período $T$.</li>
-<li>Rapidez $v$.</li>
-<li>Aceleración centrípeta $a_n$.</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>La frecuencia es $f = 2\ \text{Hz}$, así que el período es $T = 1/f = 0{,}5\ \text{s}$. La velocidad angular:</p>
-$$ \omega = 2\pi f = 2\pi\cdot 2 = 4\pi \approx 12{,}57\ \text{rad/s} $$
-<p>La rapidez tangencial:</p>
-$$ v = \omega\,R = 4\pi\cdot 0{,}5 = 2\pi \approx 6{,}28\ \text{m/s} $$
-<p>Como el movimiento es uniforme, sólo hay aceleración normal (centrípeta):</p>
-$$ a_n = \omega^2 R = (4\pi)^2\cdot 0{,}5 = 16\pi^2\cdot 0{,}5 = 8\pi^2 \approx 78{,}96\ \text{m/s}^2 $$
-<div class="alerta">En MCU la rapidez no cambia, por eso $a_t = 0$; pero la aceleración NO es nula: hay $a_n$ porque cambia la dirección de $\vec v$.</div>
-<div class="respuesta">$$\boxed{\omega = 4\pi\ \text{rad/s},\ T = 0{,}5\ \text{s},\ v = 2\pi\ \text{m/s},\ a_n \approx 79{,}0\ \text{m/s}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="cin-ej6" data-tema="cinematica">
-<h3>Ejercicio 6 — Aceleración tangencial y normal <span class="tchip">Cinemática</span> <span class="nivel">Nivel 6</span></h3>
-<div class="enunciado">
-Un auto recorre una curva de radio $R = 80\ \text{m}$. En cierto instante su rapidez es $v = 20\ \text{m/s}$ y está acelerando, aumentando su rapidez a razón de $3\ \text{m/s}^2$.
-<ol type="a">
-<li>Hallá $a_t$ y $a_n$.</li>
-<li>Módulo de la aceleración total.</li>
-<li>Ángulo que forma $\vec a$ con la dirección tangente (la del movimiento).</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>La aceleración tangencial es la tasa de cambio de la rapidez: $a_t = 3\ \text{m/s}^2$. La normal depende de $v$ y $R$:</p>
-$$ a_n = \frac{v^2}{R} = \frac{(20)^2}{80} = \frac{400}{80} = 5\ \text{m/s}^2 $$
-<p>Como $\vec a_t \perp \vec a_n$, el módulo es la hipotenusa:</p>
-$$ a = \sqrt{a_t^2 + a_n^2} = \sqrt{3^2 + 5^2} = \sqrt{34} \approx 5{,}83\ \text{m/s}^2 $$
-<p>El ángulo respecto de la tangente:</p>
-$$ \tan\phi = \frac{a_n}{a_t} = \frac{5}{3} \;\Rightarrow\; \phi = \arctan\left(\frac{5}{3}\right) \approx 59{,}0^\circ $$
-<div class="respuesta">$$\boxed{a_t = 3\ \text{m/s}^2,\ a_n = 5\ \text{m/s}^2,\ a \approx 5{,}83\ \text{m/s}^2,\ \phi \approx 59^\circ}$$</div>
-</details>
-</article>
-
-<article class="ej" id="cin-ej7" data-tema="cinematica">
-<h3>Ejercicio 7 — Movimiento circular variado <span class="tchip">Cinemática</span> <span class="nivel">Nivel 7</span></h3>
-<div class="enunciado">
-Un disco de radio $R = 0{,}2\ \text{m}$ parte del reposo y gira con aceleración angular constante $\alpha = 4\ \text{rad/s}^2$.
-<ol type="a">
-<li>¿Cuántas vueltas da en los primeros $5\ \text{s}$?</li>
-<li>Velocidad angular a los $5\ \text{s}$.</li>
-<li>Para un punto del borde a los $5\ \text{s}$: hallá $a_t$, $a_n$ y el módulo de $\vec a$.</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Las ecuaciones angulares con $\omega_0 = 0$ son análogas al MRUV. Ángulo barrido:</p>
-$$ \theta = \tfrac{1}{2}\alpha t^2 = \tfrac{1}{2}\cdot 4\cdot (5)^2 = 50\ \text{rad} $$
-<p>Número de vueltas:</p>
-$$ N = \frac{\theta}{2\pi} = \frac{50}{2\pi} \approx 7{,}96\ \text{vueltas} $$
-<p>Velocidad angular a los $5\ \text{s}$:</p>
-$$ \omega = \alpha\,t = 4\cdot 5 = 20\ \text{rad/s} $$
-<p>Para un punto del borde: la aceleración tangencial es constante y la normal crece con $\omega^2$:</p>
-$$ a_t = \alpha R = 4\cdot 0{,}2 = 0{,}8\ \text{m/s}^2 $$
-$$ a_n = \omega^2 R = (20)^2\cdot 0{,}2 = 400\cdot 0{,}2 = 80\ \text{m/s}^2 $$
-$$ a = \sqrt{a_t^2 + a_n^2} = \sqrt{0{,}8^2 + 80^2} = \sqrt{0{,}64 + 6400} \approx 80{,}004\ \text{m/s}^2 $$
-<div class="truco">A altas $\omega$, la normal domina ampliamente: $\vec a$ apunta casi hacia el centro.</div>
-<div class="respuesta">$$\boxed{N \approx 7{,}96,\ \omega = 20\ \text{rad/s},\ a_t = 0{,}8\ \text{m/s}^2,\ a_n = 80\ \text{m/s}^2,\ a \approx 80{,}0\ \text{m/s}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="cin-ej8" data-tema="cinematica">
-<h3>Ejercicio 8 — Bote cruzando un río <span class="tchip">Cinemática</span> <span class="nivel">Nivel 8</span></h3>
-<div class="enunciado">
-Un río de ancho $d = 120\ \text{m}$ tiene corriente de $v_c = 3\ \text{m/s}$ (paralela a las orillas). Un bote apunta su proa perpendicular a la orilla y se mueve respecto del agua a $v_b = 4\ \text{m/s}$.
-<ol type="a">
-<li>¿Cuánto tarda en cruzar?</li>
-<li>¿Cuánto se desvía río abajo?</li>
-<li>Rapidez del bote respecto de tierra.</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>La velocidad del bote respecto de tierra es $\vec v_{bt} = \vec v_{ba} + \vec v_{at}$ (bote-agua más agua-tierra). La componente que cruza el río es sólo $v_b$ (perpendicular), independiente de la corriente. El tiempo de cruce:</p>
-$$ t = \frac{d}{v_b} = \frac{120}{4} = 30\ \text{s} $$
-<p>El desvío río abajo lo produce la corriente durante ese tiempo:</p>
-$$ \Delta x = v_c\,t = 3\cdot 30 = 90\ \text{m} $$
-<p>Rapidez respecto de tierra (componentes perpendiculares):</p>
-$$ v_{bt} = \sqrt{v_b^2 + v_c^2} = \sqrt{4^2 + 3^2} = \sqrt{25} = 5\ \text{m/s} $$
-<div class="alerta">Error típico: querer "restar" la corriente al tiempo de cruce. La corriente es perpendicular a la travesía, por eso NO afecta el tiempo: sólo arrastra río abajo.</div>
-<div class="respuesta">$$\boxed{t = 30\ \text{s},\quad \Delta x = 90\ \text{m},\quad v_{bt} = 5\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="cin-ej9" data-tema="cinematica">
-<h3>Ejercicio 9 — Compatibilidad del vector aceleración <span class="tchip">Cinemática</span> <span class="nivel">Nivel 9</span></h3>
-<div class="enunciado">
-Una partícula recorre una trayectoria curva. En cierto instante su rapidez es $v = 6\ \text{m/s}$, el radio de curvatura es $\rho = 9\ \text{m}$ y se mide que la rapidez está disminuyendo a razón de $2\ \text{m/s}^2$.
-<ol type="a">
-<li>Hallá $a_t$ y $a_n$ en ese instante.</li>
-<li>Un compañero afirma que el módulo de la aceleración es $\lvert\vec a\rvert = 3\ \text{m/s}^2$. ¿Es compatible con los datos? Justificá.</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>La componente tangencial es la tasa de cambio de la rapidez (negativa porque frena), y la normal apunta siempre hacia el centro de curvatura:</p>
-$$ a_t = \frac{dv}{dt} = -2\ \text{m/s}^2, \qquad a_n = \frac{v^2}{\rho} = \frac{(6)^2}{9} = \frac{36}{9} = 4\ \text{m/s}^2 $$
-<p>El módulo de la aceleración real es:</p>
-$$ \lvert\vec a\rvert = \sqrt{a_t^2 + a_n^2} = \sqrt{(-2)^2 + 4^2} = \sqrt{4 + 16} = \sqrt{20} \approx 4{,}47\ \text{m/s}^2 $$
-<p>La afirmación NO es compatible: como $a_n = 4\ \text{m/s}^2$ ya es una componente del vector, el módulo total nunca puede ser menor que $a_n$. Un módulo de $3\ \text{m/s}^2$ sería incluso menor que la sola componente normal, lo cual es imposible ($\lvert\vec a\rvert \ge a_n$ siempre).</p>
-<div class="alerta">Chequeo clave de Moreno: la normal está fijada por $v$ y $\rho$ ($a_n=v^2/\rho$, siempre $\ge 0$ y hacia el centro). Cualquier $\vec a$ propuesto debe cumplir $\lvert\vec a\rvert \ge v^2/\rho$ y su proyección normal debe valer exactamente $v^2/\rho$.</div>
-<div class="respuesta">$$\boxed{a_t = -2\ \text{m/s}^2,\ a_n = 4\ \text{m/s}^2,\ \lvert\vec a\rvert = \sqrt{20}\approx 4{,}47\ \text{m/s}^2 \;\Rightarrow\; \text{no es compatible}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="cin-ej10" data-tema="cinematica">
-<h3>Ejercicio 10 — Cinemática curvilínea integradora <span class="tchip parcial">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
-<div class="enunciado">
-Una partícula recorre una trayectoria curva. Su rapidez varía según $v(t) = 3 + 2t$ (en $\text{m/s}$, $t$ en $\text{s}$). En el instante $t = 1\ \text{s}$ pasa por un punto $P$ donde el radio de curvatura de la trayectoria es $\rho = 25\ \text{m}$.
-<ol type="a">
-<li>Rapidez en $t = 1\ \text{s}$.</li>
-<li>Aceleración tangencial $a_t$ (justificá por qué es constante).</li>
-<li>Aceleración normal $a_n$ en $P$.</li>
-<li>Módulo de la aceleración total en $P$ y ángulo que forma con la tangente.</li>
-<li>Sabiendo que en $P$ el radio de curvatura se mantiene en $\rho=25\ \text{m}$ por un tramo, ¿en qué instante la aceleración sería puramente normal? ¿Es posible en este movimiento?</li>
-</ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<svg viewBox="0 0 300 170" width="300" height="170" xmlns="http://www.w3.org/2000/svg">
-<path d="M30,140 Q150,20 270,140" fill="none" stroke="#1a5490" stroke-width="2"/>
-<circle cx="150" cy="55" r="4" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
-<text x="158" y="52" font-size="12" fill="#1a5490">P</text>
-<line x1="150" y1="55" x2="220" y2="55" stroke="#333" stroke-width="2" marker-end="url(#arr2)"/>
-<text x="224" y="58" font-size="12" fill="#333">$\hat t$ ($a_t$)</text>
-<line x1="150" y1="55" x2="150" y2="120" stroke="#1a5490" stroke-width="2" marker-end="url(#arr3)"/>
-<text x="156" y="115" font-size="12" fill="#1a5490">$a_n$</text>
-<defs>
-<marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#333"/></marker>
-<marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#1a5490"/></marker>
-</defs>
-</svg>
-<p><strong>a)</strong> Evalúo la rapidez en $t = 1\ \text{s}$:</p>
-$$ v(1) = 3 + 2\cdot 1 = 5\ \text{m/s} $$
-<p><strong>b)</strong> La aceleración tangencial es la derivada de la rapidez:</p>
-$$ a_t = \frac{dv}{dt} = \frac{d}{dt}(3 + 2t) = 2\ \text{m/s}^2 $$
-<p>Es constante porque $v(t)$ es lineal en $t$: su pendiente (la tasa de cambio de la rapidez) vale siempre $2\ \text{m/s}^2$.</p>
-<p><strong>c)</strong> La aceleración normal en $P$ usa la rapidez de ese instante y el radio de curvatura:</p>
-$$ a_n = \frac{v^2}{\rho} = \frac{(5)^2}{25} = \frac{25}{25} = 1\ \text{m/s}^2 $$
-<p><strong>d)</strong> Como $\vec a_t \perp \vec a_n$:</p>
-$$ \lvert\vec a\rvert = \sqrt{a_t^2 + a_n^2} = \sqrt{2^2 + 1^2} = \sqrt{5} \approx 2{,}24\ \text{m/s}^2 $$
-$$ \tan\phi = \frac{a_n}{a_t} = \frac{1}{2} \;\Rightarrow\; \phi = \arctan(0{,}5) \approx 26{,}6^\circ $$
-<p><strong>e)</strong> La aceleración es puramente normal cuando $a_t = 0$, es decir cuando la rapidez deja de cambiar. Pero aquí $a_t = dv/dt = 2\ \text{m/s}^2 \neq 0$ en todo instante (la rapidez crece sin parar). Por lo tanto NO existe ningún instante con aceleración puramente normal en este movimiento.</p>
-<div class="alerta">Distinción clave: $a_t$ depende de cómo cambia la <em>rapidez</em> (módulo de $\vec v$), no de su dirección. $a_n$ depende de cómo cambia la <em>dirección</em>. La aceleración es puramente normal sólo si la rapidez es constante (MCU o paso por un extremo de la rapidez).</div>
-<div class="truco">Si en cambio hubieran dado $v(t) = 5 - 2t$, la aceleración sería puramente normal en $t = 2{,}5\ \text{s}$, justo cuando $v=0$ y $a_t$ todavía vale $-2$... cuidado: ahí $a_n = 0$ también. El instante "puramente normal" real exige $a_t=0$ con $v\neq 0$, o sea un máximo/mínimo de rapidez.</div>
-<div class="respuesta">$$\boxed{v(1)=5\ \tfrac{\text{m}}{\text{s}},\ a_t=2\ \tfrac{\text{m}}{\text{s}^2},\ a_n=1\ \tfrac{\text{m}}{\text{s}^2},\ \lvert\vec a\rvert=\sqrt5\approx 2{,}24\ \tfrac{\text{m}}{\text{s}^2},\ \phi\approx 26{,}6^\circ;\ \text{nunca es puramente normal}}$$</div>
-</details>
-</article>
-
-</section>
-<section class="tema" id="tema-dinamica" data-tema="dinamica">
-<h2 class="tema-titulo">2 · Dinámica</h2>
-
-<article class="ej" id="din-ej1" data-tema="dinamica">
-<h3>Ejercicio 1 — Fuerza neta y aceleración <span class="tchip">Dinámica</span> <span class="nivel">Nivel 1</span></h3>
-<div class="enunciado">
-Sobre un bloque de masa $m = 4\ \text{kg}$, apoyado en una superficie horizontal sin rozamiento, actúan dos fuerzas horizontales y colineales: $F_1 = 30\ \text{N}$ hacia la derecha y $F_2 = 18\ \text{N}$ hacia la izquierda. Hallar la aceleración del bloque.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Aplicamos la segunda ley de Newton sobre el eje horizontal. La fuerza neta es la suma vectorial de las dos fuerzas. Tomando positivo hacia la derecha:</p>
-$$ F_{\text{neta}} = F_1 - F_2 = 30\ \text{N} - 18\ \text{N} = 12\ \text{N} $$
-<p>Luego, despejamos la aceleración de $F_{\text{neta}} = m\,a$:</p>
-$$ a = \frac{F_{\text{neta}}}{m} = \frac{12\ \text{N}}{4\ \text{kg}} = 3\ \text{m/s}^2 $$
-<div class="truco">El peso y la normal se cancelan en vertical; sólo importa el balance horizontal.</div>
-<div class="respuesta">$$\boxed{a = 3\ \text{m/s}^2 \ \text{(hacia la derecha)}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej2" data-tema="dinamica">
-<h3>Ejercicio 2 — Plano inclinado sin rozamiento <span class="tchip">Dinámica</span> <span class="nivel">Nivel 2</span></h3>
-<div class="enunciado">
-Un bloque se suelta desde el reposo en la cima de un plano inclinado liso (sin rozamiento) que forma un ángulo $\alpha = 30^\circ$ con la horizontal. Hallar la aceleración con que desciende.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<svg viewBox="0 0 220 130" width="220" height="130" xmlns="http://www.w3.org/2000/svg">
-  <polygon points="20,110 200,110 200,40" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
-  <rect x="150" y="48" width="26" height="18" fill="#1a5490" transform="rotate(-21.3 163 57)"/>
-  <line x1="200" y1="110" x2="120" y2="110" stroke="#333" stroke-width="1"/>
-  <text x="172" y="105" font-size="12" fill="#333">α</text>
-</svg>
-<p>Elegimos ejes inclinados: $x$ paralelo al plano (positivo hacia abajo) e $y$ perpendicular. La única fuerza con componente sobre el plano es el peso. Su proyección paralela es $mg\,\text{sen}\,\alpha$:</p>
-$$ m\,a = mg\,\text{sen}\,\alpha \quad\Rightarrow\quad a = g\,\text{sen}\,\alpha $$
-<p>La masa se cancela. Reemplazando:</p>
-$$ a = 10\ \text{m/s}^2 \cdot \text{sen}\,30^\circ = 10 \cdot 0{,}5 = 5\ \text{m/s}^2 $$
-<div class="alerta">La normal es $N = mg\cos\alpha$, NO $mg$. En el eje perpendicular no hay aceleración, pero la normal ya no equilibra todo el peso.</div>
-<div class="respuesta">$$\boxed{a = g\,\text{sen}\,\alpha = 5\ \text{m/s}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej3" data-tema="dinamica">
+<!-- ===================== EJ3 ===================== -->
+<article class="ej" id="ej3" data-tema="dinamica">
 <h3>Ejercicio 3 — Plano inclinado con rozamiento <span class="tchip">Dinámica</span> <span class="nivel">Nivel 3</span></h3>
 <div class="enunciado">
-Un bloque de masa $m = 3\ \text{kg}$ se apoya en un plano inclinado de $\alpha = 37^\circ$ ($\text{sen}\,37^\circ = 0{,}6$; $\cos 37^\circ = 0{,}8$). Los coeficientes de rozamiento son $\mu_e = 0{,}5$ (estático) y $\mu_d = 0{,}4$ (dinámico).
-<ol type="a"><li>Determinar si el bloque, inicialmente en reposo, comienza a deslizar.</li><li>En caso afirmativo, hallar la aceleración con que desciende.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> El bloque desliza si la componente del peso paralela al plano supera al máximo rozamiento estático. El criterio equivalente compara $\tan\alpha$ con $\mu_e$:</p>
-$$ \tan 37^\circ = \frac{0{,}6}{0{,}8} = 0{,}75 \qquad \mu_e = 0{,}5 $$
-<p>Como $\tan\alpha = 0{,}75 > \mu_e = 0{,}5$, el peso vence al rozamiento estático máximo y el bloque <strong>sí desliza</strong>.</p>
-<p><strong>b)</strong> Una vez en movimiento actúa el rozamiento dinámico, opuesto al desplazamiento (hacia arriba del plano). La normal es $N = mg\cos\alpha$. Sobre el eje paralelo:</p>
-$$ m\,a = mg\,\text{sen}\,\alpha - \mu_d\, mg\cos\alpha $$
-$$ a = g\,(\text{sen}\,\alpha - \mu_d\cos\alpha) = 10\,(0{,}6 - 0{,}4 \cdot 0{,}8) $$
-$$ a = 10\,(0{,}6 - 0{,}32) = 10 \cdot 0{,}28 = 2{,}8\ \text{m/s}^2 $$
-<div class="truco">Atajo de chequeo: el bloque desliza ⟺ $\tan\alpha > \mu_e$. No hace falta calcular fuerzas para el inciso a).</div>
-<div class="respuesta">$$\boxed{\text{Desliza, con } a = 2{,}8\ \text{m/s}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej4" data-tema="dinamica">
-<h3>Ejercicio 4 — Bloque sobre mesa con polea ideal <span class="tchip">Dinámica</span> <span class="nivel">Nivel 4</span></h3>
-<div class="enunciado">
-Un bloque $A$ de masa $m_A = 2\ \text{kg}$ está sobre una mesa horizontal sin rozamiento, unido por una cuerda inextensible que pasa por una polea ideal (sin masa ni fricción) a un bloque $B$ de masa $m_B = 3\ \text{kg}$ que cuelga. Hallar la aceleración del sistema y la tensión de la cuerda.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>La cuerda inextensible impone que ambos bloques tienen el mismo módulo de aceleración $a$, y la polea ideal hace que la tensión $T$ sea la misma en todo el hilo. Planteamos Newton por bloque, en el sentido del movimiento (B baja, A avanza):</p>
-$$ \text{Bloque } A: \quad T = m_A\,a $$
-$$ \text{Bloque } B: \quad m_B\,g - T = m_B\,a $$
-<p>Sumando ambas ecuaciones se elimina $T$:</p>
-$$ m_B\,g = (m_A + m_B)\,a \quad\Rightarrow\quad a = \frac{m_B\,g}{m_A + m_B} = \frac{3 \cdot 10}{2 + 3} = 6\ \text{m/s}^2 $$
-<p>Y la tensión:</p>
-$$ T = m_A\,a = 2 \cdot 6 = 12\ \text{N} $$
-<div class="alerta">$T \neq m_B\,g$. Si la cuerda sostuviera a B en reposo sería $30\ \text{N}$; como B acelera hacia abajo, la tensión es menor.</div>
-<div class="respuesta">$$\boxed{a = 6\ \text{m/s}^2 \qquad T = 12\ \text{N}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej5" data-tema="dinamica">
-<h3>Ejercicio 5 — Cuerpos apilados con rozamiento <span class="tchip">Dinámica</span> <span class="nivel">Nivel 5</span></h3>
-<div class="enunciado">
-Sobre un bloque inferior $M = 4\ \text{kg}$, apoyado en un piso liso, descansa un bloque superior $m = 2\ \text{kg}$. El coeficiente de rozamiento estático entre los bloques es $\mu_e = 0{,}3$ (no hay rozamiento con el piso). Se empuja al bloque inferior con una fuerza horizontal $F$.
-<ol type="a"><li>Hallar la máxima fuerza $F$ para que ambos bloques se muevan juntos (el de arriba no resbale).</li><li>Calcular la aceleración común en ese límite.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> Quien arrastra al bloque de arriba es únicamente el rozamiento que el de abajo le ejerce. Para el bloque superior, ese rozamiento es la única fuerza horizontal y vale como máximo $f_{\max} = \mu_e\,m\,g$:</p>
-$$ f_{\max} = \mu_e\,m\,g = 0{,}3 \cdot 2 \cdot 10 = 6\ \text{N} $$
-<p>La máxima aceleración que el rozamiento puede imprimir al bloque de arriba es:</p>
-$$ a_{\max} = \frac{f_{\max}}{m} = \frac{6}{2} = 3\ \text{m/s}^2 $$
-<p>Si los dos se mueven juntos con esa aceleración, la fuerza externa aplicada al conjunto $(M+m)$ es:</p>
-$$ F_{\max} = (M + m)\,a_{\max} = (4 + 2) \cdot 3 = 18\ \text{N} $$
-<p><strong>b)</strong> En ese límite la aceleración común es $a_{\max} = 3\ \text{m/s}^2$.</p>
-<div class="truco">Clave: tratá el conjunto como uno solo para hallar $a$, pero analizá el bloque de arriba <em>aislado</em> para imponer el límite del rozamiento.</div>
-<div class="respuesta">$$\boxed{F_{\max} = 18\ \text{N} \qquad a = 3\ \text{m/s}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej6" data-tema="dinamica">
-<h3>Ejercicio 6 — Curva plana: velocidad máxima <span class="tchip">Dinámica</span> <span class="nivel">Nivel 6</span></h3>
-<div class="enunciado">
-Un auto recorre una curva plana (sin peralte) de radio $R = 50\ \text{m}$. El coeficiente de rozamiento estático entre las ruedas y el asfalto es $\mu_e = 0{,}8$. Hallar la máxima velocidad con la que puede tomar la curva sin derrapar.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>En una curva plana, la única fuerza horizontal que aporta la aceleración centrípeta es el rozamiento estático, que apunta hacia el centro. En vertical $N = mg$. La condición límite es que el rozamiento alcance su valor máximo:</p>
-$$ f = \mu_e\,N = \mu_e\,m\,g = m\,\frac{v^2}{R} $$
-<p>La masa se cancela y despejamos $v$:</p>
-$$ v_{\max} = \sqrt{\mu_e\,g\,R} = \sqrt{0{,}8 \cdot 10 \cdot 50} = \sqrt{400} $$
-$$ v_{\max} = 20\ \text{m/s} $$
-<div class="alerta">$v_{\max}$ no depende de la masa. Un camión y un auto derrapan a la misma velocidad en la misma curva (con igual $\mu_e$).</div>
-<div class="respuesta">$$\boxed{v_{\max} = \sqrt{\mu_e\,g\,R} = 20\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej7" data-tema="dinamica">
-<h3>Ejercicio 7 — Peralte ideal (sin rozamiento) <span class="tchip">Dinámica</span> <span class="nivel">Nivel 7</span></h3>
-<div class="enunciado">
-Se desea diseñar el peralte de una curva de radio $R = 80\ \text{m}$ de modo que un auto que circule a $v = 20\ \text{m/s}$ pueda tomarla sin necesidad de rozamiento (peralte ideal). Hallar el ángulo $\theta$ de inclinación de la pista.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<svg viewBox="0 0 220 130" width="220" height="130" xmlns="http://www.w3.org/2000/svg">
-  <polygon points="30,110 190,110 190,55" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
-  <rect x="150" y="62" width="24" height="14" fill="#1a5490" transform="rotate(-18.9 162 69)"/>
-  <line x1="162" y1="69" x2="162" y2="40" stroke="#333" stroke-width="1.5"/>
-  <text x="166" y="44" font-size="11" fill="#333">N</text>
-  <line x1="162" y1="69" x2="162" y2="98" stroke="#333" stroke-width="1.5"/>
-  <text x="166" y="96" font-size="11" fill="#333">P</text>
-  <text x="172" y="106" font-size="12" fill="#333">θ</text>
-</svg>
-<p>Sin rozamiento, las únicas fuerzas son el peso $P = mg$ (vertical) y la normal $N$ (perpendicular a la pista, inclinada $\theta$). La normal debe equilibrar el peso en vertical y aportar la centrípeta en horizontal:</p>
-$$ \text{Vertical:} \quad N\cos\theta = mg $$
-$$ \text{Horizontal (hacia el centro):} \quad N\,\text{sen}\,\theta = m\,\frac{v^2}{R} $$
-<p>Dividiendo la segunda ecuación por la primera, $N$ y $m$ se cancelan:</p>
-$$ \tan\theta = \frac{v^2}{g\,R} = \frac{20^2}{10 \cdot 80} = \frac{400}{800} = 0{,}5 $$
-$$ \theta = \arctan(0{,}5) \approx 26{,}6^\circ $$
-<div class="truco">FIRMA DE MORENO: el peralte ideal cumple $\tan\theta = v^2/(gR)$, independiente de la masa. Es la misma relación que aparece en el péndulo cónico.</div>
-<div class="respuesta">$$\boxed{\tan\theta = \frac{v^2}{gR} = 0{,}5 \;\Rightarrow\; \theta \approx 26{,}6^\circ}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej8" data-tema="dinamica">
-<h3>Ejercicio 8 — Peralte con rozamiento <span class="tchip">Dinámica</span> <span class="nivel">Nivel 8</span></h3>
-<div class="enunciado">
-Una curva peraltada con ángulo $\theta = 37^\circ$ ($\text{sen}\,37^\circ = 0{,}6$; $\cos 37^\circ = 0{,}8$) tiene radio $R = 100\ \text{m}$. Por lluvia, el coeficiente de rozamiento estático baja a $\mu_e = 0{,}2$. Hallar la máxima velocidad a la que un auto puede tomar la curva sin derrapar hacia afuera.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>A la velocidad máxima el auto tiende a salirse por el borde exterior, por lo que el rozamiento estático apunta hacia <em>abajo</em> del plano (hacia el centro), con su valor máximo $f = \mu_e N$. Proyectamos sobre ejes horizontal y vertical:</p>
-$$ \text{Horizontal:} \quad N\,\text{sen}\,\theta + \mu_e N\cos\theta = m\,\frac{v^2}{R} $$
-$$ \text{Vertical:} \quad N\cos\theta - \mu_e N\,\text{sen}\,\theta = mg $$
-<p>Dividiendo la primera por la segunda y despejando, $N$ y $m$ se cancelan:</p>
-$$ \frac{v^2}{gR} = \frac{\text{sen}\,\theta + \mu_e\cos\theta}{\cos\theta - \mu_e\,\text{sen}\,\theta} = \frac{0{,}6 + 0{,}2 \cdot 0{,}8}{0{,}8 - 0{,}2 \cdot 0{,}6} = \frac{0{,}76}{0{,}68} $$
-$$ v^2 = g\,R \cdot \frac{0{,}76}{0{,}68} = 10 \cdot 100 \cdot 1{,}1176 \approx 1117{,}6\ \tfrac{\text{m}^2}{\text{s}^2} $$
-$$ v_{\max} = \sqrt{1117{,}6} \approx 33{,}4\ \text{m/s} $$
-<div class="alerta">El rozamiento <em>suma</em> a la velocidad máxima (apunta hacia el centro), pero <em>resta</em> a la mínima. Verificar siempre el sentido del rozamiento según el caso.</div>
-<div class="respuesta">$$\boxed{v_{\max} = \sqrt{gR\,\dfrac{\text{sen}\,\theta + \mu_e\cos\theta}{\cos\theta - \mu_e\,\text{sen}\,\theta}} \approx 33{,}4\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej9" data-tema="dinamica">
-<h3>Ejercicio 9 — Cuña acelerada (sin rozamiento) <span class="tchip">Dinámica</span> <span class="nivel">Nivel 9</span></h3>
-<div class="enunciado">
-Un bloque de masa $m$ se apoya sobre la cara inclinada (ángulo $\alpha = 37^\circ$) de una cuña, sin rozamiento entre ambos. La cuña se acelera horizontalmente con aceleración $a$. Hallar el valor de $a$ para que el bloque <strong>no deslice</strong> respecto de la cuña (que suba ni baje la rampa).
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Si el bloque no desliza, acompaña a la cuña con la misma aceleración horizontal $a$. Sin rozamiento, las únicas fuerzas sobre el bloque son el peso $mg$ y la normal $N$ (perpendicular a la cara, inclinada $\alpha$). Newton en ejes horizontal y vertical:</p>
-$$ \text{Horizontal:} \quad N\,\text{sen}\,\alpha = m\,a $$
-$$ \text{Vertical:} \quad N\cos\alpha = mg $$
-<p>Dividiendo la primera por la segunda, $N$ y $m$ se cancelan:</p>
-$$ \tan\alpha = \frac{a}{g} \quad\Rightarrow\quad a = g\,\tan\alpha $$
-$$ a = 10 \cdot \tan 37^\circ = 10 \cdot 0{,}75 = 7{,}5\ \text{m/s}^2 $$
-<div class="truco">Misma estructura que el peralte ideal: $\tan\alpha = a/g$. La normal hace de "peralte" que provee la fuerza horizontal justa.</div>
-<div class="respuesta">$$\boxed{a = g\,\tan\alpha = 7{,}5\ \text{m/s}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="din-ej10" data-tema="dinamica">
-<h3>Ejercicio 10 — Cuña con rozamiento tirada por una fuerza <span class="tchip parcial">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
-<div class="enunciado">
-Un bloque de masa $m = 2\ \text{kg}$ se apoya sobre la cara inclinada ($\alpha = 37^\circ$; $\text{sen}\,37^\circ = 0{,}6$, $\cos 37^\circ = 0{,}8$) de una cuña de masa $M = 6\ \text{kg}$, que descansa sobre un piso liso. El coeficiente de rozamiento estático entre bloque y cuña es $\mu_e = 0{,}5$. Se aplica una fuerza horizontal $F$ sobre la cuña, en el sentido que la empuja "contra" el bloque.
-<ol type="a"><li>Hallar la máxima fuerza $F$ para que el bloque NO deslice (no suba la rampa).</li><li>Analizar qué ocurre con el bloque si $F = 0$ (cuña libre): ¿queda en reposo relativo o desliza? Justificar con el criterio $\mu_e$ vs $\tan\alpha$.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<svg viewBox="0 0 280 160" width="280" height="160" xmlns="http://www.w3.org/2000/svg">
-  <polygon points="30,130 240,130 240,40" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
-  <rect x="178" y="60" width="30" height="20" fill="#1a5490" transform="rotate(-36.9 193 70)"/>
-  <text x="222" y="124" font-size="13" fill="#333">α</text>
-  <line x1="30" y1="130" x2="30" y2="90" stroke="#1a5490" stroke-width="2.5" marker-end="url(#arr)"/>
-  <text x="10" y="86" font-size="13" fill="#1a5490">F</text>
-  <!-- DCL del bloque -->
-  <text x="40" y="20" font-size="12" fill="#333">DCL del bloque:</text>
-  <circle cx="150" cy="95" r="3" fill="#333"/>
-  <line x1="150" y1="95" x2="150" y2="135" stroke="#333" stroke-width="1.5" marker-end="url(#arr2)"/>
-  <text x="154" y="132" font-size="11" fill="#333">P = mg</text>
-  <line x1="150" y1="95" x2="174" y2="63" stroke="#333" stroke-width="1.5" marker-end="url(#arr2)"/>
-  <text x="176" y="62" font-size="11" fill="#333">N</text>
-  <line x1="150" y1="95" x2="126" y2="77" stroke="#333" stroke-width="1.5" marker-end="url(#arr2)"/>
-  <text x="98" y="74" font-size="11" fill="#333">f (roz.)</text>
-  <defs>
-    <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1a5490"/></marker>
-    <marker id="arr2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#333"/></marker>
-  </defs>
-</svg>
-<p><strong>a)</strong> Todo el sistema se acelera horizontalmente con $a = F/(M+m)$. Analizamos el bloque aislado, que tiene aceleración horizontal $a$ y vertical nula. Cuando $F$ es máxima, el bloque tiende a subir la rampa, por lo que el rozamiento $f = \mu_e N$ actúa hacia abajo del plano. Proyectamos en ejes horizontal y vertical:</p>
-$$ \text{Horizontal:} \quad N\,\text{sen}\,\alpha + \mu_e N\cos\alpha = m\,a $$
-$$ \text{Vertical:} \quad N\cos\alpha - \mu_e N\,\text{sen}\,\alpha = mg $$
-<p>Dividiendo la primera por la segunda obtenemos la aceleración máxima admisible (se cancelan $N$ y $m$):</p>
-$$ a_{\max} = g\,\frac{\text{sen}\,\alpha + \mu_e\cos\alpha}{\cos\alpha - \mu_e\,\text{sen}\,\alpha} = 10\cdot\frac{0{,}6 + 0{,}5\cdot 0{,}8}{0{,}8 - 0{,}5\cdot 0{,}6} = 10\cdot\frac{1{,}0}{0{,}5} = 20\ \text{m/s}^2 $$
-<p>La fuerza que produce esa aceleración sobre todo el sistema $(M+m)$ es:</p>
-$$ F_{\max} = (M + m)\,a_{\max} = (6 + 2)\cdot 20 = 160\ \text{N} $$
-<p><strong>b)</strong> Con $F = 0$ la cuña queda libre y $a = 0$. El bloque sobre una rampa lisa-no... el criterio para que NO deslice por su propio peso es comparar $\mu_e$ con $\tan\alpha$:</p>
-$$ \tan 37^\circ = \frac{0{,}6}{0{,}8} = 0{,}75 \qquad \mu_e = 0{,}5 $$
-<p>Como $\tan\alpha = 0{,}75 > \mu_e = 0{,}5$, el rozamiento estático máximo NO alcanza para sostener al bloque: <strong>el bloque desliza hacia abajo</strong> (y empuja la cuña). Para mantenerlo en reposo relativo haría falta una aceleración mínima del sistema. Esa aceleración mínima (rozamiento hacia arriba del plano) es:</p>
-$$ a_{\min} = g\,\frac{\text{sen}\,\alpha - \mu_e\cos\alpha}{\cos\alpha + \mu_e\,\text{sen}\,\alpha} = 10\cdot\frac{0{,}6 - 0{,}4}{0{,}8 + 0{,}3} = 10\cdot\frac{0{,}2}{1{,}1} \approx 1{,}82\ \text{m/s}^2 $$
-<p>Es decir, el bloque permanece sin deslizar sólo si $a_{\min} \le a \le a_{\max}$, o sea para $F$ entre $\approx 14{,}5\ \text{N}$ y $160\ \text{N}$. Con $F = 0$ ($a=0 < a_{\min}$) desliza hacia abajo.</p>
-<div class="alerta">No alcanza con que $F$ no sea demasiado grande: también hay un mínimo. Si $\tan\alpha > \mu_e$, $F = 0$ NO es solución de equilibrio relativo.</div>
-<div class="respuesta">$$\boxed{F_{\max} = 160\ \text{N}}$$ $$\boxed{\text{Con } F=0:\ \tan\alpha=0{,}75>\mu_e=0{,}5 \Rightarrow \text{el bloque desliza hacia abajo}}$$</div>
-</details>
-</article>
-
-</section>
-<section class="tema" id="tema-energia" data-tema="energia">
-<h2 class="tema-titulo">3 · Trabajo y energía</h2>
-
-<article class="ej" id="ene-ej1" data-tema="energia">
-<h3>Ejercicio 1 — Empujón horizontal <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 1</span></h3>
-<div class="enunciado">
-Una persona empuja una caja sobre un piso horizontal aplicando una fuerza constante de $F = 40\ \text{N}$ en la misma dirección y sentido del desplazamiento. La caja avanza $d = 5\ \text{m}$. Calculá el trabajo realizado por la fuerza.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Cuando la fuerza es constante y paralela al desplazamiento, el trabajo es simplemente el producto del módulo de la fuerza por la distancia recorrida:</p>
-$$ W = F \cdot d $$
-$$ W = 40\ \text{N} \cdot 5\ \text{m} = 200\ \text{J} $$
-<div class="truco">Chequeo de unidades: $\text{N}\cdot\text{m} = \text{J}$ (joule). El trabajo es positivo porque la fuerza "acompaña" al movimiento.</div>
-<div class="respuesta">$$\boxed{W = 200\ \text{J}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej2" data-tema="energia">
-<h3>Ejercicio 2 — Trabajo con ángulo y fuerza perpendicular <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 2</span></h3>
-<div class="enunciado">
-Se arrastra un bloque $d = 8\ \text{m}$ sobre un piso horizontal con una cuerda que forma $\theta = 30^\circ$ con la horizontal. La tensión es $F = 50\ \text{N}$.
-<ol type="a"><li>Calculá el trabajo de la tensión.</li><li>¿Cuánto trabajo realiza la fuerza peso (vertical) durante este desplazamiento horizontal?</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> Sólo la componente de la fuerza en la dirección del desplazamiento hace trabajo:</p>
-$$ W = F \cdot d \cdot \cos\theta = 50\ \text{N} \cdot 8\ \text{m} \cdot \cos 30^\circ $$
-$$ W = 400 \cdot \frac{\sqrt{3}}{2}\ \text{J} \approx 346{,}4\ \text{J} $$
-<p><strong>b)</strong> El peso es vertical y el desplazamiento es horizontal: el ángulo entre ambos es $90^\circ$, y $\cos 90^\circ = 0$.</p>
-$$ W_{\text{peso}} = P \cdot d \cdot \cos 90^\circ = 0 $$
-<div class="alerta">Error típico: pensar que toda fuerza "que actúa" hace trabajo. Una fuerza perpendicular al desplazamiento (como la normal o el peso en un movimiento horizontal) realiza trabajo nulo.</div>
-<div class="respuesta">$$\boxed{W_F \approx 346{,}4\ \text{J} \qquad W_{\text{peso}} = 0}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej3" data-tema="energia">
-<h3>Ejercicio 3 — Teorema del trabajo y la energía cinética <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 3</span></h3>
-<div class="enunciado">
-Un carrito de $m = 2\ \text{kg}$ parte del reposo sobre un riel horizontal sin rozamiento. Una fuerza neta constante de $F = 6\ \text{N}$ actúa a lo largo de $d = 3\ \text{m}$. Hallá la velocidad final del carrito.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>El teorema del trabajo y la energía cinética dice que el trabajo de la fuerza <em>neta</em> es igual a la variación de energía cinética:</p>
-$$ W_{\text{neto}} = \Delta E_c = \tfrac{1}{2}m v_f^2 - \tfrac{1}{2}m v_i^2 $$
-<p>Como parte del reposo, $v_i = 0$. Primero el trabajo neto:</p>
-$$ W_{\text{neto}} = F\cdot d = 6\ \text{N}\cdot 3\ \text{m} = 18\ \text{J} $$
-<p>Igualamos a la energía cinética final y despejamos $v_f$:</p>
-$$ 18\ \text{J} = \tfrac{1}{2}\cdot 2\ \text{kg}\cdot v_f^2 \;\Rightarrow\; v_f^2 = 18\ \tfrac{\text{m}^2}{\text{s}^2} $$
-$$ v_f = \sqrt{18}\ \text{m/s} \approx 4{,}24\ \text{m/s} $$
-<div class="truco">El teorema evita usar cinemática: no hace falta calcular la aceleración ni el tiempo, sólo importan fuerza y desplazamiento.</div>
-<div class="respuesta">$$\boxed{v_f = \sqrt{18}\ \text{m/s} \approx 4{,}24\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej4" data-tema="energia">
-<h3>Ejercicio 4 — Potencia media e instantánea <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 4</span></h3>
-<div class="enunciado">
-Un motor de montacargas eleva una carga de $m = 100\ \text{kg}$ a velocidad constante una altura de $h = 12\ \text{m}$ en $t = 8\ \text{s}$.
-<ol type="a"><li>Calculá la potencia media desarrollada por el motor.</li><li>Si en otra etapa el montacargas sube a velocidad constante $v = 2\ \text{m/s}$, ¿qué potencia instantánea entrega el motor?</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> A velocidad constante, el motor hace una fuerza igual al peso. El trabajo del motor es:</p>
-$$ W = m g h = 100\ \text{kg}\cdot 10\ \tfrac{\text{m}}{\text{s}^2}\cdot 12\ \text{m} = 12000\ \text{J} $$
-$$ P_{\text{media}} = \frac{W}{t} = \frac{12000\ \text{J}}{8\ \text{s}} = 1500\ \text{W} $$
-<p><strong>b)</strong> La potencia instantánea es $P = \vec F \cdot \vec v$. Como fuerza y velocidad son paralelas (ambas verticales hacia arriba):</p>
-$$ P = F\cdot v = m g \cdot v = 100\cdot 10\cdot 2\ \text{W} = 2000\ \text{W} $$
-<div class="truco">$1\ \text{W} = 1\ \text{J/s}$. La fórmula $P = F\cdot v$ es muy útil para sistemas que se mueven a velocidad constante (motores, autos en ruta).</div>
-<div class="respuesta">$$\boxed{P_{\text{media}} = 1500\ \text{W} \qquad P_{\text{inst}} = 2000\ \text{W}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej5" data-tema="energia">
-<h3>Ejercicio 5 — Conservación de energía mecánica <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 5</span></h3>
-<div class="enunciado">
-Un bloque se suelta desde el reposo en lo alto de una rampa lisa (sin rozamiento) de altura $h = 1{,}8\ \text{m}$. Hallá la velocidad con la que llega al pie de la rampa. ¿Depende el resultado del ángulo de la rampa?
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Sin rozamiento, sólo actúan el peso (conservativo) y la normal (perpendicular, trabajo nulo). Por lo tanto la energía mecánica se conserva:</p>
-$$ E_m^{(i)} = E_m^{(f)} \;\Rightarrow\; \underbrace{m g h + 0}_{\text{arriba, reposo}} = \underbrace{0 + \tfrac{1}{2}m v_f^2}_{\text{abajo}} $$
-<p>La masa se cancela. Despejamos:</p>
-$$ v_f = \sqrt{2 g h} = \sqrt{2\cdot 10\cdot 1{,}8}\ \text{m/s} = \sqrt{36}\ \text{m/s} = 6\ \text{m/s} $$
-<div class="truco">El ángulo de la rampa <strong>no</strong> aparece: para una superficie lisa, la velocidad final sólo depende de la altura $h$. Una rampa más tendida da menor velocidad por menos altura, pero a igual $h$ el resultado es idéntico (incluso en caída libre).</div>
-<div class="respuesta">$$\boxed{v_f = \sqrt{2gh} = 6\ \text{m/s} \quad (\text{independiente del ángulo})}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej6" data-tema="energia">
-<h3>Ejercicio 6 — Energía potencial elástica de un resorte <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 6</span></h3>
-<div class="enunciado">
-Un bloque de $m = 0{,}5\ \text{kg}$ está apoyado contra un resorte de constante $k = 200\ \text{N/m}$, comprimido $x = 0{,}1\ \text{m}$, sobre una superficie horizontal lisa. Se suelta el resorte.
-<ol type="a"><li>¿Con qué velocidad sale despedido el bloque?</li><li>Si luego sube por una rampa lisa, ¿qué altura máxima alcanza?</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> La energía potencial elástica almacenada es $E_{pe} = \tfrac{1}{2}k x^2$. Al soltar, toda esa energía se convierte en cinética (superficie lisa):</p>
-$$ \tfrac{1}{2}k x^2 = \tfrac{1}{2}m v^2 $$
-$$ E_{pe} = \tfrac{1}{2}\cdot 200\cdot (0{,}1)^2\ \text{J} = 1\ \text{J} $$
-$$ v = \sqrt{\frac{k x^2}{m}} = \sqrt{\frac{200\cdot (0{,}1)^2}{0{,}5}}\ \text{m/s} = \sqrt{4}\ \text{m/s} = 2\ \text{m/s} $$
-<p><strong>b)</strong> Subiendo por la rampa lisa, la cinética se transforma íntegramente en potencial gravitatoria:</p>
-$$ \tfrac{1}{2}m v^2 = m g h_{\max} \;\Rightarrow\; h_{\max} = \frac{v^2}{2g} = \frac{4}{2\cdot 10}\ \text{m} = 0{,}2\ \text{m} $$
-<div class="truco">Atajo: como todo es conservativo, podés igualar directamente la energía elástica inicial con la potencial final: $\tfrac{1}{2}kx^2 = mgh_{\max}$, sin pasar por la velocidad.</div>
-<div class="respuesta">$$\boxed{v = 2\ \text{m/s} \qquad h_{\max} = 0{,}2\ \text{m}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej7" data-tema="energia">
-<h3>Ejercicio 7 — Trabajo de una fuerza variable (integral) <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 7</span></h3>
-<div class="enunciado">
-Sobre una partícula que se mueve a lo largo del eje $x$ actúa una fuerza variable $F(x) = 3x^2\ \text{N}$ (con $x$ en metros). Calculá el trabajo que realiza esta fuerza al mover la partícula desde $x = 0$ hasta $x = 2\ \text{m}$.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Cuando la fuerza depende de la posición, el trabajo se calcula como una integral (es el área bajo la curva $F$ vs $x$):</p>
-$$ W = \int_{x_i}^{x_f} F(x)\,dx = \int_{0}^{2} 3x^2\,dx $$
-<p>Resolvemos la integral:</p>
-$$ W = \left[\, 3\cdot\frac{x^3}{3} \,\right]_0^2 = \big[\, x^3 \,\big]_0^2 = 2^3 - 0^3 = 8 $$
-$$ W = 8\ \text{J} $$
-<div class="alerta">Error típico: usar $W = F\cdot d$ con la fuerza "del final" ($F(2) = 12\ \text{N}$, lo que daría $24\ \text{J}$). Eso vale sólo si la fuerza es constante. Con fuerza variable hay que integrar.</div>
-<div class="respuesta">$$\boxed{W = 8\ \text{J}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej8" data-tema="energia">
-<h3>Ejercicio 8 — Conservatividad y energía potencial (rotor) <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 8</span></h3>
-<div class="enunciado">
-Dada la fuerza $\vec F(x,y) = (2xy)\,\hat{\imath} + (x^2)\,\hat{\jmath}$ (en newtons, con $x,y$ en metros):
-<ol type="a"><li>Verificá si es conservativa.</li><li>Si lo es, hallá la función energía potencial $E_p(x,y)$.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> En el plano, una fuerza es conservativa si su rotor es nulo, es decir si:</p>
-$$ \frac{\partial F_y}{\partial x} = \frac{\partial F_x}{\partial y} $$
-<p>Con $F_x = 2xy$ y $F_y = x^2$:</p>
-$$ \frac{\partial F_x}{\partial y} = \frac{\partial (2xy)}{\partial y} = 2x \qquad \frac{\partial F_y}{\partial x} = \frac{\partial (x^2)}{\partial x} = 2x $$
-<p>Como coinciden, el rotor es nulo y la fuerza <strong>es conservativa</strong>.</p>
-<p><strong>b)</strong> La energía potencial cumple $\vec F = -\nabla E_p$, es decir $F_x = -\dfrac{\partial E_p}{\partial x}$ y $F_y = -\dfrac{\partial E_p}{\partial y}$.</p>
-$$ -\frac{\partial E_p}{\partial x} = 2xy \;\Rightarrow\; E_p = -x^2 y + g(y) $$
-<p>Derivamos respecto de $y$ y la igualamos a $-F_y$:</p>
-$$ -\frac{\partial E_p}{\partial y} = -\big(-x^2 + g'(y)\big) = x^2 - g'(y) = F_y = x^2 \;\Rightarrow\; g'(y) = 0 $$
-<p>Entonces $g(y) = \text{cte}$, y tomando la constante nula:</p>
-$$ E_p(x,y) = -x^2 y $$
-<div class="truco">Chequeo: $-\nabla E_p = -\big(-2xy,\,-x^2\big) = (2xy,\,x^2) = \vec F$. ¡Cierra!</div>
-<div class="respuesta">$$\boxed{\text{Conservativa, con } E_p(x,y) = -x^2 y + \text{cte}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej9" data-tema="energia">
-<h3>Ejercicio 9 — Campo no conservativo: trabajo según el camino <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 9</span></h3>
-<div class="enunciado">
-Sea la fuerza $\vec F(x,y) = (y)\,\hat{\imath} + (2x)\,\hat{\jmath}$ (en newtons). Calculá el trabajo para llevar una partícula desde $A=(0,0)$ hasta $B=(1,1)$ por dos caminos distintos y comparalos:
-<ol type="a"><li>Camino I: la recta directa $A \to B$.</li><li>Camino II: primero $A=(0,0) \to C=(1,0)$ y luego $C \to B=(1,1)$.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>El trabajo es la integral de línea $W = \displaystyle\int_C \vec F\cdot d\vec r = \int_C \big(F_x\,dx + F_y\,dy\big)$.</p>
-<p><strong>a) Camino I (recta $y = x$):</strong> parametrizamos $x = t$, $y = t$, con $t: 0 \to 1$, así que $dx = dt$, $dy = dt$.</p>
-$$ W_I = \int_0^1 \big(\underbrace{y}_{=t}\,dt + \underbrace{2x}_{=2t}\,dt\big) = \int_0^1 (t + 2t)\,dt = \int_0^1 3t\,dt = \left[\tfrac{3}{2}t^2\right]_0^1 = \tfrac{3}{2} $$
-$$ W_I = 1{,}5\ \text{J} $$
-<p><strong>b) Camino II (dos tramos):</strong></p>
-<p>Tramo $A\to C$: $y = 0$ constante (así $dy = 0$), $x: 0 \to 1$. Como $F_x = y = 0$ en todo el tramo:</p>
-$$ W_{AC} = \int_0^1 0\,dx = 0 $$
-<p>Tramo $C\to B$: $x = 1$ constante (así $dx = 0$), $y: 0 \to 1$. Como $F_y = 2x = 2$:</p>
-$$ W_{CB} = \int_0^1 2\,dy = 2 $$
-$$ W_{II} = W_{AC} + W_{CB} = 0 + 2 = 2\ \text{J} $$
-<p>Como $W_I = 1{,}5\ \text{J} \neq W_{II} = 2\ \text{J}$, el trabajo <strong>depende del camino</strong>: la fuerza <strong>no es conservativa</strong>.</p>
-<div class="alerta">Verificación con el rotor: $\dfrac{\partial F_y}{\partial x} = 2$ y $\dfrac{\partial F_x}{\partial y} = 1$. Como $2 \neq 1$, el rotor no es nulo, confirmando que el campo no es conservativo (por eso el trabajo no es único entre $A$ y $B$).</div>
-<div class="respuesta">$$\boxed{W_I = 1{,}5\ \text{J} \neq W_{II} = 2\ \text{J} \;\Rightarrow\; \text{no conservativa}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="ene-ej10" data-tema="energia">
-<h3>Ejercicio 10 — Trabajo sobre trayectoria cerrada <span class="tchip parcial">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
-<div class="enunciado">
-Sobre una partícula actúa la fuerza $\vec F(x,y) = (2x + y)\,\hat{\imath}\ \text{[N]}$ (sólo tiene componente en $x$; con $x,y$ en metros). La partícula recorre la trayectoria cerrada que une, en este orden, los vértices:
-$$ O=(0,0) \;\to\; A=(3,9) \;\to\; B=(-1,9) \;\to\; O=(0,0) $$
-donde el tramo $O\to A$ sigue la parábola $y = x^2$, y los tramos $A\to B$ y $B\to O$ son segmentos de recta.
-<ol type="a"><li>Calculá el trabajo en cada tramo (parametrizando).</li><li>Calculá el trabajo total a lo largo de la trayectoria cerrada.</li><li>¿La fuerza es conservativa? Justificá con el rotor.</li><li>Enunciá los tres teoremas de trabajo y energía y vinculalos con este resultado.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Como $\vec F$ sólo tiene componente en $x$, en todo tramo el trabajo es $W = \displaystyle\int F_x\,dx = \int (2x+y)\,dx$. Hay que expresar $y$ en función de $x$ en cada tramo.</p>
-
-<p><strong>a) Tramo 1: $O=(0,0)\to A=(3,9)$ por la parábola $y = x^2$.</strong> Reemplazamos $y = x^2$, con $x: 0 \to 3$:</p>
-$$ W_1 = \int_0^3 (2x + x^2)\,dx = \left[\, x^2 + \tfrac{x^3}{3} \,\right]_0^3 = \big(9 + 9\big) - 0 = 18\ \text{J} $$
-
-<p><strong>Tramo 2: $A=(3,9)\to B=(-1,9)$, recta horizontal $y = 9$.</strong> Aquí $y = 9$ constante y $x: 3 \to -1$:</p>
-$$ W_2 = \int_{3}^{-1} (2x + 9)\,dx = \left[\, x^2 + 9x \,\right]_{3}^{-1} = \big((-1)^2 + 9(-1)\big) - \big(3^2 + 9\cdot 3\big) $$
-$$ W_2 = (1 - 9) - (9 + 27) = -8 - 36 = -44\ \text{J} $$
-
-<p><strong>Tramo 3: $B=(-1,9)\to O=(0,0)$, recta por el origen.</strong> Su pendiente es $\dfrac{0-9}{0-(-1)} = -9$, o sea $y = -9x$, con $x: -1 \to 0$:</p>
-$$ W_3 = \int_{-1}^{0} \big(2x + (-9x)\big)\,dx = \int_{-1}^{0} (-7x)\,dx = \left[\, -\tfrac{7}{2}x^2 \,\right]_{-1}^{0} = 0 - \big(-\tfrac{7}{2}\big) = \tfrac{7}{2} = 3{,}5\ \text{J} $$
-
-<p><strong>b) Trabajo total sobre la curva cerrada:</strong></p>
-$$ W_{\text{total}} = W_1 + W_2 + W_3 = 18 - 44 + 3{,}5 = -22{,}5\ \text{J} $$
-
-<p><strong>c) Conservatividad (rotor).</strong> Con $F_x = 2x + y$ y $F_y = 0$:</p>
-$$ \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} = 0 - 1 = -1 \neq 0 $$
-<p>El rotor no es nulo, así que la fuerza <strong>no es conservativa</strong>. Esto es totalmente coherente con el inciso b): si fuera conservativa, el trabajo sobre cualquier trayectoria cerrada debería ser cero, y acá dio $-22{,}5\ \text{J} \neq 0$.</p>
-
-<p><strong>d) Los tres teoremas:</strong></p>
-<ol type="1">
-<li><strong>Teorema del trabajo y la energía cinética:</strong> el trabajo de <em>todas</em> las fuerzas es igual a la variación de energía cinética. $$ W_{\text{total}} = \Delta E_c $$ En esta curva cerrada, $W_{\text{total}} = -22{,}5\ \text{J}$, así que si esta fuese la única fuerza, la partícula vuelve a $O$ con $\Delta E_c = -22{,}5\ \text{J}$ (más lenta que al salir).</li>
-<li><strong>Trabajo de fuerzas conservativas:</strong> $$ W_{\text{cons}} = -\Delta E_p $$ Sólo se define $E_p$ para la parte conservativa de la fuerza; como aquí el campo no lo es, no admite una $E_p$ asociada.</li>
-<li><strong>Trabajo de fuerzas no conservativas:</strong> $$ W_{\text{no-cons}} = \Delta E_m = \Delta(E_c + E_p) $$ La parte no conservativa cambia la energía mecánica total. Aquí toda la fuerza es no conservativa, por lo que su trabajo ($-22{,}5\ \text{J}$) es directamente la variación de energía mecánica del sistema.</li>
-</ol>
-<div class="alerta">Error típico: suponer que "trayectoria cerrada $\Rightarrow$ trabajo nulo". Eso vale <strong>sólo</strong> para fuerzas conservativas. Acá, con rotor $\neq 0$, el trabajo en el ciclo es distinto de cero.</div>
-<div class="truco">Chequeo de signos: el tramo $A\to B$ se recorre hacia los $x$ decrecientes (de $3$ a $-1$), por eso $W_2$ es negativo y grande; domina sobre $W_1$ y $W_3$, dando $W_{\text{total}} < 0$.</div>
-<div class="respuesta">$$\boxed{W_1 = 18\ \text{J},\;\; W_2 = -44\ \text{J},\;\; W_3 = 3{,}5\ \text{J},\;\; W_{\text{total}} = -22{,}5\ \text{J}\ \text{(no conservativa)}}$$</div>
-</details>
-</article>
-
-</section>
-<section class="tema" id="tema-particulas" data-tema="particulas">
-<h2 class="tema-titulo">4 · Sistemas de partículas</h2>
-
-<article class="ej" id="sis-ej1" data-tema="particulas">
-<h3>Ejercicio 1 — Centro de masa de tres puntos <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 1</span></h3>
-<div class="enunciado">
-En el plano se ubican tres masas puntuales: $m_1=2\ \text{kg}$ en $(0,0)\ \text{m}$, $m_2=3\ \text{kg}$ en $(4,0)\ \text{m}$ y $m_3=5\ \text{kg}$ en $(2,4)\ \text{m}$. Hallá la posición del centro de masa del sistema.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>El centro de masa se obtiene como promedio ponderado por las masas. Primero la masa total:</p>
-$$ M=m_1+m_2+m_3=2+3+5=10\ \text{kg} $$
-<p>Coordenada $x$:</p>
-$$ x_{cm}=\frac{\sum m_i x_i}{M}=\frac{2\cdot 0+3\cdot 4+5\cdot 2}{10}=\frac{22}{10}=2{,}2\ \text{m} $$
-<p>Coordenada $y$:</p>
-$$ y_{cm}=\frac{\sum m_i y_i}{M}=\frac{2\cdot 0+3\cdot 0+5\cdot 4}{10}=\frac{20}{10}=2{,}0\ \text{m} $$
-<div class="truco">Chequeo de sensatez: el CM debe caer "dentro" del triángulo que forman los puntos y más cerca de la masa grande ($m_3$). $(2{,}2;\,2{,}0)$ cumple ambas cosas.</div>
-<div class="respuesta">$$\boxed{\vec{r}_{cm}=(2{,}2\,;\;2{,}0)\ \text{m}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej2" data-tema="particulas">
-<h3>Ejercicio 2 — Velocidad del CM y momento lineal total <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 2</span></h3>
-<div class="enunciado">
-Dos partículas se mueven en el plano: $m_1=3\ \text{kg}$ con $\vec{v}_1=(2;\,0)\ \text{m/s}$ y $m_2=1\ \text{kg}$ con $\vec{v}_2=(-2;\,4)\ \text{m/s}$.
-<ol type="a"><li>Calculá el momento lineal total $\vec{P}$ del sistema.</li><li>Hallá la velocidad del centro de masa $\vec{v}_{cm}$ y su módulo.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> El momento lineal total es la suma vectorial de los momentos individuales:</p>
-$$ \vec{P}=m_1\vec{v}_1+m_2\vec{v}_2=3(2;\,0)+1(-2;\,4)=(6-2;\;0+4)=(4;\,4)\ \text{kg·m/s} $$
-<p><strong>b)</strong> Como $\vec{P}=M\,\vec{v}_{cm}$ con $M=3+1=4\ \text{kg}$:</p>
-$$ \vec{v}_{cm}=\frac{\vec{P}}{M}=\frac{(4;\,4)}{4}=(1;\,1)\ \text{m/s} $$
-$$ |\vec{v}_{cm}|=\sqrt{1^2+1^2}=\sqrt{2}\approx 1{,}41\ \text{m/s} $$
-<div class="truco">El CM se mueve como si toda la masa estuviera concentrada en él y todas las fuerzas externas se aplicaran allí. Con fuerzas externas nulas, $\vec{v}_{cm}$ es constante.</div>
-<div class="respuesta">$$\boxed{\vec{P}=(4;\,4)\ \text{kg·m/s}\qquad \vec{v}_{cm}=(1;\,1)\ \text{m/s},\ \ |\vec{v}_{cm}|=\sqrt{2}\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej3" data-tema="particulas">
-<h3>Ejercicio 3 — Retroceso de un cañón <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 3</span></h3>
-<div class="enunciado">
-Un cañón de $M=200\ \text{kg}$ está en reposo sobre una superficie horizontal sin rozamiento. Dispara horizontalmente una bala de $m=5\ \text{kg}$ que sale con $v_b=120\ \text{m/s}$. Hallá la velocidad de retroceso del cañón.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>No hay fuerzas externas horizontales (superficie sin rozamiento), de modo que el momento lineal horizontal del sistema se conserva. Inicialmente todo está en reposo, así que $P_i=0$.</p>
-$$ P_i=P_f \;\Rightarrow\; 0=m\,v_b+M\,V_c $$
-<p>Despejamos la velocidad del cañón $V_c$:</p>
-$$ V_c=-\frac{m\,v_b}{M}=-\frac{5\cdot 120}{200}=-3\ \text{m/s} $$
-<div class="alerta">No confundir conservación de $P$ con conservación de energía: la energía cinética NO se conserva (la pólvora aportó energía química). Aquí solo vale $\vec{P}=\text{cte}$.</div>
-<div class="respuesta">$$\boxed{V_c=-3\ \text{m/s}\ \ (\text{sentido opuesto a la bala})}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej4" data-tema="particulas">
-<h3>Ejercicio 4 — Choque plástico 1D <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 4</span></h3>
-<div class="enunciado">
-Un bloque de $m_1=4\ \text{kg}$ se mueve a $v_1=6\ \text{m/s}$ y choca contra un bloque $m_2=2\ \text{kg}$ inicialmente en reposo, sobre una mesa sin rozamiento. Quedan pegados.
-<ol type="a"><li>Hallá la velocidad final común.</li><li>Calculá la energía cinética perdida en el choque y qué fracción del total representa.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> En un choque plástico se conserva $P$ (no hay fuerzas externas horizontales durante el impacto). Quedan pegados, con velocidad común $V$:</p>
-$$ m_1 v_1=(m_1+m_2)\,V \;\Rightarrow\; V=\frac{4\cdot 6}{4+2}=\frac{24}{6}=4\ \text{m/s} $$
-<p><strong>b)</strong> Energías cinéticas inicial y final:</p>
-$$ E_{c,i}=\tfrac12 m_1 v_1^2=\tfrac12\cdot 4\cdot 6^2=72\ \text{J} $$
-$$ E_{c,f}=\tfrac12 (m_1+m_2) V^2=\tfrac12\cdot 6\cdot 4^2=48\ \text{J} $$
-$$ \Delta E_c=E_{c,f}-E_{c,i}=48-72=-24\ \text{J} \qquad \frac{|\Delta E_c|}{E_{c,i}}=\frac{24}{72}=\frac13\approx 33{,}3\% $$
-<div class="alerta">En el choque plástico SIEMPRE se pierde energía (salvo el caso trivial sin movimiento relativo). La energía perdida va a deformación y calor. Lo único que se conserva es $P$.</div>
-<div class="respuesta">$$\boxed{V=4\ \text{m/s}\qquad |\Delta E_c|=24\ \text{J}\ \ (\tfrac13\ \text{del total})}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej5" data-tema="particulas">
-<h3>Ejercicio 5 — Choque elástico 1D <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 5</span></h3>
-<div class="enunciado">
-Sobre una recta sin rozamiento, $m_1=2\ \text{kg}$ se mueve a $v_1=3\ \text{m/s}$ y $m_2=1\ \text{kg}$ a $v_2=-1\ \text{m/s}$ (vienen al encuentro). El choque es elástico. Hallá las velocidades finales.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>En un choque elástico 1D se conservan $P$ y $E_c$. Las fórmulas que salen de ese sistema de dos ecuaciones son:</p>
-$$ v_1'=\frac{(m_1-m_2)v_1+2m_2 v_2}{m_1+m_2}\qquad v_2'=\frac{(m_2-m_1)v_2+2m_1 v_1}{m_1+m_2} $$
-<p>Reemplazando ($m_1=2$, $m_2=1$, $v_1=3$, $v_2=-1$):</p>
-$$ v_1'=\frac{(2-1)\cdot 3+2\cdot 1\cdot(-1)}{3}=\frac{3-2}{3}=\frac13\approx 0{,}33\ \text{m/s} $$
-$$ v_2'=\frac{(1-2)\cdot(-1)+2\cdot 2\cdot 3}{3}=\frac{1+12}{3}=\frac{13}{3}\approx 4{,}33\ \text{m/s} $$
-<div class="truco">Doble chequeo. $P$: antes $2\cdot 3+1\cdot(-1)=5$; después $2\cdot\frac13+1\cdot\frac{13}{3}=\frac{2+13}{3}=5$. ✓ $E_c$: antes $\frac12 2\cdot 9+\frac12 1\cdot 1=9{,}5\ \text{J}$; después $\frac12 2\cdot\frac19+\frac12\cdot\frac{169}{9}=\frac{1+84{,}5}{9}\cdot...\approx 9{,}5\ \text{J}$. ✓</div>
-<div class="respuesta">$$\boxed{v_1'=\tfrac13\ \text{m/s}\qquad v_2'=\tfrac{13}{3}\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej6" data-tema="particulas">
-<h3>Ejercicio 6 — Impulso y fuerza media (rebote) <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 6</span></h3>
-<div class="enunciado">
-Una pelota de $m=0{,}5\ \text{kg}$ golpea una pared horizontalmente con rapidez $8\ \text{m/s}$ y rebota con rapidez $6\ \text{m/s}$. El contacto dura $\Delta t=0{,}02\ \text{s}$.
-<ol type="a"><li>Calculá el impulso que la pared ejerce sobre la pelota.</li><li>Estimá la fuerza media durante el contacto.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Tomamos como positivo el sentido de salida (alejándose de la pared). Velocidad de entrada $v_i=-8\ \text{m/s}$, de salida $v_f=+6\ \text{m/s}$.</p>
-<p><strong>a)</strong> El impulso es la variación del momento lineal $\vec{J}=\Delta\vec{P}$:</p>
-$$ J=m(v_f-v_i)=0{,}5\,(6-(-8))=0{,}5\cdot 14=7\ \text{N·s} $$
-<p><strong>b)</strong> La fuerza media surge de $J=F_{med}\,\Delta t$:</p>
-$$ F_{med}=\frac{J}{\Delta t}=\frac{7}{0{,}02}=350\ \text{N} $$
-<div class="alerta">Error típico: usar $\Delta v = 6-8=-2$ (restar módulos). Hay que respetar los signos: la velocidad cambia de sentido, por eso $\Delta v$ suma los módulos: $6-(-8)=14$.</div>
-<div class="respuesta">$$\boxed{J=7\ \text{N·s}\qquad F_{med}=350\ \text{N}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej7" data-tema="particulas">
-<h3>Ejercicio 7 — Impulso con fuerza variable F(t) <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 7</span></h3>
-<div class="enunciado">
-Sobre un cuerpo de $m=2\ \text{kg}$, inicialmente en reposo, actúa una fuerza horizontal $F(t)=(3t^2+2t)\ \text{N}$ (con $t$ en segundos) entre $t=0$ y $t=2\ \text{s}$.
-<ol type="a"><li>Calculá el impulso entregado.</li><li>Hallá la velocidad del cuerpo en $t=2\ \text{s}$.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> Cuando la fuerza varía con el tiempo, el impulso es la integral:</p>
-$$ J=\int_{0}^{2} F(t)\,dt=\int_{0}^{2}(3t^2+2t)\,dt=\big[t^3+t^2\big]_{0}^{2} $$
-$$ J=(2^3+2^2)-(0)=8+4=12\ \text{N·s} $$
-<p><strong>b)</strong> Por el teorema del impulso, $J=\Delta P=m(v_f-v_i)$ con $v_i=0$:</p>
-$$ v_f=\frac{J}{m}=\frac{12}{2}=6\ \text{m/s} $$
-<div class="truco">El impulso es el "área bajo la curva" $F$ vs $t$. Integrar es solo la forma exacta de calcular esa área cuando $F$ no es constante.</div>
-<div class="respuesta">$$\boxed{J=12\ \text{N·s}\qquad v_f=6\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej8" data-tema="particulas">
-<h3>Ejercicio 8 — Péndulo balístico <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 8</span></h3>
-<div class="enunciado">
-Una bala de $m=20\ \text{g}=0{,}02\ \text{kg}$ se dispara horizontalmente con $v_0=400\ \text{m/s}$ y se incrusta en un bloque de madera de $M=2\ \text{kg}$ que cuelga en reposo de un hilo. Hallá la altura máxima que alcanza el conjunto bloque + bala.
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>El problema tiene <strong>dos etapas físicamente distintas</strong>:</p>
-<p><strong>Etapa 1 — choque (se conserva $P$, NO la energía).</strong> La bala se incrusta (plástico). Sea $V$ la velocidad común justo después:</p>
-$$ m\,v_0=(m+M)\,V \;\Rightarrow\; V=\frac{0{,}02\cdot 400}{0{,}02+2}=\frac{8}{2{,}02}\approx 3{,}96\ \text{m/s} $$
-<p><strong>Etapa 2 — ascenso (se conserva la energía mecánica, NO el momento).</strong> Después del choque ya no hay fuerzas impulsivas; el conjunto sube como un péndulo y vale conservación de energía:</p>
-$$ \tfrac12 (m+M) V^2=(m+M)\,g\,h \;\Rightarrow\; h=\frac{V^2}{2g}=\frac{3{,}96^2}{2\cdot 10}\approx \frac{15{,}68}{20}\approx 0{,}78\ \text{m} $$
-<div class="alerta">El error clásico es usar conservación de energía en el choque (daría una altura enorme y falsa). Durante el impacto se pierde muchísima energía; recién DESPUÉS del choque la energía se conserva.</div>
-<div class="respuesta">$$\boxed{V\approx 3{,}96\ \text{m/s}\qquad h\approx 0{,}78\ \text{m}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej9" data-tema="particulas">
-<h3>Ejercicio 9 — Teorema de König <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 9</span></h3>
-<div class="enunciado">
-Dos partículas sobre una recta: $m_1=3\ \text{kg}$ con $v_1=4\ \text{m/s}$ y $m_2=1\ \text{kg}$ en reposo ($v_2=0$).
-<ol type="a"><li>Hallá $v_{cm}$ y verificá el teorema de König: $E_c=\tfrac12 M v_{cm}^2+E_c'$, donde $E_c'$ es la energía cinética relativa al CM.</li><li>Interpretá qué parte de la energía "no se puede perder" en un eventual choque plástico.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> Masa total $M=4\ \text{kg}$. Velocidad del CM:</p>
-$$ v_{cm}=\frac{m_1 v_1+m_2 v_2}{M}=\frac{3\cdot 4+0}{4}=3\ \text{m/s} $$
-<p>Energía cinética total (en el laboratorio):</p>
-$$ E_c=\tfrac12 m_1 v_1^2+\tfrac12 m_2 v_2^2=\tfrac12\cdot 3\cdot 16+0=24\ \text{J} $$
-<p>Energía del CM (término de traslación global):</p>
-$$ E_{c,cm}=\tfrac12 M v_{cm}^2=\tfrac12\cdot 4\cdot 3^2=18\ \text{J} $$
-<p>Energía interna (relativa al CM), por König:</p>
-$$ E_c'=E_c-E_{c,cm}=24-18=6\ \text{J} $$
-<p>Verificación directa con las velocidades relativas $u_i=v_i-v_{cm}$: $u_1=4-3=1$, $u_2=0-3=-3$.</p>
-$$ E_c'=\tfrac12\cdot 3\cdot 1^2+\tfrac12\cdot 1\cdot(-3)^2=1{,}5+4{,}5=6\ \text{J}\ \checkmark $$
-<p><strong>b)</strong> Si chocaran y quedaran pegados, ambas pasarían a moverse con $v_{cm}$, de modo que el término $E_{c,cm}=18\ \text{J}$ <em>no puede</em> perderse (lo exige la conservación de $P$). Lo máximo que puede disiparse es justamente la energía interna $E_c'=6\ \text{J}$.</p>
-<div class="truco">König separa "movimiento del conjunto" ($\tfrac12 M v_{cm}^2$) de "movimiento interno" ($E_c'$). En un choque plástico se disipa, como máximo, todo $E_c'$ y nada de $E_{c,cm}$.</div>
-<div class="respuesta">$$\boxed{v_{cm}=3\ \text{m/s}\quad E_c=24\ \text{J}=\underbrace{18\ \text{J}}_{E_{c,cm}}+\underbrace{6\ \text{J}}_{E_c'}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="sis-ej10" data-tema="particulas">
-<h3>Ejercicio 10 — Impulso, choque contra barra articulada y energía <span class="tchip parcial">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
-<div class="enunciado">
-Un pequeño carro de masa $m=2\ \text{kg}$ está en reposo sobre un riel horizontal sin rozamiento. Desde $t=0$ hasta $t=2\ \text{s}$ se le aplica una fuerza horizontal $\vec{F}(t)=e^{t}\,\hat{\imath}\ \text{N}$ (con $t$ en segundos). Al terminar la fuerza, el carro avanza y choca contra el extremo libre de una barra homogénea de masa $M=3\ \text{kg}$ y longitud $L=1\ \text{m}$, articulada en un perno fijo en su otro extremo (la barra está en reposo y horizontal). En el choque el carro queda incrustado en el extremo de la barra.
+Un bloque de $m=4\ \text{kg}$ baja por un plano inclinado $\alpha=30^\circ$. Los coeficientes son $\mu_e=0{,}3$ y $\mu_d=0{,}2$.
 <ol type="a">
-<li>Calculá el impulso $J$ entregado por la fuerza y la velocidad $v_0$ del carro al terminar de actuar (en $t=2\ \text{s}$).</li>
-<li>Durante el choque, ¿se conserva el momento lineal $\vec{P}$? ¿Y el momento angular $\vec{L}$ respecto del perno? Justificá.</li>
-<li>Hallá la velocidad angular $\Omega$ de la barra (con el carro incrustado) inmediatamente después del choque.</li>
-<li>Calculá la energía cinética perdida en el choque.</li>
+<li>Verificá que el bloque desliza.</li>
+<li>Calculá su aceleración.</li>
 </ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a) Impulso y velocidad previa al choque.</strong> Con fuerza variable, el impulso es la integral en el tiempo:</p>
-$$ J=\int_{0}^{2} e^{t}\,dt=\big[e^{t}\big]_{0}^{2}=e^{2}-1\approx 6{,}39\ \text{N·s} $$
-<p>El carro parte del reposo, así que $J=m\,v_0$:</p>
-$$ v_0=\frac{J}{m}=\frac{e^{2}-1}{2}\approx \frac{6{,}39}{2}\approx 3{,}19\ \text{m/s} $$
-<p><strong>b) Qué se conserva en el choque.</strong> El perno es un apoyo fijo que ejerce sobre la barra una fuerza externa <em>impulsiva</em> (de reacción) durante el choque. Por lo tanto, el momento lineal del sistema carro+barra <strong>NO se conserva</strong>. En cambio, esa fuerza del perno está aplicada <em>en el propio perno</em>, así que su torque respecto del perno es nulo ($\vec{r}=\vec 0$): el <strong>momento angular respecto del perno SÍ se conserva</strong>. Esta es la clave del ejercicio.</p>
-<p><strong>c) Velocidad angular tras el choque.</strong> Conservamos $L$ respecto del perno. El carro impacta a distancia $L$ del perno con velocidad $v_0$ perpendicular a la barra (puede tratarse como masa puntual):</p>
-$$ L_i=m\,v_0\,L $$
-<p>Después, todo gira con velocidad angular $\Omega$. El momento de inercia respecto del perno es el de la barra por su extremo más el del carro (masa puntual a distancia $L$):</p>
-$$ I=\underbrace{\frac{M L^2}{3}}_{\text{barra (extremo)}}+\underbrace{m L^2}_{\text{carro}}=\frac{3\cdot 1^2}{3}+2\cdot 1^2=1+2=3\ \text{kg·m}^2 $$
-<p>Igualando $L_i=I\,\Omega$:</p>
-$$ \Omega=\frac{m\,v_0\,L}{I}=\frac{2\cdot 3{,}19\cdot 1}{3}=\frac{e^{2}-1}{3}\approx \frac{6{,}39}{3}\approx 2{,}13\ \text{rad/s} $$
-<p><strong>d) Energía perdida.</strong> Antes del choque solo se mueve el carro; después, gira todo el conjunto:</p>
-$$ E_{c,i}=\tfrac12 m\,v_0^2=\tfrac12\cdot 2\cdot 3{,}19^2\approx 10{,}21\ \text{J} $$
-$$ E_{c,f}=\tfrac12 I\,\Omega^2=\tfrac12\cdot 3\cdot 2{,}13^2\approx 6{,}80\ \text{J} $$
-$$ |\Delta E_c|=E_{c,i}-E_{c,f}\approx 10{,}21-6{,}80\approx 3{,}40\ \text{J} $$
-<div class="alerta">Error gravísimo y muy castigado por la cátedra: querer conservar $\vec{P}$ en el choque con perno. NO se conserva, porque el perno ejerce una fuerza externa impulsiva. Lo que se conserva es $L$ respecto del perno (torque de esa fuerza = 0). Y, como en todo choque plástico, la energía cinética NO se conserva.</div>
-<div class="truco">Receta para choques con eje/perno fijo: (1) impulso $\to v_0$; (2) conservar $L$ respecto del eje fijo; (3) usar Steiner / $I=\tfrac13 ML^2$ para la barra por su extremo; (4) la energía perdida se calcula al final restando $E_{c,f}-E_{c,i}$, nunca se impone.</div>
-<div class="respuesta">$$\boxed{J=e^{2}-1\approx 6{,}39\ \text{N·s},\quad v_0\approx 3{,}19\ \text{m/s},\quad \Omega\approx 2{,}13\ \text{rad/s},\quad |\Delta E_c|\approx 3{,}40\ \text{J}}$$</div>
-</details>
-</article>
-
-</section>
-<section class="tema" id="tema-rigido" data-tema="rigido">
-<h2 class="tema-titulo">5 · Cuerpo rígido</h2>
-
-<article class="ej" id="rig-ej1" data-tema="rigido">
-<h3>Ejercicio 1 — Momento de inercia de masas puntuales <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 1</span></h3>
-<div class="enunciado">
-Tres masas puntuales están fijas a una varilla rígida de masa despreciable: $m_1=2\,\text{kg}$ en $x=0$, $m_2=3\,\text{kg}$ en $x=1\,\text{m}$ y $m_3=1\,\text{kg}$ en $x=2\,\text{m}$.
-<ol type="a"><li>Calculá el momento de inercia respecto de un eje perpendicular a la varilla que pasa por $x=0$.</li><li>Calculálo respecto de un eje que pasa por $x=2\,\text{m}$.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>El momento de inercia de un conjunto de masas puntuales es $I=\sum_i m_i r_i^2$, donde $r_i$ es la distancia de cada masa al eje.</p>
-<p><strong>a)</strong> Eje en $x=0$. Las distancias son $r_1=0$, $r_2=1\,\text{m}$, $r_3=2\,\text{m}$:</p>
-$$ I_0 = 2\cdot 0^2 + 3\cdot 1^2 + 1\cdot 2^2 = 0+3+4 = 7\ \text{kg·m}^2 $$
-<p><strong>b)</strong> Eje en $x=2\,\text{m}$. Ahora $r_1=2\,\text{m}$, $r_2=1\,\text{m}$, $r_3=0$:</p>
-$$ I_2 = 2\cdot 2^2 + 3\cdot 1^2 + 1\cdot 0^2 = 8+3+0 = 11\ \text{kg·m}^2 $$
-<div class="alerta">El momento de inercia depende del eje elegido: la misma distribución tiene $I$ distintos según dónde pase el eje. Las masas más lejanas pesan al cuadrado.</div>
-<div class="respuesta">$$\boxed{I_0 = 7\ \text{kg·m}^2 \qquad I_2 = 11\ \text{kg·m}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej2" data-tema="rigido">
-<h3>Ejercicio 2 — Teorema de Steiner <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 2</span></h3>
-<div class="enunciado">
-Una barra homogénea de masa $M=4\,\text{kg}$ y longitud $L=1{,}5\,\text{m}$ tiene momento de inercia respecto de su centro $I_{cm}=\tfrac{1}{12}ML^2$.
-<ol type="a"><li>Calculá $I_{cm}$.</li><li>Usando el teorema de Steiner, hallá el momento de inercia respecto de un eje perpendicular que pasa por un extremo, y compará con $\tfrac{1}{3}ML^2$.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> Con la fórmula de tabla:</p>
-$$ I_{cm} = \frac{1}{12}ML^2 = \frac{1}{12}\cdot 4 \cdot (1{,}5)^2 = \frac{1}{12}\cdot 4 \cdot 2{,}25 = 0{,}75\ \text{kg·m}^2 $$
-<p><strong>b)</strong> El teorema de Steiner (eje paralelo) dice $I = I_{cm} + M d^2$, con $d$ la distancia entre el eje nuevo y el eje por el centro de masa. Del centro al extremo $d=L/2=0{,}75\,\text{m}$:</p>
-$$ I_{ext} = I_{cm} + M\left(\frac{L}{2}\right)^2 = 0{,}75 + 4\cdot (0{,}75)^2 = 0{,}75 + 4\cdot 0{,}5625 = 0{,}75 + 2{,}25 = 3\ \text{kg·m}^2 $$
-<div class="truco">Chequeo: $\tfrac{1}{3}ML^2 = \tfrac{1}{3}\cdot 4 \cdot 2{,}25 = 3\ \text{kg·m}^2$. Coincide. De hecho $\tfrac{1}{12}+\tfrac{1}{4}=\tfrac{1}{3}$ siempre, así que para una barra por el extremo podés usar directamente $\tfrac{1}{3}ML^2$.</div>
-<div class="respuesta">$$\boxed{I_{cm}=0{,}75\ \text{kg·m}^2 \qquad I_{ext}=3\ \text{kg·m}^2}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej3" data-tema="rigido">
-<h3>Ejercicio 3 — Equilibrio de una barra (palanca) <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 3</span></h3>
-<div class="enunciado">
-Una barra rígida de masa despreciable se apoya sobre un punto fijo (fulcro). A $0{,}80\,\text{m}$ a la izquierda del fulcro cuelga un peso de $F_1=50\,\text{N}$. A la derecha del fulcro se aplica una fuerza vertical hacia abajo $F_2$ con brazo $0{,}50\,\text{m}$.
-<svg viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;width:100%">
-  <line x1="30" y1="55" x2="290" y2="55" stroke="#1a5490" stroke-width="4"/>
-  <polygon points="180,55 168,80 192,80" fill="#e8eef5" stroke="#333" stroke-width="1.5"/>
-  <line x1="80" y1="55" x2="80" y2="95" stroke="#333" stroke-width="1.5"/>
-  <polygon points="74,75 86,75 80,95" fill="#333"/>
-  <text x="62" y="48" font-size="11" fill="#333">F₁</text>
-  <line x1="245" y1="55" x2="245" y2="95" stroke="#333" stroke-width="1.5"/>
-  <polygon points="239,75 251,75 245,95" fill="#333"/>
-  <text x="252" y="48" font-size="11" fill="#333">F₂</text>
-  <text x="120" y="50" font-size="10" fill="#1a5490">0,80 m</text>
-  <text x="200" y="50" font-size="10" fill="#1a5490">0,50 m</text>
+<svg viewBox="0 0 300 150" role="img" aria-label="Plano inclinado a 30 grados con bloque">
+  <line x1="20" y1="130" x2="280" y2="130" stroke="#333" stroke-width="2"/>
+  <polygon points="40,130 250,130 250,40" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
+  <rect x="170" y="74" width="34" height="22" fill="#4a8bc2" transform="rotate(-23.2 187 85)"/>
+  <text x="60" y="125" font-size="12">30°</text>
+  <path d="M 60 130 A 25 25 0 0 0 68 113" fill="none" stroke="#333"/>
+  <text x="210" y="58" font-size="11" fill="#1a5490">m = 4 kg</text>
 </svg>
-<ol type="a"><li>¿Cuánto debe valer $F_2$ para que la barra esté en equilibrio?</li><li>¿Cuál es la reacción del fulcro?</li></ol>
 </div>
 <details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> En equilibrio, la suma de torques respecto del fulcro es cero. Tomamos antihorario positivo. $F_1$ (a la izquierda, hacia abajo) genera torque antihorario; $F_2$ (a la derecha, hacia abajo) genera torque horario. El brazo de palanca es la distancia perpendicular de la fuerza al eje:</p>
-$$ \sum \tau = F_1\, b_1 - F_2\, b_2 = 0 \;\Rightarrow\; F_2 = \frac{F_1\, b_1}{b_2} $$
-$$ F_2 = \frac{50\cdot 0{,}80}{0{,}50} = \frac{40}{0{,}50} = 80\ \text{N} $$
-<p><strong>b)</strong> Equilibrio de fuerzas verticales: la reacción $N$ del fulcro (hacia arriba) sostiene ambos pesos hacia abajo:</p>
-$$ N = F_1 + F_2 = 50 + 80 = 130\ \text{N} $$
-<div class="alerta">El brazo de palanca es la distancia <em>perpendicular</em> entre la línea de acción de la fuerza y el eje. Si las fuerzas fueran oblicuas, habría que proyectar.</div>
-<div class="respuesta">$$\boxed{F_2 = 80\ \text{N} \qquad N = 130\ \text{N}}$$</div>
+<p>Ejes: $x$ a lo largo del plano (positivo hacia abajo), $y$ perpendicular. Las fuerzas son el peso, la normal y el rozamiento.</p>
+<p><strong>Normal</strong> (eje $y$, no hay aceleración perpendicular):</p>
+$$N=m g\cos\alpha=4\cdot 10\cdot\cos 30^\circ=40\cdot 0{,}866=34{,}6\ \text{N}.$$
+<p><strong>a) ¿Desliza?</strong> Lo que tira hacia abajo es $mg\,\text{sen}\,\alpha=40\cdot 0{,}5=20\ \text{N}$. El rozamiento estático aguanta como mucho $\mu_e N=0{,}3\cdot 34{,}6=10{,}4\ \text{N}$. Como $20>10{,}4$, no alcanza: <strong>desliza</strong>. (Equivale a $\tan 30^\circ=0{,}577>\mu_e=0{,}3$.)</p>
+<p><strong>b)</strong> Como desliza, actúa el rozamiento dinámico $f_d=\mu_d N$ hacia arriba del plano. Newton en $x$:</p>
+$$m a=mg\,\text{sen}\,\alpha-\mu_d\,mg\cos\alpha\ \Rightarrow\ a=g(\text{sen}\,\alpha-\mu_d\cos\alpha).$$
+$$a=10\,(0{,}5-0{,}2\cdot 0{,}866)=10\,(0{,}5-0{,}173)=3{,}27\ \text{m/s}^2.$$
+<div class="alerta">$N$ no es $mg$: en el plano inclinado es $mg\cos\alpha$. Usar $N=mg$ es el error más común acá.</div>
+<div class="respuesta">$$\boxed{\text{Desliza};\qquad a=3{,}27\ \text{m/s}^2\ \text{(hacia abajo del plano)}}$$</div>
 </details>
 </article>
 
-<article class="ej" id="rig-ej4" data-tema="rigido">
-<h3>Ejercicio 4 — Segunda ley de rotación (τ = Iα) <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 4</span></h3>
+<!-- ===================== EJ4 ===================== -->
+<article class="ej" id="ej4" data-tema="dinamica">
+<h3>Ejercicio 4 — Curva y peralte <span class="tchip">Dinámica</span> <span class="nivel">Nivel 4</span></h3>
 <div class="enunciado">
-Una polea-disco de masa $M=2\,\text{kg}$ y radio $R=0{,}20\,\text{m}$ ($I=\tfrac{1}{2}MR^2$) puede girar libremente alrededor de su eje. Se le aplica un torque constante $\tau=0{,}6\,\text{N·m}$ partiendo del reposo.
-<ol type="a"><li>Hallá la aceleración angular $\alpha$.</li><li>¿Qué velocidad angular tiene a los $t=4\,\text{s}$?</li><li>¿Cuántas vueltas dio en ese tiempo?</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Momento de inercia del disco:</p>
-$$ I = \tfrac{1}{2}MR^2 = \tfrac{1}{2}\cdot 2 \cdot (0{,}20)^2 = \tfrac{1}{2}\cdot 2 \cdot 0{,}04 = 0{,}04\ \text{kg·m}^2 $$
-<p><strong>a)</strong> Segunda ley de rotación $\tau = I\alpha$:</p>
-$$ \alpha = \frac{\tau}{I} = \frac{0{,}6}{0{,}04} = 15\ \text{rad/s}^2 $$
-<p><strong>b)</strong> Como $\alpha$ es constante y parte del reposo, $\omega = \alpha t$:</p>
-$$ \omega = 15 \cdot 4 = 60\ \text{rad/s} $$
-<p><strong>c)</strong> Ángulo barrido $\theta = \tfrac{1}{2}\alpha t^2$:</p>
-$$ \theta = \tfrac{1}{2}\cdot 15 \cdot 4^2 = \tfrac{1}{2}\cdot 15 \cdot 16 = 120\ \text{rad} \;\Rightarrow\; n=\frac{\theta}{2\pi}=\frac{120}{6{,}283}\approx 19{,}1\ \text{vueltas} $$
-<div class="respuesta">$$\boxed{\alpha = 15\ \text{rad/s}^2 \qquad \omega = 60\ \text{rad/s} \qquad n \approx 19{,}1\ \text{vueltas}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej5" data-tema="rigido">
-<h3>Ejercicio 5 — Energía cinética de rotación y trabajo del torque <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 5</span></h3>
-<div class="enunciado">
-Un volante con momento de inercia $I=0{,}5\,\text{kg·m}^2$ gira a $\omega_0=20\,\text{rad/s}$. Un freno aplica un torque constante de módulo $\tau=2\,\text{N·m}$ que se opone al giro.
-<ol type="a"><li>¿Cuál es la energía cinética de rotación inicial?</li><li>Usando el teorema trabajo-energía, ¿cuántos radianes gira hasta detenerse?</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> Energía cinética de rotación:</p>
-$$ E_c = \tfrac{1}{2}I\omega_0^2 = \tfrac{1}{2}\cdot 0{,}5 \cdot 20^2 = \tfrac{1}{2}\cdot 0{,}5 \cdot 400 = 100\ \text{J} $$
-<p><strong>b)</strong> El trabajo del torque es $W=\tau\,\theta$ (con signo, acá negativo porque frena). Por el teorema trabajo-energía, el trabajo del freno iguala la variación de energía cinética: en módulo, todo el $E_c$ se disipa:</p>
-$$ \tau\,\theta = E_c \;\Rightarrow\; \theta = \frac{E_c}{\tau} = \frac{100}{2} = 50\ \text{rad} $$
-<div class="truco">Chequeo cinemático: $\alpha = \tau/I = 2/0{,}5 = 4\ \text{rad/s}^2$. Con $\omega^2=\omega_0^2-2\alpha\theta=0$: $\theta = \omega_0^2/(2\alpha)=400/8=50\,\text{rad}$. Coincide.</div>
-<div class="respuesta">$$\boxed{E_c = 100\ \text{J} \qquad \theta = 50\ \text{rad}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej6" data-tema="rigido">
-<h3>Ejercicio 6 — Rodadura sin deslizar en un plano inclinado <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 6</span></h3>
-<div class="enunciado">
-Un cilindro macizo de masa $M$ y radio $R$ ($I_{cm}=\tfrac{1}{2}MR^2$) baja rodando sin deslizar por un plano inclinado de ángulo $\theta=30^\circ$. Tomá $g=10\,\text{m/s}^2$.
-<ol type="a"><li>Hallá la aceleración del centro de masa $a_{cm}$.</li><li>Hallá la fuerza de rozamiento en función de $M$.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Ecuaciones para el centro de masa y para la rotación. La fuerza de rozamiento $f_r$ apunta hacia arriba del plano (es la que genera el torque que hace rodar). Vínculo de rodadura: $a_{cm}=\alpha R$.</p>
-$$ \text{(traslación)}\quad Mg\sin\theta - f_r = M a_{cm} $$
-$$ \text{(rotación, eje cm)}\quad f_r\,R = I_{cm}\,\alpha = \tfrac{1}{2}MR^2\cdot \frac{a_{cm}}{R} \;\Rightarrow\; f_r = \tfrac{1}{2}M a_{cm} $$
-<p><strong>a)</strong> Sustituyo $f_r$ en la de traslación:</p>
-$$ Mg\sin\theta - \tfrac{1}{2}M a_{cm} = M a_{cm} \;\Rightarrow\; g\sin\theta = \tfrac{3}{2}a_{cm} \;\Rightarrow\; a_{cm} = \frac{2}{3}g\sin\theta $$
-$$ a_{cm} = \frac{2}{3}\cdot 10 \cdot \sin 30^\circ = \frac{2}{3}\cdot 10 \cdot 0{,}5 = \frac{10}{3} \approx 3{,}33\ \text{m/s}^2 $$
-<p><strong>b)</strong> Con $f_r = \tfrac{1}{2}M a_{cm}$:</p>
-$$ f_r = \tfrac{1}{2}M\cdot \frac{10}{3} = \frac{5}{3}M \approx 1{,}67\,M\ \text{N} $$
-<div class="alerta">El rozamiento de rodadura es estático y NO se calcula como $\mu N$ acá: es una incógnita que sale de las ecuaciones. $\mu N$ solo da el valor <em>máximo</em> disponible. El vínculo $a=\alpha R$ es clave.</div>
-<div class="respuesta">$$\boxed{a_{cm} = \tfrac{2}{3}g\sin\theta \approx 3{,}33\ \text{m/s}^2 \qquad f_r = \tfrac{1}{2}M a_{cm} \approx 1{,}67\,M\ \text{N}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej7" data-tema="rigido">
-<h3>Ejercicio 7 — Polea con masa y dos bloques <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 7</span></h3>
-<div class="enunciado">
-Dos bloques cuelgan de una soga inextensible que pasa por una polea-disco de masa $M=2\,\text{kg}$ y radio $R$ ($I=\tfrac{1}{2}MR^2$). La soga no desliza sobre la polea. Las masas son $m_1=4\,\text{kg}$ y $m_2=2\,\text{kg}$. $g=10\,\text{m/s}^2$.
-<svg viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
-  <circle cx="120" cy="40" r="26" fill="#e8eef5" stroke="#1a5490" stroke-width="3"/>
-  <circle cx="120" cy="40" r="3" fill="#333"/>
-  <line x1="94" y1="40" x2="94" y2="120" stroke="#333" stroke-width="1.5"/>
-  <line x1="146" y1="40" x2="146" y2="95" stroke="#333" stroke-width="1.5"/>
-  <rect x="78" y="120" width="32" height="28" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
-  <text x="86" y="139" font-size="11" fill="#333">m₁</text>
-  <rect x="132" y="95" width="28" height="24" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
-  <text x="139" y="111" font-size="11" fill="#333">m₂</text>
-  <text x="112" y="20" font-size="10" fill="#1a5490">M, R</text>
-</svg>
-<ol type="a"><li>Hallá la aceleración del sistema.</li><li>Hallá las tensiones $T_1$ y $T_2$ a cada lado de la polea.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Como la polea tiene masa, las tensiones a cada lado son distintas ($T_1\neq T_2$). Supongo que $m_1$ baja (más pesado) y $m_2$ sube, con $a$ común por inextensibilidad. Vínculo $a=\alpha R$.</p>
-$$ m_1:\quad m_1 g - T_1 = m_1 a $$
-$$ m_2:\quad T_2 - m_2 g = m_2 a $$
-$$ \text{polea:}\quad (T_1 - T_2)R = I\alpha = \tfrac{1}{2}MR^2\cdot\frac{a}{R} \;\Rightarrow\; T_1 - T_2 = \tfrac{1}{2}M a $$
-<p><strong>a)</strong> Sumo las tres (la última en su forma $T_1-T_2=\tfrac12 Ma$):</p>
-$$ m_1 g - m_2 g = m_1 a + m_2 a + \tfrac{1}{2}M a \;\Rightarrow\; a = \frac{(m_1-m_2)g}{m_1+m_2+\tfrac{1}{2}M} $$
-$$ a = \frac{(4-2)\cdot 10}{4+2+\tfrac{1}{2}\cdot 2} = \frac{20}{7} \approx 2{,}86\ \text{m/s}^2 $$
-<p><strong>b)</strong> Tensiones:</p>
-$$ T_1 = m_1(g-a) = 4\left(10-\tfrac{20}{7}\right) = 4\cdot\frac{50}{7} = \frac{200}{7} \approx 28{,}6\ \text{N} $$
-$$ T_2 = m_2(g+a) = 2\left(10+\tfrac{20}{7}\right) = 2\cdot\frac{90}{7} = \frac{180}{7} \approx 25{,}7\ \text{N} $$
-<div class="truco">Chequeo: $T_1-T_2 = \tfrac{200-180}{7}=\tfrac{20}{7}\approx 2{,}86\,\text{N}$, y $\tfrac{1}{2}Ma=\tfrac12\cdot 2\cdot\tfrac{20}{7}=\tfrac{20}{7}$. Coincide.</div>
-<div class="alerta">Error típico: poner $T_1=T_2$. Eso solo vale si la polea no tiene masa. Con masa, la diferencia de tensiones es la que provee el torque neto.</div>
-<div class="respuesta">$$\boxed{a \approx 2{,}86\ \text{m/s}^2 \qquad T_1 \approx 28{,}6\ \text{N} \qquad T_2 \approx 25{,}7\ \text{N}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej8" data-tema="rigido">
-<h3>Ejercicio 8 — Conservación del momento angular <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 8</span></h3>
-<div class="enunciado">
-Un disco de $I_1=4\,\text{kg·m}^2$ gira a $\omega_1=6\,\text{rad/s}$ alrededor de un eje vertical sin rozamiento. Desde arriba se deja caer (sin velocidad angular) un segundo disco coaxial de $I_2=2\,\text{kg·m}^2$, que queda adherido al primero y giran juntos.
-<ol type="a"><li>Hallá la velocidad angular final del conjunto.</li><li>¿Qué fracción de la energía cinética de rotación se disipó?</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>No hay torques externos respecto del eje, así que se conserva el momento angular $L=I\omega$ (es como un choque plástico rotacional). El segundo disco entra con $\omega=0$.</p>
-<p><strong>a)</strong></p>
-$$ I_1\omega_1 = (I_1+I_2)\,\omega_f \;\Rightarrow\; \omega_f = \frac{I_1\omega_1}{I_1+I_2} = \frac{4\cdot 6}{4+2} = \frac{24}{6} = 4\ \text{rad/s} $$
-<p><strong>b)</strong> Energías:</p>
-$$ E_i = \tfrac{1}{2}I_1\omega_1^2 = \tfrac{1}{2}\cdot 4 \cdot 36 = 72\ \text{J} $$
-$$ E_f = \tfrac{1}{2}(I_1+I_2)\omega_f^2 = \tfrac{1}{2}\cdot 6 \cdot 16 = 48\ \text{J} $$
-$$ \frac{\Delta E}{E_i} = \frac{72-48}{72} = \frac{24}{72} = \frac{1}{3} \approx 33{,}3\% $$
-<div class="alerta">Se conserva $L$, NO la energía: el acople es inelástico y disipa energía por el rozamiento entre discos. Nunca igualés energías acá.</div>
-<div class="respuesta">$$\boxed{\omega_f = 4\ \text{rad/s} \qquad \text{se disipa el } \tfrac{1}{3} \approx 33{,}3\%}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej9" data-tema="rigido">
-<h3>Ejercicio 9 — Barra que cae girando alrededor de un perno <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 9</span></h3>
-<div class="enunciado">
-Una barra homogénea de masa $M=3\,\text{kg}$ y longitud $L=1{,}2\,\text{m}$ está articulada en un extremo mediante un perno sin rozamiento. Se suelta desde el reposo en posición horizontal. $g=10\,\text{m/s}^2$.
-<svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
-  <line x1="40" y1="40" x2="200" y2="40" stroke="#1a5490" stroke-width="4"/>
-  <circle cx="40" cy="40" r="5" fill="#333"/>
-  <path d="M 130 40 A 90 90 0 0 1 40 130" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
-  <line x1="40" y1="40" x2="40" y2="118" stroke="#1a5490" stroke-width="4" opacity="0.35"/>
-  <text x="100" y="32" font-size="10" fill="#1a5490">horizontal (inicio)</text>
-  <text x="48" y="90" font-size="10" fill="#1a5490">vertical</text>
-</svg>
-<ol type="a"><li>Hallá la velocidad angular $\omega$ de la barra al pasar por la posición vertical.</li><li>Hallá la velocidad lineal del extremo libre en ese instante.</li></ol>
-</div>
-<details class="sol"><summary>Ver resolución</summary>
-<p>Energía: no hay rozamiento, así que la energía mecánica se conserva. El centro de masa (en $L/2$ del perno) baja una altura $h=L/2$ al pasar de horizontal a vertical. La energía potencial perdida se convierte en cinética de rotación. Momento de inercia respecto del perno (extremo): $I=\tfrac{1}{3}ML^2$.</p>
-$$ I = \tfrac{1}{3}ML^2 = \tfrac{1}{3}\cdot 3 \cdot (1{,}2)^2 = \tfrac{1}{3}\cdot 3 \cdot 1{,}44 = 1{,}44\ \text{kg·m}^2 $$
-<p><strong>a)</strong> Conservación de energía:</p>
-$$ Mg\frac{L}{2} = \tfrac{1}{2}I\omega^2 \;\Rightarrow\; \omega = \sqrt{\frac{MgL}{I}} $$
-$$ Mg\frac{L}{2} = 3\cdot 10 \cdot 0{,}6 = 18\ \text{J} \;\Rightarrow\; \omega = \sqrt{\frac{2\cdot 18}{1{,}44}} = \sqrt{25} = 5\ \text{rad/s} $$
-<p><strong>b)</strong> El extremo libre está a distancia $L$ del eje:</p>
-$$ v = \omega L = 5 \cdot 1{,}2 = 6\ \text{m/s} $$
-<div class="truco">Forma compacta: con $I=\tfrac13 ML^2$ queda $\omega=\sqrt{3g/L}=\sqrt{30/1{,}2}=\sqrt{25}=5\,\text{rad/s}$, independiente de $M$.</div>
-<div class="alerta">El centro de masa cae $L/2$, no $L$. Y como la barra gira (no cae libre), hay que usar $\tfrac12 I\omega^2$, no $\tfrac12 mv^2$ del cm solamente.</div>
-<div class="respuesta">$$\boxed{\omega = 5\ \text{rad/s} \qquad v_{ext} = 6\ \text{m/s}}$$</div>
-</details>
-</article>
-
-<article class="ej" id="rig-ej10" data-tema="rigido">
-<h3>Ejercicio 10 — Cilindro-polea con torque y fuerza, soga y bloque con rozamiento <span class="tchip parcial">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
-<div class="enunciado">
-Un cilindro macizo de masa $M=8\,\text{kg}$ y radio $R=0{,}5\,\text{m}$ ($I=\tfrac{1}{2}MR^2$) está sostenido por su eje horizontal desde el techo y puede girar sin rozamiento en el eje. Una soga inextensible y sin masa se enrolla en el cilindro; sale horizontal de su borde inferior y se ata a un bloque de masa $m=10\,\text{kg}$ apoyado sobre el piso, con coeficientes de rozamiento $\mu_e$ y $\mu_d=0{,}10$. Una segunda soga, enrollada del lado opuesto, recibe una fuerza $F=30\,\text{N}$ aplicada tangencialmente; además se aplica al cilindro un torque externo $\tau=4\,\text{N·m}$. Tanto $F$ como $\tau$ giran el cilindro en el sentido que arrastra al bloque hacia la polea. Las sogas no deslizan sobre el cilindro. $g=10\,\text{m/s}^2$.
-<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;width:100%">
-  <rect x="60" y="8" width="120" height="10" fill="#333"/>
-  <line x1="120" y1="18" x2="120" y2="40" stroke="#333" stroke-width="2"/>
-  <circle cx="120" cy="65" r="26" fill="#e8eef5" stroke="#1a5490" stroke-width="3"/>
-  <circle cx="120" cy="65" r="3" fill="#333"/>
-  <path d="M 137 49 A 23 23 0 0 1 137 82" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
-  <text x="142" y="46" font-size="11" fill="#1a5490">τ</text>
-  <text x="100" y="68" font-size="10" fill="#1a5490">M,R</text>
-  <line x1="146" y1="89" x2="245" y2="89" stroke="#333" stroke-width="1.5"/>
-  <text x="180" y="84" font-size="10" fill="#1a5490">T</text>
-  <rect x="245" y="74" width="42" height="30" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
-  <text x="260" y="93" font-size="11" fill="#333">m</text>
-  <line x1="150" y1="119" x2="310" y2="119" stroke="#333" stroke-width="2"/>
-  <text x="200" y="114" font-size="9" fill="#1a5490">μ</text>
-  <line x1="94" y1="89" x2="40" y2="89" stroke="#333" stroke-width="1.5"/>
-  <line x1="40" y1="89" x2="14" y2="89" stroke="#c0392b" stroke-width="2" marker-end="url(#arF)"/>
-  <text x="22" y="83" font-size="11" fill="#c0392b">F</text>
-  <defs>
-    <marker id="ar" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#333"/></marker>
-    <marker id="arF" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#c0392b"/></marker>
-  </defs>
-</svg>
+Una curva tiene radio $R=80\ \text{m}$.
 <ol type="a">
-<li>Planteá las ecuaciones de movimiento y hallá la aceleración angular $\alpha$ del cilindro y la aceleración lineal $a$ del bloque.</li>
-<li>Hallá la tensión $T$ de la soga atada al bloque.</li>
-<li>Calculá la energía cinética total del sistema a los $t=5\,\text{s}$ partiendo del reposo.</li>
-<li>Hallá el coeficiente de rozamiento estático mínimo $\mu_e$ que debería tener la superficie para que el sistema, con $\tau$ y $F$ ya aplicados, permanezca en EQUILIBRIO. Compará con $\mu_d$.</li>
+<li>Si la pista es <strong>plana</strong> y $\mu_e=0{,}4$ entre rueda y asfalto, ¿cuál es la velocidad máxima para tomarla sin derrapar?</li>
+<li>Si se quiere <strong>peraltar</strong> la curva para tomarla a $v=20\ \text{m/s}$ <em>sin depender del rozamiento</em>, ¿qué ángulo de peralte hace falta?</li>
 </ol>
 </div>
 <details class="sol"><summary>Ver resolución</summary>
-<p><strong>a)</strong> El cilindro gira alrededor de su eje fijo (el eje no acelera linealmente, lo sostiene el techo). Sobre el bloque actúan la tensión $T$ (hacia la polea) y el rozamiento dinámico $f_r=\mu_d m g$ que se opone al movimiento. Sobre el cilindro: el torque $\tau$ y la fuerza $F$ (con brazo $R$) lo impulsan, y la tensión $T$ lo frena (brazo $R$). El vínculo de la soga es $a=\alpha R$.</p>
-<p>Rozamiento sobre el bloque (la normal es $N=mg$):</p>
-$$ f_r = \mu_d m g = 0{,}10\cdot 10\cdot 10 = 10\ \text{N} $$
-<p>Ecuación del bloque (se mueve hacia la polea):</p>
-$$ T - f_r = m a \tag{1} $$
-<p>Ecuación de rotación del cilindro (impulsan $\tau$ y $FR$, frena $TR$):</p>
-$$ \tau + F R - T R = I\alpha = \tfrac{1}{2}MR^2\cdot\frac{a}{R} = \tfrac{1}{2}MR\,a \tag{2} $$
-<p>De (1): $T = m a + f_r$. Sustituyo en (2):</p>
-$$ \tau + F R - (m a + f_r)R = \tfrac{1}{2}MR\,a $$
-$$ \tau + F R - f_r R = \left(mR + \tfrac{1}{2}MR\right)a \;\Rightarrow\; a = \frac{\tau + F R - f_r R}{R\left(m + \tfrac{1}{2}M\right)} $$
-<p>Numéricamente, con $\tau=4$, $F=30$, $f_r=10$, $R=0{,}5$, $m=10$, $M=8$:</p>
-$$ a = \frac{4 + 30\cdot 0{,}5 - 10\cdot 0{,}5}{0{,}5\,\left(10 + \tfrac12\cdot 8\right)} = \frac{4 + 15 - 5}{0{,}5\cdot 14} = \frac{14}{7} = 2\ \text{m/s}^2 $$
-$$ \alpha = \frac{a}{R} = \frac{2}{0{,}5} = 4\ \text{rad/s}^2 $$
-<div class="alerta">Ojo con el factor $\tfrac12$: $m+\tfrac12 M = 10 + \tfrac12\cdot 8 = 14$, no $18$. Olvidar el $\tfrac12 MR^2$ del cilindro es el error clásico.</div>
-<p><strong>b)</strong> Tensión, de (1):</p>
-$$ T = m a + f_r = 10\cdot 2 + 10 = 20 + 10 = 30\ \text{N} $$
-<div class="truco">Chequeo con (2): $\tau + FR - TR = 4 + 30\cdot 0{,}5 - 30\cdot 0{,}5 = 4\ \text{N·m}$; y $I\alpha = \tfrac12 MR^2\,\alpha = 1\cdot 4 = 4\ \text{N·m}$. Coincide.</div>
-<p><strong>c)</strong> A partir del reposo con $a$ constante, a los $t=5\,\text{s}$: $v=at=2\cdot 5 = 10\ \text{m/s}$ y $\omega=v/R=10/0{,}5=20\ \text{rad/s}$. La energía cinética total es la del bloque (traslación) más la del cilindro (rotación):</p>
-$$ I = \tfrac{1}{2}MR^2 = \tfrac{1}{2}\cdot 8\cdot (0{,}5)^2 = 1\ \text{kg·m}^2 $$
-$$ E_c = \tfrac{1}{2}m v^2 + \tfrac{1}{2}I\omega^2 = \tfrac{1}{2}\cdot 10\cdot (10)^2 + \tfrac{1}{2}\cdot 1\cdot (20)^2 $$
-$$ E_c = 500 + 200 = 700\ \text{J} $$
-<div class="truco">Chequeo por trabajo y energía: con $\theta=\tfrac12\alpha t^2=\tfrac12\cdot4\cdot25=50\,\text{rad}$ y $d=\tfrac12 a t^2=\tfrac12\cdot2\cdot25=25\,\text{m}$. Entregan $W_\tau=\tau\theta=4\cdot50=200\,\text{J}$ y $W_F=Fd=30\cdot25=750\,\text{J}$; disipa $W_f=f_r d=10\cdot25=250\,\text{J}$. Neto $=200+750-250=700\,\text{J}$. Coincide con $E_c$.</div>
-<p><strong>d)</strong> Para que el sistema esté en EQUILIBRIO con $\tau$ y $F$ aplicados, el cilindro no gira ($\alpha=0$): la suma de torques sobre él es nula, así que la tensión debe equilibrar a $\tau$ y $FR$:</p>
-$$ \tau + F R - T R = 0 \;\Rightarrow\; T = \frac{\tau + F R}{R} = \frac{\tau}{R} + F $$
-$$ T = \frac{4}{0{,}5} + 30 = 8 + 30 = 38\ \text{N} $$
-<p>Esa tensión tira del bloque hacia la polea. Para que el bloque no deslice, el rozamiento estático debe poder igualarla: $f_s = T \le \mu_e\,mg$. El mínimo $\mu_e$ es:</p>
-$$ \mu_e^{\min} = \frac{T}{mg} = \frac{38}{10\cdot 10} = 0{,}38 $$
-<p>Como $\mu_e^{\min}=0{,}38 > \mu_d = 0{,}10$, la superficie real (con $\mu_d=0{,}10$) NO alcanza para retener al bloque: el sistema efectivamente se mueve, lo cual es coherente con los incisos (a)–(c).</p>
-<div class="alerta">El equilibrio NO da $\mu_e=0$: aunque pongas el cilindro en reposo, la tensión que la soga transmite al bloque es real y no nula ($T=38\,\text{N}$), porque $\tau$ y $F$ la generan. Confundir "cilindro quieto" con "tensión nula" es el error que vuelve trivial el problema.</div>
-<div class="respuesta">$$\boxed{\alpha = 4\ \text{rad/s}^2 \quad a = 2\ \text{m/s}^2 \quad T = 30\ \text{N} \quad E_c(5\,\text{s}) = 700\ \text{J} \quad \mu_e^{\min}=0{,}38 > \mu_d}$$</div>
+<p><strong>a) Pista plana.</strong> Lo único que apunta al centro es el rozamiento, y la centrípeta necesaria es $m\dfrac{v^2}{R}$. En el límite el rozamiento da su máximo:</p>
+$$\mu_e\,m g=m\frac{v^2}{R}\ \Rightarrow\ v_{max}=\sqrt{\mu_e\,g\,R}=\sqrt{0{,}4\cdot 10\cdot 80}=\sqrt{320}\approx 17{,}9\ \text{m/s}\ (\approx 64\ \text{km/h}).$$
+<p>(La masa se cancela: la $v_{max}$ no depende de cuán pesado sea el auto.)</p>
+<p><strong>b) Peralte ideal.</strong> Sin rozamiento, la componente horizontal de la normal aporta toda la centrípeta:</p>
+$$N\,\text{sen}\,\theta=m\frac{v^2}{R},\qquad N\cos\theta=mg.$$
+<p>Dividiendo miembro a miembro se cancela $N$ (y la masa):</p>
+$$\tan\theta=\frac{v^2}{gR}=\frac{20^2}{10\cdot 80}=\frac{400}{800}=0{,}5\ \Rightarrow\ \theta\approx 26{,}6^\circ.$$
+<div class="truco">Firma de Moreno: variantes con lluvia (baja $\mu$, baja $v_{max}$) o coeficiente de seguridad (tomás una fracción de $v_{max}$).</div>
+<div class="respuesta">$$\boxed{v_{max}\approx 17{,}9\ \tfrac{\text{m}}{\text{s}};\qquad \theta\approx 26{,}6^\circ}$$</div>
 </details>
 </article>
 
-</section>
+<!-- ===================== EJ5 ===================== -->
+<article class="ej" id="ej5" data-tema="energia">
+<h3>Ejercicio 5 — Teorema del trabajo y la energía <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">
+Un bloque de $m=2\ \text{kg}$, inicialmente en reposo, es empujado por una fuerza horizontal $F=20\ \text{N}$ a lo largo de $d=5\ \text{m}$ sobre un piso con $\mu_d=0{,}25$. Usando el teorema del trabajo y la energía, hallá la velocidad final.
+</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El teorema dice: $W_{\text{neto}}=\Delta E_c$. Sumo el trabajo de cada fuerza horizontal a lo largo de los $5\ \text{m}$.</p>
+<p>Trabajo de la fuerza aplicada (a favor del movimiento):</p>
+$$W_F=F\,d=20\cdot 5=100\ \text{J}.$$
+<p>Trabajo del rozamiento (en contra). Como el piso es horizontal, $N=mg$:</p>
+$$f_d=\mu_d\,m g=0{,}25\cdot 2\cdot 10=5\ \text{N},\qquad W_f=-f_d\,d=-5\cdot 5=-25\ \text{J}.$$
+<p>El peso y la normal no trabajan (perpendiculares al movimiento). Entonces:</p>
+$$W_{\text{neto}}=100-25=75\ \text{J}=\Delta E_c=\tfrac{1}{2}m v^2-0.$$
+$$\tfrac{1}{2}\cdot 2\cdot v^2=75\ \Rightarrow\ v^2=75\ \Rightarrow\ v\approx 8{,}66\ \text{m/s}.$$
+<div class="truco">Atajo conceptual: el trabajo neto es la energía que "entra" al cuerpo. Si da positivo, acelera; si diera negativo, frenaría.</div>
+<div class="respuesta">$$\boxed{v\approx 8{,}66\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<!-- ===================== EJ6 ===================== -->
+<article class="ej" id="ej6" data-tema="energia">
+<h3>Ejercicio 6 — ¿Fuerza conservativa? Energía potencial <span class="tchip">Trabajo y energía</span> <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">
+Sobre una partícula actúa $\vec{F}=2xy\,\hat{\imath}+(x^2+1)\,\hat{\jmath}$ (en newton, con $x,y$ en metros).
+<ol type="a">
+<li>Determiná si es conservativa.</li>
+<li>Si lo es, hallá la energía potencial $E_p(x,y)$.</li>
+<li>Calculá el trabajo de $\vec{F}$ al ir de $(0,0)$ a $(2,3)$.</li>
+</ol>
+</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> En 2D, la fuerza es conservativa si las derivadas cruzadas coinciden (rotor nulo):</p>
+$$\frac{\partial F_x}{\partial y}=\frac{\partial(2xy)}{\partial y}=2x,\qquad \frac{\partial F_y}{\partial x}=\frac{\partial(x^2+1)}{\partial x}=2x.$$
+<p>Son iguales ⇒ <strong>es conservativa</strong>, y le puedo asociar una $E_p$.</p>
+<p><strong>b)</strong> Uso $\vec{F}=-\nabla E_p$, o sea $F_x=-\dfrac{\partial E_p}{\partial x}$ y $F_y=-\dfrac{\partial E_p}{\partial y}$.</p>
+$$-\frac{\partial E_p}{\partial x}=2xy\ \Rightarrow\ E_p=-x^2 y+h(y).$$
+<p>Derivo eso respecto de $y$ y lo igualo a $-F_y$:</p>
+$$\frac{\partial E_p}{\partial y}=-x^2+h'(y)=-(x^2+1)\ \Rightarrow\ h'(y)=-1\ \Rightarrow\ h(y)=-y.$$
+$$\boxed{E_p(x,y)=-x^2 y-y\ \ (+\,\text{cte})}$$
+<p><strong>c)</strong> El trabajo de una fuerza conservativa es $W=E_p(A)-E_p(B)=-\Delta E_p$:</p>
+$$E_p(0,0)=0,\qquad E_p(2,3)=-(2^2)(3)-3=-12-3=-15\ \text{J}.$$
+$$W=E_p(0,0)-E_p(2,3)=0-(-15)=+15\ \text{J}.$$
+<div class="truco">Como es conservativa, el trabajo NO depende del camino: da $15\,\text{J}$ por cualquier trayectoria de $(0,0)$ a $(2,3)$. Por eso conviene usar $E_p$ en vez de integrar.</div>
+<div class="respuesta">$$\boxed{\text{Conservativa};\quad E_p=-x^2y-y;\quad W=15\ \text{J}}$$</div>
+</details>
+</article>
+
+<!-- ===================== EJ7 ===================== -->
+<article class="ej" id="ej7" data-tema="particulas">
+<h3>Ejercicio 7 — Choque plástico y centro de masa <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">
+Un carrito de $m_1=3\ \text{kg}$ se mueve a $v_1=4\ \text{m/s}$ y choca con otro de $m_2=1\ \text{kg}$ en reposo, quedando ambos enganchados (choque plástico). El piso es liso.
+<ol type="a">
+<li>Velocidad final del conjunto.</li>
+<li>Energía cinética perdida en el choque.</li>
+<li>Velocidad del centro de masa antes del choque.</li>
+</ol>
+</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> No hay fuerzas externas horizontales ⇒ se conserva el momento lineal. En el plástico quedan con una sola velocidad $v$:</p>
+$$m_1 v_1=(m_1+m_2)\,v\ \Rightarrow\ v=\frac{3\cdot 4}{3+1}=\frac{12}{4}=3\ \text{m/s}.$$
+<p><strong>b)</strong> Comparo energía cinética antes y después:</p>
+$$E_{c,i}=\tfrac{1}{2}m_1 v_1^2=\tfrac{1}{2}\cdot 3\cdot 16=24\ \text{J},\qquad E_{c,f}=\tfrac{1}{2}(4)(3^2)=18\ \text{J}.$$
+$$\Delta E_c=18-24=-6\ \text{J}\ \ (\text{se "pierden" } 6\ \text{J en deformación/calor}).$$
+<p><strong>c)</strong> La velocidad del CM es la del momento total sobre la masa total:</p>
+$$v_{cm}=\frac{m_1 v_1+m_2 v_2}{m_1+m_2}=\frac{12+0}{4}=3\ \text{m/s}.$$
+<p>Coincide con la velocidad final: lógico, porque el CM se mueve a velocidad constante (no hay fuerza externa) y al final todo se mueve junto a esa velocidad.</p>
+<div class="alerta">En el choque plástico se conserva $\vec{P}$ pero NO la energía cinética. Nunca asumas conservación de $E_c$ sin justificar el tipo de choque.</div>
+<div class="respuesta">$$\boxed{v=3\ \tfrac{\text{m}}{\text{s}},\quad \Delta E_c=-6\ \text{J},\quad v_{cm}=3\ \tfrac{\text{m}}{\text{s}}}$$</div>
+</details>
+</article>
+
+<!-- ===================== EJ8 ===================== -->
+<article class="ej" id="ej8" data-tema="particulas">
+<h3>Ejercicio 8 — Impulso y fuerza media <span class="tchip">Sistemas de partículas</span> <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">
+Una pelota de $m=0{,}2\ \text{kg}$ llega horizontalmente a una pared con $v=8\ \text{m/s}$ y rebota en sentido opuesto con $v'=6\ \text{m/s}$. El contacto dura $\Delta t=0{,}02\ \text{s}$.
+<ol type="a">
+<li>Calculá el impulso que la pared ejerce sobre la pelota.</li>
+<li>Hallá la fuerza media del golpe.</li>
+</ol>
+</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Tomo positivo el sentido de llegada. La pelota llega con $+8$ y rebota con $-6$ (cambió de sentido).</p>
+<p><strong>a)</strong> El impulso es la variación de la cantidad de movimiento ($\vec{J}=\Delta\vec{P}$, que sale de integrar $\vec{F}=d\vec{P}/dt$ en el tiempo):</p>
+$$J=\Delta p=m(v'-v)=0{,}2\,(-6-8)=0{,}2\cdot(-14)=-2{,}8\ \text{N·s}.$$
+<p>El signo negativo indica que el impulso apunta en sentido contrario a la llegada (la pared frena y devuelve la pelota). Módulo $2{,}8\ \text{N·s}$.</p>
+<p><strong>b)</strong> La fuerza media es el impulso dividido el tiempo de contacto:</p>
+$$F_{med}=\frac{|J|}{\Delta t}=\frac{2{,}8}{0{,}02}=140\ \text{N}.$$
+<div class="truco">Por eso un golpe corto duele más: el mismo $\Delta p$ en menos $\Delta t$ ⇒ mucha más fuerza. Amortiguar = alargar $\Delta t$ para bajar $F$.</div>
+<div class="respuesta">$$\boxed{J=2{,}8\ \text{N·s (opuesto a la llegada)},\quad F_{med}=140\ \text{N}}$$</div>
+</details>
+</article>
+
+<!-- ===================== EJ9 ===================== -->
+<article class="ej" id="ej9" data-tema="rigido">
+<h3>Ejercicio 9 — Cilindro que rueda sin deslizar <span class="tchip">Cuerpo rígido</span> <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">
+Un cilindro macizo ($M=2\ \text{kg}$, $R=0{,}1\ \text{m}$, $I_{cm}=\tfrac12 MR^2$) rueda sin deslizar bajando un plano inclinado $\alpha=30^\circ$. Hallá la aceleración del centro de masa.
+</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Planteo Newton para la traslación del CM y la 2.ª ley de rotación alrededor del CM. Las fuerzas son: peso, normal y rozamiento estático $f$ (que es el que hace girar; al rodar sin deslizar no disipa).</p>
+<p><strong>Traslación</strong> (eje del plano, positivo hacia abajo):</p>
+$$Mg\,\text{sen}\,\alpha-f=M\,a_{cm}.$$
+<p><strong>Rotación</strong> alrededor del CM (la única fuerza con torque es $f$, con brazo $R$):</p>
+$$f\,R=I_{cm}\,\alpha_{ang}=\tfrac12 MR^2\,\alpha_{ang}.$$
+<p><strong>Vínculo de rodadura</strong> (lo que conecta lo lineal con lo angular): $a_{cm}=\alpha_{ang}\,R$. Reemplazando, $f=\tfrac12 M a_{cm}$. Lo meto en la primera:</p>
+$$Mg\,\text{sen}\,\alpha-\tfrac12 M a_{cm}=M a_{cm}\ \Rightarrow\ g\,\text{sen}\,\alpha=\tfrac32 a_{cm}.$$
+$$a_{cm}=\frac{g\,\text{sen}\,\alpha}{1+\dfrac{I_{cm}}{MR^2}}=\frac{10\cdot 0{,}5}{1+\tfrac12}=\frac{5}{1{,}5}\approx 3{,}33\ \text{m/s}^2.$$
+<div class="alerta">El cilindro acelera menos que si resbalara sin rozar ($g\,\text{sen}\,\alpha=5\ \text{m/s}^2$): parte de la energía se va a la rotación. Una esfera ($I=\tfrac25 MR^2$) bajaría más rápido, y un aro ($I=MR^2$) más lento.</div>
+<div class="respuesta">$$\boxed{a_{cm}\approx 3{,}33\ \text{m/s}^2}$$</div>
+</details>
+</article>
+
+<!-- ===================== EJ10 ===================== -->
+<article class="ej" id="ej10" data-tema="rigido">
+<h3>Ejercicio 10 — Integrador tipo parcial: barra que cae, choca y vuelve a subir <span class="tchip parcial">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">
+Una barra homogénea ($M=2\ \text{kg}$, $L=1{,}2\ \text{m}$) está articulada por un extremo en un perno $O$ y se suelta desde la <strong>posición horizontal</strong>, partiendo del reposo. Al pasar por la vertical, su extremo inferior choca y queda <strong>pegado</strong> a un bloque $m=0{,}5\ \text{kg}$ que estaba en reposo. ($I_O^{barra}=\tfrac13 ML^2$.)
+<ol type="a">
+<li>Velocidad angular $\omega$ de la barra justo antes del choque.</li>
+<li>Velocidad angular $\omega'$ del conjunto justo después.</li>
+<li>Energía cinética perdida en el choque.</li>
+<li>¿Qué ángulo respecto de la vertical alcanza el conjunto al volver a subir?</li>
+</ol>
+<svg viewBox="0 0 320 170" role="img" aria-label="Barra articulada en O que cae desde horizontal hasta la vertical donde está el bloque">
+  <!-- perno -->
+  <circle cx="70" cy="30" r="5" fill="#2c3e50"/>
+  <text x="52" y="28" font-size="12">O</text>
+  <!-- barra horizontal (inicial, punteada) -->
+  <line x1="70" y1="30" x2="210" y2="30" stroke="#bbb" stroke-width="4" stroke-dasharray="5 4"/>
+  <text x="150" y="22" font-size="10" fill="#888">inicial (horizontal)</text>
+  <!-- arco de caída -->
+  <path d="M 205 35 A 140 140 0 0 1 78 150" fill="none" stroke="#9c27b0" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="120" y="95" font-size="10" fill="#9c27b0">cae</text>
+  <!-- barra vertical (al chocar) -->
+  <line x1="70" y1="30" x2="70" y2="150" stroke="#1a5490" stroke-width="5"/>
+  <!-- bloque -->
+  <rect x="56" y="150" width="28" height="16" fill="#4a8bc2"/>
+  <text x="88" y="162" font-size="10" fill="#1a5490">m = 0,5 kg</text>
+  <text x="80" y="95" font-size="10" fill="#1a5490">M = 2 kg</text>
+</svg>
+</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a) Caída (energía).</strong> Mientras cae no hay rozamiento; se conserva la energía mecánica. El CM de la barra (a $L/2$ del perno) baja una altura $h=L/2$. Toda esa energía potencial se vuelve cinética de rotación:</p>
+$$Mg\,\frac{L}{2}=\tfrac12 I_O\,\omega^2,\qquad I_O=\tfrac13 ML^2=\tfrac13\cdot 2\cdot 1{,}2^2=0{,}96\ \text{kg·m}^2.$$
+$$2\cdot 10\cdot 0{,}6=\tfrac12\cdot 0{,}96\,\omega^2\ \Rightarrow\ 12=0{,}48\,\omega^2\ \Rightarrow\ \omega^2=25\ \Rightarrow\ \omega=5\ \text{rad/s}.$$
+<p><strong>b) Choque (momento angular).</strong> Durante el golpe el perno ejerce una fuerza externa, así que $\vec{P}$ <em>no</em> se conserva; pero el perno no hace torque respecto de sí mismo, así que <strong>se conserva el momento angular respecto de $O$</strong>. El bloque queda pegado a distancia $L$ del perno ($I_{bloque}=mL^2$):</p>
+$$I_O\,\omega=(I_O+mL^2)\,\omega',\qquad mL^2=0{,}5\cdot 1{,}2^2=0{,}72.$$
+$$\omega'=\frac{0{,}96\cdot 5}{0{,}96+0{,}72}=\frac{4{,}8}{1{,}68}\approx 2{,}86\ \text{rad/s}.$$
+<p><strong>c) Energía perdida.</strong> Comparo la cinética justo antes (solo barra) y justo después (barra + bloque):</p>
+$$E_{c,i}=\tfrac12 I_O\,\omega^2=\tfrac12\cdot 0{,}96\cdot 25=12\ \text{J}.$$
+$$E_{c,f}=\tfrac12(I_O+mL^2)\,\omega'^2=\tfrac12\cdot 1{,}68\cdot 2{,}86^2\approx 6{,}86\ \text{J}.$$
+$$\Delta E_c\approx 6{,}86-12=-5{,}14\ \text{J}\ \ (\text{choque plástico: se pierde energía}).$$
+<p><strong>d) Vuelve a subir (energía otra vez).</strong> Después del choque ya no hay disipación: la cinética del conjunto se convierte en potencial al subir un ángulo $\theta$ desde la vertical. Cada masa sube según su distancia al perno: la barra (CM a $L/2$) y el bloque (a $L$):</p>
+$$E_{c,f}=\Big[M\,\tfrac{L}{2}+m\,L\Big]\,g\,(1-\cos\theta).$$
+$$6{,}86=\big[2\cdot 0{,}6+0{,}5\cdot 1{,}2\big]\cdot 10\,(1-\cos\theta)=18\,(1-\cos\theta).$$
+$$1-\cos\theta=0{,}381\ \Rightarrow\ \cos\theta=0{,}619\ \Rightarrow\ \theta\approx 51{,}7^\circ.$$
+<div class="truco">Estrategia del integrador: <strong>energía</strong> en los tramos sin choque (a y d), <strong>momento angular</strong> en el instante del choque (b). No mezcles: durante el choque la energía NO se conserva, y fuera del choque el momento angular cambia (el peso hace torque).</div>
+<div class="respuesta">$$\boxed{\omega=5\ \tfrac{\text{rad}}{\text{s}},\quad \omega'\approx 2{,}86\ \tfrac{\text{rad}}{\text{s}},\quad \Delta E_c\approx -5{,}14\ \text{J},\quad \theta\approx 51{,}7^\circ}$$</div>
+</details>
+</article>
 
 <footer>
-Guía graduada para el parcial de Física de Sistemas de Partículas · Cátedra Moreno · g = 10 m/s²<br>
-¿Buscás un repaso integrador en 10 ejercicios? <a href="ejercicios-por-parcial.html">Abrir guía por ejercicio de parcial →</a>
+Guía integradora para el parcial de Física de Sistemas de Partículas · Cátedra Moreno · g = 10 m/s²<br>
+¿Buscás los 50 ejercicios separados por tema? <a href="ejercicios-por-parcial.html">Abrir guía por ejercicio de parcial →</a>
 </footer>
 </main>
 
@@ -1263,9 +391,8 @@ Guía graduada para el parcial de Física de Sistemas de Partículas · Cátedra
     <h3>Cinemática</h3>
     <p>Definiciones: $v=\dfrac{dx}{dt}$, &nbsp; $a=\dfrac{dv}{dt}$.</p>
     <p>MRUV ($a$ cte): $v=v_0+at$, &nbsp; $x=x_0+v_0 t+\tfrac12 a t^2$, &nbsp; $v^2=v_0^2+2a\,\Delta x$.</p>
-    <p>Tiro oblicuo: $x=v_0\cos\theta\,t$, &nbsp; $y=v_0\,\text{sen}\,\theta\,t-\tfrac12 g t^2$.</p>
     <p>Intrínsecas: $a_t=\dfrac{dv}{dt}$, &nbsp; $a_n=\dfrac{v^2}{\rho}$, &nbsp; $a=\sqrt{a_t^2+a_n^2}$.</p>
-    <p>Circular: $v=\omega R$, &nbsp; $a_t=\alpha R$, &nbsp; $a_n=\omega^2 R$, &nbsp; $T=\dfrac{2\pi}{\omega}$.</p>
+    <p>Circular: $v=\omega R$, &nbsp; $a_t=\alpha R$, &nbsp; $a_n=\omega^2 R$.</p>
   </div>
   <div class="formulas" data-tema="dinamica">
     <h3>Dinámica</h3>
@@ -1285,7 +412,7 @@ Guía graduada para el parcial de Física de Sistemas de Partículas · Cátedra
     <h3>Sistemas de partículas</h3>
     <p>CM: $\vec{r}_{cm}=\dfrac{\sum m_i\vec{r}_i}{M}$, &nbsp; $\vec{P}=M\vec{v}_{cm}$.</p>
     <p>$\sum\vec{F}_{ext}=\dfrac{d\vec{P}}{dt}$; si $=0\Rightarrow \vec{P}$ cte. &nbsp; Impulso: $\vec{J}=\displaystyle\int\vec{F}\,dt=\Delta\vec{P}$.</p>
-    <p>Choque plástico: $\vec{P}$ cte, $E_c$ no. &nbsp; Elástico: $\vec{P}$ y $E_c$. &nbsp; König: $E_c=\tfrac12 M v_{cm}^2+E_c'$.</p>
+    <p>Choque plástico: $\vec{P}$ cte, $E_c$ no. &nbsp; König: $E_c=\tfrac12 M v_{cm}^2+E_c'$.</p>
     <p>Momento angular: $\vec{L}=\sum\vec{r}_i\wedge\vec{p}_i$, &nbsp; $\dfrac{d\vec{L}}{dt}=\sum\vec{\tau}_{ext}$.</p>
   </div>
   <div class="formulas" data-tema="rigido">
@@ -1304,7 +431,7 @@ Guía graduada para el parcial de Física de Sistemas de Partículas · Cátedra
 
 <!-- Drawer índice -->
 <div class="backdrop" id="backdrop"></div>
-<aside class="drawer" id="drawer" aria-label="Índice de temas y ejercicios">
+<aside class="drawer" id="drawer" aria-label="Índice de ejercicios">
   <div class="dhead"><span>📑 Índice</span><button id="closeDrawer" aria-label="Cerrar">×</button></div>
   <ul id="navTree"></ul>
 </aside>
@@ -1318,31 +445,22 @@ Guía graduada para el parcial de Física de Sistemas de Partículas · Cátedra
 <script>
 (function(){
   var TEMAS = { cinematica:'Cinemática', dinamica:'Dinámica', energia:'Trabajo y energía', particulas:'Sistemas de partículas', rigido:'Cuerpo rígido' };
-  var secs = Array.prototype.slice.call(document.querySelectorAll('section.tema'));
-  var current = secs[0];
+  var TLABEL = { cinematica:'CIN', dinamica:'DIN', energia:'ENE', particulas:'SIST', rigido:'RÍG' };
+  var ejs = Array.prototype.slice.call(document.querySelectorAll('article.ej'));
+  var current = ejs[0];
 
-  // ---- Índice (drawer) agrupado por tema ----
+  // ---- Índice (drawer) automático ----
   var navTree = document.getElementById('navTree');
-  secs.forEach(function(sec){
-    var li = document.createElement('li');
-    li.className = 'nav-tema';
-    li.dataset.target = sec.id;
+  ejs.forEach(function(ej){
+    var h = ej.querySelector('h3').cloneNode(true);
+    h.querySelectorAll('.nivel, .tchip').forEach(function(s){ s.remove(); });
     var a = document.createElement('a');
-    a.href = '#' + sec.id;
-    a.textContent = sec.querySelector('.tema-titulo').textContent.trim();
-    li.appendChild(a);
-    var ul = document.createElement('ul');
-    ul.className = 'nav-ejs';
-    sec.querySelectorAll('article.ej').forEach(function(ej){
-      var h = ej.querySelector('h3').cloneNode(true);
-      h.querySelectorAll('.nivel, .tchip').forEach(function(s){ s.remove(); });
-      var ea = document.createElement('a');
-      ea.href = '#' + ej.id;
-      ea.textContent = h.textContent.trim();
-      ul.appendChild(ea);
-    });
-    li.appendChild(ul);
-    navTree.appendChild(li);
+    a.href = '#' + ej.id;
+    a.className = 'nav-ej';
+    a.dataset.target = ej.id;
+    var t = ej.dataset.tema;
+    a.innerHTML = '<span class="ntema">'+(TLABEL[t]||'')+'</span><span class="ntit">'+h.textContent.trim()+'</span>';
+    navTree.appendChild(a);
   });
 
   // ---- Overlays ----
@@ -1359,13 +477,13 @@ Guía graduada para el parcial de Física de Sistemas de Partículas · Cátedra
   backdrop.addEventListener('click', closeAll);
   navTree.addEventListener('click', function(e){ if(e.target.closest('a')) closeAll(); });
 
-  // ---- Tema activo según scroll ----
+  // ---- Ejercicio activo según scroll ----
   function updateCurrent(){
-    var line = 140, found = secs[0];
-    for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top <= line) found = secs[i]; }
+    var line = 140, found = ejs[0];
+    for(var i=0;i<ejs.length;i++){ if(ejs[i].getBoundingClientRect().top <= line) found = ejs[i]; }
     if(found !== current){
       current = found;
-      navTree.querySelectorAll('.nav-tema').forEach(function(li){ li.classList.toggle('active', li.dataset.target === current.id); });
+      navTree.querySelectorAll('.nav-ej').forEach(function(a){ a.classList.toggle('active', a.dataset.target === current.id); });
       if(sheet.classList.contains('show')) refreshSheet();
     }
   }
@@ -1375,7 +493,7 @@ Guía graduada para el parcial de Física de Sistemas de Partículas · Cátedra
   }, {passive:true});
   updateCurrent();
 
-  // ---- Fórmulas del tema actual ----
+  // ---- Fórmulas del tema del ejercicio actual ----
   function refreshSheet(){
     var tema = current.dataset.tema;
     document.getElementById('sheetTitle').textContent = '📐 ' + (TEMAS[tema]||'Fórmulas');
