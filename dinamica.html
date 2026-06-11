@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2c3e50">
+<title>Dinámica · FSP Moreno</title>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root { --primary:#1a5490; --primary-dark:#2c3e50; --bg:#fafafa; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:0; color:#222; line-height:1.6; background:var(--bg); -webkit-text-size-adjust:100%; }
+
+  header.top { position:sticky; top:0; z-index:100; background:var(--primary-dark); color:#fff; padding:0.7em 0.9em 0.55em; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  header.top h1 { font-size:1.0em; margin:0 0 0.5em; font-weight:600; }
+  nav.temas { display:flex; gap:0.4em; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:0.15em; }
+  nav.temas a { flex:0 0 auto; background:#ffffff22; color:#fff; text-decoration:none; padding:0.34em 0.7em; border-radius:999px; font-size:0.8em; white-space:nowrap; border:1px solid #ffffff44; }
+
+  main { max-width:820px; margin:0 auto; padding:0.8em 0.9em 3em; }
+  .intro { background:#eef3fa; border-radius:8px; padding:0.9em 1em; margin:0.9em 0 0.5em; font-size:0.95em; }
+  .intro h2 { margin:0 0 0.4em; font-size:1.1em; color:var(--primary-dark); }
+
+  .tema { margin-top:1.4em; }
+  .tema-titulo { color:#fff; background:var(--primary); border-radius:8px; padding:0.5em 0.7em; font-size:1.1em; margin:1.3em 0 0.7em; scroll-margin-top:96px; }
+
+  h2.seccion { color:var(--primary-dark); border-bottom:3px solid var(--primary); padding-bottom:0.2em; margin:1.4em 0 0.6em; font-size:1.15em; scroll-margin-top:96px; }
+
+  .ej { background:#fff; border:1px solid #e2e6ee; border-radius:9px; padding:0.8em 0.9em; margin:0.9em 0; box-shadow:0 1px 3px rgba(0,0,0,.05); scroll-margin-top:96px; }
+  .ej h3 { font-size:1.0em; color:var(--primary-dark); margin:0 0 0.5em; display:flex; flex-wrap:wrap; align-items:center; gap:0.45em; line-height:1.35; }
+  .nivel { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#e3edf7; color:var(--primary); white-space:nowrap; }
+  .tchip { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#ffe2cc; color:#e65100; white-space:nowrap; }
+
+  .enunciado { background:#f0f6ff; border-left:4px solid #4a8bc2; padding:0.7em 0.9em; border-radius:5px; }
+  .respuesta { background:#eef9ee; border-left:4px solid #4caf50; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .alerta { background:#fff4e6; border-left:4px solid #ff9800; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .truco { background:#f3e5f5; border-left:4px solid #9c27b0; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+
+  .formula { background:#f3f5f9; border-left:4px solid var(--primary); border-radius:6px; padding:0.5em 0.9em; margin:0.6em 0; }
+  .origen { background:#f3e5f5; border-left:4px solid #9c27b0; border-radius:6px; padding:0.55em 0.9em; margin:0.4em 0 0.8em; font-size:0.94em; }
+  .origen b { color:#7b1fa2; }
+
+  details.sol { margin-top:0.7em; border:1px solid #d0d7e0; border-radius:6px; padding:0 0.85em; background:#fbfcff; }
+  details.sol > summary { cursor:pointer; font-weight:600; color:var(--primary); padding:0.6em 0; list-style:none; }
+  details.sol > summary::-webkit-details-marker { display:none; }
+  details.sol > summary::before { content:"▶"; font-size:0.78em; margin-right:0.4em; }
+  details.sol[open] > summary::before { content:"▼"; }
+  details.sol[open] { padding-bottom:0.85em; }
+  details.sol[open] > summary { border-bottom:1px solid #e2e6ee; margin-bottom:0.5em; }
+
+  svg { display:block; max-width:100%; height:auto; margin:0.8em auto; background:#fff; border:1px solid #e2e6ee; border-radius:6px; }
+  mjx-container { overflow-x:auto; overflow-y:hidden; max-width:100%; }
+  mjx-container[display="true"] { margin:0.6em 0 !important; }
+
+  .fab { position:fixed; z-index:200; border:none; cursor:pointer; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,.3); display:flex; align-items:center; justify-content:center; }
+  .backtop { right:14px; bottom:128px; background:var(--primary); width:44px; height:44px; border-radius:50%; text-decoration:none; font-size:1.25em; }
+  .fab-formulas { right:14px; bottom:14px; background:#9c27b0; height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+  .fab-index { left:14px; bottom:14px; background:var(--primary-dark); height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+
+  .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:300; opacity:0; visibility:hidden; transition:opacity .25s; }
+  .backdrop.show { opacity:1; visibility:visible; }
+
+  .drawer { position:fixed; top:0; left:0; height:100%; width:82%; max-width:340px; background:#fff; z-index:310; transform:translateX(-100%); transition:transform .28s ease; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:2px 0 14px rgba(0,0,0,.25); }
+  .drawer.show { transform:translateX(0); }
+  .drawer .dhead { position:sticky; top:0; background:var(--primary-dark); color:#fff; padding:0.85em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .drawer .dhead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .drawer ul { list-style:none; margin:0; padding:0; }
+  .drawer .nav-tema > a { display:block; background:#eef3fa; color:var(--primary-dark); font-weight:600; text-decoration:none; padding:0.6em 1em; border-bottom:1px solid #e2e6ee; }
+  .drawer .nav-tema.active > a { background:var(--primary); color:#fff; }
+  .drawer .nav-ejs { padding:0.2em 0 0.5em; }
+  .drawer .nav-ejs a { display:block; color:#333; text-decoration:none; padding:0.42em 1em 0.42em 1.6em; font-size:0.88em; border-bottom:1px solid #f0f2f5; }
+
+  .sheet { position:fixed; left:0; right:0; bottom:0; max-height:72vh; background:#fff; z-index:310; transform:translateY(100%); transition:transform .28s ease; border-radius:14px 14px 0 0; box-shadow:0 -2px 14px rgba(0,0,0,.25); display:flex; flex-direction:column; }
+  .sheet.show { transform:translateY(0); }
+  .sheet .shead { background:#9c27b0; color:#fff; padding:0.8em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0; }
+  .sheet .shead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .sheet .sbody { overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0.6em 0.9em 1em; }
+  .sheet .sbody .formula { margin:0.45em 0; }
+  @media (min-width:760px){ .sheet { left:auto; right:18px; bottom:18px; width:420px; max-height:78vh; border-radius:12px; } .sheet .shead { border-radius:12px 12px 0 0; } }
+
+  footer { text-align:center; color:#888; font-size:0.85em; padding:1.5em 1em 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>⚙️ Dinámica — FSP (cátedra Moreno)</h1>
+  <nav class="temas">
+    <a href="#formulas">📐 Fórmulas</a>
+    <a href="#basico">Básico</a>
+    <a href="#intermedio">Intermedio</a>
+    <a href="#avanzado">Avanzado</a>
+    <a href="#parcial">Tipo parcial</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<div class="intro">
+<h2>De qué se trata</h2>
+<p>La <strong>dinámica</strong> explica <em>por qué</em> se mueven las cosas: relaciona las <strong>fuerzas</strong> con la <strong>aceleración</strong>. Todo gira alrededor de una sola ecuación, la 2.ª ley de Newton $\sum\vec{F}=m\vec{a}$, aplicada después de hacer un buen <strong>diagrama de cuerpo libre (DCL)</strong>.</p>
+<p style="margin-bottom:0">Abajo, las <strong>fórmulas con justificación</strong> y <strong>23 ejercicios</strong> de menos a más, con varios DCL dibujados. Botón <strong>📐 Fórmulas</strong> (abajo der.) y <strong>☰ Índice</strong> (abajo izq.). $g=10\,\text{m/s}^2$, decimales con coma.</p>
+</div>
+
+
+<!-- ===================== FÓRMULAS CON JUSTIFICACIÓN ===================== -->
+<h2 class="seccion" id="formulas">📐 Fórmulas con justificación</h2>
+
+<div class="formula">
+<strong>Segunda ley de Newton</strong>
+$$\sum\vec{F}=m\,\vec{a}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es un <b>principio</b> (no se demuestra), pero es el corazón de todo. Dice que la <em>suma</em> de todas las fuerzas sobre un cuerpo es igual a su masa por su aceleración. Si la suma da cero, no hay aceleración (1.ª ley: reposo o velocidad constante). Se aplica por separado en cada eje: $\sum F_x=ma_x$ y $\sum F_y=ma_y$.
+</div>
+
+<div class="formula">
+<strong>El método del DCL (diagrama de cuerpo libre)</strong>
+</div>
+<div class="origen">
+<b>Cómo se usa:</b> (1) elegís UN cuerpo; (2) dibujás <em>todas</em> las fuerzas que actúan sobre él (peso, normal, tensión, rozamiento, fuerzas aplicadas) saliendo del cuerpo; (3) elegís ejes (conviene uno en la dirección de la aceleración); (4) proyectás y armás $\sum F=ma$ en cada eje. <b>El 80% de los errores se evitan con un DCL prolijo.</b>
+</div>
+
+<div class="formula">
+<strong>Peso y normal</strong>
+$$P=mg\qquad N=\text{(sale de la ecuación perpendicular a la superficie)}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> el peso es la fuerza con que la Tierra atrae al cuerpo, siempre vertical hacia abajo, $P=mg$. La <b>normal</b> es la reacción de la superficie, perpendicular a ella; su valor NO es siempre $mg$: se despeja de la ecuación en la dirección perpendicular. En un plano horizontal con una fuerza vertical extra, en un plano inclinado o en una curva, $N$ cambia.
+</div>
+
+<div class="formula">
+<strong>Rozamiento</strong>
+$$f_s\le\mu_e\,N\qquad f_d=\mu_d\,N\qquad(\mu_e>\mu_d)$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es un modelo experimental. Mientras el cuerpo <b>no desliza</b>, el rozamiento estático vale <em>exactamente lo necesario</em> para equilibrar lo que empuja, hasta un tope $\mu_e N$. Si se supera ese tope, desliza y el rozamiento pasa a valer $f_d=\mu_d N$ (constante, oponiéndose al movimiento). <b>Criterio "¿se mueve?":</b> comparás la fuerza que empuja contra $\mu_e N$.
+</div>
+
+<div class="formula">
+<strong>Plano inclinado</strong>
+$$N=mg\cos\alpha\qquad \text{(bajando) } a=g(\text{sen}\,\alpha-\mu_d\cos\alpha)$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> descomponés el peso en dos: una parte <em>a lo largo</em> del plano ($mg\,\text{sen}\,\alpha$, que lo hace deslizar) y otra <em>perpendicular</em> ($mg\cos\alpha$, que aprieta contra la superficie y fija la normal). Newton a lo largo del plano: $mg\,\text{sen}\,\alpha-f_d=ma$, con $f_d=\mu_d N=\mu_d mg\cos\alpha$.
+</div>
+
+<div class="formula">
+<strong>Dinámica en curvas</strong>
+$$\sum F_n=m\frac{v^2}{R}\qquad \text{(plana) } v_{max}=\sqrt{\mu_e\,g\,R}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> no existe una "fuerza centrípeta" aparte: es la <b>resultante</b> de las fuerzas reales apuntando al centro, igualada a $m\,a_n=m\dfrac{v^2}{R}$. En una curva plana, lo único que apunta al centro es el rozamiento; en el límite $\mu_e mg=m\dfrac{v^2}{R}$, de donde sale $v_{max}=\sqrt{\mu_e g R}$ (¡no depende de la masa!).
+</div>
+
+<div class="formula">
+<strong>Peralte ideal</strong>
+$$\tan\theta=\frac{v^2}{gR}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> sin rozamiento, la componente horizontal de la normal aporta toda la centrípeta: $N\,\text{sen}\,\theta=m\dfrac{v^2}{R}$ y $N\cos\theta=mg$. Dividiendo se cancela $N$ (y la masa) y queda $\tan\theta=\dfrac{v^2}{gR}$.
+</div>
+
+<div class="formula">
+<strong>Cuña acelerada</strong>
+$$a_0=g\,\tan\alpha\quad(\text{para que el bloque no deslice, sin rozamiento})$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> si el bloque acompaña a la cuña sin deslizar, tiene la misma aceleración horizontal $a_0$. Las únicas fuerzas reales son el peso y la normal. Proyectando $\sum\vec F=m\vec a$: en horizontal $N\,\text{sen}\,\alpha=ma_0$ y en vertical $N\cos\alpha=mg$. Dividiendo: $a_0=g\tan\alpha$.
+</div>
+
+
+<!-- ===================== BÁSICO ===================== -->
+<section class="tema" id="basico" data-tema="dinamica">
+<h2 class="tema-titulo">🟢 Básico (1–7)</h2>
+
+<article class="ej" id="din-ej1">
+<h3>Ejercicio 1 — Segunda ley directa <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Sobre un cuerpo de $m=3\ \text{kg}$ actúa una fuerza neta de $12\ \text{N}$. ¿Cuál es su aceleración?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Aplico directamente $\sum F=ma$ y despejo:</p>
+$$a=\frac{\sum F}{m}=\frac{12}{3}=4\ \text{m/s}^2.$$
+<div class="respuesta">$$\boxed{a=4\ \text{m/s}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej2">
+<h3>Ejercicio 2 — Peso y masa no son lo mismo <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Un objeto tiene masa $m=5\ \text{kg}$.
+<ol type="a"><li>¿Cuánto pesa en la Tierra?</li><li>¿Cuánto pesa en la Luna ($g_L=1{,}6\ \text{m/s}^2$)? ¿Cambia su masa?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El peso es $P=mg$ (depende de dónde estés); la masa es la cantidad de materia (no cambia).</p>
+<p><strong>a)</strong> $P=5\cdot 10=50\ \text{N}.$</p>
+<p><strong>b)</strong> $P_L=5\cdot 1{,}6=8\ \text{N}.$ La masa sigue siendo $5\ \text{kg}$.</p>
+<div class="alerta">Masa (kg) ≠ peso (N). En la Luna pesás menos pero tenés la misma masa.</div>
+<div class="respuesta">$$\boxed{P=50\ \text{N};\quad P_L=8\ \text{N};\quad m=5\ \text{kg siempre}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej3">
+<h3>Ejercicio 3 — Fuerza neta en una recta <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Sobre un carrito de $m=6\ \text{kg}$ actúan dos fuerzas horizontales: $30\ \text{N}$ hacia la derecha y $12\ \text{N}$ hacia la izquierda. Hallá la aceleración.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Primero la fuerza neta (sumo con signo, derecha positiva):</p>
+$$\sum F=30-12=18\ \text{N}.$$
+$$a=\frac{18}{6}=3\ \text{m/s}^2\ \text{(hacia la derecha)}.$$
+<div class="respuesta">$$\boxed{a=3\ \text{m/s}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej4">
+<h3>Ejercicio 4 — La normal no siempre es $mg$ <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Un cajón de $m=4\ \text{kg}$ está sobre el piso. Alguien lo empuja hacia abajo con una fuerza vertical extra de $20\ \text{N}$. ¿Cuánto vale la normal?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La normal se despeja de la ecuación <strong>perpendicular al piso</strong> (vertical). El cajón no se mueve en vertical, así que la suma vertical es cero:</p>
+$$N-mg-F=0\ \Rightarrow\ N=mg+F=40+20=60\ \text{N}.$$
+<div class="alerta">Acá $N=60\ \text{N}\neq mg=40\ \text{N}$. Si en cambio lo tiraran hacia arriba con $20\ \text{N}$, sería $N=40-20=20\ \text{N}$. La normal se ajusta a las otras fuerzas verticales.</div>
+<div class="respuesta">$$\boxed{N=60\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej5">
+<h3>Ejercicio 5 — Tensión de una soga <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Una lámpara de $m=8\ \text{kg}$ cuelga de una soga.
+<ol type="a"><li>¿Cuál es la tensión si está en reposo?</li><li>¿Y si cuelga del techo de un ascensor que sube acelerando a $2\ \text{m/s}^2$?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Las fuerzas sobre la lámpara son la tensión $T$ (arriba) y el peso $mg$ (abajo).</p>
+<p><strong>a)</strong> En reposo, $\sum F=0$: $T-mg=0\Rightarrow T=mg=80\ \text{N}.$</p>
+<p><strong>b)</strong> Acelerando hacia arriba: $T-mg=ma\Rightarrow T=m(g+a)=8\cdot 12=96\ \text{N}.$</p>
+<div class="truco">Subir acelerando "pesa más" (mayor tensión); bajar acelerando "pesa menos". Es el efecto que sentís en el ascensor.</div>
+<div class="respuesta">$$\boxed{T=80\ \text{N (reposo)};\quad T=96\ \text{N (acelerando)}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej6">
+<h3>Ejercicio 6 — Plano inclinado sin rozamiento <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Un bloque de $m=2\ \text{kg}$ se suelta en un plano liso inclinado $\alpha=30^\circ$.
+<ol type="a"><li>¿Con qué aceleración baja?</li><li>¿Cuánto vale la normal?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Descompongo el peso: una parte a lo largo del plano (lo hace bajar) y otra perpendicular (la aprieta).</p>
+<p><strong>a)</strong> A lo largo del plano sólo actúa $mg\,\text{sen}\,\alpha$ (no hay rozamiento):</p>
+$$ma=mg\,\text{sen}\,\alpha\ \Rightarrow\ a=g\,\text{sen}\,\alpha=10\cdot 0{,}5=5\ \text{m/s}^2.$$
+<p><strong>b)</strong> Perpendicular: $N=mg\cos\alpha=2\cdot 10\cdot 0{,}866=17{,}3\ \text{N}.$</p>
+<div class="truco">La aceleración en un plano liso no depende de la masa: $a=g\,\text{sen}\,\alpha$. A más inclinación, más aceleración (hasta $g$ en caída libre con $\alpha=90^\circ$).</div>
+<div class="respuesta">$$\boxed{a=5\ \text{m/s}^2;\quad N\approx 17{,}3\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej7">
+<h3>Ejercicio 7 — Tu primer DCL <span class="nivel">Nivel 3</span></h3>
+<div class="enunciado">Un cajón de $m=10\ \text{kg}$ es empujado sobre el piso con una fuerza horizontal $F=40\ \text{N}$. El rozamiento dinámico es $\mu_d=0{,}2$. Dibujá el DCL y hallá la aceleración.
+<svg viewBox="0 0 300 200" role="img" aria-label="Diagrama de cuerpo libre de un bloque: normal arriba, peso abajo, fuerza aplicada a la derecha, rozamiento a la izquierda">
+  <defs>
+    <marker id="d7b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker>
+    <marker id="d7g" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2e7d32"/></marker>
+    <marker id="d7r" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker>
+  </defs>
+  <!-- bloque -->
+  <rect x="120" y="78" width="60" height="44" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.5"/>
+  <!-- N (arriba, desde borde superior) -->
+  <line x1="150" y1="78" x2="150" y2="26" stroke="#1a5490" stroke-width="2.5" marker-end="url(#d7b)"/>
+  <text x="156" y="34" font-size="12" fill="#1a5490">N</text>
+  <!-- P (abajo, desde borde inferior) -->
+  <line x1="150" y1="122" x2="150" y2="178" stroke="#1a5490" stroke-width="2.5" marker-end="url(#d7b)"/>
+  <text x="156" y="172" font-size="12" fill="#1a5490">P = mg</text>
+  <!-- F (derecha, desde borde derecho) -->
+  <line x1="180" y1="100" x2="252" y2="100" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#d7g)"/>
+  <text x="232" y="92" font-size="12" fill="#2e7d32">F</text>
+  <!-- f (izquierda, desde borde izquierdo) -->
+  <line x1="120" y1="100" x2="48" y2="100" stroke="#c0392b" stroke-width="2.5" marker-end="url(#d7r)"/>
+  <text x="20" y="94" font-size="12" fill="#c0392b">f (roz.)</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El DCL muestra 4 fuerzas: normal $N$ (arriba), peso $P$ (abajo), fuerza aplicada $F$ (derecha) y rozamiento $f$ (izquierda, oponiéndose al movimiento).</p>
+<p><strong>Vertical</strong> (no hay aceleración vertical): $N=mg=100\ \text{N}.$</p>
+<p><strong>Rozamiento</strong> dinámico: $f=\mu_d N=0{,}2\cdot 100=20\ \text{N}.$</p>
+<p><strong>Horizontal</strong> (2.ª ley):</p>
+$$F-f=ma\ \Rightarrow\ a=\frac{40-20}{10}=2\ \text{m/s}^2.$$
+<div class="respuesta">$$\boxed{N=100\ \text{N};\quad f=20\ \text{N};\quad a=2\ \text{m/s}^2}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== INTERMEDIO ===================== -->
+<section class="tema" id="intermedio" data-tema="dinamica">
+<h2 class="tema-titulo">🟡 Intermedio (8–14)</h2>
+
+<article class="ej" id="din-ej8">
+<h3>Ejercicio 8 — ¿Se mueve o no? (rozamiento estático) <span class="nivel">Nivel 4</span></h3>
+<div class="enunciado">Un bloque de $m=5\ \text{kg}$ está en reposo sobre el piso ($\mu_e=0{,}4$). Lo empujás horizontalmente con $F=15\ \text{N}$. ¿Se mueve? ¿Cuánto vale el rozamiento?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Calculo el máximo rozamiento estático que puede ofrecer el piso:</p>
+$$f_{s,max}=\mu_e N=\mu_e\,mg=0{,}4\cdot 50=20\ \text{N}.$$
+<p>Como empujás con $F=15\ \text{N}<20\ \text{N}$, el rozamiento alcanza a frenarlo: <strong>no se mueve</strong>. Y el rozamiento vale <em>justo lo necesario</em> para equilibrar: $f=15\ \text{N}$ (no $20$).</p>
+<div class="alerta">El rozamiento estático no es siempre su máximo: es lo que haga falta para que el cuerpo siga quieto, hasta el tope $\mu_e N$.</div>
+<div class="respuesta">$$\boxed{\text{No se mueve};\quad f=15\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej9">
+<h3>Ejercicio 9 — Ahora sí desliza (rozamiento dinámico) <span class="nivel">Nivel 4</span></h3>
+<div class="enunciado">El mismo bloque ($m=5\ \text{kg}$, $\mu_e=0{,}4$, $\mu_d=0{,}3$) ahora lo empujás con $F=30\ \text{N}$. ¿Se mueve? Hallá la aceleración.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Máximo estático: $\mu_e mg=20\ \text{N}$. Ahora $F=30>20$, así que <strong>desliza</strong>. Una vez en movimiento actúa el rozamiento dinámico:</p>
+$$f_d=\mu_d\,mg=0{,}3\cdot 50=15\ \text{N}.$$
+$$a=\frac{F-f_d}{m}=\frac{30-15}{5}=3\ \text{m/s}^2.$$
+<div class="respuesta">$$\boxed{\text{Desliza};\quad a=3\ \text{m/s}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej10">
+<h3>Ejercicio 10 — Plano inclinado con rozamiento (DCL) <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Un bloque de $m=4\ \text{kg}$ está en un plano inclinado $\alpha=30^\circ$ con $\mu_e=0{,}3$ y $\mu_d=0{,}2$.
+<ol type="a"><li>¿Desliza?</li><li>Si desliza, ¿con qué aceleración?</li></ol>
+<svg viewBox="0 0 320 200" role="img" aria-label="DCL de un bloque en un plano inclinado: peso vertical hacia abajo, normal perpendicular al plano, rozamiento a lo largo del plano">
+  <defs>
+    <marker id="d10b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker>
+    <marker id="d10r" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker>
+  </defs>
+  <!-- plano inclinado: A abajo-izq, B abajo-der, C arriba-der -->
+  <polygon points="40,170 300,170 300,20" fill="#eef3fa" stroke="#1a5490" stroke-width="2"/>
+  <!-- angulo en A -->
+  <path d="M 70 170 A 30 30 0 0 0 66 153" fill="none" stroke="#333"/>
+  <text x="74" y="166" font-size="11">α</text>
+  <!-- bloque sobre la hipotenusa (centro 157,102), rotado 30 -->
+  <rect x="143" y="89" width="28" height="22" rx="2" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.4" transform="rotate(-30 157 102)"/>
+  <!-- P peso (vertical hacia abajo) -->
+  <line x1="157" y1="102" x2="157" y2="162" stroke="#1a5490" stroke-width="2.5" marker-end="url(#d10b)"/>
+  <text x="162" y="156" font-size="11" fill="#1a5490">P</text>
+  <!-- N perpendicular al plano (up-left) -->
+  <line x1="157" y1="102" x2="127" y2="50" stroke="#1a5490" stroke-width="2.5" marker-end="url(#d10b)"/>
+  <text x="112" y="46" font-size="11" fill="#1a5490">N</text>
+  <!-- f rozamiento (up-slope, oponiendose a la bajada) -->
+  <line x1="157" y1="102" x2="205" y2="74" stroke="#c0392b" stroke-width="2.5" marker-end="url(#d10r)"/>
+  <text x="208" y="70" font-size="11" fill="#c0392b">f</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>En el DCL: el peso $P$ es vertical, la normal $N$ es perpendicular al plano, y el rozamiento $f$ va a lo largo del plano (hacia arriba, oponiéndose a la tendencia a bajar).</p>
+<p><strong>Normal:</strong> $N=mg\cos\alpha=4\cdot 10\cdot 0{,}866=34{,}6\ \text{N}.$</p>
+<p><strong>a) ¿Desliza?</strong> Lo que tira hacia abajo es $mg\,\text{sen}\,\alpha=40\cdot 0{,}5=20\ \text{N}$; el máximo rozamiento estático es $\mu_e N=0{,}3\cdot 34{,}6=10{,}4\ \text{N}$. Como $20>10{,}4$, <strong>desliza</strong> (equivale a $\tan 30^\circ=0{,}577>\mu_e=0{,}3$).</p>
+<p><strong>b)</strong> Con rozamiento dinámico, a lo largo del plano:</p>
+$$ma=mg\,\text{sen}\,\alpha-\mu_d\,mg\cos\alpha\ \Rightarrow\ a=g(\text{sen}\,\alpha-\mu_d\cos\alpha).$$
+$$a=10\,(0{,}5-0{,}2\cdot 0{,}866)=10\,(0{,}5-0{,}173)=3{,}27\ \text{m/s}^2.$$
+<div class="respuesta">$$\boxed{\text{Desliza};\quad a=3{,}27\ \text{m/s}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej11">
+<h3>Ejercicio 11 — Máquina de Atwood <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Dos masas cuelgan de una soga que pasa por una polea ideal: $m_1=3\ \text{kg}$ y $m_2=5\ \text{kg}$. Hallá la aceleración del sistema y la tensión de la soga.
+<svg viewBox="0 0 260 200" role="img" aria-label="Máquina de Atwood: dos masas colgando de una polea">
+  <defs><marker id="d11b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker></defs>
+  <!-- soporte -->
+  <line x1="60" y1="20" x2="200" y2="20" stroke="#333" stroke-width="3"/>
+  <!-- polea -->
+  <circle cx="130" cy="40" r="18" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
+  <circle cx="130" cy="40" r="3" fill="#2c3e50"/>
+  <!-- sogas -->
+  <line x1="112" y1="40" x2="112" y2="120" stroke="#555" stroke-width="1.5"/>
+  <line x1="148" y1="40" x2="148" y2="95" stroke="#555" stroke-width="1.5"/>
+  <!-- masas -->
+  <rect x="92" y="120" width="40" height="40" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.5"/>
+  <text x="100" y="145" font-size="11" fill="#1a5490">m₁</text>
+  <rect x="126" y="95" width="44" height="44" rx="3" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.5"/>
+  <text x="136" y="121" font-size="11" fill="#1a5490">m₂</text>
+  <!-- flechas de movimiento -->
+  <line x1="80" y1="135" x2="80" y2="105" stroke="#1a5490" stroke-width="2" marker-end="url(#d11b)"/>
+  <line x1="185" y1="112" x2="185" y2="145" stroke="#1a5490" stroke-width="2" marker-end="url(#d11b)"/>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>$m_2$ es más pesada, así que baja y $m_1$ sube; ambas tienen la misma aceleración $a$ (la soga es inextensible) y la misma tensión $T$ (polea ideal).</p>
+<p>Newton en cada una (positivo en el sentido de movimiento de cada una):</p>
+$$m_2:\quad m_2 g-T=m_2 a\qquad m_1:\quad T-m_1 g=m_1 a.$$
+<p>Sumo las dos (se cancela $T$):</p>
+$$a=\frac{(m_2-m_1)g}{m_1+m_2}=\frac{(5-3)\cdot 10}{8}=2{,}5\ \text{m/s}^2.$$
+<p>Tensión (de la ecuación de $m_1$): $T=m_1(g+a)=3\cdot 12{,}5=37{,}5\ \text{N}.$</p>
+<div class="truco">Chequeo con la otra masa: $m_2(g-a)=5\cdot 7{,}5=37{,}5\ \text{N}$. Coincide ✓.</div>
+<div class="respuesta">$$\boxed{a=2{,}5\ \text{m/s}^2;\quad T=37{,}5\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej12">
+<h3>Ejercicio 12 — Bloque sobre mesa + masa colgante <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Un bloque $M=4\ \text{kg}$ sobre una mesa lisa está unido por una soga (que pasa por una polea ideal en el borde) a una masa colgante $m=2\ \text{kg}$. Hallá la aceleración y la tensión.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La masa colgante tira del sistema. Misma $a$ y misma $T$ para los dos.</p>
+$$m:\quad mg-T=ma\qquad M:\quad T=Ma\ (\text{mesa lisa, sólo la tensión lo acelera}).$$
+<p>Sumando: $mg=(M+m)a$, entonces:</p>
+$$a=\frac{mg}{M+m}=\frac{2\cdot 10}{6}=3{,}33\ \text{m/s}^2.$$
+$$T=Ma=4\cdot 3{,}33=13{,}3\ \text{N}.$$
+<div class="respuesta">$$\boxed{a\approx 3{,}33\ \text{m/s}^2;\quad T\approx 13{,}3\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej13">
+<h3>Ejercicio 13 — Dos bloques en contacto <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Sobre un piso liso, una fuerza $F=20\ \text{N}$ empuja a un bloque $m_1=2\ \text{kg}$ que está pegado (en contacto) a otro $m_2=3\ \text{kg}$.
+<ol type="a"><li>Aceleración del conjunto.</li><li>Fuerza de contacto entre los bloques.</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> Los dos se mueven juntos, así que los trato como un solo cuerpo de masa $m_1+m_2$:</p>
+$$a=\frac{F}{m_1+m_2}=\frac{20}{5}=4\ \text{m/s}^2.$$
+<p><strong>b)</strong> La fuerza de contacto es la que $m_1$ le hace a $m_2$; es la única fuerza horizontal sobre $m_2$:</p>
+$$F_{contacto}=m_2\,a=3\cdot 4=12\ \text{N}.$$
+<div class="truco">Para hallar la fuerza interna, aislás uno solo de los bloques. Para la aceleración, conviene mirarlos juntos.</div>
+<div class="respuesta">$$\boxed{a=4\ \text{m/s}^2;\quad F_{contacto}=12\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej14">
+<h3>Ejercicio 14 — Peso aparente en el ascensor <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Una persona de $m=70\ \text{kg}$ está parada sobre una balanza dentro de un ascensor.
+<ol type="a"><li>¿Qué marca la balanza si el ascensor sube acelerando a $3\ \text{m/s}^2$?</li><li>¿Y si baja acelerando a $3\ \text{m/s}^2$?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La balanza marca la normal $N$ (la fuerza con que la persona la aprieta). Newton en vertical:</p>
+<p><strong>a) Subiendo acelerando</strong> (positivo hacia arriba): $N-mg=ma\Rightarrow N=m(g+a)=70\cdot 13=910\ \text{N}.$</p>
+<p><strong>b) Bajando acelerando</strong> (la aceleración apunta hacia abajo): $N-mg=-ma\Rightarrow N=m(g-a)=70\cdot 7=490\ \text{N}.$</p>
+<div class="truco">"Pesás más" cuando el ascensor acelera hacia arriba (arranca subiendo o frena bajando) y "menos" al revés.</div>
+<div class="respuesta">$$\boxed{N=910\ \text{N (sube)};\quad N=490\ \text{N (baja)}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== AVANZADO ===================== -->
+<section class="tema" id="avanzado" data-tema="dinamica">
+<h2 class="tema-titulo">🟠 Avanzado (15–20)</h2>
+
+<article class="ej" id="din-ej15">
+<h3>Ejercicio 15 — Bloques apilados (rozamiento entre ellos) <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Sobre un piso liso hay un bloque $M=3\ \text{kg}$, y encima otro $m=2\ \text{kg}$. El coeficiente estático entre ambos es $\mu_e=0{,}4$. Empujás el bloque de abajo con una fuerza horizontal $F$. ¿Cuál es la $F$ máxima para que se muevan juntos (el de arriba sin resbalar)?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El bloque de arriba sólo puede ser acelerado por el <strong>rozamiento</strong> que le hace el de abajo. Ese rozamiento tiene un tope: $f_{max}=\mu_e\,mg=0{,}4\cdot 2\cdot 10=8\ \text{N}$.</p>
+<p>La máxima aceleración que el de arriba puede tener sin resbalar:</p>
+$$a_{max}=\frac{f_{max}}{m}=\frac{8}{2}=4\ \text{m/s}^2\ (=\mu_e g).$$
+<p>Como se mueven juntos, esa es la aceleración del conjunto. La $F$ que la produce:</p>
+$$F_{max}=(M+m)\,a_{max}=5\cdot 4=20\ \text{N}.$$
+<div class="alerta">Si $F>20\ \text{N}$, el de abajo acelera más rápido de lo que el rozamiento puede arrastrar al de arriba ⇒ el de arriba se queda atrás (resbala).</div>
+<div class="respuesta">$$\boxed{F_{max}=20\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej16">
+<h3>Ejercicio 16 — Curva plana: velocidad máxima <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Un auto toma una curva plana de radio $R=80\ \text{m}$. El coeficiente estático entre rueda y asfalto es $\mu_e=0{,}4$. ¿Cuál es la velocidad máxima para no derrapar?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>En una curva plana, la única fuerza que apunta al centro (la centrípeta) es el rozamiento. En el límite de derrape, el rozamiento da su máximo:</p>
+$$\mu_e\,mg=m\frac{v^2}{R}\ \Rightarrow\ v_{max}=\sqrt{\mu_e\,g\,R}.$$
+$$v_{max}=\sqrt{0{,}4\cdot 10\cdot 80}=\sqrt{320}\approx 17{,}9\ \text{m/s}\ (\approx 64\ \text{km/h}).$$
+<div class="truco">La masa se cancela: un camión y un auto derrapan a la misma velocidad en la misma curva (si tienen igual $\mu$).</div>
+<div class="respuesta">$$\boxed{v_{max}\approx 17{,}9\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej17">
+<h3>Ejercicio 17 — Peralte ideal <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">Se quiere peraltar (inclinar) una curva de radio $R=80\ \text{m}$ para que se pueda tomar a $v=20\ \text{m/s}$ <em>sin depender del rozamiento</em>. ¿Qué ángulo de peralte hace falta?
+<svg viewBox="0 0 320 200" role="img" aria-label="Auto sobre una curva peraltada: normal perpendicular a la pista y peso vertical; la componente horizontal de la normal apunta al centro">
+  <defs>
+    <marker id="d17b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker>
+    <marker id="d17c" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker>
+  </defs>
+  <!-- pista peraltada (sube hacia la derecha) -->
+  <polygon points="40,170 300,170 300,40" fill="#eef3fa" stroke="#1a5490" stroke-width="2"/>
+  <path d="M 70 170 A 30 30 0 0 0 64 150" fill="none" stroke="#333"/>
+  <text x="74" y="166" font-size="11">θ</text>
+  <!-- auto sobre la pista (centro 168,99), rotado ~26.6 -->
+  <rect x="150" y="86" width="36" height="20" rx="3" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.4" transform="rotate(-26.6 168 96)"/>
+  <!-- N perpendicular a la pista (up-left) -->
+  <line x1="168" y1="96" x2="138" y2="36" stroke="#1a5490" stroke-width="2.5" marker-end="url(#d17b)"/>
+  <text x="124" y="32" font-size="11" fill="#1a5490">N</text>
+  <!-- P peso vertical -->
+  <line x1="168" y1="96" x2="168" y2="156" stroke="#1a5490" stroke-width="2.5" marker-end="url(#d17b)"/>
+  <text x="173" y="150" font-size="11" fill="#1a5490">P</text>
+  <!-- componente horizontal de N (hacia el centro, izquierda) -->
+  <line x1="168" y1="96" x2="120" y2="96" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#d17c)"/>
+  <text x="108" y="110" font-size="10" fill="#c0392b">→ centro</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Sin rozamiento, las únicas fuerzas son el peso (vertical) y la normal (perpendicular a la pista). La componente horizontal de la normal es la que apunta al centro y hace de centrípeta:</p>
+$$N\,\text{sen}\,\theta=m\frac{v^2}{R}\qquad N\cos\theta=mg.$$
+<p>Dividiendo las dos ecuaciones se cancela $N$ (y la masa):</p>
+$$\tan\theta=\frac{v^2}{gR}=\frac{20^2}{10\cdot 80}=\frac{400}{800}=0{,}5\ \Rightarrow\ \theta\approx 26{,}6^\circ.$$
+<div class="respuesta">$$\boxed{\theta\approx 26{,}6^\circ}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej18">
+<h3>Ejercicio 18 — Peralte con rozamiento <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">La curva peraltada anterior ($\theta=26{,}6^\circ$, $R=80\ \text{m}$) ahora tiene rozamiento $\mu_e=0{,}2$. ¿Cuál es la velocidad máxima a la que se puede tomar sin derrapar hacia afuera?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>A la velocidad máxima el auto tiende a salirse hacia afuera, así que el rozamiento ($f=\mu_e N$) apunta hacia abajo del peralte (ayudando a la normal a sostenerlo). Proyectando hacia el centro y en vertical y combinando, se llega a la fórmula:</p>
+$$v_{max}=\sqrt{gR\,\frac{\tan\theta+\mu_e}{1-\mu_e\tan\theta}}.$$
+<p>Con $\tan\theta=0{,}5$:</p>
+$$v_{max}=\sqrt{800\cdot\frac{0{,}5+0{,}2}{1-0{,}2\cdot 0{,}5}}=\sqrt{800\cdot\frac{0{,}7}{0{,}9}}=\sqrt{622}\approx 24{,}9\ \text{m/s}.$$
+<div class="truco">El rozamiento "agranda" el rango de velocidades seguras: sin él sólo servía $20\ \text{m/s}$; con él podés llegar a casi $25\ \text{m/s}$.</div>
+<div class="respuesta">$$\boxed{v_{max}\approx 24{,}9\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej19">
+<h3>Ejercicio 19 — Cuña acelerada (sin rozamiento) <span class="nivel">Nivel 9</span></h3>
+<div class="enunciado">Un bloque está apoyado sobre la cara inclinada ($\alpha=30^\circ$) de una cuña lisa. ¿Con qué aceleración horizontal $a_0$ hay que mover la cuña para que el bloque <strong>no deslice</strong> respecto de ella?
+<svg viewBox="0 0 320 190" role="img" aria-label="Cuña con un bloque en su cara inclinada, acelerada horizontalmente">
+  <defs>
+    <marker id="d19b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker>
+    <marker id="d19g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+  </defs>
+  <!-- cuña: incline sube a la izquierda, cara vertical a la izquierda -->
+  <polygon points="40,150 280,150 40,50" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
+  <path d="M 250 150 A 30 30 0 0 1 246 133" fill="none" stroke="#333"/>
+  <text x="232" y="146" font-size="11">α</text>
+  <!-- bloque sobre la hipotenusa (centro 130,108), rotado +22.6 (sube a la izq) -->
+  <rect x="116" y="97" width="28" height="22" rx="2" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.4" transform="rotate(22.6 130 108)"/>
+  <!-- N perpendicular a la cara (up-right) -->
+  <line x1="130" y1="108" x2="160" y2="56" stroke="#1a5490" stroke-width="2.3" marker-end="url(#d19b)"/>
+  <text x="162" y="52" font-size="11" fill="#1a5490">N</text>
+  <!-- P peso -->
+  <line x1="130" y1="108" x2="130" y2="158" stroke="#1a5490" stroke-width="2.3" marker-end="url(#d19b)"/>
+  <text x="135" y="152" font-size="11" fill="#1a5490">P</text>
+  <!-- a0 aceleración de la cuña (horizontal, a la izquierda) -->
+  <line x1="175" y1="175" x2="110" y2="175" stroke="#2e7d32" stroke-width="3" marker-end="url(#d19g)"/>
+  <text x="178" y="180" font-size="12" fill="#2e7d32">a₀</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Si el bloque no desliza, acompaña a la cuña con la misma aceleración horizontal $a_0$. Las únicas fuerzas reales sobre el bloque son el peso $P$ (vertical) y la normal $N$ (perpendicular a la cara). Newton en cada eje:</p>
+$$\text{horizontal:}\quad N\,\text{sen}\,\alpha=m\,a_0\qquad \text{vertical:}\quad N\cos\alpha=mg.$$
+<p>Dividiendo se cancela $N$ y la masa:</p>
+$$a_0=g\,\tan\alpha=10\cdot\tan 30^\circ=10\cdot 0{,}577=5{,}77\ \text{m/s}^2.$$
+<div class="truco">Es la normal "inclinada" la que empuja al bloque hacia adelante: su componente horizontal hace de fuerza que lo acelera junto con la cuña.</div>
+<div class="respuesta">$$\boxed{a_0=g\,\tan\alpha\approx 5{,}77\ \text{m/s}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej20">
+<h3>Ejercicio 20 — Caja en un camión que frena <span class="nivel">Nivel 9</span></h3>
+<div class="enunciado">Una caja apoyada sobre el piso de un camión tiene $\mu_e=0{,}5$ con él. ¿Cuál es la máxima desaceleración con que el camión puede frenar sin que la caja resbale hacia adelante?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Cuando el camión frena, lo único que puede "frenar" también a la caja (darle la misma desaceleración) es el rozamiento entre la caja y el piso del camión. Ese rozamiento tiene un máximo $\mu_e\,mg$, así que la máxima desaceleración que puede transmitirle es:</p>
+$$m\,a_{max}=\mu_e\,mg\ \Rightarrow\ a_{max}=\mu_e\,g=0{,}5\cdot 10=5\ \text{m/s}^2.$$
+<p>La masa se cancela: no importa cuán pesada sea la caja.</p>
+<div class="alerta">Si el camión frena más fuerte que $5\ \text{m/s}^2$, el rozamiento no alcanza y la caja sigue de largo (resbala hacia adelante). Es el mismo motivo por el que las cosas se caen del asiento en un frenazo.</div>
+<div class="respuesta">$$\boxed{a_{max}=5\ \text{m/s}^2}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== TIPO PARCIAL ===================== -->
+<section class="tema" id="parcial" data-tema="dinamica">
+<h2 class="tema-titulo">🔴 Tipo parcial (21–23)</h2>
+
+<article class="ej" id="din-ej21">
+<h3>Ejercicio 21 — Cuña con rozamiento tirada por F <span class="tchip">Tipo parcial</span> <span class="nivel">Firma Moreno</span></h3>
+<div class="enunciado">Una cuña de masa $M=10\ \text{kg}$ (cara inclinada $\alpha=30^\circ$ que sube hacia la derecha, cara vertical a la derecha) está sobre un piso liso. Sobre la cara inclinada apoya un bloque $m=2\ \text{kg}$, con $\mu_e=0{,}95$ y $\mu_d=0{,}10$ entre bloque y cuña. Una fuerza horizontal $F$ tira de la cuña hacia la derecha y todo el sistema se mueve junto.
+<ol type="a"><li>¿Cuál es la $F$ máxima para que el bloque NO deslice (esté a punto de bajar)?</li><li>¿Qué pasa si $F=0$? ¿Cuánto vale el rozamiento ahí?</li></ol>
+<svg viewBox="0 0 340 200" role="img" aria-label="Cuña con cara vertical a la derecha y bloque sobre la cara inclinada, tirada por una fuerza F hacia la derecha. Al costado, el DCL del bloque.">
+  <defs>
+    <marker id="d21b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker>
+    <marker id="d21r" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker>
+    <marker id="d21g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+  </defs>
+  <!-- ESCENA: cuña, incline sube a la derecha, cara vertical a la derecha -->
+  <polygon points="20,160 175,160 175,55" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
+  <path d="M 50 160 A 28 28 0 0 0 46 144" fill="none" stroke="#333"/>
+  <text x="54" y="156" font-size="10">α</text>
+  <!-- bloque sobre la hipotenusa (centro 110,103), rotado -34 (sube a la der) -->
+  <rect x="97" y="92" width="26" height="20" rx="2" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.3" transform="rotate(-34 110 102)"/>
+  <!-- F tira de la cuña a la derecha -->
+  <line x1="178" y1="120" x2="235" y2="120" stroke="#2e7d32" stroke-width="3" marker-end="url(#d21g)"/>
+  <text x="200" y="114" font-size="12" fill="#2e7d32">F</text>
+  <text x="60" y="120" font-size="10" fill="#1a5490">M, m</text>
+  <!-- DCL del bloque (a la derecha) -->
+  <text x="248" y="40" font-size="10" fill="#555">DCL bloque</text>
+  <circle cx="285" cy="110" r="3" fill="#2c3e50"/>
+  <!-- P abajo -->
+  <line x1="285" y1="110" x2="285" y2="165" stroke="#1a5490" stroke-width="2.3" marker-end="url(#d21b)"/>
+  <text x="290" y="160" font-size="10" fill="#1a5490">P</text>
+  <!-- N perpendicular a la cara (la cara sube a la derecha => normal up-left) -->
+  <line x1="285" y1="110" x2="255" y2="62" stroke="#1a5490" stroke-width="2.3" marker-end="url(#d21b)"/>
+  <text x="240" y="58" font-size="10" fill="#1a5490">N</text>
+  <!-- f rozamiento up-slope (up-right) porque tiende a bajar -->
+  <line x1="285" y1="110" x2="325" y2="86" stroke="#c0392b" stroke-width="2.3" marker-end="url(#d21r)"/>
+  <text x="312" y="80" font-size="10" fill="#c0392b">f</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>Idea:</strong> al tirar la cuña hacia la derecha (con la cara inclinada que sube a la derecha), el bloque tiende a <em>bajar</em> por la cara. Para que no deslice, el rozamiento $f$ actúa hacia arriba de la cara. En el límite, $f=\mu_e N$.</p>
+<p>El bloque se mueve con aceleración horizontal $a$ (la del sistema). Sus fuerzas: peso $P$, normal $N$ (perpendicular a la cara) y rozamiento $f$ (hacia arriba de la cara). Proyectando en horizontal y vertical y poniendo $f=\mu_e N$ se llega a:</p>
+$$a_{max}=g\,\frac{\mu_e\cos\alpha-\text{sen}\,\alpha}{\cos\alpha+\mu_e\,\text{sen}\,\alpha}=10\cdot\frac{0{,}95\cdot 0{,}866-0{,}5}{0{,}866+0{,}95\cdot 0{,}5}=10\cdot\frac{0{,}323}{1{,}341}=2{,}41\ \text{m/s}^2.$$
+<p>Esa aceleración la produce $F$ sobre todo el sistema (masa $M+m$, piso liso):</p>
+$$F_{max}=(M+m)\,a_{max}=12\cdot 2{,}41\approx 29\ \text{N}.$$
+<p><strong>b) Si $F=0$:</strong> el sistema está quieto. ¿El bloque desliza solo por su peso? Comparo: desliza si $\tan\alpha>\mu_e$. Acá $\tan 30^\circ=0{,}577<\mu_e=0{,}95$, así que <strong>no desliza</strong>. El rozamiento equilibra la componente del peso a lo largo de la cara:</p>
+$$f=mg\,\text{sen}\,\alpha=2\cdot 10\cdot 0{,}5=10\ \text{N}.$$
+<div class="alerta">El error clásico es asumir que el bloque tiende a subir. Con esta geometría (cara que sube a la derecha y F hacia la derecha) tiende a <em>bajar</em>; por eso el rozamiento va hacia arriba y la fórmula lleva $\mu_e\cos\alpha-\text{sen}\,\alpha$.</div>
+<div class="respuesta">$$\boxed{F_{max}\approx 29\ \text{N};\qquad \text{con }F=0\text{ no desliza},\ f=10\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej22">
+<h3>Ejercicio 22 — Plano inclinado + polea + masa colgante <span class="tchip">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">Un bloque $m_1=4\ \text{kg}$ está sobre un plano inclinado $\alpha=37^\circ$ ($\text{sen}=0{,}6$, $\cos=0{,}8$) con $\mu_d=0{,}25$. Una soga que pasa por una polea ideal en la cima lo une a una masa colgante $m_2=5\ \text{kg}$. Hallá la aceleración y la tensión.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Primero veo hacia dónde tiende a moverse. El peso de $m_2$ es $m_2 g=50\ \text{N}$; la componente del peso de $m_1$ que tira hacia abajo del plano es $m_1 g\,\text{sen}\,\alpha=4\cdot 10\cdot 0{,}6=24\ \text{N}$. Como $50>24$, <strong>$m_2$ baja y $m_1$ sube</strong> por el plano. El rozamiento sobre $m_1$ se opone (va hacia abajo del plano).</p>
+<p>Normal y rozamiento: $N=m_1 g\cos\alpha=4\cdot 10\cdot 0{,}8=32\ \text{N}$, $f_d=\mu_d N=0{,}25\cdot 32=8\ \text{N}$.</p>
+<p>Newton (positivo en el sentido del movimiento):</p>
+$$m_2:\ m_2 g-T=m_2 a\quad\Rightarrow\quad 50-T=5a$$
+$$m_1:\ T-m_1 g\,\text{sen}\,\alpha-f_d=m_1 a\quad\Rightarrow\quad T-24-8=4a$$
+<p>Sumo las dos (se cancela $T$): $50-32=9a\Rightarrow a=2\ \text{m/s}^2.$ Y la tensión: $T=50-5\cdot 2=40\ \text{N}.$</p>
+<div class="truco">Chequeo: en $m_1$, $40-24-8=8=m_1 a=4\cdot 2$ ✓.</div>
+<div class="respuesta">$$\boxed{a=2\ \text{m/s}^2;\quad T=40\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="din-ej23">
+<h3>Ejercicio 23 — Curva: seco, peralte y lluvia <span class="tchip">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">Una curva tiene radio $R=100\ \text{m}$.
+<ol type="a"><li>Si es plana y $\mu_e=0{,}3$ (asfalto seco), ¿cuál es la velocidad máxima?</li><li>¿Qué ángulo de peralte la haría tomable a $v=30\ \text{m/s}$ sin rozamiento?</li><li>Con lluvia el coeficiente baja a $\mu_e=0{,}1$. En la curva plana, ¿cuál es la nueva velocidad máxima?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> Curva plana, el rozamiento da la centrípeta: $v_{max}=\sqrt{\mu_e g R}=\sqrt{0{,}3\cdot 10\cdot 100}=\sqrt{300}\approx 17{,}3\ \text{m/s}.$</p>
+<p><strong>b)</strong> Peralte ideal: $\tan\theta=\dfrac{v^2}{gR}=\dfrac{30^2}{10\cdot 100}=\dfrac{900}{1000}=0{,}9\ \Rightarrow\ \theta\approx 42^\circ.$</p>
+<p><strong>c)</strong> Con lluvia: $v_{max}=\sqrt{0{,}1\cdot 10\cdot 100}=\sqrt{100}=10\ \text{m/s}\ (=36\ \text{km/h}).$</p>
+<div class="alerta">La velocidad máxima cae con la raíz de $\mu$: al pasar de $0{,}3$ a $0{,}1$ (un tercio), $v_{max}$ baja en $\sqrt{3}\approx 1{,}7$ veces. Por eso con lluvia hay que ir mucho más despacio.</div>
+<div class="respuesta">$$\boxed{v_{max}^{seco}\approx 17{,}3\,\tfrac{\text{m}}{\text{s}};\quad \theta\approx 42^\circ;\quad v_{max}^{lluvia}=10\,\tfrac{\text{m}}{\text{s}}}$$</div>
+</details>
+</article>
+</section>
+
+<footer>
+Dinámica · Física de Sistemas de Partículas · Cátedra Moreno · g = 10 m/s²<br>
+<a href="cinematica.html">🏃 Cinemática</a> · <a href="cheatsheet.html">📐 Cheatsheet</a> · <a href="index.html">📚 Guía por temas</a>
+</footer>
+</main>
+
+<!-- Banco de fórmulas (oculto; lo usa el panel flotante) -->
+<div id="formulaBank" style="display:none">
+  <div class="formula"><strong>2.ª ley:</strong> $\sum\vec{F}=m\vec{a}$ (en cada eje: $\sum F_x=ma_x$).</div>
+  <div class="formula"><strong>Peso:</strong> $P=mg$. &nbsp; <strong>Normal:</strong> de la ecuación perpendicular (no siempre $mg$).</div>
+  <div class="formula"><strong>Rozamiento:</strong> $f_s\le\mu_e N$ (no desliza), &nbsp; $f_d=\mu_d N$ (desliza).</div>
+  <div class="formula"><strong>Plano inclinado:</strong> $N=mg\cos\alpha$; &nbsp; bajando $a=g(\text{sen}\,\alpha-\mu_d\cos\alpha)$.</div>
+  <div class="formula"><strong>Desliza en plano si:</strong> $\tan\alpha>\mu_e$.</div>
+  <div class="formula"><strong>Curva plana:</strong> $\sum F_n=m\dfrac{v^2}{R}$; &nbsp; $v_{max}=\sqrt{\mu_e g R}$.</div>
+  <div class="formula"><strong>Peralte ideal:</strong> $\tan\theta=\dfrac{v^2}{gR}$.</div>
+  <div class="formula"><strong>Cuña (sin roce):</strong> $a_0=g\tan\alpha$ para que el bloque no deslice.</div>
+</div>
+
+<!-- Botones flotantes -->
+<a href="#top" class="fab backtop" aria-label="Volver arriba">↑</a>
+<button class="fab fab-formulas" id="btnFormulas" aria-label="Ver fórmulas">📐 Fórmulas</button>
+<button class="fab fab-index" id="btnIndex" aria-label="Abrir índice">☰ Índice</button>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Índice de ejercicios">
+  <div class="dhead"><span>📑 Índice</span><button id="closeDrawer" aria-label="Cerrar">×</button></div>
+  <ul id="navTree"></ul>
+</aside>
+
+<section class="sheet" id="sheet" aria-label="Fórmulas de dinámica">
+  <div class="shead"><span>📐 Fórmulas de dinámica</span><button id="closeSheet" aria-label="Cerrar">×</button></div>
+  <div class="sbody" id="sheetBody"></div>
+</section>
+
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section.tema'));
+  var navTree = document.getElementById('navTree');
+  secs.forEach(function(sec){
+    var li = document.createElement('li'); li.className='nav-tema'; li.dataset.target=sec.id;
+    var a = document.createElement('a'); a.href='#'+sec.id; a.textContent=sec.querySelector('.tema-titulo').textContent.trim();
+    li.appendChild(a);
+    var ul = document.createElement('ul'); ul.className='nav-ejs';
+    sec.querySelectorAll('article.ej').forEach(function(ej){
+      var h = ej.querySelector('h3').cloneNode(true);
+      h.querySelectorAll('.nivel,.tchip').forEach(function(s){ s.remove(); });
+      var ea = document.createElement('a'); ea.href='#'+ej.id; ea.textContent=h.textContent.trim();
+      ul.appendChild(ea);
+    });
+    li.appendChild(ul); navTree.appendChild(li);
+  });
+
+  var backdrop=document.getElementById('backdrop'), drawer=document.getElementById('drawer'), sheet=document.getElementById('sheet');
+  function fillSheet(){ var b=document.getElementById('sheetBody'); if(b.childElementCount) return;
+    document.querySelectorAll('#formulaBank .formula').forEach(function(f){ b.appendChild(f.cloneNode(true)); }); }
+  function closeAll(){ drawer.classList.remove('show'); sheet.classList.remove('show'); backdrop.classList.remove('show'); }
+  document.getElementById('btnIndex').addEventListener('click', function(){ drawer.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('btnFormulas').addEventListener('click', function(){ fillSheet(); sheet.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('closeDrawer').addEventListener('click', closeAll);
+  document.getElementById('closeSheet').addEventListener('click', closeAll);
+  backdrop.addEventListener('click', closeAll);
+  navTree.addEventListener('click', function(e){ if(e.target.closest('a')) closeAll(); });
+
+  var current=null;
+  function updateCurrent(){
+    var line=140, found=secs[0];
+    for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top<=line) found=secs[i]; }
+    if(found!==current){ current=found;
+      navTree.querySelectorAll('.nav-tema').forEach(function(li){ li.classList.toggle('active', li.dataset.target===current.id); });
+    }
+  }
+  var ticking=false;
+  window.addEventListener('scroll', function(){ if(!ticking){ window.requestAnimationFrame(function(){ updateCurrent(); ticking=false; }); ticking=true; } }, {passive:true});
+  updateCurrent();
+})();
+</script>
+
+</body>
+</html>

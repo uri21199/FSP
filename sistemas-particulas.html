@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2c3e50">
+<title>Sistemas de partículas · FSP Moreno</title>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root { --primary:#1a5490; --primary-dark:#2c3e50; --bg:#fafafa; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:0; color:#222; line-height:1.6; background:var(--bg); -webkit-text-size-adjust:100%; }
+
+  header.top { position:sticky; top:0; z-index:100; background:var(--primary-dark); color:#fff; padding:0.7em 0.9em 0.55em; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  header.top h1 { font-size:1.0em; margin:0 0 0.5em; font-weight:600; }
+  nav.temas { display:flex; gap:0.4em; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:0.15em; }
+  nav.temas a { flex:0 0 auto; background:#ffffff22; color:#fff; text-decoration:none; padding:0.34em 0.7em; border-radius:999px; font-size:0.8em; white-space:nowrap; border:1px solid #ffffff44; }
+
+  main { max-width:820px; margin:0 auto; padding:0.8em 0.9em 3em; }
+  .intro { background:#eef3fa; border-radius:8px; padding:0.9em 1em; margin:0.9em 0 0.5em; font-size:0.95em; }
+  .intro h2 { margin:0 0 0.4em; font-size:1.1em; color:var(--primary-dark); }
+
+  .tema { margin-top:1.4em; }
+  .tema-titulo { color:#fff; background:var(--primary); border-radius:8px; padding:0.5em 0.7em; font-size:1.1em; margin:1.3em 0 0.7em; scroll-margin-top:96px; }
+
+  h2.seccion { color:var(--primary-dark); border-bottom:3px solid var(--primary); padding-bottom:0.2em; margin:1.4em 0 0.6em; font-size:1.15em; scroll-margin-top:96px; }
+
+  .ej { background:#fff; border:1px solid #e2e6ee; border-radius:9px; padding:0.8em 0.9em; margin:0.9em 0; box-shadow:0 1px 3px rgba(0,0,0,.05); scroll-margin-top:96px; }
+  .ej h3 { font-size:1.0em; color:var(--primary-dark); margin:0 0 0.5em; display:flex; flex-wrap:wrap; align-items:center; gap:0.45em; line-height:1.35; }
+  .nivel { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#e3edf7; color:var(--primary); white-space:nowrap; }
+  .tchip { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#ffe2cc; color:#e65100; white-space:nowrap; }
+
+  .enunciado { background:#f0f6ff; border-left:4px solid #4a8bc2; padding:0.7em 0.9em; border-radius:5px; }
+  .respuesta { background:#eef9ee; border-left:4px solid #4caf50; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .alerta { background:#fff4e6; border-left:4px solid #ff9800; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .truco { background:#f3e5f5; border-left:4px solid #9c27b0; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+
+  .formula { background:#f3f5f9; border-left:4px solid var(--primary); border-radius:6px; padding:0.5em 0.9em; margin:0.6em 0; }
+  .origen { background:#f3e5f5; border-left:4px solid #9c27b0; border-radius:6px; padding:0.55em 0.9em; margin:0.4em 0 0.8em; font-size:0.94em; }
+  .origen b { color:#7b1fa2; }
+
+  details.sol { margin-top:0.7em; border:1px solid #d0d7e0; border-radius:6px; padding:0 0.85em; background:#fbfcff; }
+  details.sol > summary { cursor:pointer; font-weight:600; color:var(--primary); padding:0.6em 0; list-style:none; }
+  details.sol > summary::-webkit-details-marker { display:none; }
+  details.sol > summary::before { content:"▶"; font-size:0.78em; margin-right:0.4em; }
+  details.sol[open] > summary::before { content:"▼"; }
+  details.sol[open] { padding-bottom:0.85em; }
+  details.sol[open] > summary { border-bottom:1px solid #e2e6ee; margin-bottom:0.5em; }
+
+  svg { display:block; max-width:100%; height:auto; margin:0.8em auto; background:#fff; border:1px solid #e2e6ee; border-radius:6px; }
+  mjx-container { overflow-x:auto; overflow-y:hidden; max-width:100%; }
+  mjx-container[display="true"] { margin:0.6em 0 !important; }
+
+  .fab { position:fixed; z-index:200; border:none; cursor:pointer; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,.3); display:flex; align-items:center; justify-content:center; }
+  .backtop { right:14px; bottom:128px; background:var(--primary); width:44px; height:44px; border-radius:50%; text-decoration:none; font-size:1.25em; }
+  .fab-formulas { right:14px; bottom:14px; background:#9c27b0; height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+  .fab-index { left:14px; bottom:14px; background:var(--primary-dark); height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+
+  .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:300; opacity:0; visibility:hidden; transition:opacity .25s; }
+  .backdrop.show { opacity:1; visibility:visible; }
+
+  .drawer { position:fixed; top:0; left:0; height:100%; width:82%; max-width:340px; background:#fff; z-index:310; transform:translateX(-100%); transition:transform .28s ease; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:2px 0 14px rgba(0,0,0,.25); }
+  .drawer.show { transform:translateX(0); }
+  .drawer .dhead { position:sticky; top:0; background:var(--primary-dark); color:#fff; padding:0.85em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .drawer .dhead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .drawer ul { list-style:none; margin:0; padding:0; }
+  .drawer .nav-tema > a { display:block; background:#eef3fa; color:var(--primary-dark); font-weight:600; text-decoration:none; padding:0.6em 1em; border-bottom:1px solid #e2e6ee; }
+  .drawer .nav-tema.active > a { background:var(--primary); color:#fff; }
+  .drawer .nav-ejs { padding:0.2em 0 0.5em; }
+  .drawer .nav-ejs a { display:block; color:#333; text-decoration:none; padding:0.42em 1em 0.42em 1.6em; font-size:0.88em; border-bottom:1px solid #f0f2f5; }
+
+  .sheet { position:fixed; left:0; right:0; bottom:0; max-height:72vh; background:#fff; z-index:310; transform:translateY(100%); transition:transform .28s ease; border-radius:14px 14px 0 0; box-shadow:0 -2px 14px rgba(0,0,0,.25); display:flex; flex-direction:column; }
+  .sheet.show { transform:translateY(0); }
+  .sheet .shead { background:#9c27b0; color:#fff; padding:0.8em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0; }
+  .sheet .shead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .sheet .sbody { overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0.6em 0.9em 1em; }
+  .sheet .sbody .formula { margin:0.45em 0; }
+  @media (min-width:760px){ .sheet { left:auto; right:18px; bottom:18px; width:420px; max-height:78vh; border-radius:12px; } .sheet .shead { border-radius:12px 12px 0 0; } }
+
+  footer { text-align:center; color:#888; font-size:0.85em; padding:1.5em 1em 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>🎯 Sistemas de partículas — FSP (cátedra Moreno)</h1>
+  <nav class="temas">
+    <a href="#formulas">📐 Fórmulas</a>
+    <a href="#basico">Básico</a>
+    <a href="#intermedio">Intermedio</a>
+    <a href="#avanzado">Avanzado</a>
+    <a href="#parcial">Tipo parcial</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<div class="intro">
+<h2>La idea central</h2>
+<p>Cuando hay <strong>varios cuerpos que interactúan</strong> (chocan, se empujan, explotan), seguir cada fuerza es un lío. La salida son las <strong>cantidades que se conservan</strong>: el <strong>momento lineal</strong> $\vec P$, a veces la <strong>energía</strong>, y el <strong>momento angular</strong> $\vec L$. La clave del parcial es saber <em>cuál se conserva en cada situación</em> y por qué.</p>
+<p style="margin-bottom:0">Abajo, <strong>fórmulas con justificación</strong> y <strong>23 ejercicios</strong> de menos a más. Botón <strong>📐 Fórmulas</strong> (abajo der.) y <strong>☰ Índice</strong> (abajo izq.). $g=10\,\text{m/s}^2$, decimales con coma.</p>
+</div>
+
+
+<!-- ===================== FÓRMULAS CON JUSTIFICACIÓN ===================== -->
+<h2 class="seccion" id="formulas">📐 Fórmulas con justificación</h2>
+
+<div class="formula">
+<strong>Centro de masa</strong>
+$$\vec{r}_{cm}=\frac{\sum m_i\,\vec{r}_i}{M}\qquad \vec{v}_{cm}=\frac{\sum m_i\,\vec{v}_i}{M}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es el promedio de las posiciones <em>pesado por la masa</em>: las masas grandes "tiran" del CM hacia ellas. La velocidad del CM sale de derivar (la masa total $M$ es constante). Es el punto que se mueve como si toda la masa estuviera ahí.
+</div>
+
+<div class="formula">
+<strong>Momento lineal y 2.ª ley del sistema</strong>
+$$\vec{P}=\sum m_i\vec{v}_i=M\,\vec{v}_{cm}\qquad \sum\vec{F}_{ext}=\frac{d\vec{P}}{dt}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> sumás la 2.ª ley de cada partícula. Las fuerzas <b>internas</b> vienen de a pares acción–reacción (3.ª ley) y se cancelan; sólo sobreviven las <b>externas</b>. Por eso el CM se mueve como si la fuerza externa total actuara sobre toda la masa concentrada ahí.
+</div>
+
+<div class="formula">
+<strong>Conservación del momento lineal</strong>
+$$\text{si }\ \sum\vec{F}_{ext}=0\ \Rightarrow\ \vec{P}=\text{cte}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> directo de $\sum\vec F_{ext}=\dfrac{d\vec P}{dt}$. Si no hay fuerza externa (o en una dirección donde no la hay), $\vec P$ no cambia. Por eso en choques y explosiones (donde las fuerzas son internas) el momento total <b>antes</b> = <b>después</b>.
+</div>
+
+<div class="formula">
+<strong>Impulso</strong>
+$$\vec{J}=\int_{t_1}^{t_2}\vec{F}\,dt=\Delta\vec{P}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> de $\vec F=\dfrac{d\vec P}{dt}$, multiplicás por $dt$ e integrás en el tiempo: $\int\vec F\,dt=\Delta\vec P$. Sirve para fuerzas que dependen del tiempo o golpes muy breves. Si la fuerza es constante, $\vec J=\vec F\,\Delta t$.
+</div>
+
+<div class="formula">
+<strong>Choques</strong>
+$$\text{plástico (quedan pegados): }\vec P\text{ sí}, E_c\text{ no}\qquad \text{elástico: }\vec P\text{ y } E_c\text{ sí}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> en todo choque (fuerzas externas despreciables frente al impacto) se conserva $\vec P$. La diferencia está en la energía: en el plástico parte de $E_c$ se va en deformación/calor (no se conserva); en el elástico no hay pérdida. <b>Nunca asumas que $E_c$ se conserva sin justificar el tipo de choque.</b>
+</div>
+
+<div class="formula">
+<strong>Teorema de König</strong>
+$$E_c=\tfrac12 M\,v_{cm}^2+E_c'$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> escribís cada velocidad como "velocidad del CM + velocidad relativa al CM" y la metés en $E_c=\sum\tfrac12 m_i v_i^2$. El término cruzado se anula (por definición de CM) y queda: energía del CM moviéndose como un todo, más la energía interna relativa al CM ($E_c'$).
+</div>
+
+<div class="formula">
+<strong>Momento angular</strong>
+$$\vec{L}=\vec{r}\wedge\vec{p}\quad(|\vec L|=m\,v\,b)\qquad \frac{d\vec{L}}{dt}=\sum\vec{\tau}_{ext}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> es el análogo rotacional de $\vec P$. Su módulo para una partícula es $m\,v\,b$, con $b$ la distancia perpendicular de la recta de movimiento al punto $O$ ("brazo"). Si el torque externo es cero, $\vec L$ se conserva. <b>Truco de parcial (perno):</b> en un choque contra una barra con perno, $\vec P$ NO se conserva (el perno empuja), pero $\vec L$ respecto del perno SÍ (el perno no hace torque respecto de sí mismo).
+</div>
+
+
+<!-- ===================== BÁSICO ===================== -->
+<section class="tema" id="basico" data-tema="particulas">
+<h2 class="tema-titulo">🟢 Básico (1–7)</h2>
+
+<article class="ej" id="sis-ej1">
+<h3>Ejercicio 1 — Centro de masa en una recta <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Dos masas están sobre el eje $x$: $m_1=2\ \text{kg}$ en $x=0$ y $m_2=3\ \text{kg}$ en $x=5\ \text{m}$. ¿Dónde está el centro de masa?
+<svg viewBox="0 0 300 110" role="img" aria-label="Dos masas sobre una recta y la posición del centro de masa entre ellas, más cerca de la mayor">
+  <line x1="30" y1="70" x2="285" y2="70" stroke="#333" stroke-width="1.5"/>
+  <!-- m1 en x=0 (screen 50) -->
+  <circle cx="50" cy="70" r="9" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.5"/>
+  <text x="38" y="95" font-size="10">x=0</text>
+  <text x="40" y="55" font-size="10" fill="#1a5490">m₁=2</text>
+  <!-- m2 en x=5 (screen 240); escala 38 px/u -->
+  <circle cx="240" cy="70" r="12" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.5"/>
+  <text x="230" y="95" font-size="10">x=5</text>
+  <text x="226" y="52" font-size="10" fill="#1a5490">m₂=3</text>
+  <!-- CM en x=3 (screen 164) -->
+  <polygon points="164,58 170,70 164,82 158,70" fill="#c0392b"/>
+  <text x="150" y="100" font-size="10" fill="#c0392b">CM (x=3)</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El CM es el promedio de las posiciones pesado por la masa:</p>
+$$x_{cm}=\frac{m_1 x_1+m_2 x_2}{m_1+m_2}=\frac{2\cdot 0+3\cdot 5}{2+3}=\frac{15}{5}=3\ \text{m}.$$
+<div class="truco">Da más cerca de la masa más grande ($m_2$): tiene sentido, las masas pesadas "atraen" al CM.</div>
+<div class="respuesta">$$\boxed{x_{cm}=3\ \text{m}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej2">
+<h3>Ejercicio 2 — Centro de masa en el plano <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Tres masas: $m_1=1\ \text{kg}$ en $(0,0)$, $m_2=2\ \text{kg}$ en $(4,0)$ y $m_3=1\ \text{kg}$ en $(2,4)$ (en metros). Hallá el centro de masa.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Calculo cada coordenada por separado. Masa total $M=1+2+1=4\ \text{kg}$.</p>
+$$x_{cm}=\frac{1\cdot 0+2\cdot 4+1\cdot 2}{4}=\frac{10}{4}=2{,}5\ \text{m}.$$
+$$y_{cm}=\frac{1\cdot 0+2\cdot 0+1\cdot 4}{4}=\frac{4}{4}=1\ \text{m}.$$
+<div class="respuesta">$$\boxed{\text{CM}=(2{,}5;\ 1)\ \text{m}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej3">
+<h3>Ejercicio 3 — Momento lineal <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Un cuerpo de $m=4\ \text{kg}$ se mueve a $v=6\ \text{m/s}$. ¿Cuál es su cantidad de movimiento (momento lineal)?</div>
+<details class="sol"><summary>Ver resolución</summary>
+$$p=m\,v=4\cdot 6=24\ \text{kg·m/s}.$$
+<div class="truco">El momento es un vector: tiene la dirección de la velocidad. Sus unidades son kg·m/s (= N·s).</div>
+<div class="respuesta">$$\boxed{p=24\ \text{kg·m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej4">
+<h3>Ejercicio 4 — Momento total y velocidad del CM <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">$m_1=2\ \text{kg}$ se mueve a $5\ \text{m/s}$ y $m_2=3\ \text{kg}$ está en reposo (ambos en la misma recta). Hallá el momento total y la velocidad del centro de masa.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Momento total = suma de los momentos:</p>
+$$P=m_1 v_1+m_2 v_2=2\cdot 5+3\cdot 0=10\ \text{kg·m/s}.$$
+<p>La velocidad del CM es el momento total sobre la masa total:</p>
+$$v_{cm}=\frac{P}{M}=\frac{10}{5}=2\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{P=10\ \text{kg·m/s};\quad v_{cm}=2\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej5">
+<h3>Ejercicio 5 — Retroceso (conservación de P) <span class="nivel">Nivel 3</span></h3>
+<div class="enunciado">Un cañón de $M=200\ \text{kg}$ dispara horizontalmente una bala de $m=5\ \text{kg}$ a $v=80\ \text{m/s}$. ¿Con qué velocidad retrocede el cañón?
+<svg viewBox="0 0 300 120" role="img" aria-label="Cañón que dispara una bala hacia la derecha y retrocede hacia la izquierda">
+  <defs>
+    <marker id="s5g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+    <marker id="s5r" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#c0392b"/></marker>
+  </defs>
+  <line x1="20" y1="92" x2="285" y2="92" stroke="#333" stroke-width="2"/>
+  <!-- cañon -->
+  <rect x="80" y="62" width="70" height="30" rx="4" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.5"/>
+  <rect x="150" y="70" width="34" height="12" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.2"/>
+  <!-- bala -->
+  <circle cx="200" cy="76" r="6" fill="#2c3e50"/>
+  <!-- v bala derecha -->
+  <line x1="210" y1="76" x2="265" y2="76" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#s5g)"/>
+  <text x="230" y="68" font-size="11" fill="#2e7d32">v = 80</text>
+  <!-- V retroceso izquierda -->
+  <line x1="100" y1="50" x2="55" y2="50" stroke="#c0392b" stroke-width="2.5" marker-end="url(#s5r)"/>
+  <text x="60" y="44" font-size="11" fill="#c0392b">V</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Antes de disparar todo está quieto, así que el momento total es cero. Como no hay fuerzas externas horizontales, $P$ se conserva ⇒ el momento total después también es cero:</p>
+$$0=M\,V+m\,v\ \Rightarrow\ V=-\frac{m\,v}{M}=-\frac{5\cdot 80}{200}=-2\ \text{m/s}.$$
+<p>El signo menos indica que el cañón retrocede en sentido contrario a la bala, a $2\ \text{m/s}$.</p>
+<div class="truco">El cañón (pesado) sale lento; la bala (liviana) sale rápida. El momento de uno compensa exactamente al del otro.</div>
+<div class="respuesta">$$\boxed{V=2\ \text{m/s (hacia atrás)}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej6">
+<h3>Ejercicio 6 — Impulso de una fuerza constante <span class="nivel">Nivel 3</span></h3>
+<div class="enunciado">Una fuerza constante de $F=50\ \text{N}$ actúa durante $\Delta t=0{,}4\ \text{s}$ sobre un cuerpo de $m=2\ \text{kg}$ inicialmente en reposo.
+<ol type="a"><li>¿Cuál es el impulso?</li><li>¿Qué velocidad alcanza?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> Fuerza constante: $J=F\,\Delta t=50\cdot 0{,}4=20\ \text{N·s}.$</p>
+<p><strong>b)</strong> El impulso es el cambio de momento ($J=\Delta p=m v$, parte del reposo):</p>
+$$v=\frac{J}{m}=\frac{20}{2}=10\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{J=20\ \text{N·s};\quad v=10\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej7">
+<h3>Ejercicio 7 — Choque plástico <span class="nivel">Nivel 3</span></h3>
+<div class="enunciado">Un carrito de $m_1=3\ \text{kg}$ a $v_1=4\ \text{m/s}$ choca con otro de $m_2=1\ \text{kg}$ en reposo y quedan enganchados. ¿Con qué velocidad siguen?
+<svg viewBox="0 0 320 150" role="img" aria-label="Antes: dos carritos, uno en movimiento y otro quieto. Después: quedan pegados moviéndose juntos.">
+  <defs><marker id="s7b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker></defs>
+  <text x="20" y="22" font-size="11" fill="#555">ANTES</text>
+  <line x1="20" y1="55" x2="300" y2="55" stroke="#ccc" stroke-width="1"/>
+  <rect x="40" y="33" width="34" height="22" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.4"/>
+  <text x="46" y="28" font-size="9" fill="#1a5490">m₁</text>
+  <line x1="78" y1="44" x2="118" y2="44" stroke="#1a5490" stroke-width="2" marker-end="url(#s7b)"/>
+  <text x="86" y="38" font-size="9" fill="#1a5490">4 m/s</text>
+  <rect x="150" y="33" width="26" height="22" rx="3" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.4"/>
+  <text x="154" y="28" font-size="9" fill="#1a5490">m₂</text>
+  <text x="180" y="48" font-size="9" fill="#888">(quieto)</text>
+  <text x="20" y="95" font-size="11" fill="#555">DESPUÉS</text>
+  <line x1="20" y1="128" x2="300" y2="128" stroke="#ccc" stroke-width="1"/>
+  <rect x="120" y="106" width="34" height="22" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.4"/>
+  <rect x="154" y="106" width="26" height="22" rx="3" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.4"/>
+  <line x1="184" y1="117" x2="220" y2="117" stroke="#1a5490" stroke-width="2" marker-end="url(#s7b)"/>
+  <text x="190" y="111" font-size="9" fill="#1a5490">v = ?</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>No hay fuerzas externas horizontales ⇒ se conserva $P$. En el choque plástico quedan con una sola velocidad $v$:</p>
+$$m_1 v_1=(m_1+m_2)\,v\ \Rightarrow\ v=\frac{3\cdot 4}{3+1}=\frac{12}{4}=3\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{v=3\ \text{m/s}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== INTERMEDIO ===================== -->
+<section class="tema" id="intermedio" data-tema="particulas">
+<h2 class="tema-titulo">🟡 Intermedio (8–14)</h2>
+
+<article class="ej" id="sis-ej8">
+<h3>Ejercicio 8 — Energía perdida en el choque plástico <span class="nivel">Nivel 4</span></h3>
+<div class="enunciado">Para el choque del Ej. 7 ($m_1=3$, $v_1=4$, $m_2=1$, quedan a $v=3\ \text{m/s}$), ¿cuánta energía cinética se perdió?</div>
+<details class="sol"><summary>Ver resolución</summary>
+$$E_{c,i}=\tfrac12 m_1 v_1^2=\tfrac12\cdot 3\cdot 16=24\ \text{J}.$$
+$$E_{c,f}=\tfrac12(m_1+m_2)v^2=\tfrac12\cdot 4\cdot 9=18\ \text{J}.$$
+$$\Delta E_c=18-24=-6\ \text{J}.$$
+<div class="alerta">En el choque plástico SIEMPRE se pierde energía cinética (se va en deformar/calentar), pero el momento $P$ sí se conserva. Son cosas distintas.</div>
+<div class="respuesta">$$\boxed{\Delta E_c=-6\ \text{J (se pierden 6 J)}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej9">
+<h3>Ejercicio 9 — Choque elástico <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">$m_1=2\ \text{kg}$ a $v_1=6\ \text{m/s}$ choca elásticamente con $m_2=4\ \text{kg}$ en reposo. Hallá las velocidades finales.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>En el elástico se conservan <strong>las dos cosas</strong>: $P$ y $E_c$. Resolviendo ese sistema se llega a las fórmulas:</p>
+$$v_1'=\frac{m_1-m_2}{m_1+m_2}v_1=\frac{2-4}{6}\cdot 6=-2\ \text{m/s},$$
+$$v_2'=\frac{2m_1}{m_1+m_2}v_1=\frac{4}{6}\cdot 6=4\ \text{m/s}.$$
+<p>$m_1$ rebota hacia atrás ($-2$) porque chocó con una masa mayor.</p>
+<div class="truco">Chequeo: $P$ antes $=12$; después $2(-2)+4(4)=12$ ✓. $E_c$ antes $=36$; después $\tfrac12 2\cdot4+\tfrac12 4\cdot16=4+32=36$ ✓.</div>
+<div class="respuesta">$$\boxed{v_1'=-2\ \tfrac{\text{m}}{\text{s}};\quad v_2'=4\ \tfrac{\text{m}}{\text{s}}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej10">
+<h3>Ejercicio 10 — Explosión en dos fragmentos <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Un objeto de $M=10\ \text{kg}$ en reposo explota en dos pedazos: $m_1=4\ \text{kg}$ que sale a $6\ \text{m/s}$ hacia la derecha, y $m_2=6\ \text{kg}$. ¿Qué velocidad tiene $m_2$?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La explosión es por fuerzas internas ⇒ $P$ se conserva. Antes todo está quieto ($P=0$):</p>
+$$0=m_1 v_1+m_2 v_2\ \Rightarrow\ v_2=-\frac{m_1 v_1}{m_2}=-\frac{4\cdot 6}{6}=-4\ \text{m/s}.$$
+<p>$m_2$ sale a $4\ \text{m/s}$ hacia la izquierda (sentido opuesto).</p>
+<div class="respuesta">$$\boxed{v_2=4\ \text{m/s (hacia la izquierda)}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej11">
+<h3>Ejercicio 11 — Impulso con rebote <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Una pelota de $m=0{,}2\ \text{kg}$ llega a una pared a $8\ \text{m/s}$ y rebota a $6\ \text{m/s}$ en sentido contrario. El contacto dura $\Delta t=0{,}02\ \text{s}$.
+<ol type="a"><li>Impulso sobre la pelota.</li><li>Fuerza media del golpe.</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Tomo positivo el sentido de llegada: llega con $+8$, rebota con $-6$.</p>
+<p><strong>a)</strong> $J=\Delta p=m(v'-v)=0{,}2(-6-8)=0{,}2\cdot(-14)=-2{,}8\ \text{N·s}$ (módulo $2{,}8$, en sentido opuesto a la llegada).</p>
+<p><strong>b)</strong> $F_{med}=\dfrac{|J|}{\Delta t}=\dfrac{2{,}8}{0{,}02}=140\ \text{N}.$</p>
+<div class="alerta">El rebote cambia el signo de la velocidad, así que el $\Delta p$ es grande (de $+8$ a $-6$ son 14, no 2). Olvidarse del signo es el error más común acá.</div>
+<div class="respuesta">$$\boxed{J=2{,}8\ \text{N·s};\quad F_{med}=140\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej12">
+<h3>Ejercicio 12 — Impulso con fuerza variable <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Sobre un cuerpo de $m=2\ \text{kg}$ (en reposo) actúa una fuerza $F(t)=3t^2+2t$ (N) durante $2\ \text{s}$. Hallá el impulso y la velocidad final.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Como la fuerza depende del tiempo, el impulso es la <strong>integral</strong>:</p>
+$$J=\int_0^2 (3t^2+2t)\,dt=\left.\big(t^3+t^2\big)\right|_0^2=8+4=12\ \text{N·s}.$$
+<p>El impulso es el cambio de momento; parte del reposo:</p>
+$$v=\frac{J}{m}=\frac{12}{2}=6\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{J=12\ \text{N·s};\quad v=6\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej13">
+<h3>Ejercicio 13 — Dos patinadores se empujan <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Sobre hielo (sin rozamiento), dos patinadores quietos se empujan. Uno de $m_1=50\ \text{kg}$ sale a $2\ \text{m/s}$. ¿A qué velocidad sale el otro, de $m_2=70\ \text{kg}$? ¿Qué hace el centro de masa?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Parten del reposo y se empujan con fuerzas internas ⇒ $P=0$ siempre:</p>
+$$0=m_1 v_1+m_2 v_2\ \Rightarrow\ v_2=-\frac{50\cdot 2}{70}=-1{,}43\ \text{m/s}.$$
+<p>El centro de masa <strong>queda en reposo</strong> (su velocidad es $P/M=0$): no hay fuerza externa que lo mueva, aunque cada patinador se aleje.</p>
+<div class="respuesta">$$\boxed{v_2\approx 1{,}43\ \text{m/s (sentido opuesto)};\quad v_{cm}=0}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej14">
+<h3>Ejercicio 14 — Choque en dos dimensiones <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Dos masas iguales de $2\ \text{kg}$ se mueven perpendicularmente: una a $3\ \text{m/s}$ en $x$ y la otra a $4\ \text{m/s}$ en $y$. Chocan y quedan pegadas. Hallá la velocidad final (módulo).</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El momento se conserva en cada dirección por separado. Masa total $M=4\ \text{kg}$.</p>
+$$P_x=2\cdot 3=6\ \text{kg·m/s}\ \Rightarrow\ v_x=\frac{6}{4}=1{,}5\ \text{m/s}.$$
+$$P_y=2\cdot 4=8\ \text{kg·m/s}\ \Rightarrow\ v_y=\frac{8}{4}=2\ \text{m/s}.$$
+<p>Módulo de la velocidad final:</p>
+$$v=\sqrt{v_x^2+v_y^2}=\sqrt{1{,}5^2+2^2}=\sqrt{6{,}25}=2{,}5\ \text{m/s}.$$
+<div class="truco">En 2D, $P$ es un vector: se conserva componente a componente. Resolvés $x$ e $y$ por separado y al final componés.</div>
+<div class="respuesta">$$\boxed{v=2{,}5\ \text{m/s}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== AVANZADO ===================== -->
+<section class="tema" id="avanzado" data-tema="particulas">
+<h2 class="tema-titulo">🟠 Avanzado (15–20)</h2>
+
+<article class="ej" id="sis-ej15">
+<h3>Ejercicio 15 — Péndulo balístico <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Una bala de $m=1\ \text{kg}$ a $v=12\ \text{m/s}$ se incrusta en un bloque de $M=2\ \text{kg}$ que cuelga en reposo. ¿A qué altura sube el conjunto?
+<svg viewBox="0 0 300 180" role="img" aria-label="Bala que se incrusta en un bloque colgante; el conjunto sube una altura h">
+  <defs>
+    <marker id="s15g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+  </defs>
+  <line x1="60" y1="20" x2="240" y2="20" stroke="#333" stroke-width="3"/>
+  <!-- cuerda -->
+  <line x1="160" y1="20" x2="160" y2="110" stroke="#555" stroke-width="1.3"/>
+  <!-- bloque -->
+  <rect x="143" y="110" width="34" height="30" rx="3" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.5"/>
+  <text x="180" y="130" font-size="10" fill="#1a5490">M</text>
+  <!-- bala -->
+  <circle cx="80" cy="125" r="5" fill="#2c3e50"/>
+  <line x1="88" y1="125" x2="138" y2="125" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#s15g)"/>
+  <text x="95" y="118" font-size="10" fill="#2e7d32">v, m</text>
+  <!-- posicion elevada (punteada) -->
+  <line x1="160" y1="20" x2="225" y2="82" stroke="#bbb" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <rect x="212" y="78" width="30" height="26" rx="3" fill="none" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 2"/>
+  <line x1="250" y1="125" x2="250" y2="91" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="255" y="112" font-size="10" fill="#888">h</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Son <strong>dos etapas distintas</strong> (¡no se pueden mezclar!):</p>
+<p><strong>1) El choque</strong> (plástico, instantáneo): se conserva $P$, NO la energía.</p>
+$$m\,v=(m+M)\,V\ \Rightarrow\ V=\frac{1\cdot 12}{3}=4\ \text{m/s}.$$
+<p><strong>2) El ascenso</strong> (ya pegados, sin rozamiento): ahora SÍ se conserva la energía mecánica. La cinética se convierte en potencial:</p>
+$$\tfrac12(m+M)V^2=(m+M)g\,h\ \Rightarrow\ h=\frac{V^2}{2g}=\frac{16}{20}=0{,}8\ \text{m}.$$
+<div class="alerta">El error fatal es usar conservación de energía en el choque. En el choque se conserva $P$; recién <em>después</em>, en la subida, se conserva la energía.</div>
+<div class="respuesta">$$\boxed{V=4\ \tfrac{\text{m}}{\text{s}};\quad h=0{,}8\ \text{m}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej16">
+<h3>Ejercicio 16 — Teorema de König <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Dos masas de $2\ \text{kg}$ se mueven en la misma dirección: una a $5\ \text{m/s}$ y otra a $1\ \text{m/s}$.
+<ol type="a"><li>Energía cinética total.</li><li>Energía del CM y energía interna (relativa al CM), verificando König.</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> $E_c=\tfrac12\cdot 2\cdot 5^2+\tfrac12\cdot 2\cdot 1^2=25+1=26\ \text{J}.$</p>
+<p><strong>b)</strong> Velocidad del CM: $v_{cm}=\dfrac{2\cdot 5+2\cdot 1}{4}=3\ \text{m/s}.$ Energía del CM (todo moviéndose junto):</p>
+$$E_{cm}=\tfrac12 M v_{cm}^2=\tfrac12\cdot 4\cdot 9=18\ \text{J}.$$
+<p>Energía interna (relativa al CM): $E_c'=E_c-E_{cm}=26-18=8\ \text{J}$. Verifica König: $26=18+8$ ✓.</p>
+<div class="truco">König separa la energía en "la del conjunto moviéndose" + "la de las partes moviéndose una respecto de otra". Útil cuando un sistema se traslada y además tiene movimiento interno.</div>
+<div class="respuesta">$$\boxed{E_c=26\ \text{J}=\underbrace{18}_{E_{cm}}+\underbrace{8}_{E_c'}\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej17">
+<h3>Ejercicio 17 — Momento angular de una partícula <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Una partícula de $m=2\ \text{kg}$ se mueve en línea recta a $v=5\ \text{m/s}$. La recta de movimiento pasa a una distancia perpendicular $b=3\ \text{m}$ de un punto $O$. ¿Cuál es su momento angular respecto de $O$?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El módulo del momento angular es la masa por la velocidad por el <strong>brazo</strong> $b$ (la distancia perpendicular de la recta de movimiento al punto):</p>
+$$L=m\,v\,b=2\cdot 5\cdot 3=30\ \text{kg·m}^2/\text{s}.$$
+<div class="truco">Aunque la partícula vaya en línea recta, tiene momento angular respecto de un punto que no esté sobre su trayectoria. Si pasara justo por $O$ (b=0), sería $L=0$.</div>
+<div class="respuesta">$$\boxed{L=30\ \text{kg·m}^2/\text{s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej18">
+<h3>Ejercicio 18 — Conservación del momento angular <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">Una partícula atada a un hilo gira sobre una mesa lisa en un círculo de radio $r_1=2\ \text{m}$ a $v_1=3\ \text{m/s}$. Se tira del hilo desde el centro hasta dejar el radio en $r_2=1\ \text{m}$. ¿Cuál es la nueva velocidad?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La fuerza del hilo apunta siempre al centro, así que no hace torque respecto de $O$ ⇒ <strong>se conserva el momento angular</strong>:</p>
+$$m\,v_1\,r_1=m\,v_2\,r_2\ \Rightarrow\ v_2=\frac{v_1 r_1}{r_2}=\frac{3\cdot 2}{1}=6\ \text{m/s}.$$
+<div class="truco">Al acortar el radio, la partícula se acelera (igual que la patinadora que encoge los brazos y gira más rápido). El producto $v\,r$ se mantiene.</div>
+<div class="respuesta">$$\boxed{v_2=6\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej19">
+<h3>Ejercicio 19 — ¿El choque fue elástico? <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">$m_1=2\ \text{kg}$ a $5\ \text{m/s}$ choca con $m_2=3\ \text{kg}$ en reposo. Después, $m_1$ queda a $1\ \text{m/s}$ (mismo sentido).
+<ol type="a"><li>Hallá la velocidad de $m_2$.</li><li>Decidí si el choque fue elástico.</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> Conservación de $P$ (siempre vale en un choque):</p>
+$$m_1 v_1=m_1 v_1'+m_2 v_2'\ \Rightarrow\ 2\cdot 5=2\cdot 1+3\,v_2'\ \Rightarrow\ v_2'=\frac{8}{3}\approx 2{,}67\ \text{m/s}.$$
+<p><strong>b)</strong> Comparo la energía cinética antes y después:</p>
+$$E_{c,i}=\tfrac12\cdot 2\cdot 25=25\ \text{J};\quad E_{c,f}=\tfrac12\cdot 2\cdot 1+\tfrac12\cdot 3\cdot 2{,}67^2=1+10{,}7=11{,}7\ \text{J}.$$
+<p>Como $E_{c,f}<E_{c,i}$, se perdió energía ⇒ <strong>NO fue elástico</strong> (fue inelástico).</p>
+<div class="respuesta">$$\boxed{v_2'\approx 2{,}67\ \tfrac{\text{m}}{\text{s}};\quad \text{inelástico (se perdieron} \approx 13\ \text{J)}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej20">
+<h3>Ejercicio 20 — La persona que camina sobre el bote <span class="nivel">Nivel 9</span></h3>
+<div class="enunciado">Una persona de $m=60\ \text{kg}$ camina $3\ \text{m}$ (respecto del bote) sobre un bote de $M=120\ \text{kg}$ que flota en agua sin rozamiento. ¿Cuánto se desplaza el bote?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>No hay fuerzas externas horizontales ⇒ el centro de masa <strong>no se mueve</strong>. Si la persona avanza $d_p$ y el bote retrocede $d_b$, el CM fijo exige:</p>
+$$m\,d_p=M\,d_b.$$
+<p>Además, el desplazamiento de la persona respecto del bote es la suma: $d_p+d_b=3\ \text{m}$. De $60\,d_p=120\,d_b$ sale $d_p=2\,d_b$, entonces:</p>
+$$2d_b+d_b=3\ \Rightarrow\ d_b=1\ \text{m}.$$
+<div class="truco">El bote (pesado) se mueve poco y la persona (liviana) mucho, de modo que el CM no se corre. Es el mismo principio del retroceso, pero con desplazamientos.</div>
+<div class="respuesta">$$\boxed{\text{El bote se desplaza } 1\ \text{m}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== TIPO PARCIAL ===================== -->
+<section class="tema" id="parcial" data-tema="particulas">
+<h2 class="tema-titulo">🔴 Tipo parcial (21–23)</h2>
+
+<article class="ej" id="sis-ej21">
+<h3>Ejercicio 21 — Impulso con $F(t)=e^t$ <span class="tchip">Tipo parcial</span> <span class="nivel">Firma Moreno</span></h3>
+<div class="enunciado">Sobre un cuerpo de $m=2\ \text{kg}$, en reposo sobre una superficie lisa, actúa una fuerza $F(t)=e^{t}$ (N, con $t$ en segundos) durante $2\ \text{s}$.
+<ol type="a"><li>Calculá el impulso entregado.</li><li>Hallá la velocidad final.</li><li>¿Qué fuerza constante habría producido el mismo efecto?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> La fuerza depende del tiempo, así que el impulso es la integral:</p>
+$$J=\int_0^2 e^{t}\,dt=\left.e^{t}\right|_0^2=e^2-e^0=e^2-1\approx 7{,}39-1=6{,}39\ \text{N·s}.$$
+<p><strong>b)</strong> Impulso = cambio de momento (parte del reposo):</p>
+$$v=\frac{J}{m}=\frac{6{,}39}{2}\approx 3{,}19\ \text{m/s}.$$
+<p><strong>c)</strong> Una fuerza constante equivalente daría el mismo impulso en $2\ \text{s}$: $F_{eq}=\dfrac{J}{\Delta t}=\dfrac{6{,}39}{2}\approx 3{,}20\ \text{N}.$</p>
+<div class="truco">Aunque no sepas resolver el movimiento instante a instante, el impulso te da directo el cambio de velocidad. Para $F(t)$ siempre pensá en impulso.</div>
+<div class="respuesta">$$\boxed{J=e^2-1\approx 6{,}39\ \text{N·s};\quad v\approx 3{,}19\ \tfrac{\text{m}}{\text{s}}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej22">
+<h3>Ejercicio 22 — Choque contra una barra con perno <span class="tchip">Tipo parcial</span> <span class="nivel">Firma Moreno</span></h3>
+<div class="enunciado">Una partícula de $m=0{,}5\ \text{kg}$ se mueve a $v=6\ \text{m/s}$ y choca perpendicularmente, incrustándose, en el extremo de una barra ($M=1{,}5\ \text{kg}$, $L=1\ \text{m}$) que puede girar alrededor de un perno en su otro extremo, inicialmente en reposo. ($I_{barra}^{perno}=\tfrac13 ML^2$.)
+<ol type="a"><li>Velocidad angular $\omega$ justo después del choque.</li><li>¿Se conserva el momento lineal? ¿Y el momento angular?</li><li>Energía perdida en el choque.</li></ol>
+<svg viewBox="0 0 280 180" role="img" aria-label="Barra vertical articulada en un perno arriba; una partícula llega horizontalmente y golpea el extremo inferior">
+  <defs>
+    <marker id="s22g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+    <marker id="s22p" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9c27b0"/></marker>
+  </defs>
+  <!-- perno arriba -->
+  <circle cx="150" cy="30" r="5" fill="#2c3e50"/>
+  <text x="158" y="30" font-size="11">perno</text>
+  <!-- barra vertical -->
+  <line x1="150" y1="30" x2="150" y2="150" stroke="#1a5490" stroke-width="5"/>
+  <text x="158" y="95" font-size="10" fill="#1a5490">M, L</text>
+  <!-- particula llega desde la izquierda al extremo inferior -->
+  <circle cx="70" cy="150" r="6" fill="#2c3e50"/>
+  <line x1="80" y1="150" x2="138" y2="150" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#s22g)"/>
+  <text x="86" y="143" font-size="10" fill="#2e7d32">v, m</text>
+  <!-- giro despues -->
+  <path d="M 168 150 A 26 26 0 0 1 178 128" fill="none" stroke="#9c27b0" stroke-width="1.6" marker-end="url(#s22p)"/>
+  <text x="182" y="140" font-size="11" fill="#9c27b0">ω</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>b) ¿Qué se conserva?</strong> Durante el choque, el <strong>perno</strong> ejerce una fuerza externa (impulsiva) sobre la barra, así que el momento lineal $\vec P$ <strong>NO se conserva</strong>. Pero el perno no hace torque respecto de sí mismo ⇒ el <strong>momento angular respecto del perno SÍ se conserva</strong>.</p>
+<p><strong>a)</strong> Momento angular respecto del perno, antes (sólo la partícula, a distancia $L$) = después (todo girando):</p>
+$$m\,v\,L=(I_{barra}+m L^2)\,\omega.$$
+<p>Calculo las inercias: $I_{barra}=\tfrac13 ML^2=\tfrac13\cdot 1{,}5\cdot 1^2=0{,}5$; $\ mL^2=0{,}5\cdot 1^2=0{,}5$. Total $I=1{,}0\ \text{kg·m}^2$.</p>
+$$\omega=\frac{m v L}{I}=\frac{0{,}5\cdot 6\cdot 1}{1{,}0}=3\ \text{rad/s}.$$
+<p><strong>c) Energía perdida:</strong></p>
+$$E_{c,i}=\tfrac12 m v^2=\tfrac12\cdot 0{,}5\cdot 36=9\ \text{J};\quad E_{c,f}=\tfrac12 I\omega^2=\tfrac12\cdot 1\cdot 9=4{,}5\ \text{J}.$$
+$$\Delta E_c=4{,}5-9=-4{,}5\ \text{J}.$$
+<div class="alerta">Este es el ejercicio donde más se pierde puntos: hay que decir explícitamente que $\vec P$ no se conserva (por el perno) y que lo que se conserva es $\vec L$ respecto del perno. Usar conservación de $P$ acá da mal.</div>
+<div class="respuesta">$$\boxed{\omega=3\ \tfrac{\text{rad}}{\text{s}};\ \ P\text{ no se conserva},\ L^{perno}\text{ sí};\ \ \Delta E_c=-4{,}5\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="sis-ej23">
+<h3>Ejercicio 23 — Péndulo balístico integrador <span class="tchip">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">Una bala de $m=1\ \text{kg}$ a $v=12\ \text{m/s}$ se incrusta en un bloque de $M=2\ \text{kg}$ que cuelga de un hilo de largo $\ell=2\ \text{m}$, en reposo.
+<ol type="a"><li>Velocidad del conjunto justo después del choque.</li><li>Energía perdida en el choque.</li><li>Altura máxima que sube.</li><li>Ángulo máximo que se aparta el hilo de la vertical.</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a) Choque</strong> (plástico): se conserva $P$.</p>
+$$m v=(m+M)V\ \Rightarrow\ V=\frac{1\cdot 12}{3}=4\ \text{m/s}.$$
+<p><strong>b) Energía perdida</strong> en el choque:</p>
+$$E_{c,i}=\tfrac12\cdot 1\cdot 12^2=72\ \text{J};\quad E_{c,f}=\tfrac12\cdot 3\cdot 4^2=24\ \text{J};\quad \Delta E_c=-48\ \text{J}.$$
+<p><strong>c) Ascenso</strong> (ya pegados, sin rozamiento): se conserva la energía.</p>
+$$\tfrac12(m+M)V^2=(m+M)g\,h\ \Rightarrow\ h=\frac{V^2}{2g}=\frac{16}{20}=0{,}8\ \text{m}.$$
+<p><strong>d) Ángulo:</strong> el hilo sube de modo que el bloque gana altura $h=\ell(1-\cos\theta)$:</p>
+$$\cos\theta=1-\frac{h}{\ell}=1-\frac{0{,}8}{2}=0{,}6\ \Rightarrow\ \theta\approx 53^\circ.$$
+<div class="truco">Tres etapas, tres herramientas: $P$ en el choque, energía en la subida, geometría para el ángulo. Mantené cada una en su lugar.</div>
+<div class="respuesta">$$\boxed{V=4\ \tfrac{\text{m}}{\text{s}};\ \Delta E_c=-48\ \text{J};\ h=0{,}8\ \text{m};\ \theta\approx 53^\circ}$$</div>
+</details>
+</article>
+</section>
+
+<footer>
+Sistemas de partículas · Física de Sistemas de Partículas · Cátedra Moreno · g = 10 m/s²<br>
+<a href="cinematica.html">🏃 Cinemática</a> · <a href="dinamica.html">⚙️ Dinámica</a> · <a href="trabajo-energia.html">⚡ Trabajo y energía</a> · <a href="cheatsheet.html">📐 Cheatsheet</a>
+</footer>
+</main>
+
+<!-- Banco de fórmulas (oculto; lo usa el panel flotante) -->
+<div id="formulaBank" style="display:none">
+  <div class="formula"><strong>Centro de masa:</strong> $\vec r_{cm}=\dfrac{\sum m_i\vec r_i}{M}$; &nbsp; $\vec P=M\vec v_{cm}$.</div>
+  <div class="formula"><strong>2.ª ley del sistema:</strong> $\sum\vec F_{ext}=\dfrac{d\vec P}{dt}$; &nbsp; si $=0\Rightarrow\vec P$ cte.</div>
+  <div class="formula"><strong>Impulso:</strong> $\vec J=\displaystyle\int\vec F\,dt=\Delta\vec P$; &nbsp; ($F$ cte: $J=F\Delta t$).</div>
+  <div class="formula"><strong>Choque plástico:</strong> $P$ sí, $E_c$ no. &nbsp; <strong>Elástico:</strong> $P$ y $E_c$.</div>
+  <div class="formula"><strong>König:</strong> $E_c=\tfrac12 M v_{cm}^2+E_c'$.</div>
+  <div class="formula"><strong>Momento angular:</strong> $L=m\,v\,b$ (brazo $b$); &nbsp; si $\tau_{ext}=0\Rightarrow L$ cte.</div>
+  <div class="formula"><strong>Choque con perno:</strong> $P$ NO se conserva, $L$ respecto del perno SÍ.</div>
+</div>
+
+<!-- Botones flotantes -->
+<a href="#top" class="fab backtop" aria-label="Volver arriba">↑</a>
+<button class="fab fab-formulas" id="btnFormulas" aria-label="Ver fórmulas">📐 Fórmulas</button>
+<button class="fab fab-index" id="btnIndex" aria-label="Abrir índice">☰ Índice</button>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Índice de ejercicios">
+  <div class="dhead"><span>📑 Índice</span><button id="closeDrawer" aria-label="Cerrar">×</button></div>
+  <ul id="navTree"></ul>
+</aside>
+
+<section class="sheet" id="sheet" aria-label="Fórmulas de sistemas de partículas">
+  <div class="shead"><span>📐 Fórmulas de sistemas de partículas</span><button id="closeSheet" aria-label="Cerrar">×</button></div>
+  <div class="sbody" id="sheetBody"></div>
+</section>
+
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section.tema'));
+  var navTree = document.getElementById('navTree');
+  secs.forEach(function(sec){
+    var li = document.createElement('li'); li.className='nav-tema'; li.dataset.target=sec.id;
+    var a = document.createElement('a'); a.href='#'+sec.id; a.textContent=sec.querySelector('.tema-titulo').textContent.trim();
+    li.appendChild(a);
+    var ul = document.createElement('ul'); ul.className='nav-ejs';
+    sec.querySelectorAll('article.ej').forEach(function(ej){
+      var h = ej.querySelector('h3').cloneNode(true);
+      h.querySelectorAll('.nivel,.tchip').forEach(function(s){ s.remove(); });
+      var ea = document.createElement('a'); ea.href='#'+ej.id; ea.textContent=h.textContent.trim();
+      ul.appendChild(ea);
+    });
+    li.appendChild(ul); navTree.appendChild(li);
+  });
+
+  var backdrop=document.getElementById('backdrop'), drawer=document.getElementById('drawer'), sheet=document.getElementById('sheet');
+  function fillSheet(){ var b=document.getElementById('sheetBody'); if(b.childElementCount) return;
+    document.querySelectorAll('#formulaBank .formula').forEach(function(f){ b.appendChild(f.cloneNode(true)); }); }
+  function closeAll(){ drawer.classList.remove('show'); sheet.classList.remove('show'); backdrop.classList.remove('show'); }
+  document.getElementById('btnIndex').addEventListener('click', function(){ drawer.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('btnFormulas').addEventListener('click', function(){ fillSheet(); sheet.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('closeDrawer').addEventListener('click', closeAll);
+  document.getElementById('closeSheet').addEventListener('click', closeAll);
+  backdrop.addEventListener('click', closeAll);
+  navTree.addEventListener('click', function(e){ if(e.target.closest('a')) closeAll(); });
+
+  var current=null;
+  function updateCurrent(){
+    var line=140, found=secs[0];
+    for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top<=line) found=secs[i]; }
+    if(found!==current){ current=found;
+      navTree.querySelectorAll('.nav-tema').forEach(function(li){ li.classList.toggle('active', li.dataset.target===current.id); });
+    }
+  }
+  var ticking=false;
+  window.addEventListener('scroll', function(){ if(!ticking){ window.requestAnimationFrame(function(){ updateCurrent(); ticking=false; }); ticking=true; } }, {passive:true});
+  updateCurrent();
+})();
+</script>
+
+</body>
+</html>

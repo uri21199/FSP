@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2c3e50">
+<title>Cuerpo rígido · FSP Moreno</title>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root { --primary:#1a5490; --primary-dark:#2c3e50; --bg:#fafafa; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:0; color:#222; line-height:1.6; background:var(--bg); -webkit-text-size-adjust:100%; }
+
+  header.top { position:sticky; top:0; z-index:100; background:var(--primary-dark); color:#fff; padding:0.7em 0.9em 0.55em; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  header.top h1 { font-size:1.0em; margin:0 0 0.5em; font-weight:600; }
+  nav.temas { display:flex; gap:0.4em; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:0.15em; }
+  nav.temas a { flex:0 0 auto; background:#ffffff22; color:#fff; text-decoration:none; padding:0.34em 0.7em; border-radius:999px; font-size:0.8em; white-space:nowrap; border:1px solid #ffffff44; }
+
+  main { max-width:820px; margin:0 auto; padding:0.8em 0.9em 3em; }
+  .intro { background:#eef3fa; border-radius:8px; padding:0.9em 1em; margin:0.9em 0 0.5em; font-size:0.95em; }
+  .intro h2 { margin:0 0 0.4em; font-size:1.1em; color:var(--primary-dark); }
+
+  .tema { margin-top:1.4em; }
+  .tema-titulo { color:#fff; background:var(--primary); border-radius:8px; padding:0.5em 0.7em; font-size:1.1em; margin:1.3em 0 0.7em; scroll-margin-top:96px; }
+
+  h2.seccion { color:var(--primary-dark); border-bottom:3px solid var(--primary); padding-bottom:0.2em; margin:1.4em 0 0.6em; font-size:1.15em; scroll-margin-top:96px; }
+
+  .ej { background:#fff; border:1px solid #e2e6ee; border-radius:9px; padding:0.8em 0.9em; margin:0.9em 0; box-shadow:0 1px 3px rgba(0,0,0,.05); scroll-margin-top:96px; }
+  .ej h3 { font-size:1.0em; color:var(--primary-dark); margin:0 0 0.5em; display:flex; flex-wrap:wrap; align-items:center; gap:0.45em; line-height:1.35; }
+  .nivel { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#e3edf7; color:var(--primary); white-space:nowrap; }
+  .tchip { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#ffe2cc; color:#e65100; white-space:nowrap; }
+
+  .enunciado { background:#f0f6ff; border-left:4px solid #4a8bc2; padding:0.7em 0.9em; border-radius:5px; }
+  .respuesta { background:#eef9ee; border-left:4px solid #4caf50; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .alerta { background:#fff4e6; border-left:4px solid #ff9800; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .truco { background:#f3e5f5; border-left:4px solid #9c27b0; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+
+  .formula { background:#f3f5f9; border-left:4px solid var(--primary); border-radius:6px; padding:0.5em 0.9em; margin:0.6em 0; }
+  .origen { background:#f3e5f5; border-left:4px solid #9c27b0; border-radius:6px; padding:0.55em 0.9em; margin:0.4em 0 0.8em; font-size:0.94em; }
+  .origen b { color:#7b1fa2; }
+
+  details.sol { margin-top:0.7em; border:1px solid #d0d7e0; border-radius:6px; padding:0 0.85em; background:#fbfcff; }
+  details.sol > summary { cursor:pointer; font-weight:600; color:var(--primary); padding:0.6em 0; list-style:none; }
+  details.sol > summary::-webkit-details-marker { display:none; }
+  details.sol > summary::before { content:"▶"; font-size:0.78em; margin-right:0.4em; }
+  details.sol[open] > summary::before { content:"▼"; }
+  details.sol[open] { padding-bottom:0.85em; }
+  details.sol[open] > summary { border-bottom:1px solid #e2e6ee; margin-bottom:0.5em; }
+
+  svg { display:block; max-width:100%; height:auto; margin:0.8em auto; background:#fff; border:1px solid #e2e6ee; border-radius:6px; }
+  mjx-container { overflow-x:auto; overflow-y:hidden; max-width:100%; }
+  mjx-container[display="true"] { margin:0.6em 0 !important; }
+
+  table { border-collapse:collapse; width:100%; font-size:0.88em; margin:0.6em 0; display:block; overflow-x:auto; }
+  th,td { border:1px solid #ccc; padding:0.4em 0.6em; text-align:left; }
+  th { background:#e8eef5; }
+
+  .fab { position:fixed; z-index:200; border:none; cursor:pointer; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,.3); display:flex; align-items:center; justify-content:center; }
+  .backtop { right:14px; bottom:128px; background:var(--primary); width:44px; height:44px; border-radius:50%; text-decoration:none; font-size:1.25em; }
+  .fab-formulas { right:14px; bottom:14px; background:#9c27b0; height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+  .fab-index { left:14px; bottom:14px; background:var(--primary-dark); height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+
+  .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:300; opacity:0; visibility:hidden; transition:opacity .25s; }
+  .backdrop.show { opacity:1; visibility:visible; }
+
+  .drawer { position:fixed; top:0; left:0; height:100%; width:82%; max-width:340px; background:#fff; z-index:310; transform:translateX(-100%); transition:transform .28s ease; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:2px 0 14px rgba(0,0,0,.25); }
+  .drawer.show { transform:translateX(0); }
+  .drawer .dhead { position:sticky; top:0; background:var(--primary-dark); color:#fff; padding:0.85em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .drawer .dhead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .drawer ul { list-style:none; margin:0; padding:0; }
+  .drawer .nav-tema > a { display:block; background:#eef3fa; color:var(--primary-dark); font-weight:600; text-decoration:none; padding:0.6em 1em; border-bottom:1px solid #e2e6ee; }
+  .drawer .nav-tema.active > a { background:var(--primary); color:#fff; }
+  .drawer .nav-ejs { padding:0.2em 0 0.5em; }
+  .drawer .nav-ejs a { display:block; color:#333; text-decoration:none; padding:0.42em 1em 0.42em 1.6em; font-size:0.88em; border-bottom:1px solid #f0f2f5; }
+
+  .sheet { position:fixed; left:0; right:0; bottom:0; max-height:72vh; background:#fff; z-index:310; transform:translateY(100%); transition:transform .28s ease; border-radius:14px 14px 0 0; box-shadow:0 -2px 14px rgba(0,0,0,.25); display:flex; flex-direction:column; }
+  .sheet.show { transform:translateY(0); }
+  .sheet .shead { background:#9c27b0; color:#fff; padding:0.8em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0; }
+  .sheet .shead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .sheet .sbody { overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0.6em 0.9em 1em; }
+  .sheet .sbody .formula { margin:0.45em 0; }
+  @media (min-width:760px){ .sheet { left:auto; right:18px; bottom:18px; width:420px; max-height:78vh; border-radius:12px; } .sheet .shead { border-radius:12px 12px 0 0; } }
+
+  footer { text-align:center; color:#888; font-size:0.85em; padding:1.5em 1em 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>🛞 Cuerpo rígido — FSP (cátedra Moreno)</h1>
+  <nav class="temas">
+    <a href="#formulas">📐 Fórmulas</a>
+    <a href="#basico">Básico</a>
+    <a href="#intermedio">Intermedio</a>
+    <a href="#avanzado">Avanzado</a>
+    <a href="#parcial">Tipo parcial</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<div class="intro">
+<h2>La idea central</h2>
+<p>Un <strong>cuerpo rígido</strong> es un objeto que no se deforma: además de trasladarse, puede <strong>rotar</strong>. La buena noticia es que la rotación es el "espejo" de lo que ya sabés: donde antes había fuerza $F$, masa $m$ y aceleración $a$, ahora hay <strong>torque $\tau$, momento de inercia $I$ y aceleración angular $\alpha$</strong>, con la misma ecuación $\sum\tau=I\alpha$.</p>
+<p style="margin-bottom:0">Es el tema que <strong>más toma Moreno</strong>. Abajo, <strong>fórmulas con justificación</strong> y <strong>23 ejercicios</strong> de menos a más. Botón <strong>📐 Fórmulas</strong> (abajo der.) y <strong>☰ Índice</strong> (abajo izq.). $g=10\,\text{m/s}^2$, decimales con coma.</p>
+</div>
+
+
+<!-- ===================== FÓRMULAS CON JUSTIFICACIÓN ===================== -->
+<h2 class="seccion" id="formulas">📐 Fórmulas con justificación</h2>
+
+<div class="formula">
+<strong>El diccionario lineal ↔ rotación</strong>
+$$F\leftrightarrow\tau\qquad m\leftrightarrow I\qquad a\leftrightarrow\alpha\qquad v\leftrightarrow\omega\qquad p\leftrightarrow L$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> toda la rotación copia la dinámica lineal. Si entendés $F=ma$, entendés $\tau=I\alpha$; si entendés $E_c=\tfrac12 mv^2$, entendés $E_c=\tfrac12 I\omega^2$. Cuando dudes, traducí con este diccionario.
+</div>
+
+<div class="formula">
+<strong>Momento de inercia y teorema de Steiner</strong>
+$$I=\sum m_i r_i^2=\int r^2\,dm\qquad I=I_{cm}+M d^2$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> $I$ mide cuánto "cuesta" cambiar la rotación (la masa que está lejos del eje pesa más, va al cuadrado de la distancia). <b>Steiner:</b> si conocés $I$ por el centro de masa, para un eje paralelo a distancia $d$ sumás $Md^2$. El eje del CM siempre da el $I$ <em>mínimo</em>.
+</div>
+<table>
+<tr><th>Cuerpo (eje)</th><th>$I$</th></tr>
+<tr><td>Barra por el centro</td><td>$\tfrac{1}{12}ML^2$</td></tr>
+<tr><td>Barra por un extremo</td><td>$\tfrac{1}{3}ML^2$</td></tr>
+<tr><td>Disco / cilindro (eje)</td><td>$\tfrac{1}{2}MR^2$</td></tr>
+<tr><td>Aro / cilindro hueco</td><td>$MR^2$</td></tr>
+<tr><td>Esfera maciza</td><td>$\tfrac{2}{5}MR^2$</td></tr>
+</table>
+
+<div class="formula">
+<strong>Torque y 2.ª ley de la rotación</strong>
+$$\vec\tau=\vec r\wedge\vec F\qquad |\tau|=F\cdot b\ (\text{brazo})\qquad \sum\tau=I\,\alpha$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> el torque mide la capacidad de una fuerza de hacer girar; su módulo es $F$ por el <b>brazo</b> $b$ (la distancia perpendicular del eje a la recta de la fuerza). La ley $\sum\tau=I\alpha$ es el análogo de $F=ma$: sale de sumar $\vec\tau=\vec r\wedge\vec F$ partícula por partícula, y como todas giran con el mismo $\alpha$, aparece $I=\sum m_i r_i^2$.
+</div>
+
+<div class="formula">
+<strong>Momento angular</strong>
+$$L=I\,\omega\qquad \frac{dL}{dt}=\sum\tau_{ext}\qquad (\tau_{ext}=0\Rightarrow L\ \text{cte})$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> sumando $L=\sum m_i r_i v_i=\sum m_i r_i(\omega r_i)=I\omega$. Si no hay torque externo, $L$ se conserva: por eso la patinadora que encoge los brazos baja su $I$ y sube su $\omega$ (el producto se mantiene).
+</div>
+
+<div class="formula">
+<strong>Energía cinética y rodadura</strong>
+$$E_c^{rot}=\tfrac12 I\omega^2\qquad E_c^{rodadura}=\tfrac12 M v_{cm}^2+\tfrac12 I_{cm}\,\omega^2\qquad v_{cm}=\omega R$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> $E_c=\sum\tfrac12 m_i v_i^2$ con $v_i=\omega r_i$ da $\tfrac12 I\omega^2$. Si el cuerpo <b>rueda</b>, tiene las dos energías: la de trasladarse (CM) y la de girar. El vínculo de <b>rodar sin deslizar</b> es $v_{cm}=\omega R$ (y $a_{cm}=\alpha R$): es la ecuación extra que conecta lo lineal con lo angular.
+</div>
+
+<div class="formula">
+<strong>Polea con masa</strong>
+$$\text{si la polea tiene masa: } T_1\neq T_2,\qquad (T_1-T_2)R=I\alpha$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> en una polea <em>ideal</em> (sin masa) las tensiones a ambos lados son iguales. Si tiene masa, la <b>diferencia</b> de tensiones es la que produce el torque neto que la acelera: $(T_1-T_2)R=I\alpha$. Por eso en estos problemas hay que tratar a la polea como un cuerpo más (con su $\sum\tau=I\alpha$).
+</div>
+
+
+<!-- ===================== BÁSICO ===================== -->
+<section class="tema" id="basico" data-tema="rigido">
+<h2 class="tema-titulo">🟢 Básico (1–7)</h2>
+
+<article class="ej" id="rig-ej1">
+<h3>Ejercicio 1 — Momento de inercia de masas puntuales <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Tres masas están fijas a una varilla (sin masa) que gira alrededor de un eje: $m_1=1\ \text{kg}$ a $1\ \text{m}$, $m_2=2\ \text{kg}$ a $2\ \text{m}$ y $m_3=3\ \text{kg}$ a $1\ \text{m}$ del eje. Hallá el momento de inercia.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Sumo $m\,r^2$ de cada masa:</p>
+$$I=\sum m_i r_i^2=1\cdot 1^2+2\cdot 2^2+3\cdot 1^2=1+8+3=12\ \text{kg·m}^2.$$
+<div class="truco">La distancia va al <em>cuadrado</em>: la masa de $2\ \text{kg}$, por estar lejos, aporta mucho más (8) que las otras. Alejar masa del eje encarece girar.</div>
+<div class="respuesta">$$\boxed{I=12\ \text{kg·m}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej2">
+<h3>Ejercicio 2 — Comparar momentos de inercia <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Un aro, un cilindro macizo y una esfera maciza tienen la misma masa $M=2\ \text{kg}$ y el mismo radio $R=0{,}5\ \text{m}$. Calculá el $I$ de cada uno y ordenálos.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Uso la tabla. Con $MR^2=2\cdot 0{,}5^2=0{,}5$:</p>
+<ul>
+<li>Aro: $I=MR^2=0{,}5\ \text{kg·m}^2.$</li>
+<li>Cilindro: $I=\tfrac12 MR^2=0{,}25\ \text{kg·m}^2.$</li>
+<li>Esfera: $I=\tfrac25 MR^2=0{,}2\ \text{kg·m}^2.$</li>
+</ul>
+<p>Orden: aro $>$ cilindro $>$ esfera.</p>
+<div class="truco">A igual masa y radio, el aro tiene más $I$ porque toda su masa está lejos del eje (en el borde). La esfera, con masa repartida hacia el centro, tiene el menor.</div>
+<div class="respuesta">$$\boxed{I_{aro}=0{,}5>I_{cil}=0{,}25>I_{esf}=0{,}2\ \text{kg·m}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej3">
+<h3>Ejercicio 3 — Teorema de Steiner <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Una barra de $M=3\ \text{kg}$ y $L=2\ \text{m}$ tiene $I_{cm}=\tfrac{1}{12}ML^2$ por su centro. ¿Cuál es su momento de inercia respecto de un eje que pasa por un extremo?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El extremo está a $d=L/2=1\ \text{m}$ del centro. Aplico Steiner:</p>
+$$I_{cm}=\tfrac{1}{12}\cdot 3\cdot 2^2=1\ \text{kg·m}^2.$$
+$$I_{extremo}=I_{cm}+M d^2=1+3\cdot 1^2=4\ \text{kg·m}^2.$$
+<div class="truco">Coincide con la fórmula directa de la tabla: barra por el extremo $=\tfrac13 ML^2=\tfrac13\cdot 3\cdot 4=4$ ✓. Steiner sirve para cualquier eje paralelo.</div>
+<div class="respuesta">$$\boxed{I_{extremo}=4\ \text{kg·m}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej4">
+<h3>Ejercicio 4 — Torque y brazo de palanca <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Se aplica una fuerza $F=20\ \text{N}$ perpendicular a una llave, a una distancia de $0{,}3\ \text{m}$ del eje del tornillo. ¿Cuál es el torque?
+<svg viewBox="0 0 300 130" role="img" aria-label="Una barra articulada en un eje con una fuerza perpendicular aplicada en el extremo; se muestra el brazo">
+  <defs><marker id="r4g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker></defs>
+  <!-- eje -->
+  <circle cx="50" cy="60" r="6" fill="#2c3e50"/>
+  <text x="36" y="55" font-size="11">eje</text>
+  <!-- barra -->
+  <line x1="50" y1="60" x2="240" y2="60" stroke="#1a5490" stroke-width="4"/>
+  <!-- fuerza perpendicular (hacia abajo) en el extremo -->
+  <line x1="240" y1="60" x2="240" y2="112" stroke="#2e7d32" stroke-width="2.6" marker-end="url(#r4g)"/>
+  <text x="246" y="100" font-size="12" fill="#2e7d32">F</text>
+  <!-- brazo -->
+  <line x1="50" y1="80" x2="240" y2="80" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="130" y="95" font-size="10" fill="#888">b = 0,3 m</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Como la fuerza es perpendicular a la barra, el brazo es directamente la distancia al eje:</p>
+$$\tau=F\cdot b=20\cdot 0{,}3=6\ \text{N·m}.$$
+<div class="truco">Por eso una llave larga afloja mejor: a mayor brazo, más torque con la misma fuerza. Si la fuerza no fuera perpendicular, usarías $\tau=F\,b\,\text{sen}\,\theta$.</div>
+<div class="respuesta">$$\boxed{\tau=6\ \text{N·m}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej5">
+<h3>Ejercicio 5 — Equilibrio de una palanca <span class="nivel">Nivel 3</span></h3>
+<div class="enunciado">Una barra está apoyada en un punto fijo (fulcro). De un lado, a $0{,}5\ \text{m}$, cuelga un peso de $40\ \text{N}$. ¿Qué peso hay que colgar del otro lado, a $2\ \text{m}$ del fulcro, para que quede equilibrada?
+<svg viewBox="0 0 300 140" role="img" aria-label="Balancín apoyado en un fulcro con un peso a cada lado a distintas distancias">
+  <defs><marker id="r5b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker></defs>
+  <!-- barra -->
+  <line x1="40" y1="60" x2="270" y2="60" stroke="#1a5490" stroke-width="4"/>
+  <!-- fulcro -->
+  <polygon points="150,60 138,90 162,90" fill="#777"/>
+  <text x="143" y="105" font-size="10">fulcro</text>
+  <!-- peso 1 a la izquierda (d1=0,5) -->
+  <line x1="100" y1="60" x2="100" y2="108" stroke="#1a5490" stroke-width="2.3" marker-end="url(#r5b)"/>
+  <text x="78" y="122" font-size="10" fill="#1a5490">W₁=40</text>
+  <line x1="100" y1="48" x2="150" y2="48" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="108" y="44" font-size="9" fill="#888">d₁=0,5</text>
+  <!-- peso 2 a la derecha (d2=2) -->
+  <line x1="240" y1="60" x2="240" y2="108" stroke="#1a5490" stroke-width="2.3" marker-end="url(#r5b)"/>
+  <text x="226" y="122" font-size="10" fill="#1a5490">W₂=?</text>
+  <line x1="150" y1="48" x2="240" y2="48" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="178" y="44" font-size="9" fill="#888">d₂=2</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>En equilibrio, los torques respecto del fulcro se cancelan: el que tiende a girar para un lado iguala al del otro.</p>
+$$W_1\,d_1=W_2\,d_2\ \Rightarrow\ 40\cdot 0{,}5=W_2\cdot 2.$$
+$$W_2=\frac{20}{2}=10\ \text{N}.$$
+<div class="truco">Con más brazo hace falta menos peso: es el principio de la palanca. Por eso un chico puede equilibrar a un adulto en un sube y baja sentándose más lejos.</div>
+<div class="respuesta">$$\boxed{W_2=10\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej6">
+<h3>Ejercicio 6 — Segunda ley de la rotación <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Una rueda con momento de inercia $I=0{,}5\ \text{kg·m}^2$ recibe un torque neto de $2\ \text{N·m}$. ¿Cuál es su aceleración angular?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Es $\tau=I\alpha$ (el análogo de $F=ma$):</p>
+$$\alpha=\frac{\tau}{I}=\frac{2}{0{,}5}=4\ \text{rad/s}^2.$$
+<div class="respuesta">$$\boxed{\alpha=4\ \text{rad/s}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej7">
+<h3>Ejercicio 7 — De lo angular a lo lineal <span class="nivel">Nivel 3</span></h3>
+<div class="enunciado">Una rueda de radio $R=0{,}4\ \text{m}$ gira con $\omega=10\ \text{rad/s}$ y acelera angularmente con $\alpha=5\ \text{rad/s}^2$. ¿Cuál es la velocidad y la aceleración tangencial de un punto del borde?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Un punto del borde está a distancia $R$ del eje:</p>
+$$v=\omega R=10\cdot 0{,}4=4\ \text{m/s}.$$
+$$a_t=\alpha R=5\cdot 0{,}4=2\ \text{m/s}^2.$$
+<div class="truco">Son las mismas relaciones de cinemática circular. Conectan el mundo angular (ω, α) con el lineal (v, aₜ).</div>
+<div class="respuesta">$$\boxed{v=4\ \tfrac{\text{m}}{\text{s}};\quad a_t=2\ \tfrac{\text{m}}{\text{s}^2}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== INTERMEDIO ===================== -->
+<section class="tema" id="intermedio" data-tema="rigido">
+<h2 class="tema-titulo">🟡 Intermedio (8–14)</h2>
+
+<article class="ej" id="rig-ej8">
+<h3>Ejercicio 8 — Energía cinética de rotación <span class="nivel">Nivel 4</span></h3>
+<div class="enunciado">Un volante con $I=0{,}5\ \text{kg·m}^2$ gira a $\omega=6\ \text{rad/s}$. ¿Cuál es su energía cinética de rotación?</div>
+<details class="sol"><summary>Ver resolución</summary>
+$$E_c=\tfrac12 I\omega^2=\tfrac12\cdot 0{,}5\cdot 6^2=\tfrac12\cdot 0{,}5\cdot 36=9\ \text{J}.$$
+<div class="truco">Es $\tfrac12 I\omega^2$, el espejo de $\tfrac12 m v^2$. Los volantes guardan energía justamente girando.</div>
+<div class="respuesta">$$\boxed{E_c=9\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej9">
+<h3>Ejercicio 9 — Polea con masa y un bloque <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">De una polea (cilindro, $I=\tfrac12 MR^2$, $M=4\ \text{kg}$, $R=0{,}5\ \text{m}$) cuelga, por una soga enrollada, un bloque de $m=2\ \text{kg}$. Hallá la aceleración del bloque y la tensión de la soga.
+<svg viewBox="0 0 220 200" role="img" aria-label="Polea con masa fija arriba; de una soga cuelga un bloque que cae">
+  <defs><marker id="r9b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker></defs>
+  <!-- soporte techo -->
+  <line x1="60" y1="20" x2="160" y2="20" stroke="#333" stroke-width="3"/>
+  <line x1="110" y1="20" x2="110" y2="34" stroke="#555" stroke-width="1.5"/>
+  <!-- polea -->
+  <circle cx="110" cy="52" r="18" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
+  <circle cx="110" cy="52" r="3" fill="#2c3e50"/>
+  <text x="132" y="50" font-size="10" fill="#1a5490">M, I</text>
+  <!-- soga del lado derecho de la polea bajando -->
+  <line x1="128" y1="52" x2="128" y2="120" stroke="#555" stroke-width="1.5"/>
+  <!-- bloque -->
+  <rect x="108" y="120" width="40" height="36" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.5"/>
+  <text x="120" y="143" font-size="10" fill="#1a5490">m</text>
+  <!-- cae -->
+  <line x1="170" y1="125" x2="170" y2="160" stroke="#1a5490" stroke-width="2" marker-end="url(#r9b)"/>
+  <text x="175" y="148" font-size="10" fill="#1a5490">a</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Trato al bloque y a la polea por separado. La soga tira del bloque con $T$ (hacia arriba) y hace girar la polea con torque $T R$.</p>
+<p><strong>Bloque</strong> (cae): $mg-T=ma$.</p>
+<p><strong>Polea</strong> ($\sum\tau=I\alpha$, con $I=\tfrac12 MR^2$ y vínculo $a=\alpha R$):</p>
+$$T R=I\alpha=\tfrac12 MR^2\cdot\frac{a}{R}\ \Rightarrow\ T=\tfrac12 M a.$$
+<p>Reemplazo en la del bloque:</p>
+$$mg-\tfrac12 M a=ma\ \Rightarrow\ a=\frac{mg}{m+\tfrac12 M}=\frac{2\cdot 10}{2+2}=5\ \text{m/s}^2.$$
+$$T=\tfrac12 M a=\tfrac12\cdot 4\cdot 5=10\ \text{N}.$$
+<div class="alerta">Acá $T=10\ \text{N}<mg=20\ \text{N}$: la tensión es <em>menor</em> que el peso (por eso el bloque acelera hacia abajo). Parte del peso se "gasta" en hacer girar la polea.</div>
+<div class="respuesta">$$\boxed{a=5\ \text{m/s}^2;\quad T=10\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej10">
+<h3>Ejercicio 10 — Polea con masa y dos bloques (T₁≠T₂) <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Dos bloques cuelgan de una soga sobre una polea con masa (cilindro $I=\tfrac12 MR^2$, $M=2\ \text{kg}$): $m_1=3\ \text{kg}$ y $m_2=1\ \text{kg}$. Hallá la aceleración y las dos tensiones.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Como la polea tiene masa, las tensiones a cada lado son <strong>distintas</strong>; su diferencia es la que la hace girar. $m_1$ baja, $m_2$ sube.</p>
+$$m_1:\ m_1 g-T_1=m_1 a\qquad m_2:\ T_2-m_2 g=m_2 a\qquad \text{polea: }(T_1-T_2)R=I\alpha=\tfrac12 M a R.$$
+<p>De la última, $T_1-T_2=\tfrac12 M a$. Sumo las tres ecuaciones (se van las tensiones):</p>
+$$a=\frac{(m_1-m_2)g}{m_1+m_2+\tfrac12 M}=\frac{(3-1)\cdot 10}{3+1+1}=\frac{20}{5}=4\ \text{m/s}^2.$$
+<p>Tensiones: $T_1=m_1(g-a)=3\cdot 6=18\ \text{N}$; &nbsp; $T_2=m_2(g+a)=1\cdot 14=14\ \text{N}$.</p>
+<div class="truco">Chequeo: $T_1-T_2=18-14=4=\tfrac12 M a=\tfrac12\cdot 2\cdot 4$ ✓. Si la polea fuera ideal ($M=0$), darían $T_1=T_2$.</div>
+<div class="respuesta">$$\boxed{a=4\ \text{m/s}^2;\quad T_1=18\ \text{N};\quad T_2=14\ \text{N}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej11">
+<h3>Ejercicio 11 — Rodadura: cilindro que baja <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Un cilindro macizo ($I_{cm}=\tfrac12 MR^2$) rueda sin deslizar bajando un plano inclinado $\alpha=30^\circ$. Hallá la aceleración de su centro.
+<svg viewBox="0 0 300 180" role="img" aria-label="Cilindro que rueda bajando un plano inclinado, con la aceleración del centro a lo largo del plano">
+  <defs>
+    <marker id="r11g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+    <marker id="r11p" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9c27b0"/></marker>
+  </defs>
+  <polygon points="40,160 280,160 280,30" fill="#eef3fa" stroke="#1a5490" stroke-width="2"/>
+  <path d="M 70 160 A 30 30 0 0 0 66 143" fill="none" stroke="#333"/>
+  <text x="74" y="156" font-size="11">α</text>
+  <!-- cilindro sobre la hipotenusa -->
+  <circle cx="150" cy="92" r="20" fill="#cfe0f0" stroke="#1a5490" stroke-width="2"/>
+  <circle cx="150" cy="92" r="2.5" fill="#2c3e50"/>
+  <!-- a_cm hacia abajo del plano (down-right) -->
+  <line x1="150" y1="92" x2="196" y2="118" stroke="#2e7d32" stroke-width="2.6" marker-end="url(#r11g)"/>
+  <text x="186" y="112" font-size="11" fill="#2e7d32">a_cm</text>
+  <!-- ω giro -->
+  <path d="M 134 78 A 20 20 0 0 1 166 78" fill="none" stroke="#9c27b0" stroke-width="1.6" marker-end="url(#r11p)"/>
+  <text x="146" y="66" font-size="10" fill="#9c27b0">ω</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Dos ecuaciones: traslación del centro y rotación alrededor del centro. La fuerza que hace girar es el rozamiento estático $f$ (al rodar sin deslizar no disipa).</p>
+$$\text{traslación: } Mg\,\text{sen}\,\alpha-f=M a_{cm}\qquad \text{rotación: } f R=\tfrac12 MR^2\,\alpha_{ang}.$$
+<p>Vínculo de rodadura $a_{cm}=\alpha_{ang}R$ ⇒ $f=\tfrac12 M a_{cm}$. Reemplazo:</p>
+$$Mg\,\text{sen}\,\alpha-\tfrac12 M a_{cm}=M a_{cm}\ \Rightarrow\ a_{cm}=\frac{g\,\text{sen}\,\alpha}{1+\tfrac12}=\frac{5}{1{,}5}\approx 3{,}33\ \text{m/s}^2.$$
+<div class="alerta">Rueda más lento que si resbalara sin rozar ($g\,\text{sen}\,\alpha=5$): parte de la energía va a la rotación. La fórmula general es $a_{cm}=\dfrac{g\,\text{sen}\,\alpha}{1+I_{cm}/MR^2}$.</div>
+<div class="respuesta">$$\boxed{a_{cm}\approx 3{,}33\ \text{m/s}^2}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej12">
+<h3>Ejercicio 12 — Rodadura por energía <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Un cilindro macizo parte del reposo y rueda sin deslizar bajando una altura $h=1{,}5\ \text{m}$. ¿Con qué velocidad llega su centro al pie?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Conservación de energía: la potencial se reparte entre traslación y rotación. Con $I=\tfrac12 MR^2$ y $\omega=v/R$:</p>
+$$Mgh=\tfrac12 M v^2+\tfrac12 I\omega^2=\tfrac12 M v^2+\tfrac12\cdot\tfrac12 MR^2\cdot\frac{v^2}{R^2}=\tfrac34 M v^2.$$
+<p>Se cancela $M$ y despejo:</p>
+$$v^2=\frac{4gh}{3}=\frac{4\cdot 10\cdot 1{,}5}{3}=20\ \Rightarrow\ v\approx 4{,}47\ \text{m/s}.$$
+<div class="truco">Si sólo se deslizara (sin rodar), llegaría con $v=\sqrt{2gh}=\sqrt{30}\approx 5{,}48$. Rueda más lento porque parte de la energía quedó en el giro.</div>
+<div class="respuesta">$$\boxed{v\approx 4{,}47\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej13">
+<h3>Ejercicio 13 — Conservación del momento angular <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Un disco con $I_1=2\ \text{kg·m}^2$ gira a $\omega_1=6\ \text{rad/s}$. Se le deja caer encima, alineado, otro disco con $I_2=1\ \text{kg·m}^2$ en reposo, y quedan girando juntos. ¿Cuál es la velocidad angular final?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>No hay torque externo sobre el eje ⇒ se conserva el momento angular. Antes lo tiene sólo el primer disco; después giran juntos con $I_1+I_2$:</p>
+$$I_1\omega_1=(I_1+I_2)\,\omega_f\ \Rightarrow\ \omega_f=\frac{2\cdot 6}{2+1}=\frac{12}{3}=4\ \text{rad/s}.$$
+<div class="alerta">Es un "choque rotacional": $L$ se conserva pero la energía cinética NO (parte se pierde al acoplarse, como en el choque plástico).</div>
+<div class="respuesta">$$\boxed{\omega_f=4\ \text{rad/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej14">
+<h3>Ejercicio 14 — Barra que cae desde la horizontal <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Una barra ($M=2\ \text{kg}$, $L=1{,}2\ \text{m}$, $I_O=\tfrac13 ML^2$) está articulada en un extremo $O$ y se suelta desde la posición horizontal. ¿Con qué velocidad angular pasa por la vertical?
+<svg viewBox="0 0 280 170" role="img" aria-label="Barra articulada en O que cae desde la horizontal hasta la vertical">
+  <defs>
+    <marker id="r14p" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9c27b0"/></marker>
+  </defs>
+  <!-- perno -->
+  <circle cx="70" cy="35" r="5" fill="#2c3e50"/>
+  <text x="52" y="33" font-size="11">O</text>
+  <!-- posicion inicial horizontal (punteada) -->
+  <line x1="70" y1="35" x2="210" y2="35" stroke="#bbb" stroke-width="4" stroke-dasharray="6 4"/>
+  <text x="120" y="27" font-size="9" fill="#999">inicial</text>
+  <!-- arco de caida -->
+  <path d="M 205 40 A 140 140 0 0 1 78 150" fill="none" stroke="#9c27b0" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#r14p)"/>
+  <!-- posicion vertical (solida) -->
+  <line x1="70" y1="35" x2="70" y2="155" stroke="#1a5490" stroke-width="5"/>
+  <text x="78" y="100" font-size="10" fill="#1a5490">M, L</text>
+  <text x="92" y="150" font-size="11" fill="#9c27b0">ω</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Conservación de energía: el centro de masa (a $L/2$ del perno) baja una altura $h=L/2$, y esa potencial se vuelve cinética de rotación.</p>
+$$Mg\,\frac{L}{2}=\tfrac12 I_O\,\omega^2,\qquad I_O=\tfrac13 ML^2=\tfrac13\cdot 2\cdot 1{,}2^2=0{,}96\ \text{kg·m}^2.$$
+$$2\cdot 10\cdot 0{,}6=\tfrac12\cdot 0{,}96\,\omega^2\ \Rightarrow\ 12=0{,}48\,\omega^2\ \Rightarrow\ \omega^2=25\ \Rightarrow\ \omega=5\ \text{rad/s}.$$
+<div class="truco">Es energía pura, pero con $E_c=\tfrac12 I\omega^2$ (rotación) en vez de $\tfrac12 mv^2$. La altura que baja es la del CM, no la del extremo.</div>
+<div class="respuesta">$$\boxed{\omega=5\ \text{rad/s}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== AVANZADO ===================== -->
+<section class="tema" id="avanzado" data-tema="rigido">
+<h2 class="tema-titulo">🟠 Avanzado (15–20)</h2>
+
+<article class="ej" id="rig-ej15">
+<h3>Ejercicio 15 — Torque que acelera durante un tiempo <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Sobre un volante con $I=1{,}5\ \text{kg·m}^2$, en reposo, se aplica un torque constante $\tau=3\ \text{N·m}$ durante $4\ \text{s}$. ¿Qué velocidad angular alcanza?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>Camino 1 (torque-inercia):</strong> $\alpha=\dfrac{\tau}{I}=\dfrac{3}{1{,}5}=2\ \text{rad/s}^2$, y $\omega=\alpha\,t=2\cdot 4=8\ \text{rad/s}$.</p>
+<p><strong>Camino 2 (impulso angular):</strong> $\Delta L=\tau\,\Delta t$, o sea $I\omega=\tau\,t\Rightarrow\omega=\dfrac{\tau t}{I}=\dfrac{3\cdot 4}{1{,}5}=8\ \text{rad/s}.$ (mismo resultado).</p>
+<div class="truco">$\tau\,\Delta t=\Delta L$ es el "impulso angular", el espejo de $F\,\Delta t=\Delta p$.</div>
+<div class="respuesta">$$\boxed{\omega=8\ \text{rad/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej16">
+<h3>Ejercicio 16 — Trabajo del torque <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Un torque constante $\tau=5\ \text{N·m}$ hace girar un cuerpo (con $I=2{,}5\ \text{kg·m}^2$, en reposo) un ángulo $\Delta\theta=4\ \text{rad}$.
+<ol type="a"><li>¿Qué trabajo realiza?</li><li>¿Qué velocidad angular alcanza?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> El trabajo de un torque es $W=\tau\,\Delta\theta$ (análogo de $F\,d$):</p>
+$$W=5\cdot 4=20\ \text{J}.$$
+<p><strong>b)</strong> Por el teorema trabajo–energía rotacional, $W=\Delta E_c=\tfrac12 I\omega^2$:</p>
+$$20=\tfrac12\cdot 2{,}5\cdot\omega^2\ \Rightarrow\ \omega^2=16\ \Rightarrow\ \omega=4\ \text{rad/s}.$$
+<div class="respuesta">$$\boxed{W=20\ \text{J};\quad \omega=4\ \text{rad/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej17">
+<h3>Ejercicio 17 — ¿Cuál llega primero? <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">Una esfera, un cilindro y un aro (todos macizos donde corresponda) se sueltan a la vez desde lo alto de la misma rampa y ruedan sin deslizar. ¿Cuál llega primero? Justificá con la aceleración.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La aceleración al rodar es $a_{cm}=\dfrac{g\,\text{sen}\,\alpha}{1+I_{cm}/MR^2}$. El que tenga <strong>menor</strong> $I/MR^2$ acelera más. Ese factor:</p>
+<ul>
+<li>Esfera: $I/MR^2=\tfrac25=0{,}4$ ⇒ $a=\dfrac{g\,\text{sen}\,\alpha}{1{,}4}$ (la mayor).</li>
+<li>Cilindro: $\tfrac12=0{,}5$ ⇒ $a=\dfrac{g\,\text{sen}\,\alpha}{1{,}5}$.</li>
+<li>Aro: $1$ ⇒ $a=\dfrac{g\,\text{sen}\,\alpha}{2}$ (la menor).</li>
+</ul>
+<p>Orden de llegada: <strong>esfera, luego cilindro, luego aro</strong>.</p>
+<div class="truco">No depende de la masa ni del radio, sólo de <em>cómo está repartida</em> la masa (el factor $I/MR^2$). El aro, con todo en el borde, es el más "perezoso" para rodar.</div>
+<div class="respuesta">$$\boxed{\text{1º esfera · 2º cilindro · 3º aro}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej18">
+<h3>Ejercicio 18 — Péndulo físico (barra que oscila) <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">Una barra uniforme de largo $L=1{,}5\ \text{m}$ cuelga de un extremo y oscila con pequeña amplitud. Hallá el período. (Usá $I_O=\tfrac13 ML^2$ y que el CM está a $d=L/2$.)</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El período de un péndulo físico es $T=2\pi\sqrt{\dfrac{I_O}{Mg\,d}}$. Reemplazo $I_O=\tfrac13 ML^2$ y $d=L/2$ (la masa se cancela):</p>
+$$T=2\pi\sqrt{\frac{\tfrac13 ML^2}{Mg\,(L/2)}}=2\pi\sqrt{\frac{2L}{3g}}=2\pi\sqrt{\frac{2\cdot 1{,}5}{3\cdot 10}}=2\pi\sqrt{0{,}1}\approx 1{,}99\ \text{s}.$$
+<div class="truco">El período no depende de la masa, igual que en el péndulo simple. La barra equivale a un péndulo simple de largo $\tfrac23 L$.</div>
+<div class="respuesta">$$\boxed{T\approx 1{,}99\ \text{s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej19">
+<h3>Ejercicio 19 — Persona que salta a una calesita <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">Una calesita (disco) con $I=100\ \text{kg·m}^2$ gira a $\omega_0=2\ \text{rad/s}$. Una persona de $m=50\ \text{kg}$ salta y queda en el borde, a $R=2\ \text{m}$ del centro (llega sin velocidad tangencial). ¿Cuál es la nueva velocidad angular?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>No hay torque externo respecto del eje ⇒ se conserva $L$. La persona en el borde aporta $I_p=mR^2=50\cdot 2^2=200\ \text{kg·m}^2$.</p>
+$$I\,\omega_0=(I+mR^2)\,\omega_f\ \Rightarrow\ \omega_f=\frac{100\cdot 2}{100+200}=\frac{200}{300}=0{,}67\ \text{rad/s}.$$
+<div class="truco">Al sumar inercia (la persona lejos del centro), la calesita se frena. Es conservación de $L$: al subir $I$, baja $\omega$.</div>
+<div class="respuesta">$$\boxed{\omega_f\approx 0{,}67\ \text{rad/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej20">
+<h3>Ejercicio 20 — Polea con masa + plano inclinado <span class="nivel">Nivel 9</span></h3>
+<div class="enunciado">Un bloque $m_1=2\ \text{kg}$ está sobre un plano inclinado liso $\alpha=30^\circ$, unido por una soga que pasa por una polea con masa (cilindro $I=\tfrac12 MR^2$, $M=2\ \text{kg}$) a un bloque colgante $m_2=3\ \text{kg}$. Hallá la aceleración del sistema.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>$m_2$ baja, $m_1$ sube por el plano. Tensiones distintas a cada lado de la polea ($T_1$ del lado del plano, $T_2$ del lado colgante).</p>
+$$m_2:\ m_2 g-T_2=m_2 a\qquad m_1:\ T_1-m_1 g\,\text{sen}\,\alpha=m_1 a\qquad \text{polea: }(T_2-T_1)R=\tfrac12 MR^2\frac{a}{R}.$$
+<p>De la polea, $T_2-T_1=\tfrac12 M a$. Sumo las tres ecuaciones:</p>
+$$m_2 g-m_1 g\,\text{sen}\,\alpha=(m_1+m_2+\tfrac12 M)\,a.$$
+$$a=\frac{30-2\cdot 10\cdot 0{,}5}{2+3+1}=\frac{30-10}{6}=\frac{20}{6}\approx 3{,}33\ \text{m/s}^2.$$
+<div class="respuesta">$$\boxed{a\approx 3{,}33\ \text{m/s}^2}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== TIPO PARCIAL ===================== -->
+<section class="tema" id="parcial" data-tema="rigido">
+<h2 class="tema-titulo">🔴 Tipo parcial (21–23)</h2>
+
+<article class="ej" id="rig-ej21">
+<h3>Ejercicio 21 — Cilindro-polea + bloque + torque <span class="tchip">Tipo parcial</span> <span class="nivel">Firma Moreno</span></h3>
+<div class="enunciado">Un cilindro ($M=8\ \text{kg}$, $R=0{,}5\ \text{m}$, $I=\tfrac12 MR^2$) está sostenido por su eje fijo. Una soga enrollada en él tira de un bloque ($m=10\ \text{kg}$) que está sobre un piso horizontal con $\mu_d=0{,}10$. Al cilindro se le aplican un torque $\tau=4\ \text{N·m}$ y una fuerza $F=30\ \text{N}$ (tangente, que colabora a girarlo). El sistema parte del reposo.
+<ol type="a"><li>Aceleración angular $\alpha$ del cilindro y lineal $a$ del bloque.</li><li>Tensión de la soga.</li><li>Energía cinética del sistema a los $5\ \text{s}$.</li><li>$\mu_e$ mínimo para que, sin $\tau$ ni $F$, todo quede en equilibrio.</li></ol>
+<svg viewBox="0 0 330 200" role="img" aria-label="Cilindro fijo por su eje con una soga enrollada que va a un bloque sobre el piso; se aplican un torque y una fuerza F">
+  <defs>
+    <marker id="r21g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+    <marker id="r21p" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9c27b0"/></marker>
+    <marker id="r21k" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#555"/></marker>
+  </defs>
+  <!-- soporte del eje -->
+  <line x1="55" y1="22" x2="115" y2="22" stroke="#333" stroke-width="3"/>
+  <line x1="85" y1="22" x2="85" y2="46" stroke="#555" stroke-width="1.5"/>
+  <!-- cilindro -->
+  <circle cx="85" cy="74" r="28" fill="#e8eef5" stroke="#1a5490" stroke-width="2"/>
+  <circle cx="85" cy="74" r="3" fill="#2c3e50"/>
+  <text x="64" y="78" font-size="9" fill="#1a5490">M,R,I</text>
+  <!-- torque (curvo, horario) -->
+  <path d="M 70 52 A 22 22 0 0 1 104 56" fill="none" stroke="#9c27b0" stroke-width="1.8" marker-end="url(#r21p)"/>
+  <text x="78" y="44" font-size="11" fill="#9c27b0">τ</text>
+  <!-- F tangente en el tope, hacia la izquierda -->
+  <line x1="85" y1="46" x2="38" y2="46" stroke="#2e7d32" stroke-width="2.4" marker-end="url(#r21g)"/>
+  <text x="40" y="40" font-size="11" fill="#2e7d32">F</text>
+  <!-- soga sale por abajo del cilindro hacia la derecha (horizontal) al bloque -->
+  <line x1="85" y1="102" x2="85" y2="150" stroke="#555" stroke-width="1.4"/>
+  <line x1="85" y1="150" x2="225" y2="150" stroke="#555" stroke-width="1.4"/>
+  <text x="140" y="144" font-size="10" fill="#555">T</text>
+  <!-- piso -->
+  <line x1="150" y1="170" x2="320" y2="170" stroke="#333" stroke-width="2"/>
+  <!-- bloque -->
+  <rect x="225" y="146" width="46" height="24" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.5"/>
+  <text x="234" y="163" font-size="10" fill="#1a5490">m, μ</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Trato el cilindro (rotación) y el bloque (traslación) por separado, unidos por la tensión $T$ y el vínculo $a=\alpha R$.</p>
+<p><strong>Cilindro</strong> ($\sum\tau=I\alpha$): lo hacen girar $\tau$ y $F$ (brazo $R$) a favor, y la soga $T$ en contra:</p>
+$$\tau+F R-T R=I\alpha=\tfrac12 MR^2\,\frac{a}{R}=\tfrac12 MR\,a.$$
+<p><strong>Bloque</strong> (lo tira $T$, lo frena el rozamiento $f=\mu_d m g$):</p>
+$$T-\mu_d m g=m a\ \Rightarrow\ T=m a+\mu_d m g.$$
+<p>Reemplazo $T$ en la del cilindro. Con números: $f=\mu_d mg=0{,}10\cdot 10\cdot 10=10\ \text{N}$.</p>
+$$\tau+FR-(ma+f)R=\tfrac12 MR\,a\ \Rightarrow\ \tau+FR-fR=\Big(m+\tfrac12 M\Big)R\,a.$$
+$$a=\frac{\tau+FR-fR}{R\,(m+\tfrac12 M)}=\frac{4+30\cdot 0{,}5-10\cdot 0{,}5}{0{,}5\,(10+4)}=\frac{4+15-5}{7}=\frac{14}{7}=2\ \text{m/s}^2.$$
+<p><strong>a)</strong> $a=2\ \text{m/s}^2$ y $\alpha=\dfrac{a}{R}=\dfrac{2}{0{,}5}=4\ \text{rad/s}^2.$</p>
+<p><strong>b)</strong> $T=m a+f=10\cdot 2+10=30\ \text{N}.$</p>
+<p><strong>c)</strong> A los $5\ \text{s}$ (desde el reposo): $v=a t=10\ \text{m/s}$, $\omega=\alpha t=20\ \text{rad/s}$. Energía total (bloque + cilindro):</p>
+$$E_c=\tfrac12 m v^2+\tfrac12 I\omega^2=\tfrac12\cdot 10\cdot 100+\tfrac12\cdot\big(\tfrac12\cdot 8\cdot 0{,}5^2\big)\cdot 20^2=500+\tfrac12\cdot 1\cdot 400=700\ \text{J}.$$
+<p><strong>d)</strong> En equilibrio ($\alpha=0$, sin $\tau$ ni $F$) la soga fija $T$ desde el cilindro... pero sin $\tau$ ni $F$ el único torque sería el de $T$, que debe ser cero ⇒ $T=0$ y no hace falta rozamiento. <em>Para que el problema tenga sentido</em>, pensemos el caso en que se mantienen $\tau$ y $F$ pero el sistema está a punto de moverse: el cilindro fija $T=\dfrac{\tau+FR}{R}=\dfrac{4+15}{0{,}5}=38\ \text{N}$, y el bloque no desliza si $\mu_e mg\ge T$:</p>
+$$\mu_{e,\min}=\frac{T}{mg}=\frac{38}{100}=0{,}38.$$
+<div class="alerta">Como $\mu_{e,\min}=0{,}38>\mu_d=0{,}10$, el rozamiento real no alcanza para sostenerlo: por eso el sistema efectivamente se mueve (coherente con $a=2\ \text{m/s}^2$).</div>
+<div class="respuesta">$$\boxed{a=2\ \tfrac{\text{m}}{\text{s}^2},\ \alpha=4\ \tfrac{\text{rad}}{\text{s}^2};\ T=30\ \text{N};\ E_c(5\,\text{s})=700\ \text{J};\ \mu_{e,\min}=0{,}38}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej22">
+<h3>Ejercicio 22 — Barra que cae, choca y vuelve a subir <span class="tchip">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">Una barra ($M=2\ \text{kg}$, $L=1{,}2\ \text{m}$, $I_O=\tfrac13 ML^2$) articulada en $O$ se suelta desde la horizontal. Al pasar por la vertical, su extremo inferior choca y queda pegado a un bloque $m=0{,}5\ \text{kg}$ en reposo.
+<ol type="a"><li>$\omega$ justo antes del choque.</li><li>$\omega'$ del conjunto justo después.</li><li>Energía perdida en el choque.</li><li>Ángulo (desde la vertical) que alcanza al volver a subir.</li></ol>
+<svg viewBox="0 0 300 175" role="img" aria-label="Barra articulada en O que cae desde la horizontal a la vertical, donde su extremo golpea un bloque">
+  <defs>
+    <marker id="r22p" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9c27b0"/></marker>
+  </defs>
+  <circle cx="70" cy="32" r="5" fill="#2c3e50"/>
+  <text x="52" y="30" font-size="11">O</text>
+  <line x1="70" y1="32" x2="205" y2="32" stroke="#bbb" stroke-width="4" stroke-dasharray="6 4"/>
+  <text x="118" y="24" font-size="9" fill="#999">inicial (horizontal)</text>
+  <path d="M 200 37 A 135 135 0 0 1 80 150" fill="none" stroke="#9c27b0" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#r22p)"/>
+  <line x1="70" y1="32" x2="70" y2="150" stroke="#1a5490" stroke-width="5"/>
+  <text x="78" y="95" font-size="10" fill="#1a5490">M, L</text>
+  <!-- bloque al pie -->
+  <rect x="56" y="150" width="28" height="16" rx="2" fill="#9bbfe0" stroke="#1a5490" stroke-width="1.3"/>
+  <text x="88" y="163" font-size="9" fill="#1a5490">m</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a) Caída (energía):</strong> el CM baja $h=L/2$. Con $I_O=\tfrac13\cdot 2\cdot 1{,}2^2=0{,}96$:</p>
+$$Mg\tfrac{L}{2}=\tfrac12 I_O\omega^2\ \Rightarrow\ 12=0{,}48\,\omega^2\ \Rightarrow\ \omega=5\ \text{rad/s}.$$
+<p><strong>b) Choque (momento angular respecto de $O$):</strong> el perno hace fuerza, así que $P$ no se conserva, pero $L$ respecto de $O$ sí. El bloque queda a distancia $L$ ($mL^2=0{,}5\cdot 1{,}44=0{,}72$):</p>
+$$I_O\,\omega=(I_O+mL^2)\,\omega'\ \Rightarrow\ \omega'=\frac{0{,}96\cdot 5}{0{,}96+0{,}72}=\frac{4{,}8}{1{,}68}\approx 2{,}86\ \text{rad/s}.$$
+<p><strong>c) Energía perdida:</strong></p>
+$$E_{c,i}=\tfrac12 I_O\omega^2=\tfrac12\cdot 0{,}96\cdot 25=12\ \text{J};\quad E_{c,f}=\tfrac12(1{,}68)(2{,}86)^2\approx 6{,}86\ \text{J}.$$
+$$\Delta E_c\approx -5{,}14\ \text{J}.$$
+<p><strong>d) Vuelve a subir (energía):</strong> la cinética del conjunto se transforma en potencial. Sube la barra (CM a $L/2$) y el bloque (a $L$):</p>
+$$6{,}86=\Big[M\tfrac{L}{2}+mL\Big]g\,(1-\cos\theta)=[1{,}2+0{,}6]\cdot 10\,(1-\cos\theta)=18(1-\cos\theta).$$
+$$1-\cos\theta=0{,}381\ \Rightarrow\ \cos\theta=0{,}619\ \Rightarrow\ \theta\approx 51{,}7^\circ.$$
+<div class="truco">Tres herramientas, sin mezclar: <strong>energía</strong> en la caída (a) y en la subida (d), <strong>momento angular</strong> en el instante del choque (b). Durante el choque la energía NO se conserva; fuera del choque, el momento angular cambia (el peso hace torque).</div>
+<div class="respuesta">$$\boxed{\omega=5;\ \omega'\approx 2{,}86\ \tfrac{\text{rad}}{\text{s}};\ \Delta E_c\approx -5{,}14\ \text{J};\ \theta\approx 51{,}7^\circ}$$</div>
+</details>
+</article>
+
+<article class="ej" id="rig-ej23">
+<h3>Ejercicio 23 — Cilindro que rueda: integrador <span class="tchip">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">Un cilindro macizo ($M=4\ \text{kg}$, $R=0{,}2\ \text{m}$, $I=\tfrac12 MR^2$) parte del reposo y rueda sin deslizar bajando un plano inclinado $\alpha=30^\circ$ de longitud $L=3\ \text{m}$.
+<ol type="a"><li>Aceleración del centro.</li><li>Velocidad al pie (por cinemática y por energía).</li><li>Tiempo que tarda en bajar.</li><li>Energía cinética al pie (traslación + rotación).</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> Rodadura de un cilindro: $a_{cm}=\dfrac{g\,\text{sen}\,\alpha}{1+I/MR^2}=\dfrac{10\cdot 0{,}5}{1+\tfrac12}=\dfrac{5}{1{,}5}\approx 3{,}33\ \text{m/s}^2.$</p>
+<p><strong>b)</strong> Cinemática ($v^2=2a L$): $v=\sqrt{2\cdot 3{,}33\cdot 3}=\sqrt{20}\approx 4{,}47\ \text{m/s}.$ Energía: la altura bajada es $h=L\,\text{sen}\,\alpha=1{,}5\ \text{m}$, $Mgh=\tfrac34 Mv^2\Rightarrow v^2=\tfrac43 gh=20$ ✓.</p>
+<p><strong>c)</strong> Como parte del reposo, $v=a\,t\Rightarrow t=\dfrac{v}{a}=\dfrac{4{,}47}{3{,}33}\approx 1{,}34\ \text{s}.$</p>
+<p><strong>d)</strong> Energía total al pie (= potencial perdida): $E_c=Mgh=4\cdot 10\cdot 1{,}5=60\ \text{J}$. Se reparte:</p>
+$$E_{tras}=\tfrac12 M v^2=\tfrac12\cdot 4\cdot 20=40\ \text{J};\qquad E_{rot}=\tfrac12 I\omega^2=60-40=20\ \text{J}.$$
+<div class="truco">En el cilindro la energía se reparte 2/3 traslación y 1/3 rotación. La esfera guarda menos en rotación (por eso baja más rápido) y el aro, la mitad y mitad.</div>
+<div class="respuesta">$$\boxed{a\approx 3{,}33\ \tfrac{\text{m}}{\text{s}^2};\ v\approx 4{,}47\ \tfrac{\text{m}}{\text{s}};\ t\approx 1{,}34\ \text{s};\ E_c=60\ \text{J}\ (40+20)}$$</div>
+</details>
+</article>
+</section>
+
+<footer>
+Cuerpo rígido · Física de Sistemas de Partículas · Cátedra Moreno · g = 10 m/s²<br>
+<a href="cinematica.html">🏃 Cinemática</a> · <a href="dinamica.html">⚙️ Dinámica</a> · <a href="trabajo-energia.html">⚡ Trabajo y energía</a> · <a href="sistemas-particulas.html">🎯 Sistemas de partículas</a> · <a href="cheatsheet.html">📐 Cheatsheet</a>
+</footer>
+</main>
+
+<!-- Banco de fórmulas (oculto; lo usa el panel flotante) -->
+<div id="formulaBank" style="display:none">
+  <div class="formula"><strong>Inercia:</strong> $I=\sum m_i r_i^2$; &nbsp; Steiner $I=I_{cm}+Md^2$.</div>
+  <div class="formula"><strong>Tabla:</strong> barra extremo $\tfrac13 ML^2$, centro $\tfrac{1}{12}ML^2$; disco/cil $\tfrac12 MR^2$; aro $MR^2$; esfera $\tfrac25 MR^2$.</div>
+  <div class="formula"><strong>Torque:</strong> $\tau=F\cdot b$ (brazo); &nbsp; $\sum\tau=I\alpha$.</div>
+  <div class="formula"><strong>Momento angular:</strong> $L=I\omega$; &nbsp; si $\tau_{ext}=0\Rightarrow L$ cte.</div>
+  <div class="formula"><strong>Energía:</strong> $E_c=\tfrac12 I\omega^2$; &nbsp; rodadura $\tfrac12 Mv^2+\tfrac12 I_{cm}\omega^2$.</div>
+  <div class="formula"><strong>Rodadura sin deslizar:</strong> $v_{cm}=\omega R$, &nbsp; $a_{cm}=\alpha R$.</div>
+  <div class="formula"><strong>Polea con masa:</strong> $T_1\neq T_2$; &nbsp; $(T_1-T_2)R=I\alpha$.</div>
+</div>
+
+<!-- Botones flotantes -->
+<a href="#top" class="fab backtop" aria-label="Volver arriba">↑</a>
+<button class="fab fab-formulas" id="btnFormulas" aria-label="Ver fórmulas">📐 Fórmulas</button>
+<button class="fab fab-index" id="btnIndex" aria-label="Abrir índice">☰ Índice</button>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Índice de ejercicios">
+  <div class="dhead"><span>📑 Índice</span><button id="closeDrawer" aria-label="Cerrar">×</button></div>
+  <ul id="navTree"></ul>
+</aside>
+
+<section class="sheet" id="sheet" aria-label="Fórmulas de cuerpo rígido">
+  <div class="shead"><span>📐 Fórmulas de cuerpo rígido</span><button id="closeSheet" aria-label="Cerrar">×</button></div>
+  <div class="sbody" id="sheetBody"></div>
+</section>
+
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section.tema'));
+  var navTree = document.getElementById('navTree');
+  secs.forEach(function(sec){
+    var li = document.createElement('li'); li.className='nav-tema'; li.dataset.target=sec.id;
+    var a = document.createElement('a'); a.href='#'+sec.id; a.textContent=sec.querySelector('.tema-titulo').textContent.trim();
+    li.appendChild(a);
+    var ul = document.createElement('ul'); ul.className='nav-ejs';
+    sec.querySelectorAll('article.ej').forEach(function(ej){
+      var h = ej.querySelector('h3').cloneNode(true);
+      h.querySelectorAll('.nivel,.tchip').forEach(function(s){ s.remove(); });
+      var ea = document.createElement('a'); ea.href='#'+ej.id; ea.textContent=h.textContent.trim();
+      ul.appendChild(ea);
+    });
+    li.appendChild(ul); navTree.appendChild(li);
+  });
+
+  var backdrop=document.getElementById('backdrop'), drawer=document.getElementById('drawer'), sheet=document.getElementById('sheet');
+  function fillSheet(){ var b=document.getElementById('sheetBody'); if(b.childElementCount) return;
+    document.querySelectorAll('#formulaBank .formula').forEach(function(f){ b.appendChild(f.cloneNode(true)); }); }
+  function closeAll(){ drawer.classList.remove('show'); sheet.classList.remove('show'); backdrop.classList.remove('show'); }
+  document.getElementById('btnIndex').addEventListener('click', function(){ drawer.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('btnFormulas').addEventListener('click', function(){ fillSheet(); sheet.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('closeDrawer').addEventListener('click', closeAll);
+  document.getElementById('closeSheet').addEventListener('click', closeAll);
+  backdrop.addEventListener('click', closeAll);
+  navTree.addEventListener('click', function(e){ if(e.target.closest('a')) closeAll(); });
+
+  var current=null;
+  function updateCurrent(){
+    var line=140, found=secs[0];
+    for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top<=line) found=secs[i]; }
+    if(found!==current){ current=found;
+      navTree.querySelectorAll('.nav-tema').forEach(function(li){ li.classList.toggle('active', li.dataset.target===current.id); });
+    }
+  }
+  var ticking=false;
+  window.addEventListener('scroll', function(){ if(!ticking){ window.requestAnimationFrame(function(){ updateCurrent(); ticking=false; }); ticking=true; } }, {passive:true});
+  updateCurrent();
+})();
+</script>
+
+</body>
+</html>

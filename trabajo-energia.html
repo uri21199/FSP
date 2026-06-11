@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2c3e50">
+<title>Trabajo y energía · FSP Moreno</title>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root { --primary:#1a5490; --primary-dark:#2c3e50; --bg:#fafafa; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:0; color:#222; line-height:1.6; background:var(--bg); -webkit-text-size-adjust:100%; }
+
+  header.top { position:sticky; top:0; z-index:100; background:var(--primary-dark); color:#fff; padding:0.7em 0.9em 0.55em; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  header.top h1 { font-size:1.0em; margin:0 0 0.5em; font-weight:600; }
+  nav.temas { display:flex; gap:0.4em; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:0.15em; }
+  nav.temas a { flex:0 0 auto; background:#ffffff22; color:#fff; text-decoration:none; padding:0.34em 0.7em; border-radius:999px; font-size:0.8em; white-space:nowrap; border:1px solid #ffffff44; }
+
+  main { max-width:820px; margin:0 auto; padding:0.8em 0.9em 3em; }
+  .intro { background:#eef3fa; border-radius:8px; padding:0.9em 1em; margin:0.9em 0 0.5em; font-size:0.95em; }
+  .intro h2 { margin:0 0 0.4em; font-size:1.1em; color:var(--primary-dark); }
+
+  .tema { margin-top:1.4em; }
+  .tema-titulo { color:#fff; background:var(--primary); border-radius:8px; padding:0.5em 0.7em; font-size:1.1em; margin:1.3em 0 0.7em; scroll-margin-top:96px; }
+
+  h2.seccion { color:var(--primary-dark); border-bottom:3px solid var(--primary); padding-bottom:0.2em; margin:1.4em 0 0.6em; font-size:1.15em; scroll-margin-top:96px; }
+
+  .ej { background:#fff; border:1px solid #e2e6ee; border-radius:9px; padding:0.8em 0.9em; margin:0.9em 0; box-shadow:0 1px 3px rgba(0,0,0,.05); scroll-margin-top:96px; }
+  .ej h3 { font-size:1.0em; color:var(--primary-dark); margin:0 0 0.5em; display:flex; flex-wrap:wrap; align-items:center; gap:0.45em; line-height:1.35; }
+  .nivel { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#e3edf7; color:var(--primary); white-space:nowrap; }
+  .tchip { font-size:0.68em; font-weight:700; padding:0.14em 0.6em; border-radius:999px; background:#ffe2cc; color:#e65100; white-space:nowrap; }
+
+  .enunciado { background:#f0f6ff; border-left:4px solid #4a8bc2; padding:0.7em 0.9em; border-radius:5px; }
+  .respuesta { background:#eef9ee; border-left:4px solid #4caf50; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .alerta { background:#fff4e6; border-left:4px solid #ff9800; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+  .truco { background:#f3e5f5; border-left:4px solid #9c27b0; padding:0.6em 0.9em; border-radius:5px; margin-top:0.7em; }
+
+  .formula { background:#f3f5f9; border-left:4px solid var(--primary); border-radius:6px; padding:0.5em 0.9em; margin:0.6em 0; }
+  .origen { background:#f3e5f5; border-left:4px solid #9c27b0; border-radius:6px; padding:0.55em 0.9em; margin:0.4em 0 0.8em; font-size:0.94em; }
+  .origen b { color:#7b1fa2; }
+
+  details.sol { margin-top:0.7em; border:1px solid #d0d7e0; border-radius:6px; padding:0 0.85em; background:#fbfcff; }
+  details.sol > summary { cursor:pointer; font-weight:600; color:var(--primary); padding:0.6em 0; list-style:none; }
+  details.sol > summary::-webkit-details-marker { display:none; }
+  details.sol > summary::before { content:"▶"; font-size:0.78em; margin-right:0.4em; }
+  details.sol[open] > summary::before { content:"▼"; }
+  details.sol[open] { padding-bottom:0.85em; }
+  details.sol[open] > summary { border-bottom:1px solid #e2e6ee; margin-bottom:0.5em; }
+
+  svg { display:block; max-width:100%; height:auto; margin:0.8em auto; background:#fff; border:1px solid #e2e6ee; border-radius:6px; }
+  mjx-container { overflow-x:auto; overflow-y:hidden; max-width:100%; }
+  mjx-container[display="true"] { margin:0.6em 0 !important; }
+
+  .fab { position:fixed; z-index:200; border:none; cursor:pointer; color:#fff; box-shadow:0 2px 8px rgba(0,0,0,.3); display:flex; align-items:center; justify-content:center; }
+  .backtop { right:14px; bottom:128px; background:var(--primary); width:44px; height:44px; border-radius:50%; text-decoration:none; font-size:1.25em; }
+  .fab-formulas { right:14px; bottom:14px; background:#9c27b0; height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+  .fab-index { left:14px; bottom:14px; background:var(--primary-dark); height:52px; border-radius:999px; padding:0 1.05em; font-size:0.95em; font-weight:600; gap:0.4em; }
+
+  .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:300; opacity:0; visibility:hidden; transition:opacity .25s; }
+  .backdrop.show { opacity:1; visibility:visible; }
+
+  .drawer { position:fixed; top:0; left:0; height:100%; width:82%; max-width:340px; background:#fff; z-index:310; transform:translateX(-100%); transition:transform .28s ease; overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:2px 0 14px rgba(0,0,0,.25); }
+  .drawer.show { transform:translateX(0); }
+  .drawer .dhead { position:sticky; top:0; background:var(--primary-dark); color:#fff; padding:0.85em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .drawer .dhead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .drawer ul { list-style:none; margin:0; padding:0; }
+  .drawer .nav-tema > a { display:block; background:#eef3fa; color:var(--primary-dark); font-weight:600; text-decoration:none; padding:0.6em 1em; border-bottom:1px solid #e2e6ee; }
+  .drawer .nav-tema.active > a { background:var(--primary); color:#fff; }
+  .drawer .nav-ejs { padding:0.2em 0 0.5em; }
+  .drawer .nav-ejs a { display:block; color:#333; text-decoration:none; padding:0.42em 1em 0.42em 1.6em; font-size:0.88em; border-bottom:1px solid #f0f2f5; }
+
+  .sheet { position:fixed; left:0; right:0; bottom:0; max-height:72vh; background:#fff; z-index:310; transform:translateY(100%); transition:transform .28s ease; border-radius:14px 14px 0 0; box-shadow:0 -2px 14px rgba(0,0,0,.25); display:flex; flex-direction:column; }
+  .sheet.show { transform:translateY(0); }
+  .sheet .shead { background:#9c27b0; color:#fff; padding:0.8em 1em; font-weight:600; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0; }
+  .sheet .shead button { background:none; border:none; color:#fff; font-size:1.4em; cursor:pointer; line-height:1; }
+  .sheet .sbody { overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0.6em 0.9em 1em; }
+  .sheet .sbody .formula { margin:0.45em 0; }
+  @media (min-width:760px){ .sheet { left:auto; right:18px; bottom:18px; width:420px; max-height:78vh; border-radius:12px; } .sheet .shead { border-radius:12px 12px 0 0; } }
+
+  footer { text-align:center; color:#888; font-size:0.85em; padding:1.5em 1em 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>⚡ Trabajo y energía — FSP (cátedra Moreno)</h1>
+  <nav class="temas">
+    <a href="#formulas">📐 Fórmulas</a>
+    <a href="#basico">Básico</a>
+    <a href="#intermedio">Intermedio</a>
+    <a href="#avanzado">Avanzado</a>
+    <a href="#parcial">Tipo parcial</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<div class="intro">
+<h2>La idea central</h2>
+<p>La <strong>energía</strong> es una forma de resolver problemas sin pasar por las fuerzas instante a instante: en vez de mirar la aceleración, mirás <em>cuánta energía entra y sale</em>. El puente entre fuerza y energía es el <strong>trabajo</strong>. Tres ideas dominan todo: <strong>el trabajo neto cambia la energía cinética</strong>, <strong>las fuerzas conservativas guardan energía potencial</strong>, y <strong>si no hay rozamiento la energía mecánica se conserva</strong>.</p>
+<p style="margin-bottom:0">Abajo, <strong>fórmulas con justificación</strong> y <strong>23 ejercicios</strong> de menos a más. Botón <strong>📐 Fórmulas</strong> (abajo der.) y <strong>☰ Índice</strong> (abajo izq.). $g=10\,\text{m/s}^2$, decimales con coma.</p>
+</div>
+
+
+<!-- ===================== FÓRMULAS CON JUSTIFICACIÓN ===================== -->
+<h2 class="seccion" id="formulas">📐 Fórmulas con justificación</h2>
+
+<div class="formula">
+<strong>Trabajo de una fuerza</strong>
+$$W=\int \vec{F}\cdot d\vec{r}\qquad\text{(si }\vec F\text{ es constante: } W=F\,d\cos\theta)$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> para una fuerza constante y un tramo recto, el trabajo es $W=F\,d\cos\theta$: sólo cuenta la parte de la fuerza <em>en la dirección del movimiento</em>. Si la fuerza varía, partís el camino en pedacitos $d\vec r$ donde es casi constante, sumás $dW=\vec F\cdot d\vec r$, y esa suma infinita es la <b>integral</b>. Ojo: el trabajo es la integral de la fuerza, no su derivada.
+</div>
+
+<div class="formula">
+<strong>Potencia</strong>
+$$P=\frac{W}{t}=\vec{F}\cdot\vec{v}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> la potencia es el trabajo por unidad de tiempo (qué tan rápido se entrega energía). Si derivás $W=\vec F\cdot\vec r$ respecto del tiempo, aparece $\vec F\cdot\vec v$. Se mide en watts ($1\ \text{W}=1\ \text{J/s}$).
+</div>
+
+<div class="formula">
+<strong>Energía cinética y teorema del trabajo</strong>
+$$E_c=\tfrac12 m v^2\qquad W_{\text{neto}}=\Delta E_c$$
+</div>
+<div class="origen">
+<b>De dónde sale (esto lo piden justificar):</b> partís del trabajo de la fuerza neta y usás $\vec F=m\dfrac{d\vec v}{dt}$:
+$$W=\int \vec F\cdot d\vec r=\int m\frac{d\vec v}{dt}\cdot \vec v\,dt=\int m\,\vec v\cdot d\vec v=\tfrac12 m v_f^2-\tfrac12 m v_i^2.$$
+El paso clave es $d\vec r=\vec v\,dt$. El trabajo neto es la energía que "entra" al cuerpo: si es positivo, acelera.
+</div>
+
+<div class="formula">
+<strong>Energía potencial</strong>
+$$W_{\text{cons}}=-\Delta E_p\qquad E_p^{\text{grav}}=mgh\qquad E_p^{\text{res}}=\tfrac12 k x^2$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> una fuerza es <b>conservativa</b> si su trabajo no depende del camino. A esas fuerzas se les puede asociar una "energía guardada" $E_p$ tal que $W_{\text{cons}}=-\Delta E_p$ (el signo menos: si la fuerza trabaja a favor, la $E_p$ baja). De $E_p=mgh$ sale el peso; de $E_p=\tfrac12 kx^2$ sale la fuerza del resorte ($F=-kx$).
+</div>
+
+<div class="formula">
+<strong>¿Es conservativa?</strong>
+$$\frac{\partial F_x}{\partial y}=\frac{\partial F_y}{\partial x}\ \Longleftrightarrow\ \oint\vec F\cdot d\vec r=0\ \Longleftrightarrow\ W\ \text{no depende del camino}$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> tres formas equivalentes de lo mismo. Si el trabajo no depende del camino, dar una vuelta cerrada da cero ($\oint=0$); y eso, por el teorema del rotor, equivale a que las derivadas cruzadas coincidan. <b>Si fallan, NO es conservativa</b> y no tiene $E_p$: hay que calcular el trabajo por integral de línea en cada tramo.
+</div>
+
+<div class="formula">
+<strong>Conservación de la energía mecánica</strong>
+$$E_m=E_c+E_p\qquad W_{\text{no cons}}=\Delta E_m$$
+</div>
+<div class="origen">
+<b>De dónde sale:</b> separás el trabajo neto en conservativo + no conservativo. Como $W_{\text{cons}}=-\Delta E_p$ y $W_{\text{neto}}=\Delta E_c$, reordenando: $W_{\text{no cons}}=\Delta E_c+\Delta E_p=\Delta E_m$. <b>Si no hay rozamiento</b> (ni otras no conservativas), $W_{\text{no cons}}=0$ y la energía mecánica se conserva.
+</div>
+
+
+<!-- ===================== BÁSICO ===================== -->
+<section class="tema" id="basico" data-tema="energia">
+<h2 class="tema-titulo">🟢 Básico (1–7)</h2>
+
+<article class="ej" id="ene-ej1">
+<h3>Ejercicio 1 — Trabajo de una fuerza constante <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Empujás una caja con una fuerza horizontal de $50\ \text{N}$ a lo largo de $8\ \text{m}$, en la misma dirección del movimiento. ¿Qué trabajo hacés?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Fuerza y movimiento van en la misma dirección ($\theta=0$, $\cos 0=1$):</p>
+$$W=F\,d=50\cdot 8=400\ \text{J}.$$
+<div class="respuesta">$$\boxed{W=400\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej2">
+<h3>Ejercicio 2 — Trabajo con un ángulo <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Tirás de un trineo con una soga que forma $\theta=60^\circ$ con el piso, aplicando $F=100\ \text{N}$. El trineo avanza $10\ \text{m}$ en horizontal. ¿Qué trabajo hace la fuerza?
+<svg viewBox="0 0 300 160" role="img" aria-label="Caja tirada por una fuerza inclinada; se muestran la componente horizontal y el desplazamiento">
+  <defs>
+    <marker id="t2g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker>
+    <marker id="t2k" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#888"/></marker>
+  </defs>
+  <line x1="20" y1="125" x2="285" y2="125" stroke="#333" stroke-width="2"/>
+  <rect x="70" y="95" width="46" height="30" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.5"/>
+  <!-- F a 60 grados desde el centro de la cara superior derecha -->
+  <line x1="110" y1="100" x2="150" y2="31" stroke="#2e7d32" stroke-width="2.6" marker-end="url(#t2g)"/>
+  <text x="150" y="28" font-size="12" fill="#2e7d32">F</text>
+  <!-- componente horizontal -->
+  <line x1="110" y1="100" x2="150" y2="100" stroke="#888" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#t2k)"/>
+  <text x="120" y="114" font-size="10" fill="#888">F cosθ</text>
+  <!-- angulo -->
+  <path d="M 130 100 A 20 20 0 0 0 124 86" fill="none" stroke="#333"/>
+  <text x="133" y="95" font-size="10">θ</text>
+  <!-- desplazamiento -->
+  <line x1="70" y1="142" x2="200" y2="142" stroke="#1a5490" stroke-width="1.6"/>
+  <text x="125" y="156" font-size="10" fill="#1a5490">d = 10 m</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Sólo trabaja la componente de la fuerza <strong>en la dirección del movimiento</strong> (la horizontal). Por eso aparece el coseno:</p>
+$$W=F\,d\cos\theta=100\cdot 10\cdot\cos 60^\circ=100\cdot 10\cdot 0{,}5=500\ \text{J}.$$
+<div class="truco">La componente vertical ($F\,\text{sen}\,\theta$) no hace trabajo porque el trineo no se mueve hacia arriba: es perpendicular al movimiento.</div>
+<div class="respuesta">$$\boxed{W=500\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej3">
+<h3>Ejercicio 3 — Trabajo nulo y trabajo negativo <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">
+<ol type="a"><li>Llevás una valija a peso constante, caminando en horizontal $20\ \text{m}$. ¿Qué trabajo hace la fuerza con que la sostenés?</li><li>Un rozamiento de $20\ \text{N}$ frena a un cuerpo que recorre $5\ \text{m}$. ¿Qué trabajo hace el rozamiento?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> La fuerza que sostiene la valija es vertical (hacia arriba), pero el movimiento es horizontal: son perpendiculares ($\theta=90^\circ$, $\cos 90^\circ=0$):</p>
+$$W=F\,d\cos 90^\circ=0\ \text{J}.$$
+<p><strong>b)</strong> El rozamiento apunta en contra del movimiento ($\theta=180^\circ$, $\cos 180^\circ=-1$):</p>
+$$W=f\,d\cos 180^\circ=-20\cdot 5=-100\ \text{J}.$$
+<div class="alerta">El signo del trabajo importa: positivo si la fuerza ayuda al movimiento, cero si es perpendicular, negativo si se opone (le saca energía al cuerpo).</div>
+<div class="respuesta">$$\boxed{W_a=0\ \text{J};\quad W_b=-100\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej4">
+<h3>Ejercicio 4 — Energía cinética <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Un cuerpo de $m=2\ \text{kg}$ se mueve a $v=10\ \text{m/s}$.
+<ol type="a"><li>¿Cuál es su energía cinética?</li><li>¿Y si duplica su velocidad a $20\ \text{m/s}$?</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> $E_c=\tfrac12 m v^2=\tfrac12\cdot 2\cdot 10^2=100\ \text{J}.$</p>
+<p><strong>b)</strong> $E_c=\tfrac12\cdot 2\cdot 20^2=400\ \text{J}.$</p>
+<div class="truco">La energía cinética va con el <em>cuadrado</em> de la velocidad: al duplicar $v$, $E_c$ se hace 4 veces más grande. Por eso frenar desde el doble de velocidad cuesta 4 veces más distancia.</div>
+<div class="respuesta">$$\boxed{E_c=100\ \text{J};\quad E_c'=400\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej5">
+<h3>Ejercicio 5 — Energía potencial gravitatoria <span class="nivel">Nivel 1</span></h3>
+<div class="enunciado">Se levanta un objeto de $m=5\ \text{kg}$ hasta una altura de $3\ \text{m}$. ¿Cuánta energía potencial gravitatoria gana?</div>
+<details class="sol"><summary>Ver resolución</summary>
+$$E_p=mgh=5\cdot 10\cdot 3=150\ \text{J}.$$
+<div class="truco">La energía potencial se mide respecto de una altura de referencia (el piso, normalmente). Lo que importa es la <em>diferencia</em> de altura.</div>
+<div class="respuesta">$$\boxed{E_p=150\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej6">
+<h3>Ejercicio 6 — Potencia <span class="nivel">Nivel 2</span></h3>
+<div class="enunciado">Un motor realiza $6000\ \text{J}$ de trabajo en $30\ \text{s}$. ¿Cuál es su potencia media?</div>
+<details class="sol"><summary>Ver resolución</summary>
+$$P=\frac{W}{t}=\frac{6000}{30}=200\ \text{W}.$$
+<div class="respuesta">$$\boxed{P=200\ \text{W}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej7">
+<h3>Ejercicio 7 — Teorema del trabajo y la energía <span class="nivel">Nivel 3</span></h3>
+<div class="enunciado">Un bloque de $m=3\ \text{kg}$, en reposo, es empujado por una fuerza neta de $30\ \text{N}$ a lo largo de $5\ \text{m}$ (piso liso). ¿Con qué velocidad termina?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>El trabajo neto es igual al cambio de energía cinética. Como parte del reposo, $E_{c,i}=0$:</p>
+$$W_{\text{neto}}=F\,d=30\cdot 5=150\ \text{J}=\tfrac12 m v^2.$$
+$$\tfrac12\cdot 3\cdot v^2=150\ \Rightarrow\ v^2=100\ \Rightarrow\ v=10\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{v=10\ \text{m/s}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== INTERMEDIO ===================== -->
+<section class="tema" id="intermedio" data-tema="energia">
+<h2 class="tema-titulo">🟡 Intermedio (8–14)</h2>
+
+<article class="ej" id="ene-ej8">
+<h3>Ejercicio 8 — Teorema con rozamiento <span class="nivel">Nivel 4</span></h3>
+<div class="enunciado">Un bloque de $m=2\ \text{kg}$ parte del reposo y una fuerza horizontal $F=20\ \text{N}$ lo arrastra $5\ \text{m}$ sobre un piso con $\mu_d=0{,}25$. Hallá la velocidad final.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Sumo el trabajo de cada fuerza. La fuerza aplicada hace trabajo positivo; el rozamiento, negativo:</p>
+$$W_F=F\,d=20\cdot 5=100\ \text{J}.$$
+$$f=\mu_d\,mg=0{,}25\cdot 2\cdot 10=5\ \text{N}\ \Rightarrow\ W_f=-f\,d=-25\ \text{J}.$$
+<p>El peso y la normal no trabajan (perpendiculares). Trabajo neto:</p>
+$$W_{\text{neto}}=100-25=75\ \text{J}=\tfrac12\cdot 2\cdot v^2\ \Rightarrow\ v=\sqrt{75}\approx 8{,}66\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{v\approx 8{,}66\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej9">
+<h3>Ejercicio 9 — Conservación de energía en una rampa lisa <span class="nivel">Nivel 4</span></h3>
+<div class="enunciado">Un carrito se suelta desde el reposo en lo alto de una rampa lisa, a una altura de $5\ \text{m}$. ¿Con qué velocidad llega abajo?
+<svg viewBox="0 0 300 170" role="img" aria-label="Rampa lisa con un cuerpo arriba a altura h que baja hasta el piso">
+  <defs><marker id="e9b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker></defs>
+  <!-- rampa: de arriba-izq a abajo, luego piso -->
+  <line x1="40" y1="40" x2="200" y2="140" stroke="#1a5490" stroke-width="2.5"/>
+  <line x1="200" y1="140" x2="285" y2="140" stroke="#333" stroke-width="2"/>
+  <!-- carrito arriba -->
+  <rect x="32" y="26" width="26" height="18" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.4" transform="rotate(32 45 35)"/>
+  <!-- altura -->
+  <line x1="40" y1="40" x2="40" y2="140" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="16" y="92" font-size="11" fill="#888">h = 5 m</text>
+  <!-- v abajo -->
+  <line x1="205" y1="152" x2="255" y2="152" stroke="#1a5490" stroke-width="2.3" marker-end="url(#e9b)"/>
+  <text x="230" y="166" font-size="11" fill="#1a5490">v</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Rampa lisa = sin rozamiento ⇒ la energía mecánica se conserva. Toda la potencial de arriba se convierte en cinética abajo:</p>
+$$mgh=\tfrac12 m v^2\ \Rightarrow\ v=\sqrt{2gh}=\sqrt{2\cdot 10\cdot 5}=\sqrt{100}=10\ \text{m/s}.$$
+<div class="truco">La masa se cancela y la <em>forma</em> de la rampa no importa: sólo cuenta la altura. Llegaría con la misma velocidad cayendo en picada o por una rampa suave.</div>
+<div class="respuesta">$$\boxed{v=10\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej10">
+<h3>Ejercicio 10 — Resorte que lanza un bloque <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Un resorte de constante $k=200\ \text{N/m}$ se comprime $x=0{,}1\ \text{m}$ y lanza un bloque de $m=0{,}5\ \text{kg}$ sobre una superficie lisa. ¿Con qué velocidad sale?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La energía guardada en el resorte ($\tfrac12 kx^2$) se convierte toda en energía cinética del bloque:</p>
+$$\tfrac12 k x^2=\tfrac12 m v^2\ \Rightarrow\ \tfrac12\cdot 200\cdot 0{,}1^2=\tfrac12\cdot 0{,}5\cdot v^2.$$
+$$1\ \text{J}=0{,}25\,v^2\ \Rightarrow\ v^2=4\ \Rightarrow\ v=2\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{v=2\ \text{m/s}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej11">
+<h3>Ejercicio 11 — Energía perdida por rozamiento <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Un bloque de $m=2\ \text{kg}$ baja una rampa con rozamiento, descendiendo una altura de $3\ \text{m}$, y llega abajo con $v=6\ \text{m/s}$. ¿Cuánta energía se perdió por rozamiento?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La energía mecánica NO se conserva (hay rozamiento). El trabajo del rozamiento es el cambio de energía mecánica:</p>
+$$E_{p,i}=mgh=2\cdot 10\cdot 3=60\ \text{J}\ \ (\text{arriba, } v=0).$$
+$$E_{c,f}=\tfrac12 m v^2=\tfrac12\cdot 2\cdot 36=36\ \text{J}\ \ (\text{abajo, } h=0).$$
+$$W_{\text{roz}}=\Delta E_m=E_{c,f}-E_{p,i}=36-60=-24\ \text{J}.$$
+<p>Se "perdieron" $24\ \text{J}$ (se transformaron en calor).</p>
+<div class="respuesta">$$\boxed{W_{\text{roz}}=-24\ \text{J}\ (\text{se disipan } 24\ \text{J})}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej12">
+<h3>Ejercicio 12 — Potencia instantánea <span class="nivel">Nivel 5</span></h3>
+<div class="enunciado">Un auto avanza a $v=20\ \text{m/s}$ y su motor entrega una fuerza de tracción de $500\ \text{N}$. ¿Qué potencia desarrolla en ese instante?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La potencia instantánea es fuerza por velocidad (cuando van en la misma dirección):</p>
+$$P=F\,v=500\cdot 20=10000\ \text{W}=10\ \text{kW}.$$
+<div class="respuesta">$$\boxed{P=10\,000\ \text{W}=10\ \text{kW}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej13">
+<h3>Ejercicio 13 — Trabajo de una fuerza variable <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Una fuerza en la dirección del movimiento vale $F(x)=6x$ (newton, con $x$ en metros). ¿Qué trabajo hace al mover el cuerpo de $x=0$ a $x=4\ \text{m}$?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Como la fuerza cambia con la posición, el trabajo es la <strong>integral</strong> (no puedo usar $F\cdot d$ con un solo valor de $F$):</p>
+$$W=\int_0^4 F(x)\,dx=\int_0^4 6x\,dx=\left.3x^2\right|_0^4=3\cdot 16=48\ \text{J}.$$
+<div class="truco">El trabajo es el <em>área</em> bajo el gráfico $F$–$x$. Acá es un triángulo de base 4 y altura $F(4)=24$: área $=\tfrac12\cdot 4\cdot 24=48\ \text{J}$ ✓.</div>
+<div class="respuesta">$$\boxed{W=48\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej14">
+<h3>Ejercicio 14 — Fuerza variable que disminuye <span class="nivel">Nivel 6</span></h3>
+<div class="enunciado">Una fuerza en la dirección del movimiento vale $F(x)=10-2x$ (N). Calculá su trabajo de $x=0$ a $x=5\ \text{m}$.</div>
+<details class="sol"><summary>Ver resolución</summary>
+$$W=\int_0^5 (10-2x)\,dx=\left.\big(10x-x^2\big)\right|_0^5=(50-25)-0=25\ \text{J}.$$
+<div class="alerta">La fuerza se anula en $x=5$ y sería negativa más allá. Mientras integres hasta donde $F\ge 0$, el trabajo es positivo. Siempre fijate los límites.</div>
+<div class="respuesta">$$\boxed{W=25\ \text{J}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== AVANZADO ===================== -->
+<section class="tema" id="avanzado" data-tema="energia">
+<h2 class="tema-titulo">🟠 Avanzado (15–20)</h2>
+
+<article class="ej" id="ene-ej15">
+<h3>Ejercicio 15 — ¿Hasta dónde sube? (rampa con roce) <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Un bloque llega al pie de una rampa con $v_0=10\ \text{m/s}$ y sube por ella ($\alpha=30^\circ$, $\mu_d=0{,}2$). ¿Qué distancia recorre sobre la rampa hasta detenerse?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Uso energía: la cinética inicial se gasta en subir (potencial) y en vencer el rozamiento. Si recorre una distancia $d$ sobre la rampa, sube una altura $h=d\,\text{sen}\,\alpha$ y el rozamiento disipa $f\,d=\mu_d\,mg\cos\alpha\cdot d$:</p>
+$$\tfrac12 m v_0^2=mg\,d\,\text{sen}\,\alpha+\mu_d\,mg\cos\alpha\,d.$$
+<p>La masa se cancela; despejo $d$:</p>
+$$d=\frac{v_0^2}{2g(\text{sen}\,\alpha+\mu_d\cos\alpha)}=\frac{100}{2\cdot 10\,(0{,}5+0{,}2\cdot 0{,}866)}=\frac{100}{20\cdot 0{,}673}=7{,}43\ \text{m}.$$
+<div class="alerta">Subiendo, el rozamiento y la gravedad <em>suman</em> en contra (ambos frenan). Por eso va $\text{sen}\,\alpha+\mu_d\cos\alpha$ (a diferencia de bajar, donde se restan).</div>
+<div class="respuesta">$$\boxed{d\approx 7{,}43\ \text{m}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej16">
+<h3>Ejercicio 16 — Montaña rusa (conservación) <span class="nivel">Nivel 7</span></h3>
+<div class="enunciado">Un carrito parte del reposo desde lo alto de una montaña rusa lisa, a $h_0=20\ \text{m}$.
+<ol type="a"><li>¿Con qué velocidad pasa por el punto más bajo?</li><li>¿Y por un punto a $10\ \text{m}$ de altura?</li></ol>
+<svg viewBox="0 0 320 170" role="img" aria-label="Pista de montaña rusa con un punto alto de salida, un valle y un punto intermedio">
+  <defs><marker id="e16b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a5490"/></marker></defs>
+  <!-- pista -->
+  <path d="M 35 30 C 80 30 90 150 140 150 C 185 150 195 80 250 80 C 280 80 285 110 300 110" fill="none" stroke="#1a5490" stroke-width="2.5"/>
+  <line x1="20" y1="150" x2="300" y2="150" stroke="#ccc" stroke-width="1" stroke-dasharray="2 3"/>
+  <!-- carrito arriba -->
+  <rect x="28" y="20" width="22" height="14" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.3"/>
+  <!-- alturas -->
+  <line x1="35" y1="30" x2="35" y2="150" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="10" y="92" font-size="10" fill="#888">20 m</text>
+  <line x1="250" y1="80" x2="250" y2="150" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="255" y="120" font-size="10" fill="#888">10 m</text>
+  <circle cx="140" cy="150" r="3" fill="#c0392b"/>
+  <text x="118" y="166" font-size="10" fill="#c0392b">punto bajo</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Pista lisa ⇒ energía mecánica constante. Tomo el punto más bajo como referencia ($h=0$).</p>
+<p><strong>a)</strong> Toda la potencial inicial se vuelve cinética abajo:</p>
+$$mgh_0=\tfrac12 m v^2\ \Rightarrow\ v=\sqrt{2gh_0}=\sqrt{2\cdot 10\cdot 20}=\sqrt{400}=20\ \text{m/s}.$$
+<p><strong>b)</strong> A $10\ \text{m}$ todavía le queda potencial; sólo se convirtió la diferencia de altura:</p>
+$$mg h_0=mg h+\tfrac12 m v^2\ \Rightarrow\ v=\sqrt{2g(h_0-h)}=\sqrt{2\cdot 10\cdot 10}=\sqrt{200}\approx 14{,}1\ \text{m/s}.$$
+<div class="respuesta">$$\boxed{v_{\text{bajo}}=20\ \tfrac{\text{m}}{\text{s}};\quad v_{10}\approx 14{,}1\ \tfrac{\text{m}}{\text{s}}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej17">
+<h3>Ejercicio 17 — Resorte + rampa <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">Un resorte ($k=800\ \text{N/m}$) comprimido $x=0{,}2\ \text{m}$ lanza un bloque de $m=1\ \text{kg}$ que luego sube por una rampa lisa. ¿Qué altura máxima alcanza?
+<svg viewBox="0 0 320 160" role="img" aria-label="Resorte comprimido contra una pared lanza un bloque que sube una rampa lisa">
+  <defs><marker id="e17g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2e7d32"/></marker></defs>
+  <!-- pared -->
+  <line x1="22" y1="70" x2="22" y2="125" stroke="#333" stroke-width="4"/>
+  <!-- resorte zigzag -->
+  <polyline points="22,108 32,100 42,116 52,100 62,116 72,108" fill="none" stroke="#9c27b0" stroke-width="2"/>
+  <!-- bloque -->
+  <rect x="72" y="93" width="28" height="28" rx="3" fill="#cfe0f0" stroke="#1a5490" stroke-width="1.5"/>
+  <!-- piso -->
+  <line x1="22" y1="121" x2="210" y2="121" stroke="#333" stroke-width="2"/>
+  <!-- rampa lisa sube a la derecha -->
+  <line x1="210" y1="121" x2="300" y2="50" stroke="#1a5490" stroke-width="2.5"/>
+  <!-- flecha de lanzamiento -->
+  <line x1="110" y1="107" x2="160" y2="107" stroke="#2e7d32" stroke-width="2.3" marker-end="url(#e17g)"/>
+  <!-- altura -->
+  <line x1="300" y1="50" x2="300" y2="121" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="304" y="90" font-size="10" fill="#888">h</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Todo es liso, así que la energía del resorte se convierte primero en cinética y después en potencial al subir. Igualo energía del resorte = energía potencial en la altura máxima:</p>
+$$\tfrac12 k x^2=mgh.$$
+$$\tfrac12\cdot 800\cdot 0{,}2^2=16\ \text{J}=1\cdot 10\cdot h\ \Rightarrow\ h=1{,}6\ \text{m}.$$
+<div class="truco">No hizo falta calcular la velocidad intermedia: con energía vas directo de la situación inicial a la final. Ese es el poder del método.</div>
+<div class="respuesta">$$\boxed{h=1{,}6\ \text{m}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej18">
+<h3>Ejercicio 18 — ¿Es conservativa? (rotor) <span class="nivel">Nivel 8</span></h3>
+<div class="enunciado">Determiná si cada fuerza es conservativa:
+<ol type="a"><li>$\vec F=2xy\,\hat{\imath}+(x^2+3)\,\hat{\jmath}$</li><li>$\vec F=y^2\,\hat{\imath}+x\,\hat{\jmath}$</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Una fuerza (en 2D) es conservativa si $\dfrac{\partial F_x}{\partial y}=\dfrac{\partial F_y}{\partial x}$.</p>
+<p><strong>a)</strong> $\dfrac{\partial F_x}{\partial y}=\dfrac{\partial(2xy)}{\partial y}=2x$; &nbsp; $\dfrac{\partial F_y}{\partial x}=\dfrac{\partial(x^2+3)}{\partial x}=2x$. <strong>Iguales ⇒ conservativa.</strong></p>
+<p><strong>b)</strong> $\dfrac{\partial F_x}{\partial y}=\dfrac{\partial(y^2)}{\partial y}=2y$; &nbsp; $\dfrac{\partial F_y}{\partial x}=\dfrac{\partial(x)}{\partial x}=1$. <strong>Distintas ($2y\neq 1$) ⇒ NO conservativa.</strong></p>
+<div class="respuesta">$$\boxed{\text{a) conservativa};\quad \text{b) no conservativa}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej19">
+<h3>Ejercicio 19 — Trabajo por integral de línea <span class="nivel">Nivel 9</span></h3>
+<div class="enunciado">Una fuerza $\vec F=3x\,\hat{\imath}+2\,\hat{\jmath}$ (N) actúa sobre una partícula que va de $(0,0)$ a $(2,4)$ por la recta $y=2x$. Calculá el trabajo.</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>Parametrizo la recta: $x=t$, $y=2t$, con $t$ de $0$ a $2$. Entonces $dx=dt$, $dy=2\,dt$, y el diferencial de trabajo es $dW=F_x\,dx+F_y\,dy$:</p>
+$$dW=3x\,dx+2\,dy=3t\,dt+2(2\,dt)=(3t+4)\,dt.$$
+$$W=\int_0^2 (3t+4)\,dt=\left.\big(\tfrac32 t^2+4t\big)\right|_0^2=6+8=14\ \text{J}.$$
+<div class="respuesta">$$\boxed{W=14\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej20">
+<h3>Ejercicio 20 — Dos caminos, distinto trabajo <span class="nivel">Nivel 9</span></h3>
+<div class="enunciado">Para la fuerza $\vec F=y\,\hat{\imath}$ (sólo componente en $x$, que vale $y$), calculá el trabajo de $(0,0)$ a $(2,2)$ por dos caminos: (1) primero horizontal y luego vertical; (2) por la recta $y=x$. ¿Qué concluís?</div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>Camino 1</strong> (horizontal hasta $(2,0)$, luego vertical hasta $(2,2)$):</p>
+<ul>
+<li>Tramo horizontal: $y=0$, así que $F_x=y=0$ ⇒ aporta $0$.</li>
+<li>Tramo vertical: el movimiento es en $y$ ($dx=0$); como $\vec F$ sólo tiene componente $x$, $\vec F\cdot d\vec r=0$.</li>
+</ul>
+<p>Total camino 1: $W_1=0\ \text{J}$.</p>
+<p><strong>Camino 2</strong> (recta $y=x$): $x=t,\ y=t$, $dx=dt$. $F_x=y=t$.</p>
+$$W_2=\int_0^2 F_x\,dx=\int_0^2 t\,dt=\left.\tfrac{t^2}{2}\right|_0^2=2\ \text{J}.$$
+<p>Como $W_1\neq W_2$, el trabajo <strong>depende del camino</strong> ⇒ la fuerza NO es conservativa. (Se confirma con el rotor: $\partial F_x/\partial y=1\neq \partial F_y/\partial x=0$.)</p>
+<div class="respuesta">$$\boxed{W_1=0\ \text{J},\ W_2=2\ \text{J}\ \Rightarrow\ \text{no conservativa}}$$</div>
+</details>
+</article>
+</section>
+
+
+<!-- ===================== TIPO PARCIAL ===================== -->
+<section class="tema" id="parcial" data-tema="energia">
+<h2 class="tema-titulo">🔴 Tipo parcial (21–23)</h2>
+
+<article class="ej" id="ene-ej21">
+<h3>Ejercicio 21 — Fuerza conservativa: hallar Ep y trabajo <span class="tchip">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">Sobre una partícula actúa $\vec F=(2xy+1)\,\hat{\imath}+x^2\,\hat{\jmath}$ (N).
+<ol type="a"><li>Mostrá que es conservativa.</li><li>Hallá la energía potencial $E_p(x,y)$.</li><li>Calculá el trabajo de $\vec F$ al ir de $(0,0)$ a $(1,3)$.</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> $\dfrac{\partial F_x}{\partial y}=\dfrac{\partial(2xy+1)}{\partial y}=2x$; &nbsp; $\dfrac{\partial F_y}{\partial x}=\dfrac{\partial(x^2)}{\partial x}=2x$. Iguales ⇒ <strong>conservativa</strong>.</p>
+<p><strong>b)</strong> Uso $\vec F=-\nabla E_p$. De $F_x=-\dfrac{\partial E_p}{\partial x}=2xy+1$:</p>
+$$E_p=-(x^2 y+x)+h(y).$$
+<p>Derivo respecto de $y$ y lo igualo a $-F_y$: $\dfrac{\partial E_p}{\partial y}=-x^2+h'(y)=-x^2\Rightarrow h'(y)=0$, así que $h=$ cte.</p>
+$$\boxed{E_p(x,y)=-(x^2 y+x)\ \ (+\,\text{cte})}$$
+<p><strong>c)</strong> $W=E_p(\text{inicio})-E_p(\text{fin})$: con $E_p(0,0)=0$ y $E_p(1,3)=-(1\cdot 3+1)=-4\ \text{J}$:</p>
+$$W=0-(-4)=4\ \text{J}.$$
+<div class="truco">Como es conservativa, este trabajo es el mismo por cualquier camino. Por eso conviene usar $E_p$ y no integrar.</div>
+<div class="respuesta">$$\boxed{\text{conservativa};\quad E_p=-(x^2y+x);\quad W=4\ \text{J}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej22">
+<h3>Ejercicio 22 — Trayectoria cerrada por vértices <span class="tchip">Tipo parcial</span> <span class="nivel">Firma Moreno</span></h3>
+<div class="enunciado">Una fuerza $\vec F=(2x+y)\,\hat{\imath}$ (sólo componente en $x$, N) actúa sobre una partícula que recorre el circuito cerrado $O(0,0)\to A(3,9)\to B(-1,9)\to O$, donde:
+<ul><li>$O\to A$ es la parábola $y=x^2$,</li><li>$A\to B$ es la recta horizontal $y=9$,</li><li>$B\to O$ es la recta $y=-9x$.</li></ul>
+Hallá el trabajo en cada tramo, el trabajo total y decidí si es conservativa.
+<svg viewBox="0 0 320 190" role="img" aria-label="Circuito cerrado en el plano: parábola de O a A, recta de A a B y recta de B a O">
+  <defs>
+    <marker id="e22a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9c27b0"/></marker>
+  </defs>
+  <!-- ejes -->
+  <line x1="40" y1="165" x2="305" y2="165" stroke="#aaa" stroke-width="1"/>
+  <line x1="160" y1="180" x2="160" y2="20" stroke="#aaa" stroke-width="1"/>
+  <text x="298" y="178" font-size="10" fill="#888">x</text>
+  <text x="146" y="28" font-size="10" fill="#888">y</text>
+  <!-- O en (160,165); escala x:30/u, y:14/u. A(3,9)->(250,39). B(-1,9)->(130,39) -->
+  <!-- parabola O->A: x=0..3 -> puntos (160,165)(190,151)(220,109)(250,39) -->
+  <path d="M 160 165 Q 205 165 250 39" fill="none" stroke="#9c27b0" stroke-width="2.2" marker-end="url(#e22a)"/>
+  <!-- recta A->B (y=9) -->
+  <line x1="250" y1="39" x2="130" y2="39" stroke="#9c27b0" stroke-width="2.2" marker-end="url(#e22a)"/>
+  <!-- recta B->O (y=-9x) -->
+  <line x1="130" y1="39" x2="160" y2="165" stroke="#9c27b0" stroke-width="2.2" marker-end="url(#e22a)"/>
+  <!-- vertices -->
+  <circle cx="160" cy="165" r="3.5" fill="#2c3e50"/><text x="148" y="178" font-size="11">O</text>
+  <circle cx="250" cy="39" r="3.5" fill="#2c3e50"/><text x="255" y="38" font-size="11">A(3,9)</text>
+  <circle cx="130" cy="39" r="3.5" fill="#2c3e50"/><text x="86" y="38" font-size="11">B(-1,9)</text>
+</svg></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p>La fuerza sólo tiene componente $x$, así que $\vec F\cdot d\vec r=F_x\,dx=(2x+y)\,dx$. En cada tramo reemplazo $y$ por su relación con $x$ e integro en $x$.</p>
+<p><strong>Tramo O→A</strong> ($y=x^2$, $x:0\to 3$):</p>
+$$W_1=\int_0^3 (2x+x^2)\,dx=\left.\big(x^2+\tfrac{x^3}{3}\big)\right|_0^3=9+9=18\ \text{J}.$$
+<p><strong>Tramo A→B</strong> ($y=9$, $x:3\to -1$):</p>
+$$W_2=\int_3^{-1} (2x+9)\,dx=\left.\big(x^2+9x\big)\right|_3^{-1}=(1-9)-(9+27)=-8-36=-44\ \text{J}.$$
+<p><strong>Tramo B→O</strong> ($y=-9x$, $x:-1\to 0$):</p>
+$$W_3=\int_{-1}^{0} (2x-9x)\,dx=\int_{-1}^{0} -7x\,dx=\left.-\tfrac{7}{2}x^2\right|_{-1}^{0}=0-\big(-\tfrac72\big)=3{,}5\ \text{J}.$$
+<p><strong>Trabajo total (circuito cerrado):</strong></p>
+$$W_{\text{total}}=18-44+3{,}5=-22{,}5\ \text{J}.$$
+<p>Como $\oint\vec F\cdot d\vec r=-22{,}5\neq 0$, la fuerza <strong>NO es conservativa</strong>. Se confirma con el rotor: $\dfrac{\partial F_x}{\partial y}=1\neq \dfrac{\partial F_y}{\partial x}=0$.</p>
+<div class="truco"><strong>Los 3 teoremas para cerrar:</strong> $W_{\text{total}}=\Delta E_c$ (trabajo de TODAS las fuerzas) · $W_{\text{cons}}=-\Delta E_p$ (sólo conservativas) · $W_{\text{no cons}}=\Delta E_m$ (rozamiento y demás). Como acá $\oint\neq 0$, esta fuerza entra en la categoría "no conservativa".</div>
+<div class="respuesta">$$\boxed{W_1=18,\ W_2=-44,\ W_3=3{,}5\ \text{J};\ \ W_{\text{total}}=-22{,}5\ \text{J};\ \text{no conservativa}}$$</div>
+</details>
+</article>
+
+<article class="ej" id="ene-ej23">
+<h3>Ejercicio 23 — Resorte + piso con roce + rampa <span class="tchip">Tipo parcial</span> <span class="nivel">Integrador</span></h3>
+<div class="enunciado">Un resorte ($k=500\ \text{N/m}$) comprimido $x=0{,}4\ \text{m}$ empuja un bloque de $m=2\ \text{kg}$. El bloque recorre $d=2\ \text{m}$ sobre un piso <em>con</em> rozamiento ($\mu_d=0{,}25$) y luego sube por una rampa <em>lisa</em> de $\alpha=30^\circ$.
+<ol type="a"><li>Energía entregada por el resorte.</li><li>Velocidad con que el bloque deja el piso.</li><li>Altura máxima que alcanza en la rampa.</li></ol></div>
+<details class="sol"><summary>Ver resolución</summary>
+<p><strong>a)</strong> Energía guardada en el resorte:</p>
+$$E_{res}=\tfrac12 k x^2=\tfrac12\cdot 500\cdot 0{,}4^2=\tfrac12\cdot 500\cdot 0{,}16=40\ \text{J}.$$
+<p><strong>b)</strong> En el piso, el rozamiento le saca energía: $W_f=\mu_d\,mg\,d=0{,}25\cdot 2\cdot 10\cdot 2=10\ \text{J}$. La energía cinética al terminar el piso:</p>
+$$E_c=E_{res}-W_f=40-10=30\ \text{J}=\tfrac12\cdot 2\cdot v^2\ \Rightarrow\ v=\sqrt{30}\approx 5{,}48\ \text{m/s}.$$
+<p><strong>c)</strong> En la rampa lisa no hay más pérdidas: la cinética se convierte en potencial:</p>
+$$E_c=mgh\ \Rightarrow\ h=\frac{30}{2\cdot 10}=1{,}5\ \text{m}.$$
+<div class="truco">Estrategia integradora: seguí la energía paso a paso. Sale del resorte (40 J), el rozamiento se come 10 J en el piso, y los 30 J restantes suben el bloque. Cada superficie suma o resta a la "cuenta" de energía.</div>
+<div class="respuesta">$$\boxed{E_{res}=40\ \text{J};\quad v\approx 5{,}48\ \tfrac{\text{m}}{\text{s}};\quad h=1{,}5\ \text{m}}$$</div>
+</details>
+</article>
+</section>
+
+<footer>
+Trabajo y energía · Física de Sistemas de Partículas · Cátedra Moreno · g = 10 m/s²<br>
+<a href="cinematica.html">🏃 Cinemática</a> · <a href="dinamica.html">⚙️ Dinámica</a> · <a href="cheatsheet.html">📐 Cheatsheet</a> · <a href="index.html">📚 Guía por temas</a>
+</footer>
+</main>
+
+<!-- Banco de fórmulas (oculto; lo usa el panel flotante) -->
+<div id="formulaBank" style="display:none">
+  <div class="formula"><strong>Trabajo:</strong> $W=\int\vec F\cdot d\vec r$; &nbsp; constante: $W=F\,d\cos\theta$.</div>
+  <div class="formula"><strong>Potencia:</strong> $P=\dfrac{W}{t}=\vec F\cdot\vec v$.</div>
+  <div class="formula"><strong>Energía cinética:</strong> $E_c=\tfrac12 m v^2$; &nbsp; teorema $W_{\text{neto}}=\Delta E_c$.</div>
+  <div class="formula"><strong>Potencial:</strong> $E_p^{grav}=mgh$, &nbsp; $E_p^{res}=\tfrac12 k x^2$; &nbsp; $W_{cons}=-\Delta E_p$.</div>
+  <div class="formula"><strong>¿Conservativa?</strong> $\dfrac{\partial F_x}{\partial y}=\dfrac{\partial F_y}{\partial x}$ &nbsp;(o $\oint\vec F\cdot d\vec r=0$).</div>
+  <div class="formula"><strong>Mecánica:</strong> $E_m=E_c+E_p$; &nbsp; $W_{\text{no cons}}=\Delta E_m$ (si no hay roce, $E_m$ cte).</div>
+  <div class="formula"><strong>3 teoremas:</strong> $W_{tot}=\Delta E_c$ · $W_{cons}=-\Delta E_p$ · $W_{no\,cons}=\Delta E_m$.</div>
+</div>
+
+<!-- Botones flotantes -->
+<a href="#top" class="fab backtop" aria-label="Volver arriba">↑</a>
+<button class="fab fab-formulas" id="btnFormulas" aria-label="Ver fórmulas">📐 Fórmulas</button>
+<button class="fab fab-index" id="btnIndex" aria-label="Abrir índice">☰ Índice</button>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Índice de ejercicios">
+  <div class="dhead"><span>📑 Índice</span><button id="closeDrawer" aria-label="Cerrar">×</button></div>
+  <ul id="navTree"></ul>
+</aside>
+
+<section class="sheet" id="sheet" aria-label="Fórmulas de trabajo y energía">
+  <div class="shead"><span>📐 Fórmulas de trabajo y energía</span><button id="closeSheet" aria-label="Cerrar">×</button></div>
+  <div class="sbody" id="sheetBody"></div>
+</section>
+
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section.tema'));
+  var navTree = document.getElementById('navTree');
+  secs.forEach(function(sec){
+    var li = document.createElement('li'); li.className='nav-tema'; li.dataset.target=sec.id;
+    var a = document.createElement('a'); a.href='#'+sec.id; a.textContent=sec.querySelector('.tema-titulo').textContent.trim();
+    li.appendChild(a);
+    var ul = document.createElement('ul'); ul.className='nav-ejs';
+    sec.querySelectorAll('article.ej').forEach(function(ej){
+      var h = ej.querySelector('h3').cloneNode(true);
+      h.querySelectorAll('.nivel,.tchip').forEach(function(s){ s.remove(); });
+      var ea = document.createElement('a'); ea.href='#'+ej.id; ea.textContent=h.textContent.trim();
+      ul.appendChild(ea);
+    });
+    li.appendChild(ul); navTree.appendChild(li);
+  });
+
+  var backdrop=document.getElementById('backdrop'), drawer=document.getElementById('drawer'), sheet=document.getElementById('sheet');
+  function fillSheet(){ var b=document.getElementById('sheetBody'); if(b.childElementCount) return;
+    document.querySelectorAll('#formulaBank .formula').forEach(function(f){ b.appendChild(f.cloneNode(true)); }); }
+  function closeAll(){ drawer.classList.remove('show'); sheet.classList.remove('show'); backdrop.classList.remove('show'); }
+  document.getElementById('btnIndex').addEventListener('click', function(){ drawer.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('btnFormulas').addEventListener('click', function(){ fillSheet(); sheet.classList.add('show'); backdrop.classList.add('show'); });
+  document.getElementById('closeDrawer').addEventListener('click', closeAll);
+  document.getElementById('closeSheet').addEventListener('click', closeAll);
+  backdrop.addEventListener('click', closeAll);
+  navTree.addEventListener('click', function(e){ if(e.target.closest('a')) closeAll(); });
+
+  var current=null;
+  function updateCurrent(){
+    var line=140, found=secs[0];
+    for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top<=line) found=secs[i]; }
+    if(found!==current){ current=found;
+      navTree.querySelectorAll('.nav-tema').forEach(function(li){ li.classList.toggle('active', li.dataset.target===current.id); });
+    }
+  }
+  var ticking=false;
+  window.addEventListener('scroll', function(){ if(!ticking){ window.requestAnimationFrame(function(){ updateCurrent(); ticking=false; }); ticking=true; } }, {passive:true});
+  updateCurrent();
+})();
+</script>
+
+</body>
+</html>
